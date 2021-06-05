@@ -16,6 +16,8 @@
 #include "levels/castle_grounds/header.h"
 
 static const LevelScript script_func_local_1[] = {
+    OBJECT(/*model*/ MODEL_CASTLE_GROUNDS_WARP_PIPE, /*pos*/ -1878, 260, 4164, /*angle*/ 0, 180, 0, /*behParam*/ 0x00820000, /*beh*/ bhvWarpPipe),
+    WARP_NODE(/*id*/ 0x82, /*destLevel*/ LEVEL_BOB, /*destArea*/ 0x01, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
     WARP_NODE(/*id*/ 0x00, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 0x01, /*destNode*/ 0x00, /*flags*/ WARP_NO_CHECKPOINT),
     WARP_NODE(/*id*/ 0x01, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 0x01, /*destNode*/ 0x01, /*flags*/ WARP_NO_CHECKPOINT),
     WARP_NODE(/*id*/ 0x02, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 0x03, /*destNode*/ 0x02, /*flags*/ WARP_NO_CHECKPOINT),
