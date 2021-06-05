@@ -17,7 +17,7 @@ void bullet_bill_act_0(void) {
     o->oFaceAngleRoll = 0;
     o->oMoveFlags = 0;
     cur_obj_set_pos_to_home();
-    o->oAction = 1;
+    o->oAction = 2;
 }
 
 void bullet_bill_act_1(void) {
@@ -27,28 +27,22 @@ void bullet_bill_act_1(void) {
 }
 
 void bullet_bill_act_2(void) {
-    if (o->oTimer < 40)
-        o->oForwardVel = 3.0f;
-    else if (o->oTimer < 50) {
-        if (o->oTimer % 2)
-            o->oForwardVel = 3.0f;
-        else
-            o->oForwardVel = -3.0f;
-    } else {
-        if (o->oTimer > 70)
-            cur_obj_update_floor_and_walls();
-        spawn_object(o, MODEL_SMOKE, bhvWhitePuffSmoke);
-        o->oForwardVel = 30.0f;
-        if (o->oDistanceToMario > 300.0f)
-            cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x100);
-        if (o->oTimer == 50) {
-            cur_obj_play_sound_2(SOUND_OBJ_POUNDING_CANNON);
-            cur_obj_shake_screen(SHAKE_POS_SMALL);
-        }
-        if (o->oTimer > 150 || o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
-            o->oAction = 3;
-            spawn_mist_particles();
-        }
+    //if (o->oTimer > 70) {
+    //    o->activeFlags = 0;
+    cur_obj_update_floor_and_walls();
+    //}
+    spawn_object(o, MODEL_SMOKE, bhvWhitePuffSmoke);
+    o->oForwardVel = 30.0f;
+    //if (o->oDistanceToMario > 300.0f)
+    //    cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x100);
+    //if (o->oTimer == 50) {
+    //    cur_obj_play_sound_2(SOUND_OBJ_POUNDING_CANNON);
+    //    cur_obj_shake_screen(SHAKE_POS_SMALL);
+    //}
+    if (o->oTimer > 60 || o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
+        o->activeFlags = 0;
+        //o->oAction = 3;
+        //spawn_mist_particles();
     }
 }
 

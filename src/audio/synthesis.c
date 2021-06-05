@@ -8,6 +8,11 @@
 #include "internal.h"
 #include "external.h"
 #include "game/object_list_processor.h"
+#include "model_ids.h"
+#include "behavior_data.h"
+#include "game/level_update.h"
+#include "object_fields.h"
+#include "engine/math_util.h"
 
 
 #ifndef VERSION_SH
@@ -2190,6 +2195,7 @@ void note_set_frequency(struct Note *note, f32 frequency) {
 }
 
 void note_enable(struct Note *note) {
+    struct Object *obj;
     u8 noteChannelID = 0xFF;
     u8 i;
     note->enabled = TRUE;
@@ -2212,6 +2218,15 @@ void note_enable(struct Note *note) {
         }
         if(noteChannelID != 0xFF) {
             onScreenLayers[channelMap[0][noteChannelID]] = 18;
+            if (channelMap[0][noteChannelID] == 1 && gCurrLevelNum == LEVEL_BOB) {
+                obj = spawn_object(gMarioObject, MODEL_BULLET_BILL, bhvBulletBill);
+                obj->oPosX += -750.0f * sins(gMarioState->faceAngle[1]);
+                obj->oPosZ += -750.0f * coss(gMarioState->faceAngle[1]);
+                obj->oPosY += 80.0f;
+                vec3f_copy(&obj->oHomeX, &obj->oPosX);
+                //obj->oAction = 2;
+                obj->oFaceAngleYaw = obj_angle_to_object(obj, gMarioObject);
+            }
         }
     }
 }
