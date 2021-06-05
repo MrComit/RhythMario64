@@ -123,5 +123,7 @@ void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo);
 void clear_objects(void);
 void update_objects(UNUSED s32 unused);
 
+extern s32 gLoadingCheckpoint;
+
 
 #endif // OBJECT_LIST_PROCESSOR_H

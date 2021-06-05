@@ -9,6 +9,7 @@
 #include "engine/graph_node.h"
 #include "engine/surface_collision.h"
 #include "engine/surface_load.h"
+#include "game_init.h"
 #include "interaction.h"
 #include "level_update.h"
 #include "mario.h"
@@ -19,6 +20,11 @@
 #include "platform_displacement.h"
 #include "profiler.h"
 #include "spawn_object.h"
+
+#include "audio/load.h"
+#include "audio/external.h"
+#include "seq_ids.h"
+#include "audio/seqplayer.h"
 
 
 /**
@@ -264,7 +270,56 @@ void spawn_particle(u32 activeParticleFlag, s16 model, const BehaviorScript *beh
 /**
  * Mario's primary behavior update function.
  */
+
+s32 gLoadingCheckpoint;
+
+struct M64ScriptState *state;
+u32 addr = 0x8007433E;
+s32 gAddress;
+
+u16 m64_read_compressed_u16_but_epic(u8 *state) {
+    u16 ret = *(state++);
+    if (ret & 0x80) {
+        ret = (ret << 8) & 0x7f00;
+        ret = *(state++) | ret;
+    }
+    return ret;
+}
+
+u32 go_to_checkpoint(u32 checkpoint) {
+    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
+    u8 checkpointIncrement = 0;
+    u8 cmd;
+    u32 seqPointer = 0;
+    u32 totalTimer = 0;
+    while(cmd != 0x90) {
+        seqPointer++;
+        cmd = seqPlayer->seqData[seqPointer];
+    }
+    while(checkpointIncrement != checkpoint) {
+        while(cmd != 0xFD) {
+            if(cmd >= 0x90 && cmd <= 0x9F) {
+                seqPointer += 0x3;
+            } else if(cmd == 0xDD || cmd == 0xDB) {
+                seqPointer += 0x2;
+            }
+            cmd = seqPlayer->seqData[seqPointer];
+        }
+        totalTimer += m64_read_compressed_u16_but_epic(&seqPlayer->seqData[seqPointer + 1]);
+        while(cmd != 0x90) {
+            seqPointer++;
+            cmd = seqPlayer->seqData[seqPointer];
+        }
+        gAddress = &seqPlayer->seqData[seqPointer];
+        checkpointIncrement++;
+    }
+    seqPlayer->scriptState.pc = *(typeof(seqPlayer->scriptState.pc) *)&gAddress;
+    seqPlayer->delay = 0;
+    return totalTimer;
+}
+
 void bhv_mario_update(void) {
+    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
     u32 particleFlags = 0;
     s32 i;
 
@@ -284,6 +339,11 @@ void bhv_mario_update(void) {
 
         i++;
     }
+
+    if(gPlayer1Controller->buttonPressed & L_TRIG) {
+        seqPlayer->globalSongTimer = go_to_checkpoint(random_u16() % 4);
+    }
+    print_text_fmt_int(10, 10, "%x", seqPlayer->globalSongTimer);
 }
 
 /**

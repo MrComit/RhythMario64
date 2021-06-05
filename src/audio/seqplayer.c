@@ -6,6 +6,7 @@
 #include "heap.h"
 #include "load.h"
 #include "seqplayer.h"
+#include "src/game/object_list_processor.h"
 
 #define PORTAMENTO_IS_SPECIAL(x) ((x).mode & 0x80)
 #define PORTAMENTO_MODE(x) ((x).mode & ~0x80)
@@ -2356,6 +2357,7 @@ void sequence_player_process_sequence(struct SequencePlayer *seqPlayer) {
         }
 #endif
         seqPlayer->delay--;
+        seqPlayer->globalSongTimer++;
     } else {
 #if defined(VERSION_EU) || defined(VERSION_SH)
         seqPlayer->recalculateVolume = 1;
@@ -2767,10 +2769,12 @@ void init_sequence_player(u32 player) {
     seqPlayer->muted = FALSE;
 #endif
     seqPlayer->delay = 0;
+    seqPlayer->globalSongTimer = 0;
 #if defined(VERSION_EU) || defined(VERSION_SH)
     seqPlayer->state = 1;
 #else
-    seqPlayer->state = SEQUENCE_PLAYER_STATE_0;
+    if(gLoadingCheckpoint == 0)
+        seqPlayer->state = SEQUENCE_PLAYER_STATE_0;
 #endif
     seqPlayer->fadeRemainingFrames = 0;
 #if defined(VERSION_EU) || defined(VERSION_SH)

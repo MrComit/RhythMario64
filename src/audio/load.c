@@ -5,6 +5,7 @@
 #include "heap.h"
 #include "load.h"
 #include "seqplayer.h"
+#include "src/game/object_list_processor.h"
 
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 
@@ -1636,7 +1637,8 @@ void load_sequence_internal(u32 player, u32 seqId, s32 loadAsync) {
     seqPlayer->delay = 0;
     seqPlayer->enabled = TRUE;
     seqPlayer->seqData = sequenceData;
-    seqPlayer->scriptState.pc = sequenceData;
+    if(gLoadingCheckpoint == 0)
+        seqPlayer->scriptState.pc = sequenceData;
 }
 #endif
 

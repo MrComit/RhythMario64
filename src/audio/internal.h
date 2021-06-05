@@ -318,6 +318,7 @@ struct SequencePlayer
     /*0x118, 0x120*/ OSMesg bankDmaMesg;
     /*0x11C, 0x124*/ OSIoMesg bankDmaIoMesg;
     /*0x130, 0x13C*/ u8 *bankDmaCurrMemAddr;
+                     u32 globalSongTimer;
 #if defined(VERSION_JP) || defined(VERSION_US)
     /*0x134, ?????*/ struct AudioBank *loadingBank;
 #endif
