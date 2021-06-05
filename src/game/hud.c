@@ -14,6 +14,7 @@
 #include "save_file.h"
 #include "print.h"
 #include "engine/surface_load.h"
+#include "object_list_processor.h"
 
 /* @file hud.c
  * This file implements HUD rendering and power meter animations.
@@ -455,6 +456,124 @@ void render_hud_camera_status(void) {
  * Render HUD strings using hudDisplayFlags with it's render functions,
  * excluding the cannon reticle which detects a camera preset for it.
  */
+
+Vtx vis_bar_Plane_mesh_vtx_cull[8] = {
+	{{{-310, -8, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-310, -8, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-310, 8, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-310, 8, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{10, -8, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{10, -8, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{10, 8, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{10, 8, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+};
+
+Vtx vis_bar_Plane_mesh_vtx_0[8] = {
+	{{{10, 8, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-310, 8, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-310, 6, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{8, 6, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{10, -8, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{8, -6, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-310, -8, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-310, -6, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+};
+
+Gfx vis_bar_Plane_mesh_tri_0[] = {
+	gsSPVertex(vis_bar_Plane_mesh_vtx_0 + 0, 8, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(3, 4, 0, 0, 3, 5, 4, 0),
+	gsSP2Triangles(6, 4, 5, 0, 6, 5, 7, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx vis_bar_Plane_mesh_vtx_1[4] = {
+	{{{8, -6, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{8, 6, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-310, 6, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-310, -6, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+};
+
+Gfx vis_bar_Plane_mesh_tri_1[] = {
+	gsSPVertex(vis_bar_Plane_mesh_vtx_1 + 0, 4, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_vis_bar_black_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1),
+	gsDPSetRenderMode(G_RM_ZB_XLU_SURF, G_RM_ZB_XLU_SURF2),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_vis_bar_black_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_vis_bar_color[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, ENVIRONMENT, 0, 0, 0, 1, 0, 0, 0, ENVIRONMENT, 0, 0, 0, 1),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsSPEndDisplayList(),
+};
+
+Gfx vis_bar_mesh[] = {
+	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPVertex(vis_bar_Plane_mesh_vtx_cull + 0, 8, 0),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPCullDisplayList(0, 7),
+	gsSPDisplayList(mat_vis_bar_black_layer1),
+	gsSPDisplayList(vis_bar_Plane_mesh_tri_0),
+	gsSPDisplayList(mat_revert_vis_bar_black_layer1),
+	gsSPDisplayList(mat_vis_bar_color),
+	gsSPDisplayList(vis_bar_Plane_mesh_tri_1),
+	gsDPPipeSync(),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPClearGeometryMode(G_TEXTURE_GEN),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 0),
+	gsSPEndDisplayList(),
+};
+
+
+
+void render_audiovisual_bars(void) {
+    u8 i, r, g, b;
+    for(i = 0; i < 4; i++) {
+        create_dl_translation_matrix(MENU_MTX_PUSH, (2.0f * onScreenLayers[i]) - 5.0f, 10.0f + (20.0f * i), 0);
+        switch(i) {
+            case 0:
+                r = 0;
+                g = 255;
+                b = 0;
+                break;
+            case 1:
+                r = 0;
+                g = 0;
+                b = 255;
+                break;
+            case 2:
+                r = 255;
+                g = 0;
+                b = 0;
+                break;
+            case 3:
+                r = 255;
+                g = 255;
+                b = 0;
+                break;
+
+        }
+        gDPSetEnvColor(gDisplayListHead++, r, g, b, 255);
+        gSPDisplayList(gDisplayListHead++, &vis_bar_mesh);
+        gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+    }
+}
+
 void render_hud(void) {
     s16 hudDisplayFlags;
 #ifdef VERSION_EU
@@ -521,5 +640,7 @@ void render_hud(void) {
         {
             print_text(10, 60, "SURFACE NODE POOL FULL");
         }
+
+        render_audiovisual_bars();
     }
 }

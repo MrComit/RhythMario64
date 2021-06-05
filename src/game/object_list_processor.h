@@ -6,6 +6,7 @@
 #include "area.h"
 #include "macros.h"
 #include "types.h"
+#include "audio/internal.h"
 
 /**
  * Flags for gTimeStopState. These control which objects are processed each frame
@@ -124,6 +125,8 @@ void clear_objects(void);
 void update_objects(UNUSED s32 unused);
 
 extern s32 gLoadingCheckpoint;
+extern u8 onScreenLayers[CHANNELS_MAX];
+extern u8 channelMap[8][CHANNELS_MAX];
 
 
 #endif // OBJECT_LIST_PROCESSOR_H

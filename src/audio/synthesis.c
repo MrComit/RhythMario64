@@ -7,6 +7,7 @@
 #include "seqplayer.h"
 #include "internal.h"
 #include "external.h"
+#include "game/object_list_processor.h"
 
 
 #ifndef VERSION_SH
@@ -2189,6 +2190,8 @@ void note_set_frequency(struct Note *note, f32 frequency) {
 }
 
 void note_enable(struct Note *note) {
+    u8 noteChannelID = 0xFF;
+    u8 i;
     note->enabled = TRUE;
     note->needsInit = TRUE;
     note->restart = FALSE;
@@ -2200,6 +2203,17 @@ void note_enable(struct Note *note) {
     note->headsetPanRight = 0;
     note->prevHeadsetPanRight = 0;
     note->prevHeadsetPanLeft = 0;
+    if(note->parentLayer->seqChannel->seqPlayer == &gSequencePlayers[SEQ_PLAYER_LEVEL]) {
+        for(i = 0; i < CHANNELS_MAX; i++) {
+            if(note->parentLayer->seqChannel->seqPlayer->channels[i] == note->parentLayer->seqChannel) {
+                noteChannelID = i;
+                i = CHANNELS_MAX;
+            }
+        }
+        if(noteChannelID != 0xFF) {
+            onScreenLayers[channelMap[0][noteChannelID]] = 18;
+        }
+    }
 }
 
 void note_disable(struct Note *note) {
@@ -2208,6 +2222,7 @@ void note_disable(struct Note *note) {
     } else {
         note_set_vel_pan_reverb(note, 0, .5, 0);
     }
+    
     note->priority = NOTE_PRIORITY_DISABLED;
     note->enabled = FALSE;
     note->finished = FALSE;

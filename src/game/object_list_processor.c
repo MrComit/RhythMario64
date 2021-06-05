@@ -25,6 +25,7 @@
 #include "audio/external.h"
 #include "seq_ids.h"
 #include "audio/seqplayer.h"
+#include "audio/synthesis.h"
 
 
 /**
@@ -318,10 +319,23 @@ u32 go_to_checkpoint(u32 checkpoint) {
     return totalTimer;
 }
 
+u8 onScreenLayers[CHANNELS_MAX];
+u8 barsCovered[CHANNELS_MAX];
+u8 channelMap[8][CHANNELS_MAX] = {
+    {0, 1, 2, 3, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 3},
+    {0, 1, 2, 3, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 3},
+    {0, 1, 2, 3, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 3},
+    {0, 1, 2, 3, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 3},
+    {0, 1, 2, 3, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 3},
+    {0, 1, 2, 3, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 3},
+    {0, 1, 2, 3, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 3},
+    {0, 1, 2, 3, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 3},
+};
+
 void bhv_mario_update(void) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
     u32 particleFlags = 0;
-    s32 i;
+    s32 i, j, bar;
 
     particleFlags = execute_mario_action(gCurrentObject);
     gCurrentObject->oMarioParticleFlags = particleFlags;
@@ -343,7 +357,33 @@ void bhv_mario_update(void) {
     if(gPlayer1Controller->buttonPressed & L_TRIG) {
         seqPlayer->globalSongTimer = go_to_checkpoint(random_u16() % 4);
     }
-    print_text_fmt_int(10, 10, "%x", seqPlayer->globalSongTimer);
+    print_text_fmt_int(280, 10, "%x", seqPlayer->globalSongTimer);
+
+    for(i = 0; i < CHANNELS_MAX; i++) {
+        barsCovered[i] = 0;
+    }
+
+    for(i = 0; i < CHANNELS_MAX; i++) {
+        bar = channelMap[0][i];
+        if(bar != 0xFF) {
+            if(barsCovered[bar] == 0 && onScreenLayers[bar] > 0) {
+                onScreenLayers[bar]--;
+                barsCovered[bar] = 1;
+            }
+            for(j = 0; j < LAYERS_MAX; j++) {
+                if(seqPlayer->channels[i] != 0 && seqPlayer->channels[i]->layers[j] != 0 && seqPlayer->channels[i]->layers[j]->note != 0) {
+                    if(barsCovered[bar] == 0) {
+                        if(onScreenLayers[bar] > 15) {
+                            onScreenLayers[bar]--;
+                        } else {
+                            onScreenLayers[bar] = 15;
+                        }
+                        barsCovered[bar] = 1;
+                    }
+                }
+            }
+        }
+    }
 }
 
 /**
