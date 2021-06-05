@@ -13,6 +13,8 @@
 #include "game/level_update.h"
 #include "object_fields.h"
 #include "engine/math_util.h"
+#include "game/interaction.h"
+#include "game/object_helpers.h"
 
 
 #ifndef VERSION_SH
