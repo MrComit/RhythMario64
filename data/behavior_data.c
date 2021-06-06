@@ -6107,4 +6107,15 @@ const BehaviorScript bhvIntroScene[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvGate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(gate_collision),
+    SET_FLOAT(oCollisionDistance, 2500),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
 

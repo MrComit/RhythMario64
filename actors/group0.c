@@ -25,3 +25,7 @@
 #include "white_particle_small/model.inc.c"
 
 #include "sparkle_animation/model.inc.c"
+
+#include "gate/model.inc.c"
+#include "gate/collision.inc.c"
+#include "bullet_bill/model.inc.c"

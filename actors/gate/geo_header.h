@@ -1,0 +1,11 @@
+extern const GeoLayout gate_geo[];
+extern Lights1 gate_gate_lights;
+extern u8 gate_ej_fence2_ci8[];
+extern u8 gate_ej_fence2_ci8_pal_rgba16[];
+extern Vtx gate_gate_mesh_layer_4_vtx_cull[8];
+extern Vtx gate_gate_mesh_layer_4_vtx_0[4];
+extern Gfx gate_gate_mesh_layer_4_tri_0[];
+extern Gfx mat_gate_gate[];
+extern Gfx mat_revert_gate_gate[];
+extern Gfx gate_gate_mesh_layer_4[];
+extern Gfx gate_material_revert_render_settings[];
