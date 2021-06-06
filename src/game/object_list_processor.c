@@ -20,6 +20,7 @@
 #include "platform_displacement.h"
 #include "profiler.h"
 #include "spawn_object.h"
+#include "game/print.h"
 
 #include "audio/load.h"
 #include "audio/external.h"
