@@ -39,7 +39,10 @@ const LevelScript level_bob_entry[] = {
 
 	AREA(1, bob_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
-		OBJECT(MODEL_NONE, -12000, 0, -6000, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
+		WARP_NODE(0x0B, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF1, LEVEL_BOB, 0x01, 0x0B, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_NONE, -12000, 300, -6000, 0, -180, 0, 0x000B0000, bhvAirborneDeathWarp),
+		OBJECT(MODEL_NONE, -12000, 300, -6000, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
 		TERRAIN(bob_area_1_collision),
 		MACRO_OBJECTS(bob_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_TEST),

@@ -2,7 +2,7 @@ void scroll_bob_dl_cloud_floor_mesh_layer_1_vtx_0() {
 	int i = 0;
 	int count = 25;
 	int width = 64 * 0x20;
-	int height = 128 * 0x20;
+	int height = 64 * 0x20;
 
 	static int currentX = 0;
 	int deltaX;
