@@ -82,6 +82,6 @@
  * - If you're using 4x bounds, use a value between 3.f and 4.f, depending on whether you're filling up the entire 4x bounds or not.
  * If you want to change the extended bounds mode, go to src/engine/extended_bounds.h
  */
-#define WORLD_SCALE 2.f
+#define WORLD_SCALE 4.f
 
 #endif // CONFIG_H
