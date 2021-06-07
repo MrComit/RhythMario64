@@ -43,6 +43,12 @@
             [1, 32700],
             [32700, 29430],
             "hang"
+        ],
+        "envelopePiano": [
+            [2, 32700],
+            [205, 0],
+            [1, 0],
+            "hang"
         ]
     },
     "instruments": {
@@ -65,6 +71,11 @@
             "release_rate": 208,
             "envelope": "envelope3",
             "sound": "1C"
+        },
+        "instPiano": {
+            "release_rate": 34,
+            "envelope": "envelopePiano",
+            "sound": "44_grand_piano"
         },
         "percussion": [
             {"release_rate": 10, "pan": 62, "envelope": "envelope4", "sound": {"sample": "06_kick_drum_1", "tuning": 0.210224}},
@@ -161,6 +172,7 @@
         "inst3",
         null,
         "inst4",
-        "inst5"
+        "inst5",
+        "instPiano"
     ]
 }
