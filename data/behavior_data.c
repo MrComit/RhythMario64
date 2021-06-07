@@ -6118,4 +6118,14 @@ const BehaviorScript bhvGate[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvLauncher[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE),
+    SET_FLOAT(oDrawingDistance, 15000),
+    CALL_NATIVE(bhv_bullet_bill_launcher_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bullet_bill_launcher_loop),
+    END_LOOP(),
+};
+
 

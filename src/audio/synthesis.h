@@ -96,4 +96,6 @@ void note_enable(struct Note *note);
 void note_disable(struct Note *note);
 #endif
 
+extern struct Object *gLaunchers[3];
+
 #endif // AUDIO_SYNTHESIS_H

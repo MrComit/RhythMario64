@@ -1,0 +1,17 @@
+extern const GeoLayout launcher_geo[];
+extern Lights1 launcher_mat_lights;
+extern Lights1 launcher_launcher_lights;
+extern u8 launcher_xx_33_ci8[];
+extern u8 launcher_xx_33_ci8_pal_rgba16[];
+extern u8 launcher_launcher_ia8[];
+extern Vtx launcher_Circle_mesh_layer_1_vtx_0[40];
+extern Gfx launcher_Circle_mesh_layer_1_tri_0[];
+extern Vtx launcher_Circle_mesh_layer_6_vtx_0[4];
+extern Gfx launcher_Circle_mesh_layer_6_tri_0[];
+extern Gfx mat_launcher_mat[];
+extern Gfx mat_revert_launcher_mat[];
+extern Gfx mat_launcher_launcher[];
+extern Gfx mat_revert_launcher_launcher[];
+extern Gfx launcher_Circle_mesh_layer_1[];
+extern Gfx launcher_Circle_mesh_layer_6[];
+extern Gfx launcher_material_revert_render_settings[];

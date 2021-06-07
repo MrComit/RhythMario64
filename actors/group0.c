@@ -29,3 +29,4 @@
 #include "gate/model.inc.c"
 #include "gate/collision.inc.c"
 #include "bullet_bill/model.inc.c"
+#include "launcher/model.inc.c"

@@ -19,3 +19,4 @@
 
 #include "gate/geo.inc.c"
 #include "bullet_bill/geo.inc.c"
+#include "launcher/geo.inc.c"

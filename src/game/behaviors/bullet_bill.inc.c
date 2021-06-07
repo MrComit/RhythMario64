@@ -1,4 +1,5 @@
 // bullet_bill.inc.c
+#include "audio/synthesis.h"
 
 // bullet bill smoke
 void bhv_white_puff_smoke_init(void) {
@@ -69,4 +70,18 @@ void bhv_bullet_bill_loop(void) {
     cur_obj_call_action_function(sBulletBillActions);
     if (cur_obj_check_interacted())
         o->oAction = 4;
+}
+
+void bhv_bullet_bill_launcher_init(void) {
+    u8 i;
+    for(i = 0; i < 3; i++) {
+        if(gLaunchers[i] == 0) {
+            gLaunchers[i] = o;
+            i = 3;
+        }
+    }
+}
+
+void bhv_bullet_bill_launcher_loop(void) {
+    o->oMoveAngleYaw = obj_angle_to_object(o, gMarioObject);
 }

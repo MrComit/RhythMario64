@@ -2196,6 +2196,9 @@ void note_set_frequency(struct Note *note, f32 frequency) {
     note->frequency = frequency;
 }
 
+struct Object *gLaunchers[3];
+s32 gCurrentLauncher;
+
 void note_enable(struct Note *note) {
     struct Object *obj;
     u8 noteChannelID = 0xFF;
@@ -2221,13 +2224,19 @@ void note_enable(struct Note *note) {
         if(noteChannelID != 0xFF) {
             onScreenLayers[channelMap[0][noteChannelID]] = 18;
             if (channelMap[0][noteChannelID] == 1 && gCurrLevelNum == LEVEL_BOB) {
-                obj = spawn_object(gMarioObject, MODEL_BULLET_BILL, bhvBulletBill);
-                obj->oPosX += -750.0f * sins(gMarioState->faceAngle[1]);
-                obj->oPosZ += -750.0f * coss(gMarioState->faceAngle[1]);
-                obj->oPosY += 80.0f;
-                vec3f_copy(&obj->oHomeX, &obj->oPosX);
-                //obj->oAction = 2;
-                obj->oFaceAngleYaw = obj_angle_to_object(obj, gMarioObject);
+                gCurrentLauncher++;
+                if(gCurrentLauncher >= 3) {gCurrentLauncher = 0;}
+                if(gLaunchers[gCurrentLauncher] != 0) {
+                    obj = spawn_object(gLaunchers[gCurrentLauncher], MODEL_BULLET_BILL, bhvBulletBill);
+
+                    // obj->oPosX += -750.0f * sins(gMarioState->faceAngle[1]);
+                    // obj->oPosZ += -750.0f * coss(gMarioState->faceAngle[1]);
+                    // obj->oPosY += 80.0f;
+
+                    vec3f_copy(&obj->oHomeX, &obj->oPosX);
+                    //obj->oAction = 2;
+                    // obj->oFaceAngleYaw = obj_angle_to_object(obj, gMarioObject);
+                }
             }
         }
     }

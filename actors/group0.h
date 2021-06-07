@@ -348,4 +348,6 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "bullet_bill/geo_header.h"
 
+#include "launcher/geo_header.h"
+
 #endif
