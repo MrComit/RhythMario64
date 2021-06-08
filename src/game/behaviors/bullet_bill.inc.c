@@ -33,14 +33,14 @@ void bullet_bill_act_2(void) {
     cur_obj_update_floor_and_walls();
     //}
     spawn_object(o, MODEL_SMOKE, bhvWhitePuffSmoke);
-    o->oForwardVel = 30.0f;
+    o->oForwardVel = 60.0f;
     //if (o->oDistanceToMario > 300.0f)
     //    cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x100);
     //if (o->oTimer == 50) {
     //    cur_obj_play_sound_2(SOUND_OBJ_POUNDING_CANNON);
     //    cur_obj_shake_screen(SHAKE_POS_SMALL);
     //}
-    if (o->oTimer > 60 || o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
+    if (o->oTimer > 90 || o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
         o->activeFlags = 0;
         //o->oAction = 3;
         //spawn_mist_particles();
