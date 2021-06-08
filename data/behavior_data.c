@@ -1121,6 +1121,7 @@ const BehaviorScript bhvThwomp[] = {
     SCALE(/*Unused*/ 0, /*Field*/ 140),
     SET_HOME(),
     SET_FLOAT(oDrawingDistance, 4000),
+    CALL_NATIVE(bhv_grindel_thwomp_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_grindel_thwomp_loop),
         CALL_NATIVE(load_object_collision_model),

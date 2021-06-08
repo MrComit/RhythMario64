@@ -43,6 +43,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_LAUNCHER, -12000, 250, -1000, 0, 0, 0, 0x00000000, bhvLauncher),
 		OBJECT(MODEL_LAUNCHER, -17000, 250, -6000, 0, 0, 0, 0x00000000, bhvLauncher),
 		OBJECT(MODEL_NONE, -12000, 300, -6000, 0, 90, 0, 0x000A0000, bhvFlyingWarp),
+		OBJECT(MODEL_THWOMP, -10099, 0, -7133, 0, 0, 0, 0x00000000, bhvThwomp),
 		TERRAIN(bob_area_1_collision),
 		MACRO_OBJECTS(bob_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_TEST),
