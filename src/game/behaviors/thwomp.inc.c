@@ -49,3 +49,9 @@ void (*sGrindelThwompActions[])(void) = { grindel_thwomp_act_0, grindel_thwomp_a
 void bhv_grindel_thwomp_loop(void) {
     cur_obj_call_action_function(sGrindelThwompActions);
 }
+
+
+void bhv_grindel_thwomp_init(void) {
+    //struct SequencePlayer *seqPlayer = &gSequencePlayers[player];
+    //o->oF4 = seqPlayer->tempo;
+}
