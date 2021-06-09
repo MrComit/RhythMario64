@@ -2223,7 +2223,7 @@ void note_enable(struct Note *note) {
         }
         if(noteChannelID != 0xFF) {
             onScreenLayers[channelMap[0][noteChannelID]] = 18;
-            if (channelMap[0][noteChannelID] == 1 && gCurrLevelNum == LEVEL_BOB) {
+            if (channelMap[0][noteChannelID] == 3 && gCurrLevelNum == LEVEL_BOB) {
                 gCurrentLauncher++;
                 if(gCurrentLauncher >= count_objects_with_behavior(bhvLauncher) * 2) {gCurrentLauncher = 0;}
                 if(gLaunchers[gCurrentLauncher / 2] != 0 && (gCurrentLauncher & 1) == 0) {
