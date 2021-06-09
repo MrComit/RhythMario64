@@ -21,6 +21,10 @@
 #include "obj_behaviors.h"
 #include "save_file.h"
 #include "debug_course.h"
+#include "audio/load.h"
+#include "seq_ids.h"
+#include "audio/seqplayer.h"
+#include "audio/synthesis.h"
 #ifdef VERSION_EU
 #include "memory.h"
 #include "eu_translation.h"
@@ -1170,6 +1174,7 @@ s32 update_level(void) {
 }
 
 s32 init_level(void) {
+    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
     s32 val4 = 0;
 
     set_play_mode(PLAY_MODE_NORMAL);
@@ -1243,6 +1248,9 @@ s32 init_level(void) {
     if (gMarioState->action == ACT_INTRO_CUTSCENE) {
         sound_banks_disable(SEQ_PLAYER_SFX, SOUND_BANKS_DISABLED_DURING_INTRO_CUTSCENE);
     }
+
+    gBeatTimer = seqPlayer->tempo / 960;
+    seqPlayer->globalSongTimer = gPrevSongTimer = gLastBeatHit = 0;
 
     return 1;
 }

@@ -566,6 +566,9 @@
 #define MODEL_GATE                        0xFF
 #define MODEL_BULLET_BILL                 0xFE        // bullet_bill_geo
 #define MODEL_LAUNCHER                    0xFD
+#define MODEL_LASER_RING_SPAWNER          0xFC
+#define MODEL_LASER_RING                  0xFB
+#define MODEL_BEAT_BLOCK                  0xFA
 
 // Menu Models (overwrites Level Geometry IDs)
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON         MODEL_LEVEL_GEOMETRY_03   // main_menu_geo_0001D0

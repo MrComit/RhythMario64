@@ -30,3 +30,8 @@
 #include "gate/collision.inc.c"
 #include "bullet_bill/model.inc.c"
 #include "launcher/model.inc.c"
+#include "laser_ring/model.inc.c"
+#include "laser_ring_spawner/model.inc.c"
+
+#include "beat_block/model.inc.c"
+#include "beat_block/collision.inc.c"

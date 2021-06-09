@@ -350,4 +350,11 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "launcher/geo_header.h"
 
+#include "laser_ring/geo_header.h"
+#include "laser_ring_spawner/geo_header.h"
+
+#include "beat_block/geo_header.h"
+
+#include "beat_block/collision_header.h"
+
 #endif

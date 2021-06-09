@@ -26,6 +26,7 @@
 #include "rendering_graph_node.h"
 #include "spawn_object.h"
 #include "spawn_sound.h"
+#include "audio/load.h"
 
 s8 D_8032F0A0[] = { -8, 8, -4, 4 };
 s16 D_8032F0A4[] = { 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80 };
@@ -2889,3 +2890,55 @@ void cur_obj_spawn_star_at_y_offset(f32 targetX, f32 targetY, f32 targetZ, f32 o
     o->oPosY = objectPosY;
 }
 #endif
+
+Gfx *geo_update_laser_ring_spawner_top(s32 run, struct GraphNode *node, UNUSED void *context)
+{
+    struct GraphNodeTranslationRotation *trNode = (struct GraphNodeTranslationRotation*) (node->next);
+    struct Object* spawner = (struct Object*)gCurGraphNodeObject;
+
+    if (run == GEO_CONTEXT_RENDER)
+    {
+        trNode->translation[1] = (s16)spawner->oSpawnerTopOffset;
+    }
+
+    return NULL;
+}
+
+Gfx *geo_beat_block_light(s32 callContext, struct GraphNode *node, UNUSED void *context)
+{
+    struct GraphNodeGenerated *asGenerated = (struct GraphNodeGenerated *) node;
+    Gfx *gfx = NULL;
+    Gfx *gfxHead = NULL;
+    struct Object* block = (struct Object*)gCurGraphNodeObject;
+
+    if (callContext == GEO_CONTEXT_RENDER)
+    {
+        u8 color = block->oOpacity;
+        gfxHead = alloc_display_list(2 * sizeof(*gfxHead));
+        gfx = gfxHead;
+        gDPSetEnvColor(&gfx[0], color, color, color, 255);
+        gSPEndDisplayList(&gfx[1]);
+        asGenerated->fnNode.node.flags = (asGenerated->fnNode.node.flags & 0xFF) | (LAYER_OPAQUE << 8);
+    }
+
+    return gfxHead;
+}
+
+void stay_on_beat(s32 *timer, s32 *bpm, s32 *prevTimer) {
+    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
+    *bpm = (seqPlayer->tempo / 60);
+    *timer += seqPlayer->globalSongTimer - *prevTimer;
+    *prevTimer = seqPlayer->globalSongTimer;
+}
+
+s32 cur_obj_beat_hit(s32 *timer, s32 *bpm) {
+    if(*timer >= *bpm) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+void reset_beat_timer(s32 *timer, s32 *bpm) {
+    *timer -= *bpm;
+}

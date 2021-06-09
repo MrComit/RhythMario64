@@ -126,7 +126,12 @@ void update_objects(UNUSED s32 unused);
 
 extern s32 gLoadingCheckpoint;
 extern u8 onScreenLayers[CHANNELS_MAX];
-extern u8 channelMap[8][CHANNELS_MAX];
+extern u8 channelMap[4][CHANNELS_MAX];
+
+extern s32 gBeatTimer;
+extern s32 gBeatHit;
+extern s32 gPrevSongTimer;
+extern s32 gLastBeatHit;
 
 
 #endif // OBJECT_LIST_PROCESSOR_H

@@ -2351,13 +2351,13 @@ void sequence_player_process_sequence(struct SequencePlayer *seqPlayer) {
     seqPlayer->tempoAcc -= (u16) gTempoInternalToExternal;
 
     state = &seqPlayer->scriptState;
+    seqPlayer->globalSongTimer++;
     if (seqPlayer->delay > 1) {
 #ifndef AVOID_UB
         if (temp) {
         }
 #endif
         seqPlayer->delay--;
-        seqPlayer->globalSongTimer++;
     } else {
 #if defined(VERSION_EU) || defined(VERSION_SH)
         seqPlayer->recalculateVolume = 1;

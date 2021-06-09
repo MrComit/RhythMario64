@@ -6129,4 +6129,37 @@ const BehaviorScript bhvLauncher[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvLaserRingSpawner[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    SET_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SCALE(0, 200),
+    CALL_NATIVE(bhv_laser_ring_spawner_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_laser_ring_spawner_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvLaserRing[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    SET_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_INTERACT_TYPE(INTERACT_SHOCK),
+    SET_INT(oDamageOrCoinValue, 2),
+    CALL_NATIVE(bhv_init_room),
+    CALL_NATIVE(bhv_laser_ring_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_laser_ring_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvBeatBlock[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    SET_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(beat_block_collision),
+    CALL_NATIVE(bhv_init_room),
+    CALL_NATIVE(bhv_beat_block_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_beat_block_update),
+    END_LOOP(),
+};
+
 
