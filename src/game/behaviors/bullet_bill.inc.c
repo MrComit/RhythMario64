@@ -83,5 +83,5 @@ void bhv_bullet_bill_launcher_init(void) {
 }
 
 void bhv_bullet_bill_launcher_loop(void) {
-    o->oMoveAngleYaw = obj_angle_to_object(o, gMarioObject);
+    //o->oMoveAngleYaw = obj_angle_to_object(o, gMarioObject);
 }

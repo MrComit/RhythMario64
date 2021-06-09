@@ -242,14 +242,92 @@ void (*sWhompActions[])(void) = {
 
 // MM
 void bhv_whomp_loop(void) {
-    cur_obj_update_floor_and_walls();
-    cur_obj_call_action_function(sWhompActions);
-    cur_obj_move_standard(-20);
+    f32 dx, dz;
+    //cur_obj_update_floor_and_walls();
+    //cur_obj_call_action_function(sWhompActions);
+    //cur_obj_move_standard(-20);
     if (o->oAction != 9) {
         if (o->oBehParams2ndByte != 0)
             cur_obj_hide_if_mario_far_away_y(2000.0f);
         else
             cur_obj_hide_if_mario_far_away_y(1000.0f);
         load_object_collision_model();
+    }
+
+    switch (o->oAction) {
+        case 0:
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0x4000, 0x800);
+            if (o->oFaceAnglePitch == 0x4000 && o->oFC == 0) {
+                o->oFC = 1;
+                if (o->oDistanceToMario < 1000.0f) {
+                    cur_obj_shake_screen(SHAKE_POS_SMALL);
+                    create_sound_spawner(SOUND_OBJ_THWOMP);
+                }
+            }
+            if (o->oTimer > 30) {
+                o->oAction = 1;
+                o->oFC = 0;
+                o->oForwardVel = 55.0f;
+            }
+            break;
+        case 1:
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0x8000, 0x800);
+            o->oPosY = approach_f32(o->oPosY, o->oHomeY + 420.0f, 55.0f, 55.0f);
+            cur_obj_compute_vel_xz();
+            o->oPosX += o->oVelX;
+            o->oPosZ += o->oVelZ;
+            //dx = (o->oHomeX + 420.0f) * sins(o->oFaceAngleYaw);
+            //dz = (o->oHomeZ + 420.0f) * coss(o->oFaceAngleYaw);
+            //o->oPosX = approach_f32(o->oPosX, dx, 55.0f, 55.0f);
+            //o->oPosZ = approach_f32(o->oPosZ, dz, 55.0f, 55.0f);
+            if (o->oTimer > 7 && o->oFC == 0) {
+                o->oFC = 1;
+                o->oForwardVel = 0;
+                if (o->oDistanceToMario < 1000.0f) {
+                    cur_obj_shake_screen(SHAKE_POS_SMALL);
+                    create_sound_spawner(SOUND_OBJ_THWOMP);
+                }
+            }
+            if (o->oTimer > 30) {
+                o->oAction = 2;
+                o->oFC = 0;
+                o->oForwardVel = 55.0f;
+            }
+            break;
+        case 2:
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0xC000, 0x800);
+            o->oPosY = approach_f32(o->oPosY, o->oHomeY + 100.0f, 35.0f, 35.0f);
+            cur_obj_compute_vel_xz();
+            o->oPosX += o->oVelX;
+            o->oPosZ += o->oVelZ;
+            if (o->oTimer > 7 && o->oFC == 0) {
+                o->oFC = 1;
+                o->oForwardVel = 0;
+                if (o->oDistanceToMario < 1000.0f) {
+                    cur_obj_shake_screen(SHAKE_POS_SMALL);
+                    create_sound_spawner(SOUND_OBJ_THWOMP);
+                }
+            }
+            if (o->oTimer > 30) {
+                o->oAction = 3;
+                o->oFaceAnglePitch = -0x4000;
+                o->oFC = 0;
+            }
+            break;
+        case 3:
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0x800);
+            o->oPosY = approach_f32(o->oPosY, o->oHomeY, 55.0f, 55.0f);
+            if (o->oFaceAnglePitch == 0 && o->oFC == 0) {
+                o->oFC = 1;
+                if (o->oDistanceToMario < 1000.0f) {
+                    cur_obj_shake_screen(SHAKE_POS_SMALL);
+                    create_sound_spawner(SOUND_OBJ_THWOMP);
+                }
+            }
+            if (o->oTimer > 30) {
+                o->oAction = 0;
+                o->oFC = 0;
+            }
+            break;
     }
 }
