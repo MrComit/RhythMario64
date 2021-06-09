@@ -1218,8 +1218,7 @@
 #define /*0x0F4*/ oBeatBlockTimer     OBJECT_FIELD_S32(0x1B)
 
 #define /*0x0F4*/ oBeatTimer          OBJECT_FIELD_S32(0x1B)
-#define /*0x0F8*/ oBPM                OBJECT_FIELD_S32(0x1C)
-#define /*0x100*/ oPrevSongTimer      OBJECT_FIELD_S32(0x1E)
+#define /*0x0F8*/ oPrevSongTimer      OBJECT_FIELD_S32(0x1C)
 
 
 

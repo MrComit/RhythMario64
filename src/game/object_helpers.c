@@ -2924,21 +2924,20 @@ Gfx *geo_beat_block_light(s32 callContext, struct GraphNode *node, UNUSED void *
     return gfxHead;
 }
 
-void stay_on_beat(s32 *timer, s32 *bpm, s32 *prevTimer) {
+void stay_on_beat(s32 *timer, s32 *prevTimer) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
-    *bpm = (seqPlayer->tempo / 60);
     *timer += seqPlayer->globalSongTimer - *prevTimer;
     *prevTimer = seqPlayer->globalSongTimer;
 }
 
-s32 cur_obj_beat_hit(s32 *timer, s32 *bpm) {
-    if(*timer >= *bpm) {
+s32 cur_obj_beat_hit(s32 *timer) {
+    if(*timer >= 96) {
         return 1;
     } else {
         return 0;
     }
 }
 
-void reset_beat_timer(s32 *timer, s32 *bpm) {
-    *timer -= *bpm;
+void reset_beat_timer(s32 *timer) {
+    *timer -= 96;
 }

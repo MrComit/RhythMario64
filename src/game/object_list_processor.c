@@ -356,7 +356,7 @@ void bhv_mario_update(void) {
     if(gPlayer1Controller->buttonPressed & L_TRIG) {
         seqPlayer->globalSongTimer = go_to_checkpoint(random_u16() % 4);
     }
-    print_text_fmt_int(280, 10, "%x", seqPlayer->globalSongTimer);
+    print_text_fmt_int(260, 10, "%x", seqPlayer->globalSongTimer);
 
     for(i = 0; i < CHANNELS_MAX; i++) {
         barsCovered[i] = 0;
@@ -386,18 +386,20 @@ void bhv_mario_update(void) {
 
     gBeatTimer += seqPlayer->globalSongTimer - gPrevSongTimer;
     gPrevSongTimer = seqPlayer->globalSongTimer;
-    print_text_fmt_int(20, 20, "%d", gBeatTimer);
-    if(gBeatTimer >= (seqPlayer->tempo / 240)) {
+    // print_text_fmt_int(20, 20, "%d", gBeatTimer);
+    if(gBeatTimer >= 24) {
         gBeatHit = gLastBeatHit + 1;
         gLastBeatHit = gBeatHit;
         if(gBeatHit > 4) {
             gBeatHit = 1;
             gLastBeatHit = 1;
         }
-        gBeatTimer -= (seqPlayer->tempo / 240);
+        gBeatTimer -= 24;
     } else {
         gBeatHit = 0;
     }
+
+    //print_text_fmt_int(20, 20, "%d", gLastBeatHit);
 }
 
 /**

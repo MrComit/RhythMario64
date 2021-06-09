@@ -70,7 +70,7 @@ void bhv_bullet_bill_loop(void) {
     cur_obj_call_action_function(sBulletBillActions);
     if (cur_obj_check_interacted())
         o->oAction = 4;
-    o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1], 50.0f, 50.0f);
+    o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1], 20.0f, 50.0f);
 }
 
 void bhv_bullet_bill_launcher_init(void) {
