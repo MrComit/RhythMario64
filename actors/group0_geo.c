@@ -20,3 +20,7 @@
 #include "gate/geo.inc.c"
 #include "bullet_bill/geo.inc.c"
 #include "launcher/geo.inc.c"
+#include "laser_ring_spawner/geo.inc.c"
+#include "laser_ring/geo.inc.c"
+
+#include "beat_block/geo.inc.c"

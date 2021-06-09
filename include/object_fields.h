@@ -1213,8 +1213,13 @@
 #define /*0x110*/ os16110             OBJECT_FIELD_S16(0x22, 0)
 #define /*0x112*/ os16112             OBJECT_FIELD_S16(0x22, 1)
 
+#define /*0x0F4*/ oSpawnerTopOffset      OBJECT_FIELD_F32(0x1B)
 
+#define /*0x0F4*/ oBeatBlockTimer     OBJECT_FIELD_S32(0x1B)
 
+#define /*0x0F4*/ oBeatTimer          OBJECT_FIELD_S32(0x1B)
+#define /*0x0F8*/ oBPM                OBJECT_FIELD_S32(0x1C)
+#define /*0x100*/ oPrevSongTimer      OBJECT_FIELD_S32(0x1E)
 
 
 
