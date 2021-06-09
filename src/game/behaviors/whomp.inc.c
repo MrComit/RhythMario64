@@ -243,6 +243,7 @@ void (*sWhompActions[])(void) = {
 // MM
 void bhv_whomp_loop(void) {
     f32 dx, dz;
+    stay_on_beat(&o->oBeatTimer, &o->oPrevSongTimer);
     //cur_obj_update_floor_and_walls();
     //cur_obj_call_action_function(sWhompActions);
     //cur_obj_move_standard(-20);
@@ -264,7 +265,7 @@ void bhv_whomp_loop(void) {
                     create_sound_spawner(SOUND_OBJ_THWOMP);
                 }
             }
-            if (o->oTimer > 30) {
+            if (cur_obj_beat_hit_and_reset(&o->oBeatTimer)) {
                 o->oAction = 1;
                 o->oFC = 0;
                 o->oForwardVel = 55.0f;
@@ -288,7 +289,7 @@ void bhv_whomp_loop(void) {
                     create_sound_spawner(SOUND_OBJ_THWOMP);
                 }
             }
-            if (o->oTimer > 30) {
+            if (cur_obj_beat_hit_and_reset(&o->oBeatTimer)) {
                 o->oAction = 2;
                 o->oFC = 0;
                 o->oForwardVel = 55.0f;
@@ -308,7 +309,7 @@ void bhv_whomp_loop(void) {
                     create_sound_spawner(SOUND_OBJ_THWOMP);
                 }
             }
-            if (o->oTimer > 30) {
+            if (cur_obj_beat_hit_and_reset(&o->oBeatTimer)) {
                 o->oAction = 3;
                 o->oFaceAnglePitch = -0x4000;
                 o->oFC = 0;
@@ -324,7 +325,7 @@ void bhv_whomp_loop(void) {
                     create_sound_spawner(SOUND_OBJ_THWOMP);
                 }
             }
-            if (o->oTimer > 30) {
+            if (cur_obj_beat_hit_and_reset(&o->oBeatTimer)) {
                 o->oAction = 0;
                 o->oFC = 0;
             }

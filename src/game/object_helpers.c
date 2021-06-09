@@ -2941,3 +2941,13 @@ s32 cur_obj_beat_hit(s32 *timer) {
 void reset_beat_timer(s32 *timer) {
     *timer -= 96;
 }
+
+
+s32 cur_obj_beat_hit_and_reset(s32 *timer) {
+    if(*timer >= 96) {
+        *timer -= 96;
+        return 1;
+    } else {
+        return 0;
+    }
+}

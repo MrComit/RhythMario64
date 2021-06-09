@@ -3269,6 +3269,7 @@ const BehaviorScript bhvSmallWhomp[] = {
     ANIMATE(1),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 0, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 0, /*Friction*/ 0, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     SET_HOME(),
+    CALL_NATIVE(bhv_grindel_thwomp_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_whomp_loop),
     END_LOOP(),
