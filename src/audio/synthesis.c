@@ -2225,17 +2225,9 @@ void note_enable(struct Note *note) {
             onScreenLayers[channelMap[0][noteChannelID]] = 18;
             if (channelMap[0][noteChannelID] == 1 && gCurrLevelNum == LEVEL_BOB) {
                 gCurrentLauncher++;
-                if(gCurrentLauncher >= 3) {gCurrentLauncher = 0;}
-                if(gLaunchers[gCurrentLauncher] != 0) {
-                    obj = spawn_object(gLaunchers[gCurrentLauncher], MODEL_BULLET_BILL, bhvBulletBill);
-
-                    // obj->oPosX += -750.0f * sins(gMarioState->faceAngle[1]);
-                    // obj->oPosZ += -750.0f * coss(gMarioState->faceAngle[1]);
-                    // obj->oPosY += 80.0f;
-
-                    vec3f_copy(&obj->oHomeX, &obj->oPosX);
-                    //obj->oAction = 2;
-                    // obj->oFaceAngleYaw = obj_angle_to_object(obj, gMarioObject);
+                if(gCurrentLauncher >= count_objects_with_behavior(bhvLauncher) * 2) {gCurrentLauncher = 0;}
+                if(gLaunchers[gCurrentLauncher / 2] != 0 && (gCurrentLauncher & 1) == 0) {
+                    obj = spawn_object(gLaunchers[gCurrentLauncher / 2], MODEL_BULLET_BILL, bhvBulletBill);
                 }
             }
         }
