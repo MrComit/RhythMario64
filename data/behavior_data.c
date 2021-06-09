@@ -6115,6 +6115,7 @@ const BehaviorScript bhvGate[] = {
     LOAD_COLLISION_DATA(gate_collision),
     SET_FLOAT(oCollisionDistance, 0x4000),
     SET_HOME(),
+    DEACTIVATE(),
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
