@@ -258,15 +258,23 @@ void bhv_whomp_loop(void) {
     switch (o->oAction) {
         case 0:
             o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0x4000, 0x800);
+            o->oPosY = approach_f32(o->oPosY, o->oHomeY, 55.0f, 55.0f);
+            cur_obj_compute_vel_xz();
+            o->oPosX += o->oVelX;
+            o->oPosZ += o->oVelZ;
             if (o->oFaceAnglePitch == 0x4000 && o->oFC == 0) {
                 o->oFC = 1;
+                o->oForwardVel = 0;
                 if (o->oDistanceToMario < 1000.0f) {
                     cur_obj_shake_screen(SHAKE_POS_SMALL);
                     create_sound_spawner(SOUND_OBJ_THWOMP);
                 }
             }
             if (cur_obj_beat_hit_and_reset(&o->oBeatTimer)) {
-                o->oAction = 1;
+                if (o->o100)
+                    o->oAction = 3;
+                else
+                    o->oAction = 1;
                 o->oFC = 0;
                 o->oForwardVel = 55.0f;
             }
@@ -290,9 +298,14 @@ void bhv_whomp_loop(void) {
                 }
             }
             if (cur_obj_beat_hit_and_reset(&o->oBeatTimer)) {
-                o->oAction = 2;
                 o->oFC = 0;
-                o->oForwardVel = 55.0f;
+                if (o->o100) {
+                    o->oAction = 0;
+                    o->oForwardVel = -55.0f;
+                } else {
+                    o->oAction = 2;
+                    o->oForwardVel = 55.0f;
+                }
             }
             break;
         case 2:
@@ -310,9 +323,13 @@ void bhv_whomp_loop(void) {
                 }
             }
             if (cur_obj_beat_hit_and_reset(&o->oBeatTimer)) {
-                o->oAction = 3;
+                if (o->o100)
+                    o->oAction = 1;
+                else
+                    o->oAction = 3;
                 o->oFaceAnglePitch = -0x4000;
                 o->oFC = 0;
+                o->oForwardVel = -55.0f;
             }
             break;
         case 3:
@@ -326,8 +343,16 @@ void bhv_whomp_loop(void) {
                 }
             }
             if (cur_obj_beat_hit_and_reset(&o->oBeatTimer)) {
-                o->oAction = 0;
                 o->oFC = 0;
+                if (o->o100) {
+                    o->o100 = 0;
+                    o->oAction = 0;
+                    o->oForwardVel = 0;
+                } else {
+                    o->oAction--;
+                    o->o100 = 1;
+                    o->oForwardVel = 0.0f;
+                }
             }
             break;
     }
