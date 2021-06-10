@@ -1531,7 +1531,7 @@ s32 act_squished(struct MarioState *m) {
             break;
         case 2:
             m->actionTimer++;
-            if (m->actionTimer >= 15) {
+            if (m->actionTimer >= 5) {
                 // 1 unit of health
                 if (m->health < 0x0100) {
                     level_trigger_warp(m, WARP_OP_DEATH);
@@ -1539,7 +1539,7 @@ s32 act_squished(struct MarioState *m) {
                     set_mario_action(m, ACT_DISAPPEARED, 0);
                 } else if (m->hurtCounter == 0) {
                     // un-squish animation
-                    m->squishTimer = 30;
+                    m->squishTimer = 10;
                     set_mario_action(m, ACT_IDLE, 0);
                 }
             }
