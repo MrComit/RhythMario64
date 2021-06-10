@@ -303,5 +303,6 @@ Gfx *geo_beat_block_light(s32 callContext, struct GraphNode *node, UNUSED void *
 void stay_on_beat(s32 *timer, s32 *prevTimer);
 s32 cur_obj_beat_hit(s32 *timer);
 void reset_beat_timer(s32 *timer);
+s32 cur_obj_beat_hit_and_reset(s32 *timer);
 
 #endif // OBJECT_HELPERS_H
