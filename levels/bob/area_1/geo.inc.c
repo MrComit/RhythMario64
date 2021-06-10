@@ -3,6 +3,7 @@
 const GeoLayout bob_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 5500, 188, -6250, bob_dl_Bridge_mesh_layer_1),
 		GEO_DISPLAY_LIST(1, bob_dl_cloud_floor_mesh_layer_1),
 		GEO_DISPLAY_LIST(1, bob_dl_clouds_mesh_layer_1),
 		GEO_DISPLAY_LIST(1, bob_dl_hills_mesh_layer_1),
@@ -11,6 +12,8 @@ const GeoLayout bob_area_1_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(1, -471, -887, -15385, bob_dl_Mushroom_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -4429, -171, -12316, bob_dl_Mushroom_002_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -2819, -171, -10970, bob_dl_Mushroom_003_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 5162, -62, -5316, bob_dl_Mushroom_004_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 10762, -1654, -12445, bob_dl_Mushroom_005_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

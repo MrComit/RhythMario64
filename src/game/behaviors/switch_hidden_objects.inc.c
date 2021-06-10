@@ -20,10 +20,10 @@ void breakable_box_init(void) {
             o->oNumLootCoins = 0;
             break;
         case 1:
-            o->oNumLootCoins = 3;
+            o->oNumLootCoins = 1;
             break;
         case 2:
-            o->oNumLootCoins = 5;
+            o->oNumLootCoins = 3;
             break;
         case 3:
             cur_obj_scale(1.5f);
