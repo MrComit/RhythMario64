@@ -9,7 +9,7 @@
  * Hitbox for evil lakitu.
  */
 static struct ObjectHitbox sEnemyLakituHitbox = {
-    /* interactType:      */ INTERACT_HIT_FROM_BELOW,
+    /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 2,
     /* health:            */ 0,
@@ -73,7 +73,7 @@ static void enemy_lakitu_update_speed_and_angle(void) {
     clamp_f32(&o->oForwardVel, minSpeed, 40.0f);
 
     // Accelerate toward mario vertically
-    enemy_lakitu_update_vel_y(300.0f);
+    enemy_lakitu_update_vel_y(600.0f);
 
     // Turn toward mario except right after throwing a spiny
     if (o->oEnemyLakituFaceForwardCountdown != 0) {
@@ -95,7 +95,7 @@ static void enemy_lakitu_update_speed_and_angle(void) {
 static void enemy_lakitu_sub_act_no_spiny(void) {
     cur_obj_init_animation_with_sound(1);
 
-    if (o->oEnemyLakituSpinyCooldown != 0) {
+    /*if (o->oEnemyLakituSpinyCooldown != 0) {
         o->oEnemyLakituSpinyCooldown -= 1;
     } else if (o->oEnemyLakituNumSpinies < 3 && o->oDistanceToMario < 800.0f
                && abs_angle_diff(o->oAngleToMario, o->oFaceAngleYaw) < 0x4000) {
@@ -109,6 +109,18 @@ static void enemy_lakitu_sub_act_no_spiny(void) {
             o->oSubAction = ENEMY_LAKITU_SUB_ACT_HOLD_SPINY;
             o->oEnemyLakituSpinyCooldown = 30;
         }
+    }*/
+    if (onScreenLayers[2] > 15) {
+        struct Object *spiny = spawn_object(o, MODEL_SPINY_BALL, bhvSpiny);
+        if (spiny != NULL) {
+            o->prevObj = spiny;
+            spiny->oAction = SPINY_ACT_HELD_BY_LAKITU;
+            obj_init_animation_with_sound(spiny, spiny_egg_seg5_anims_050157E4, 0);
+
+            o->oEnemyLakituNumSpinies += 1;
+            o->oSubAction = ENEMY_LAKITU_SUB_ACT_THROW_SPINY;
+            o->oEnemyLakituSpinyCooldown = 30;
+        }
     }
 }
 
@@ -119,16 +131,16 @@ static void enemy_lakitu_sub_act_no_spiny(void) {
 static void enemy_lakitu_sub_act_hold_spiny(void) {
     cur_obj_init_anim_extend(3);
 
-    if (o->oEnemyLakituSpinyCooldown != 0) {
-        o->oEnemyLakituSpinyCooldown -= 1;
-    }
+    //if (o->oEnemyLakituSpinyCooldown != 0) {
+    //    o->oEnemyLakituSpinyCooldown -= 1;
+    //}
     // TODO: Check if anything interesting happens if we bypass this with speed
-    else if (o->oDistanceToMario > o->oDrawingDistance - 100.0f
-             || (o->oDistanceToMario < 500.0f
-                 && abs_angle_diff(o->oAngleToMario, o->oFaceAngleYaw) < 0x2000)) {
+    //else if (o->oDistanceToMario > o->oDrawingDistance - 100.0f
+    //         || (o->oDistanceToMario < 500.0f
+    //             && abs_angle_diff(o->oAngleToMario, o->oFaceAngleYaw) < 0x2000)) {
         o->oSubAction = ENEMY_LAKITU_SUB_ACT_THROW_SPINY;
         o->oEnemyLakituFaceForwardCountdown = 20;
-    }
+    //}
 }
 
 /**
@@ -188,7 +200,7 @@ static void enemy_lakitu_act_main(void) {
 void bhv_enemy_lakitu_update(void) {
     // PARTIAL_UPDATE
 
-    treat_far_home_as_mario(2000.0f);
+    //treat_far_home_as_mario(2000.0f);
 
     switch (o->oAction) {
         case ENEMY_LAKITU_ACT_UNINITIALIZED:

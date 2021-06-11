@@ -15,8 +15,8 @@ static struct ObjectHitbox sSpinyHitbox = {
     /* damageOrCoinValue: */ 2,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 80,
-    /* height:            */ 50,
+    /* radius:            */ 120,
+    /* height:            */ 70,
     /* hurtboxRadius:     */ 40,
     /* hurtboxHeight:     */ 40,
 };
@@ -130,7 +130,7 @@ static void spiny_act_held_by_lakitu(void) {
     o->oParentRelativePosY = 35.0f;
     o->oParentRelativePosZ = -100.0f;
 
-    if (o->parentObj->prevObj == NULL) {
+    //if (o->parentObj->prevObj == NULL) {
         o->oAction = SPINY_ACT_THROWN_BY_LAKITU;
         o->oMoveAngleYaw = o->parentObj->oFaceAngleYaw;
 
@@ -140,7 +140,7 @@ static void spiny_act_held_by_lakitu(void) {
         o->oVelY = 30.0f;
 
         o->oMoveFlags = 0; // you do you, spiny
-    }
+    //}
 }
 
 /**
@@ -157,12 +157,14 @@ static void spiny_act_thrown_by_lakitu(void) {
 
         if (o->oMoveFlags & OBJ_MOVE_LANDED) {
             cur_obj_play_sound_2(SOUND_OBJ_SPINY_UNK59);
-            cur_obj_set_model(MODEL_SPINY);
-            obj_init_animation_with_sound(o, spiny_seg5_anims_05016EAC, 0);
-            o->oGraphYOffset = -17.0f;
+            //cur_obj_set_model(MODEL_SPINY);
+            //obj_init_animation_with_sound(o, spiny_seg5_anims_05016EAC, 0);
+            //o->oGraphYOffset = -17.0f;
 
-            o->oFaceAnglePitch = 0;
-            o->oAction = SPINY_ACT_WALK;
+            //o->oFaceAnglePitch = 0;
+            //o->oAction = SPINY_ACT_WALK;
+            o->activeFlags = 0;
+            spawn_mist_particles();
         } else if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
             o->oMoveAngleYaw = cur_obj_reflect_move_angle_off_wall();
         }
