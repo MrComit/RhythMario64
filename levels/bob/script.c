@@ -118,6 +118,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_RED_COIN, -57, 990, -15586, 0, 5, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, 2313, 500, -12000, 0, -90, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_NONE, -11750, 300, -6500, 0, 90, 0, 0x000A0000, bhvFlyingWarp),
+		MARIO_POS(0x01, 90, -11750, 300, -6500),
 		OBJECT(MODEL_THWOMP, -10099, 0, -6133, 0, 0, 0, 0x00000000, bhvThwomp),
 		OBJECT(MODEL_THWOMP, 2313, 500, -12000, 0, -90, 0, 0x00000000, bhvThwomp),
 		OBJECT(MODEL_WHOMP, -10099, 0, -5562, 0, -90, 0, 0x00000000, bhvSmallWhomp),
@@ -130,7 +131,7 @@ const LevelScript level_bob_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(1, 0, 0, 0, 0),
+	MARIO_POS(0x01, 90, -11750, 300, -6500),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),

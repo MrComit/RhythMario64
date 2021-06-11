@@ -9,7 +9,6 @@ struct ObjectHitbox sBoxHitbox = {
     /* hurtboxRadius: */ 40,
     /* hurtboxHeight: */ 30,
 };
-
 void bhv_block_update(void) {
     o->oAnimState = o->oBehParams2ndByte;
     obj_set_hitbox(o, &sBoxHitbox);
@@ -25,7 +24,8 @@ void bhv_block_update(void) {
         o->oPosY = o->oHomeY;
         o->oGraphYOffset = 0.0f;
     }
-    if (o->oBehParams2ndByte < 2 && cur_obj_was_attacked_or_ground_pounded()) {
+    if (o->oBehParams2ndByte < 2 && ((gMarioState->ceil != NULL && gMarioState->pos[1] + 170.0f >= gMarioState->ceilHeight && 
+        gMarioState->ceil->object == o) || cur_obj_was_attacked_or_ground_pounded())) {
         struct Object *coin;
         if(o->oBehParams2ndByte == 0) {
             spawn_mist_particles();
