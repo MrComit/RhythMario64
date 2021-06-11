@@ -29,3 +29,4 @@
 
 #include "levels/bob/block/model.inc.c"
 #include "levels/bob/block/collision.inc.c"
+#include "levels/bob/bounce_hill/model.inc.c"

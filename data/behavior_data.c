@@ -6176,4 +6176,14 @@ const BehaviorScript bhvBlock[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvBounceHill[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    SET_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x6000),
+    CALL_NATIVE(bhv_bounce_hill_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bounce_hill_loop),
+    END_LOOP(),
 
+};

@@ -573,6 +573,7 @@
 
 //0x30 - 0x53 are free
 #define MODEL_THWOMP                      0x30        // thwomp_geo
+#define MODEL_BOUNCE_HILL                 0x31
 #define MODEL_BLOCK                       0x3F
 
 // Menu Models (overwrites Level Geometry IDs)

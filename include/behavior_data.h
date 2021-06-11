@@ -549,5 +549,10 @@ extern const BehaviorScript bhvLaserRingSpawner[];
 extern const BehaviorScript bhvLaserRing[];
 extern const BehaviorScript bhvBeatBlock[];
 extern const BehaviorScript bhvBlock[];
+extern const BehaviorScript bhvBounceHill[];
+
+
+
+
 
 #endif // BEHAVIOR_DATA_H

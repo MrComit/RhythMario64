@@ -9,6 +9,8 @@ struct ObjectHitbox sBoxHitbox = {
     /* hurtboxRadius: */ 40,
     /* hurtboxHeight: */ 30,
 };
+
+
 void bhv_block_update(void) {
     o->oAnimState = o->oBehParams2ndByte;
     obj_set_hitbox(o, &sBoxHitbox);

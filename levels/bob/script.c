@@ -33,6 +33,7 @@ const LevelScript level_bob_entry[] = {
 	JUMP_LINK(script_func_global_12), 
 	JUMP_LINK(script_func_global_15), 
 	LOAD_MODEL_FROM_GEO(MODEL_BLOCK, block_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BOUNCE_HILL, bounce_hill_geo), 
 
 	AREA(1, bob_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -88,6 +89,9 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_BREAKABLE_BOX, 5496, 200, 435, 0, -180, 0, 0x00030000, bhvBreakableBox),
 		OBJECT(MODEL_NONE, -10750, 300, -6500, 0, 90, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_GATE, -7500, 0, -6000, 0, 0, 0, 0x00000000, bhvGate),
+		OBJECT(MODEL_BOUNCE_HILL, -6836, -4000, 2125, 0, -144, 0, 0x00000000, bhvBounceHill),
+		OBJECT(MODEL_BOUNCE_HILL, -16842, -4000, 2300, 0, 132, 0, 0x01010000, bhvBounceHill),
+		OBJECT(MODEL_BOUNCE_HILL, -21941, -4000, 5557, 0, 144, 0, 0x02000000, bhvBounceHill),
 		OBJECT(MODEL_ENEMY_LAKITU, -6006, 500, -6055, 0, 0, 0, 0x00000000, bhvEnemyLakitu),
 		OBJECT(MODEL_LASER_RING_SPAWNER, -11000, 0, -6000, 0, 0, 0, 0x00000000, bhvLaserRingSpawner),
 		OBJECT(MODEL_LASER_RING_SPAWNER, 7729, 500, 435, 0, 0, 0, 0x00000000, bhvLaserRingSpawner),
