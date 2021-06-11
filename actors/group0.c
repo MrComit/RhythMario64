@@ -35,3 +35,7 @@
 
 #include "beat_block/model.inc.c"
 #include "beat_block/collision.inc.c"
+
+
+#include "thwomp/model.inc.c"
+#include "thwomp/collision.inc.c"

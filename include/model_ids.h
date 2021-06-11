@@ -337,7 +337,7 @@
 #define MODEL_YELLOW_SPHERE               0x55        // yellow_sphere_geo
 #define MODEL_HOOT                        0x56        // hoot_geo
 #define MODEL_YOSHI_EGG                   0x57        // yoshi_egg_geo
-#define MODEL_THWOMP                      0x58        // thwomp_geo
+//#define MODEL_THWOMP                      0x58        // thwomp_geo
 #define MODEL_HEAVE_HO                    0x59        // heave_ho_geo
 
 // group 2
@@ -570,6 +570,9 @@
 #define MODEL_LASER_RING                  0xFB
 #define MODEL_BEAT_BLOCK                  0xFA
 
+
+//0x30 - 0x53 are free
+#define MODEL_THWOMP                      0x30        // thwomp_geo
 #define MODEL_BLOCK                       0x3F
 
 // Menu Models (overwrites Level Geometry IDs)

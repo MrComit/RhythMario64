@@ -118,6 +118,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_LASER_RING_SPAWNER,      laser_ring_spawner_geo),
     LOAD_MODEL_FROM_GEO(MODEL_LASER_RING,              laser_ring_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BEAT_BLOCK,              beat_block_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_THWOMP,                  thwomp_geo),
     FREE_LEVEL_POOL(),
     CALL(/*arg*/ 0, /*func*/ lvl_init_from_save_file),
     LOOP_BEGIN(),
@@ -206,7 +207,6 @@ const LevelScript script_func_global_2[] = {
     LOAD_MODEL_FROM_GEO(MODEL_YELLOW_SPHERE,           yellow_sphere_geo),
     LOAD_MODEL_FROM_GEO(MODEL_HOOT,                    hoot_geo),
     LOAD_MODEL_FROM_GEO(MODEL_YOSHI_EGG,               yoshi_egg_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_THWOMP,                  thwomp_geo),
     LOAD_MODEL_FROM_GEO(MODEL_HEAVE_HO,                heave_ho_geo),
     RETURN(),
 };

@@ -24,3 +24,4 @@
 #include "laser_ring/geo.inc.c"
 
 #include "beat_block/geo.inc.c"
+#include "thwomp/geo.inc.c"

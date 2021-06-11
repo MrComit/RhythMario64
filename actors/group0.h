@@ -357,4 +357,12 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "beat_block/collision_header.h"
 
+
+extern const GeoLayout thwomp_geo[];
+extern const Gfx thwomp_seg5_dl_0500B570[];
+extern const Gfx thwomp_seg5_dl_0500B718[];
+extern const Gfx thwomp_seg5_dl_0500B750[];
+extern const Collision thwomp_seg5_collision_0500B7D0[];
+extern const Collision thwomp_seg5_collision_0500B92C[];
+
 #endif
