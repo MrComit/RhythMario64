@@ -1,4 +1,4 @@
-
+#include "game/print.h"
 /**
  * Behavior for bhvSpiny.
  * When spawned by lakitu, its parent object is the lakitu.
@@ -123,6 +123,8 @@ static void spiny_act_walk(void) {
  * after being spawned by a lakitu.
  */
 static void spiny_act_held_by_lakitu(void) {
+    f32 dist;
+    s16 pitch, yaw;
     o->oGraphYOffset = 15.0f;
     cur_obj_init_animation_with_sound(0);
 
@@ -132,12 +134,15 @@ static void spiny_act_held_by_lakitu(void) {
 
     //if (o->parentObj->prevObj == NULL) {
         o->oAction = SPINY_ACT_THROWN_BY_LAKITU;
-        o->oMoveAngleYaw = o->parentObj->oFaceAngleYaw;
-
+        //o->oMoveAngleYaw = o->oAngleToMario;
+        vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
+        o->oMoveAnglePitch = pitch;
+        o->oMoveAngleYaw = yaw;
+        //print_text_fmt_int(20, 80, "%d", o->oMoveAnglePitch);
         // Move more quickly if the lakitu is moving forward
-        o->oForwardVel =
-            o->parentObj->oForwardVel * coss(o->oMoveAngleYaw - o->parentObj->oMoveAngleYaw) + 10.0f;
-        o->oVelY = 30.0f;
+        o->oForwardVel = 30.0f;
+            //o->parentObj->oForwardVel * coss(o->oMoveAngleYaw - o->parentObj->oMoveAngleYaw) + 10.0f;
+        //o->oVelY = 30.0f;
 
         o->oMoveFlags = 0; // you do you, spiny
     //}
@@ -169,7 +174,10 @@ static void spiny_act_thrown_by_lakitu(void) {
             o->oMoveAngleYaw = cur_obj_reflect_move_angle_off_wall();
         }
 
-        cur_obj_move_standard(-78);
+        //cur_obj_move_standard(-78);
+        cur_obj_compute_vel_xyz();
+        cur_obj_move_using_vel_and_gravity();
+        //o->oPosY -= 50.0f;
 
         if (obj_check_attacks(&sSpinyHitbox, o->oAction)) {
             if (o->parentObj != o) {

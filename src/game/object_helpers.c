@@ -1430,6 +1430,12 @@ void cur_obj_compute_vel_xz(void) {
     o->oVelZ = o->oForwardVel * coss(o->oMoveAngleYaw);
 }
 
+void cur_obj_compute_vel_xyz(void) {
+    o->oVelX = o->oForwardVel * sins(o->oMoveAngleYaw) * coss(o->oMoveAnglePitch);
+    o->oVelZ = o->oForwardVel * coss(o->oMoveAngleYaw) * coss(o->oMoveAnglePitch);
+    o->oVelY = o->oForwardVel * sins(o->oMoveAnglePitch);
+}
+
 f32 increment_velocity_toward_range(f32 value, f32 center, f32 zeroThreshold, f32 increment) {
     f32 relative;
     if ((relative = value - center) > 0) {

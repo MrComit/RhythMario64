@@ -174,6 +174,7 @@ s16 abs_angle_diff(s16 x0, s16 x1);
 void cur_obj_move_xz_using_fvel_and_yaw(void);
 void cur_obj_move_y_with_terminal_vel(void);
 void cur_obj_compute_vel_xz(void);
+void cur_obj_compute_vel_xyz(void);
 f32 increment_velocity_toward_range(f32 value, f32 center, f32 zeroThreshold, f32 increment);
 s32 obj_check_if_collided_with_object(struct Object *obj1, struct Object *obj2);
 void cur_obj_set_behavior(const BehaviorScript *behavior);

@@ -147,15 +147,15 @@ static void enemy_lakitu_sub_act_hold_spiny(void) {
  * Throw the spiny, then enter the no spiny sub-action.
  */
 static void enemy_lakitu_sub_act_throw_spiny(void) {
-    if (cur_obj_init_anim_check_frame(2, 2)) {
+    //if (cur_obj_init_anim_check_frame(2, 2)) {
         cur_obj_play_sound_2(SOUND_OBJ_EVIL_LAKITU_THROW);
         o->prevObj = NULL;
-    }
+    //}
 
-    if (cur_obj_check_if_near_animation_end()) {
+    //if (cur_obj_check_if_near_animation_end()) {
         o->oSubAction = ENEMY_LAKITU_SUB_ACT_NO_SPINY;
-        o->oEnemyLakituSpinyCooldown = random_linear_offset(100, 100);
-    }
+    //    o->oEnemyLakituSpinyCooldown = random_linear_offset(100, 100);
+    //}
 }
 
 /**
