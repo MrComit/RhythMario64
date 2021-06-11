@@ -2951,3 +2951,17 @@ s32 cur_obj_beat_hit_and_reset(s32 *timer) {
         return 0;
     }
 }
+
+void reset_for_checkpoint(s32 *timer, s32 *prevTimer, s32 originalOffset, s32 resetPitchRoll, s32 resetYaw) {
+    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
+    *prevTimer = 0;
+    *timer = originalOffset;
+    cur_obj_set_pos_to_home();
+    if(resetPitchRoll) {
+        o->oFaceAnglePitch = o->oMoveAnglePitch = o->oFaceAngleRoll = o->oMoveAngleRoll = 0;
+    }
+    if(resetYaw) {
+        o->oFaceAngleYaw = o->oMoveAngleYaw;
+    }
+    o->oAction = 0;
+}

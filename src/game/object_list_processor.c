@@ -273,7 +273,7 @@ void spawn_particle(u32 activeParticleFlag, s16 model, const BehaviorScript *beh
  * Mario's primary behavior update function.
  */
 
-s32 gLoadingCheckpoint;
+s32 gCheckpointLoaded;
 
 struct M64ScriptState *state;
 u32 addr = 0x8007433E;
@@ -288,6 +288,8 @@ u16 m64_read_compressed_u16_but_epic(u8 *state) {
     return ret;
 }
 
+s32 gBeatTimer, gPrevSongTimer, gBeatHit, gLastBeatHit;
+
 u32 go_to_checkpoint(u32 checkpoint) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
     u8 checkpointIncrement = 0;
@@ -298,6 +300,7 @@ u32 go_to_checkpoint(u32 checkpoint) {
         seqPointer++;
         cmd = seqPlayer->seqData[seqPointer];
     }
+    gAddress = &seqPlayer->seqData[seqPointer];
     while(checkpointIncrement != checkpoint) {
         while(cmd != 0xFD) {
             if(cmd >= 0x90 && cmd <= 0x9F) {
@@ -317,6 +320,11 @@ u32 go_to_checkpoint(u32 checkpoint) {
     }
     seqPlayer->scriptState.pc = *(typeof(seqPlayer->scriptState.pc) *)&gAddress;
     seqPlayer->delay = 0;
+    gPrevSongTimer = totalTimer - 4;
+    gBeatTimer = 0;
+    gCheckpointLoaded = 1;
+    gLastBeatHit = 0;
+    gBeatHit = 0;
     return totalTimer;
 }
 
@@ -328,8 +336,6 @@ u8 channelMap[4][CHANNELS_MAX] = {
     {0, 1, 2, 3, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 3},
     {0, 1, 2, 3, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 3},
 };
-
-s32 gBeatTimer, gPrevSongTimer, gBeatHit, gLastBeatHit;
 
 void bhv_mario_update(void) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
@@ -353,9 +359,6 @@ void bhv_mario_update(void) {
         i++;
     }
 
-    if(gPlayer1Controller->buttonPressed & L_TRIG) {
-        seqPlayer->globalSongTimer = go_to_checkpoint(random_u16() % 4);
-    }
     print_text_fmt_int(260, 10, "%x", seqPlayer->globalSongTimer);
 
     for(i = 0; i < CHANNELS_MAX; i++) {
@@ -397,6 +400,11 @@ void bhv_mario_update(void) {
         gBeatTimer -= 24;
     } else {
         gBeatHit = 0;
+    }
+
+    gCheckpointLoaded = 0;
+    if(gPlayer1Controller->buttonPressed & L_TRIG) {
+        seqPlayer->globalSongTimer = go_to_checkpoint(0);
     }
 
     //print_text_fmt_int(20, 20, "%d", gLastBeatHit);

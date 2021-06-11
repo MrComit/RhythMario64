@@ -6165,4 +6165,15 @@ const BehaviorScript bhvBeatBlock[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvBlock[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    SET_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(block_collision),
+    SET_FLOAT(oCollisionDistance, 300),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_block_update),
+    END_LOOP(),
+};
+
 

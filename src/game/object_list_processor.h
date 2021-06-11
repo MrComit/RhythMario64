@@ -124,7 +124,7 @@ void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo);
 void clear_objects(void);
 void update_objects(UNUSED s32 unused);
 
-extern s32 gLoadingCheckpoint;
+// extern s32 gLoadingCheckpoint;
 extern u8 onScreenLayers[CHANNELS_MAX];
 extern u8 channelMap[4][CHANNELS_MAX];
 
@@ -132,6 +132,7 @@ extern s32 gBeatTimer;
 extern s32 gBeatHit;
 extern s32 gPrevSongTimer;
 extern s32 gLastBeatHit;
+extern s32 gCheckpointLoaded;
 
 
 #endif // OBJECT_LIST_PROCESSOR_H
