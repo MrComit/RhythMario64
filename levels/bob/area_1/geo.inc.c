@@ -4,6 +4,7 @@ const GeoLayout bob_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 5500, 188, -6250, bob_dl_Bridge_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 5500, 1535, 7603, bob_dl_castle_mesh_layer_1),
 		GEO_DISPLAY_LIST(1, bob_dl_cloud_floor_mesh_layer_1),
 		GEO_DISPLAY_LIST(1, bob_dl_clouds_mesh_layer_1),
 		GEO_DISPLAY_LIST(1, bob_dl_hills_mesh_layer_1),
