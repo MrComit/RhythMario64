@@ -58,11 +58,12 @@ void bhv_grindel_thwomp_loop(void) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
     stay_on_beat(&o->oBeatTimer, &o->oPrevSongTimer);
     cur_obj_call_action_function(sGrindelThwompActions);
+    if(gCheckpointLoaded) {
+        bhv_grindel_thwomp_init();
+    }
 }
 
 
 void bhv_grindel_thwomp_init(void) {
-    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
-    //o->oBPM = 30;
-    o->oBeatTimer = 32;
+    reset_for_checkpoint(&o->oBeatTimer, &o->oPrevSongTimer, 32, 1, 0);
 }

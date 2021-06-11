@@ -11,6 +11,9 @@ void bhv_beat_block_init(void) {
 }
 
 void bhv_beat_block_update(void) {
+    if(gCheckpointLoaded == 1) {
+        bhv_beat_block_init();
+    }
     if(gBeatHit == 2 || gBeatHit == 4) {
         o->oBeatBlockTimer++;
         if(o->oBeatBlockTimer > 4 && o->oBeatBlockTimer < 8) {

@@ -18,3 +18,5 @@
 #include "levels/bob/grate_door/geo.inc.c"
 #include "levels/bob/areas/1/geo.inc.c"
 #include "levels/bob/geo.inc.c"
+
+#include "levels/bob/block/geo.inc.c"

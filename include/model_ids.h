@@ -570,6 +570,8 @@
 #define MODEL_LASER_RING                  0xFB
 #define MODEL_BEAT_BLOCK                  0xFA
 
+#define MODEL_BLOCK                       0x3F
+
 // Menu Models (overwrites Level Geometry IDs)
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON         MODEL_LEVEL_GEOMETRY_03   // main_menu_geo_0001D0
 #define MODEL_MAIN_MENU_RED_ERASE_BUTTON          MODEL_LEVEL_GEOMETRY_04   // main_menu_geo_000290

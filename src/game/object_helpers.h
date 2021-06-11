@@ -304,5 +304,6 @@ void stay_on_beat(s32 *timer, s32 *prevTimer);
 s32 cur_obj_beat_hit(s32 *timer);
 void reset_beat_timer(s32 *timer);
 s32 cur_obj_beat_hit_and_reset(s32 *timer);
+void reset_for_checkpoint(s32 *timer, s32 *prevTimer, s32 originalOffset, s32 resetPitchRoll, s32 resetYaw);
 
 #endif // OBJECT_HELPERS_H

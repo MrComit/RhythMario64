@@ -2773,7 +2773,7 @@ void init_sequence_player(u32 player) {
 #if defined(VERSION_EU) || defined(VERSION_SH)
     seqPlayer->state = 1;
 #else
-    if(gLoadingCheckpoint == 0)
+    // if(gLoadingCheckpoint == 0)
         seqPlayer->state = SEQUENCE_PLAYER_STATE_0;
 #endif
     seqPlayer->fadeRemainingFrames = 0;

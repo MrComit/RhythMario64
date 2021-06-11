@@ -244,6 +244,9 @@ void (*sWhompActions[])(void) = {
 void bhv_whomp_loop(void) {
     f32 dx, dz;
     stay_on_beat(&o->oBeatTimer, &o->oPrevSongTimer);
+    if(gCheckpointLoaded) {
+        bhv_grindel_thwomp_init();
+    }
     //cur_obj_update_floor_and_walls();
     //cur_obj_call_action_function(sWhompActions);
     //cur_obj_move_standard(-20);

@@ -1637,7 +1637,7 @@ void load_sequence_internal(u32 player, u32 seqId, s32 loadAsync) {
     seqPlayer->delay = 0;
     seqPlayer->enabled = TRUE;
     seqPlayer->seqData = sequenceData;
-    if(gLoadingCheckpoint == 0)
+    // if(gLoadingCheckpoint == 0)
         seqPlayer->scriptState.pc = sequenceData;
 }
 #endif
