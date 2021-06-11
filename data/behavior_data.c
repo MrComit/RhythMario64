@@ -6178,7 +6178,7 @@ const BehaviorScript bhvBlock[] = {
 
 const BehaviorScript bhvBounceHill[] = {
     BEGIN(OBJ_LIST_DEFAULT),
-    SET_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
     SET_HOME(),
     SET_FLOAT(oDrawingDistance, 0x6000),
     CALL_NATIVE(bhv_bounce_hill_init),
