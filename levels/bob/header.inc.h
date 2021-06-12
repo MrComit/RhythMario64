@@ -56,7 +56,7 @@ extern Vtx bob_dl_cloud_floor_mesh_layer_1_vtx_cull[8];
 extern Vtx bob_dl_cloud_floor_mesh_layer_1_vtx_0[25];
 extern Gfx bob_dl_cloud_floor_mesh_layer_1_tri_0[];
 extern Vtx bob_dl_clouds_mesh_layer_1_vtx_cull[8];
-extern Vtx bob_dl_clouds_mesh_layer_1_vtx_0[256];
+extern Vtx bob_dl_clouds_mesh_layer_1_vtx_0[335];
 extern Gfx bob_dl_clouds_mesh_layer_1_tri_0[];
 extern Vtx bob_dl_hills_mesh_layer_1_vtx_cull[8];
 extern Vtx bob_dl_hills_mesh_layer_1_vtx_0[246];

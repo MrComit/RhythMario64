@@ -17,7 +17,7 @@ static struct ObjectHitbox sSpinyHitbox = {
     /* numLootCoins:      */ 0,
     /* radius:            */ 120,
     /* height:            */ 70,
-    /* hurtboxRadius:     */ 40,
+    /* hurtboxRadius:     */ 100,
     /* hurtboxHeight:     */ 40,
 };
 

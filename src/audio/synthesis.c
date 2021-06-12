@@ -2224,8 +2224,11 @@ void note_enable(struct Note *note) {
         }
         if(noteChannelID != 0xFF) {
             onScreenLayers[channelMap[0][noteChannelID]] = 18;
-            if (channelMap[0][noteChannelID] == 3 && gCurrLevelNum == LEVEL_BOB) {
+            if (channelMap[0][noteChannelID] == 3) {
                 gBulletLauncherIndex[0]++;
+                gBulletLauncherIndex[1]++;
+                gBulletLauncherIndex[2]++;
+                gBulletLauncherIndex[3]++;
             }
         }
     }

@@ -71,7 +71,7 @@ void bhv_bullet_bill_loop(void) {
     if (cur_obj_check_interacted())
         o->oAction = 4;
     if(o->oTimer < 20)
-        o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1] + 80.0f, 20.0f, 20.0f);
+        o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1] + 80.0f, 30.0f, 30.0f);
 }
 
 void bhv_bullet_bill_launcher_init(void) {
@@ -92,14 +92,25 @@ void bhv_bullet_bill_launcher_init(void) {
 }
 
 void bhv_bullet_bill_launcher_rotate_loop(void) {
+    if (o->oDistanceToMario > 8000.0f) {
+        return;
+    }
+
     o->oMoveAngleYaw = obj_angle_to_object(o, gMarioObject);
     if(onScreenLayers[channelMap[0][3]] == 17) {
+        o->oF4++;
+    }
+    if (o->oF4 >= 3) {
         spawn_object(o, MODEL_BULLET_BILL, bhvBulletBill);
+        o->oF4 = 0;
     }
 }
 
 void bhv_bullet_bill_launcher_loop(void) {
-    u8 bparam1 = bparam1;
+    u8 bparam1 = o->oBehParams >> 24;;
+    if (o->oDistanceToMario > 8000.0f) {
+        return;
+    }
 
     if(gBulletLauncherIndex[bparam1] >= count_objects_with_behavior_and_bparams(bhvLauncher, 0xFF000000, o->oBehParams & 0xFF000000)) {
         gBulletLauncherIndex[bparam1] = 0;
