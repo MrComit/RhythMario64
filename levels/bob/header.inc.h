@@ -66,7 +66,7 @@ extern Gfx bob_dl_hills_mesh_layer_1_tri_1[];
 extern Vtx bob_dl_hills_mesh_layer_1_vtx_2[99];
 extern Gfx bob_dl_hills_mesh_layer_1_tri_2[];
 extern Vtx bob_dl_main_mesh_layer_1_vtx_cull[8];
-extern Vtx bob_dl_main_mesh_layer_1_vtx_0[131];
+extern Vtx bob_dl_main_mesh_layer_1_vtx_0[121];
 extern Gfx bob_dl_main_mesh_layer_1_tri_0[];
 extern Vtx bob_dl_main_mesh_layer_1_vtx_1[334];
 extern Gfx bob_dl_main_mesh_layer_1_tri_1[];
