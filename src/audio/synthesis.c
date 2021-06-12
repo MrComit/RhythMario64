@@ -2196,8 +2196,9 @@ void note_set_frequency(struct Note *note, f32 frequency) {
     note->frequency = frequency;
 }
 
-struct Object *gLaunchers[3];
+struct Object *gLaunchers[7];
 s32 gCurrentLauncher;
+u8 gBulletLauncherIndex[4];
 
 void note_enable(struct Note *note) {
     struct Object *obj;
@@ -2224,11 +2225,7 @@ void note_enable(struct Note *note) {
         if(noteChannelID != 0xFF) {
             onScreenLayers[channelMap[0][noteChannelID]] = 18;
             if (channelMap[0][noteChannelID] == 3 && gCurrLevelNum == LEVEL_BOB) {
-                gCurrentLauncher++;
-                if(gCurrentLauncher >= count_objects_with_behavior(bhvLauncher) * 2) {gCurrentLauncher = 0;}
-                if(gLaunchers[gCurrentLauncher / 2] != 0 && (gCurrentLauncher & 1) == 0) {
-                    obj = spawn_object(gLaunchers[gCurrentLauncher / 2], MODEL_BULLET_BILL, bhvBulletBill);
-                }
+                gBulletLauncherIndex[0]++;
             }
         }
     }

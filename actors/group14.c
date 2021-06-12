@@ -25,12 +25,6 @@ UNUSED static const u64 binid_2 = 2;
 #include "piranha_plant/anims/table.inc.c"
 UNUSED static const u64 binid_3 = 3;
 
-#include "whomp/model.inc.c"
-#include "whomp/anims/data.inc.c"
-#include "whomp/anims/table.inc.c"
-#include "whomp/collision.inc.c"
-UNUSED static const u64 binid_4 = 4;
-
 #include "chain_ball/model.inc.c"
 UNUSED static const u64 binid_5 = 5;
 

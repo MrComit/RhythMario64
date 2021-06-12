@@ -360,3 +360,57 @@ void bhv_whomp_loop(void) {
             break;
     }
 }
+
+void bhv_whomp_circle_loop(void) {
+    f32 dx, dz, targetY;
+    stay_on_beat(&o->oBeatTimer, &o->oPrevSongTimer);
+    if(gCheckpointLoaded) {
+        bhv_grindel_thwomp_init();
+    }
+    if (o->oAction != 9) {
+        // if (o->oBehParams2ndByte != 0)
+        //     cur_obj_hide_if_mario_far_away_y(2000.0f);
+        // else
+        //     cur_obj_hide_if_mario_far_away_y(1000.0f);
+        load_object_collision_model();
+    }
+
+    if(absi(o->oFaceAnglePitch % 0x10000) != absi(o->oAction*0x4000)) {
+        o->oForwardVel = 30.0f;
+        o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, absi(o->oAction*0x4000), 0x800);
+        cur_obj_compute_vel_xz();
+        o->oPosX += o->oVelX;
+        o->oPosZ += o->oVelZ;
+    } else {
+        o->oForwardVel = 0;
+        if (o->oDistanceToMario < 1000.0f) {
+            cur_obj_shake_screen(SHAKE_POS_SMALL);
+            create_sound_spawner(SOUND_OBJ_THWOMP);
+        }
+    }
+
+    switch(o->oAction) {
+        case 0:
+            targetY = o->oHomeY;
+            break;
+        case 1:
+            targetY = o->oHomeY + 420.0f;
+            break;
+        case 2:
+            targetY = o->oHomeY + 100.0f;
+            break;
+        case 3:
+            targetY = o->oHomeY;
+            break;
+    }
+    o->oPosY = approach_f32(o->oPosY, targetY, 55.0f, 55.0f);
+    if (cur_obj_beat_hit_and_reset(&o->oBeatTimer)) {
+        o->oAction++;
+        o->oMoveAngleYaw -= 0x1000;
+        if(o->oAction >= 4) {
+            o->oAction = 0;
+        }
+        o->oFC = 0;
+        o->oForwardVel = 55.0f;
+    }
+}

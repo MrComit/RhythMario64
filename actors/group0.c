@@ -39,3 +39,8 @@
 
 #include "thwomp/model.inc.c"
 #include "thwomp/collision.inc.c"
+
+#include "whomp/model.inc.c"
+#include "whomp/anims/data.inc.c"
+#include "whomp/anims/table.inc.c"
+#include "whomp/collision.inc.c"

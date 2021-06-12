@@ -25,3 +25,4 @@
 
 #include "beat_block/geo.inc.c"
 #include "thwomp/geo.inc.c"
+#include "whomp/geo.inc.c"

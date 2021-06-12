@@ -112,25 +112,4 @@ extern const Gfx poundable_pole_seg6_dl_06002358[];
 extern const Gfx poundable_pole_seg6_dl_06002410[];
 extern const Collision poundable_pole_collision_06002490[];
 
-// whomp
-extern const GeoLayout whomp_geo[];
-extern const Gfx whomp_seg6_dl_0601F4F8[];
-extern const Gfx whomp_seg6_dl_0601F570[];
-extern const Gfx whomp_seg6_dl_0601F5A8[];
-extern const Gfx whomp_seg6_dl_0601F5E0[];
-extern const Gfx whomp_seg6_dl_0601F7F0[];
-extern const Gfx whomp_seg6_dl_0601F880[];
-extern const Gfx whomp_seg6_dl_0601FA58[];
-extern const Gfx whomp_seg6_dl_0601FAE8[];
-extern const Gfx whomp_seg6_dl_0601FB88[];
-extern const Gfx whomp_seg6_dl_0601FBC0[];
-extern const Gfx whomp_seg6_dl_0601FC70[];
-extern const Gfx whomp_seg6_dl_0601FCA8[];
-extern const Gfx whomp_seg6_dl_0601FE10[];
-extern const Gfx whomp_seg6_dl_0601FEA8[];
-extern const Gfx whomp_seg6_dl_0601FFA0[];
-extern const Gfx whomp_seg6_dl_06020038[];
-extern const struct Animation *const whomp_seg6_anims_06020A04[];
-extern const Collision whomp_seg6_collision_06020A0C[];
-
 #endif
