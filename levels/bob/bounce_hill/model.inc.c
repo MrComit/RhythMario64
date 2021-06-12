@@ -941,19 +941,19 @@ u8 bounce_hill_hillstripes3_ci4_pal_rgba16[] = {
 	0xe3, 0x15, 0xca, 0x95, 
 };
 
-Vtx bounce_hill_dl2_mesh_layer_4_vtx_0[8] = {
-	{{{-1005, 3809, 641},0, {-166, 1158},{0xCE, 0x0, 0x75, 0xFF}}},
-	{{{66, 3809, 1099},0, {1158, 1158},{0xCE, 0x0, 0x75, 0xFF}}},
-	{{{66, 4974, 1099},0, {1158, -166},{0xCE, 0x0, 0x75, 0xFF}}},
-	{{{-1005, 4974, 641},0, {-166, -166},{0xCE, 0x0, 0x75, 0xFF}}},
-	{{{-66, 3809, 1099},0, {-166, 1158},{0x32, 0x0, 0x75, 0xFF}}},
-	{{{1005, 3809, 641},0, {1158, 1158},{0x32, 0x0, 0x75, 0xFF}}},
-	{{{1005, 4974, 641},0, {1158, -166},{0x32, 0x0, 0x75, 0xFF}}},
-	{{{-66, 4974, 1099},0, {-166, -166},{0x32, 0x0, 0x75, 0xFF}}},
+Vtx bounce_hill_dl2_mesh_layer_6_vtx_0[8] = {
+	{{{-995, 3809, 616},0, {-166, 1158},{0xCE, 0x0, 0x75, 0xFF}}},
+	{{{76, 3809, 1074},0, {1158, 1158},{0xCE, 0x0, 0x75, 0xFF}}},
+	{{{76, 4974, 1074},0, {1158, -166},{0xCE, 0x0, 0x75, 0xFF}}},
+	{{{-995, 4974, 616},0, {-166, -166},{0xCE, 0x0, 0x75, 0xFF}}},
+	{{{-77, 3809, 1074},0, {-166, 1158},{0x32, 0x0, 0x75, 0xFF}}},
+	{{{995, 3809, 616},0, {1158, 1158},{0x32, 0x0, 0x75, 0xFF}}},
+	{{{995, 4974, 616},0, {1158, -166},{0x32, 0x0, 0x75, 0xFF}}},
+	{{{-77, 4974, 1074},0, {-166, -166},{0x32, 0x0, 0x75, 0xFF}}},
 };
 
-Gfx bounce_hill_dl2_mesh_layer_4_tri_0[] = {
-	gsSPVertex(bounce_hill_dl2_mesh_layer_4_vtx_0 + 0, 8, 0),
+Gfx bounce_hill_dl2_mesh_layer_6_tri_0[] = {
+	gsSPVertex(bounce_hill_dl2_mesh_layer_6_vtx_0 + 0, 8, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
 	gsSPEndDisplayList(),
@@ -1145,9 +1145,9 @@ Gfx mat_revert_bounce_hill_hills3[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx bounce_hill_dl2_mesh_layer_4[] = {
+Gfx bounce_hill_dl2_mesh_layer_6[] = {
 	gsSPDisplayList(mat_bounce_hill_eyes),
-	gsSPDisplayList(bounce_hill_dl2_mesh_layer_4_tri_0),
+	gsSPDisplayList(bounce_hill_dl2_mesh_layer_6_tri_0),
 	gsSPEndDisplayList(),
 };
 
