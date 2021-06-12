@@ -561,6 +561,7 @@ void bhv_laser_ring_loop(void);
 void bhv_beat_block_init(void);
 void bhv_beat_block_update(void);
 void bhv_block_update(void);
+void bhv_whomp_circle_loop(void);
 
 Gfx *geo_move_mario_part_from_parent(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 

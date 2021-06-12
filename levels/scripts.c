@@ -119,6 +119,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_LASER_RING,              laser_ring_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BEAT_BLOCK,              beat_block_geo),
     LOAD_MODEL_FROM_GEO(MODEL_THWOMP,                  thwomp_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_WHOMP,                   whomp_geo),
     FREE_LEVEL_POOL(),
     CALL(/*arg*/ 0, /*func*/ lvl_init_from_save_file),
     LOOP_BEGIN(),
@@ -320,7 +321,6 @@ const LevelScript script_func_global_14[] = {
 
 const LevelScript script_func_global_15[] = {
     LOAD_MODEL_FROM_GEO(MODEL_PIRANHA_PLANT,           piranha_plant_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_WHOMP,                   whomp_geo),
     LOAD_MODEL_FROM_GEO(MODEL_KOOPA_WITH_SHELL,        koopa_with_shell_geo),
     LOAD_MODEL_FROM_GEO(MODEL_KOOPA_WITHOUT_SHELL,     koopa_without_shell_geo),
     LOAD_MODEL_FROM_GEO(MODEL_METALLIC_BALL,           metallic_ball_geo),

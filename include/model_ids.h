@@ -426,7 +426,6 @@
 
 // group 14
 #define MODEL_PIRANHA_PLANT               0x64        // piranha_plant_geo
-#define MODEL_WHOMP                       0x67        // whomp_geo
 #define MODEL_KOOPA_WITH_SHELL            0x68        // koopa_with_shell_geo
 #define MODEL_METALLIC_BALL               0x65        // metallic_ball_geo
 #define MODEL_CHAIN_CHOMP                 0x66        // chain_chomp
@@ -574,6 +573,7 @@
 //0x30 - 0x53 are free
 #define MODEL_THWOMP                      0x30        // thwomp_geo
 #define MODEL_BLOCK                       0x3F
+#define MODEL_WHOMP                       0x34        // whomp_geo
 
 // Menu Models (overwrites Level Geometry IDs)
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON         MODEL_LEVEL_GEOMETRY_03   // main_menu_geo_0001D0
