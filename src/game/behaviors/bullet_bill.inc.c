@@ -76,14 +76,33 @@ void bhv_bullet_bill_loop(void) {
 
 void bhv_bullet_bill_launcher_init(void) {
     u8 i;
-    for(i = 0; i < 3; i++) {
-        if(gLaunchers[i] == 0) {
-            gLaunchers[i] = o;
-            i = 3;
-        }
+        // for(i = 0; i < 7; i++) {
+        //     if(gLaunchers[i] == 0) {
+        //         gLaunchers[i] = o;
+        //         i = 7;
+        //     }
+        // }
+        // o->oBehParams2ndByte = count_objects_with_behavior(bhvLauncher) - 1;
+}
+
+void bhv_bullet_bill_launcher_rotate_loop(void) {
+    o->oMoveAngleYaw = obj_angle_to_object(o, gMarioObject);
+    if(onScreenLayers[channelMap[0][3]] == 17) {
+        spawn_object(o, MODEL_BULLET_BILL, bhvBulletBill);
     }
 }
 
 void bhv_bullet_bill_launcher_loop(void) {
-    o->oMoveAngleYaw = obj_angle_to_object(o, gMarioObject);
+
+    if(gBulletLauncherIndex[0] >= count_objects_with_behavior(bhvLauncher)) {
+        gBulletLauncherIndex[0] = 0;
+    }
+    if(gBulletLauncherIndex[0] == o->oBehParams2ndByte) {
+        if(o->oAction == 0) {
+            spawn_object(o, MODEL_BULLET_BILL, bhvBulletBill);
+            o->oAction = 1;
+        }
+    } else {
+        o->oAction = 0;
+    }
 }

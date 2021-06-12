@@ -6131,6 +6131,15 @@ const BehaviorScript bhvLauncher[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvLauncherRotate[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bullet_bill_launcher_rotate_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvLaserRingSpawner[] = {
     BEGIN(OBJ_LIST_SURFACE),
     SET_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),

@@ -553,6 +553,7 @@ void bhv_yoshi_loop(void);
 void bhv_volcano_trap_loop(void);
 void bhv_bullet_bill_launcher_init(void);
 void bhv_bullet_bill_launcher_loop(void);
+void bhv_bullet_bill_launcher_rotate_loop(void);
 void bhv_laser_ring_spawner_init(void);
 void bhv_laser_ring_spawner_loop(void);
 void bhv_laser_ring_init(void);

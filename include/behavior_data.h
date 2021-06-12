@@ -545,6 +545,7 @@ extern const BehaviorScript bhvUnusedFakeStar[];
 
 extern const BehaviorScript bhvGate[];
 extern const BehaviorScript bhvLauncher[];
+extern const BehaviorScript bhvLauncherRotate[];
 extern const BehaviorScript bhvLaserRingSpawner[];
 extern const BehaviorScript bhvLaserRing[];
 extern const BehaviorScript bhvBeatBlock[];
