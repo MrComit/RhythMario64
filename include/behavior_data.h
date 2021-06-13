@@ -550,6 +550,11 @@ extern const BehaviorScript bhvLaserRingSpawner[];
 extern const BehaviorScript bhvLaserRing[];
 extern const BehaviorScript bhvBeatBlock[];
 extern const BehaviorScript bhvBlock[];
+extern const BehaviorScript bhvBounceHill[];
+
+
+
+
 extern const BehaviorScript bhvSmallWhompCircle[];
 extern const BehaviorScript bhvSpikePillar[];
 

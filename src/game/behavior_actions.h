@@ -592,6 +592,8 @@ extern struct WaterDropletParams gShallowWaterWaveDropletParams;
 
 
 void bhv_grindel_thwomp_init(void);
+void bhv_bounce_hill_init(void);
+void bhv_bounce_hill_loop(void);
 
 
 

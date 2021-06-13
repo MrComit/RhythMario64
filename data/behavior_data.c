@@ -6123,7 +6123,7 @@ const BehaviorScript bhvGate[] = {
 
 const BehaviorScript bhvLauncher[] = {
     BEGIN(OBJ_LIST_GENACTOR),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     SET_FLOAT(oDrawingDistance, 0x4000),
     CALL_NATIVE(bhv_bullet_bill_launcher_init),
     BEGIN_LOOP(),
@@ -6133,7 +6133,7 @@ const BehaviorScript bhvLauncher[] = {
 
 const BehaviorScript bhvLauncherRotate[] = {
     BEGIN(OBJ_LIST_GENACTOR),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     SET_FLOAT(oDrawingDistance, 0x4000),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_bullet_bill_launcher_rotate_loop),
@@ -6185,6 +6185,18 @@ const BehaviorScript bhvBlock[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvBounceHill[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    SET_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x6000),
+    CALL_NATIVE(bhv_bounce_hill_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bounce_hill_loop),
+    END_LOOP(),
+
+};
+
 const BehaviorScript bhvSmallWhompCircle[] = {
     BEGIN(OBJ_LIST_SURFACE),
     SET_INT(oNumLootCoins, 5),
@@ -6200,6 +6212,7 @@ const BehaviorScript bhvSmallWhompCircle[] = {
         CALL_NATIVE(bhv_whomp_circle_loop),
     END_LOOP(),
 };
+<<<<<<< HEAD
 
 const BehaviorScript bhvSpikePillar[] = {
     BEGIN(OBJ_LIST_SURFACE),
@@ -6214,3 +6227,5 @@ const BehaviorScript bhvSpikePillar[] = {
 };
 
 
+=======
+>>>>>>> 486c64263a9e0f3f55c9a7aef3d81a4ee5786382

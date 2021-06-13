@@ -20,3 +20,4 @@
 #include "levels/bob/geo.inc.c"
 
 #include "levels/bob/block/geo.inc.c"
+#include "levels/bob/bounce_hill/geo.inc.c"
