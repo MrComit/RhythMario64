@@ -22,8 +22,9 @@ struct SaveFile
     // Location of lost cap.
     // Note: the coordinates get set, but are never actually used, since the
     // cap can always be found in a fixed spot within the course
-    u8 capLevel;
-    u8 capArea;
+    //u8 capLevel;
+    //u8 capArea;
+    u16 sideObjectives;
     Vec3s capPos;
 
     u32 flags;
@@ -142,6 +143,8 @@ s32 save_file_get_total_star_count(s32 fileIndex, s32 minCourse, s32 maxCourse);
 void save_file_set_flags(u32 flags);
 void save_file_clear_flags(u32 flags);
 u32 save_file_get_flags(void);
+void save_file_set_objectives(u16 objectives);
+u32 save_file_get_objectives(void);
 u32 save_file_get_star_flags(s32 fileIndex, s32 courseIndex);
 void save_file_set_star_flags(s32 fileIndex, s32 courseIndex, u32 starFlags);
 s32 save_file_get_course_coin_score(s32 fileIndex, s32 courseIndex);
