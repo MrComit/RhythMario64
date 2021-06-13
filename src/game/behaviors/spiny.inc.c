@@ -17,7 +17,7 @@ static struct ObjectHitbox sSpinyHitbox = {
     /* numLootCoins:      */ 0,
     /* radius:            */ 120,
     /* height:            */ 70,
-    /* hurtboxRadius:     */ 100,
+    /* hurtboxRadius:     */ 80,
     /* hurtboxHeight:     */ 40,
 };
 
@@ -136,8 +136,11 @@ static void spiny_act_held_by_lakitu(void) {
         o->oAction = SPINY_ACT_THROWN_BY_LAKITU;
         //o->oMoveAngleYaw = o->oAngleToMario;
         vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
-        o->oMoveAnglePitch = pitch;
         o->oMoveAngleYaw = yaw;
+        o->oMoveAnglePitch = pitch;
+        if (o->oMoveAnglePitch > -0x2000) {
+            o->oMoveAnglePitch = -0x2000;
+        }
         //print_text_fmt_int(20, 80, "%d", o->oMoveAnglePitch);
         // Move more quickly if the lakitu is moving forward
         o->oForwardVel = 30.0f;
