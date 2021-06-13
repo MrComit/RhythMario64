@@ -639,6 +639,9 @@ s32 mario_floor_is_steep(struct MarioState *m) {
     f32 normY;
     s32 result = FALSE;
 
+    if (m->floor->type == SURFACE_DEFAULT || m->floor->type == SURFACE_NOT_SLIPPERY)
+        return FALSE;
+
     // Interestingly, this function does not check for the
     // slide terrain type. This means that steep behavior persists for
     // non-slippery and slippery surfaces.
