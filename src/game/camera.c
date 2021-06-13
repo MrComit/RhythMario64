@@ -3097,7 +3097,7 @@ void update_camera(struct Camera *c) {
                     mode_mario_camera(c);
             }
         } else {
-            switch (c->mode) {
+            /*switch (c->mode) {
                 case CAMERA_MODE_BEHIND_MARIO:
                     mode_behind_mario_camera(c);
                     break;
@@ -3152,7 +3152,8 @@ void update_camera(struct Camera *c) {
                 case CAMERA_MODE_SPIRAL_STAIRS:
                     mode_spiral_stairs_camera(c);
                     break;
-            }
+            }*/
+            mode_8_directions_camera(c);
         }
     }
     // Start any Mario-related cutscenes
@@ -6366,6 +6367,9 @@ struct CameraTrigger sCamBBH[] = {
  * Each table is terminated with NULL_TRIGGER
  */
 struct CameraTrigger sCamJRB[] = {
+	NULL_TRIGGER
+};
+struct CameraTrigger sCamCastleGrounds[] = {
 	NULL_TRIGGER
 };
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {
