@@ -568,6 +568,7 @@
 #define MODEL_LASER_RING_SPAWNER          0xFC
 #define MODEL_LASER_RING                  0xFB
 #define MODEL_BEAT_BLOCK                  0xFA
+#define MODEL_SPIKE_PILLAR                0xF9        // whomp_geo
 
 
 //0x30 - 0x53 are free

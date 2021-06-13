@@ -2966,9 +2966,12 @@ void reset_beat_timer(s32 *timer) {
 }
 
 
-s32 cur_obj_beat_hit_and_reset(s32 *timer) {
-    if(*timer >= 96) {
-        *timer -= 96;
+s32 cur_obj_beat_hit_and_reset(s32 *timer, s32 timerDivisor) {
+    if(timerDivisor == 0) {
+        timerDivisor = 1;
+    }
+    if(*timer >= (96 / timerDivisor)) {
+        *timer -= (96 / timerDivisor);
         return 1;
     } else {
         return 0;
@@ -2984,7 +2987,7 @@ void reset_for_checkpoint(s32 *timer, s32 *prevTimer, s32 originalOffset, s32 re
         o->oFaceAnglePitch = o->oMoveAnglePitch = o->oFaceAngleRoll = o->oMoveAngleRoll = 0;
     }
     if(resetYaw) {
-        o->oFaceAngleYaw = o->oMoveAngleYaw;
+        o->oFaceAngleYaw = o->oMoveAngleYaw = 0;
     }
     o->oAction = 0;
 }

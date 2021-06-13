@@ -273,7 +273,7 @@ void bhv_whomp_loop(void) {
                     create_sound_spawner(SOUND_OBJ_THWOMP);
                 }
             }
-            if (cur_obj_beat_hit_and_reset(&o->oBeatTimer)) {
+            if (cur_obj_beat_hit_and_reset(&o->oBeatTimer, 1)) {
                 if (o->o100)
                     o->oAction = 3;
                 else
@@ -300,7 +300,7 @@ void bhv_whomp_loop(void) {
                     create_sound_spawner(SOUND_OBJ_THWOMP);
                 }
             }
-            if (cur_obj_beat_hit_and_reset(&o->oBeatTimer)) {
+            if (cur_obj_beat_hit_and_reset(&o->oBeatTimer, 1)) {
                 o->oFC = 0;
                 if (o->o100) {
                     o->oAction = 0;
@@ -325,7 +325,7 @@ void bhv_whomp_loop(void) {
                     create_sound_spawner(SOUND_OBJ_THWOMP);
                 }
             }
-            if (cur_obj_beat_hit_and_reset(&o->oBeatTimer)) {
+            if (cur_obj_beat_hit_and_reset(&o->oBeatTimer, 1)) {
                 if (o->o100)
                     o->oAction = 1;
                 else
@@ -345,7 +345,7 @@ void bhv_whomp_loop(void) {
                     create_sound_spawner(SOUND_OBJ_THWOMP);
                 }
             }
-            if (cur_obj_beat_hit_and_reset(&o->oBeatTimer)) {
+            if (cur_obj_beat_hit_and_reset(&o->oBeatTimer, 1)) {
                 o->oFC = 0;
                 if (o->o100) {
                     o->o100 = 0;
@@ -365,7 +365,10 @@ void bhv_whomp_circle_loop(void) {
     f32 dx, dz, targetY;
     stay_on_beat(&o->oBeatTimer, &o->oPrevSongTimer);
     if(gCheckpointLoaded) {
-        bhv_grindel_thwomp_init();
+        reset_for_checkpoint(&o->oBeatTimer, &o->oPrevSongTimer, 32, 1, 1);
+        if(o->oBehParams2ndByte == 1) {
+            o->oMoveAngleYaw = 0x8000;
+        }
     }
     if (o->oAction != 9) {
         // if (o->oBehParams2ndByte != 0)
@@ -375,18 +378,23 @@ void bhv_whomp_circle_loop(void) {
         load_object_collision_model();
     }
 
-    if(absi(o->oFaceAnglePitch % 0x10000) != absi(o->oAction*0x4000)) {
-        o->oForwardVel = 30.0f;
-        o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, absi(o->oAction*0x4000), 0x800);
+    while(o->oFaceAnglePitch < 0) {o->oFaceAnglePitch += 0x10000;}
+    while(o->oFaceAnglePitch >= 0x10000) {o->oFaceAnglePitch -= 0x10000;}
+    if((o->oFaceAnglePitch % 0x10000) != (o->oAction*0x4000)) {
+        if(o->oBehParams2ndByte == 0)
+            o->oForwardVel = 30.5f;
+        else
+            o->oForwardVel = 17.5f;
+        o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, o->oAction*0x4000, 0x800);
         cur_obj_compute_vel_xz();
         o->oPosX += o->oVelX;
         o->oPosZ += o->oVelZ;
-    } else {
-        o->oForwardVel = 0;
-        if (o->oDistanceToMario < 1000.0f) {
+        if((o->oFaceAnglePitch % 0x10000) == (o->oAction*0x4000) && o->oDistanceToMario < 1000.0f) {
             cur_obj_shake_screen(SHAKE_POS_SMALL);
             create_sound_spawner(SOUND_OBJ_THWOMP);
         }
+    } else {
+        o->oForwardVel = 0;
     }
 
     switch(o->oAction) {
@@ -394,19 +402,22 @@ void bhv_whomp_circle_loop(void) {
             targetY = o->oHomeY;
             break;
         case 1:
-            targetY = o->oHomeY + 420.0f;
+            targetY = o->oHomeY;
             break;
         case 2:
-            targetY = o->oHomeY + 100.0f;
+            targetY = o->oHomeY + 420.0f;
             break;
         case 3:
-            targetY = o->oHomeY;
+            targetY = o->oHomeY + 100.0f;
             break;
     }
     o->oPosY = approach_f32(o->oPosY, targetY, 55.0f, 55.0f);
-    if (cur_obj_beat_hit_and_reset(&o->oBeatTimer)) {
+    if (cur_obj_beat_hit_and_reset(&o->oBeatTimer, 2)) {
         o->oAction++;
-        o->oMoveAngleYaw -= 0x1000;
+        if(o->oBehParams2ndByte == 0)
+            o->oMoveAngleYaw -= 0x800;
+        else
+            o->oMoveAngleYaw += 0x800;
         if(o->oAction >= 4) {
             o->oAction = 0;
         }

@@ -44,3 +44,4 @@
 #include "whomp/anims/data.inc.c"
 #include "whomp/anims/table.inc.c"
 #include "whomp/collision.inc.c"
+#include "spike_pillar/model.inc.c"

@@ -1173,6 +1173,8 @@ s32 update_level(void) {
     return changeLevel;
 }
 
+u8 gSpikePillarIndex;
+
 s32 init_level(void) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
     s32 val4 = 0;
@@ -1251,6 +1253,8 @@ s32 init_level(void) {
 
     gBeatTimer = seqPlayer->tempo / 960;
     seqPlayer->globalSongTimer = gPrevSongTimer = gLastBeatHit = 0;
+    gBulletLauncherIndex[0] = gBulletLauncherIndex[1] = gBulletLauncherIndex[2] = gBulletLauncherIndex[3] = 0;
+    gSpikePillarIndex = 0;
 
     return 1;
 }

@@ -6201,4 +6201,16 @@ const BehaviorScript bhvSmallWhompCircle[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvSpikePillar[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    SET_INT(oNumLootCoins, 5),
+    // Whomp - common:
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    CALL_NATIVE(bhv_spike_pillar_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_spike_pillar_loop),
+    END_LOOP(),
+};
+
 

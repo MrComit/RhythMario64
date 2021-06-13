@@ -551,5 +551,6 @@ extern const BehaviorScript bhvLaserRing[];
 extern const BehaviorScript bhvBeatBlock[];
 extern const BehaviorScript bhvBlock[];
 extern const BehaviorScript bhvSmallWhompCircle[];
+extern const BehaviorScript bhvSpikePillar[];
 
 #endif // BEHAVIOR_DATA_H
