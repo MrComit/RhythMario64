@@ -557,5 +557,6 @@ extern const BehaviorScript bhvBounceHill[];
 
 extern const BehaviorScript bhvSmallWhompCircle[];
 extern const BehaviorScript bhvSpikePillar[];
+extern const BehaviorScript bhvTippingPlatform[];
 
 #endif // BEHAVIOR_DATA_H

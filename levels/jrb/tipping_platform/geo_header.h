@@ -1,0 +1,10 @@
+extern const GeoLayout tipping_platform_geo[];
+extern Lights1 tipping_platform_stone_lights;
+extern u8 tipping_platform_iwa2_ci8[];
+extern u8 tipping_platform_iwa2_ci8_pal_rgba16[];
+extern Vtx tipping_platform_Cube_mesh_layer_1_vtx_0[24];
+extern Gfx tipping_platform_Cube_mesh_layer_1_tri_0[];
+extern Gfx mat_tipping_platform_stone[];
+extern Gfx mat_revert_tipping_platform_stone[];
+extern Gfx tipping_platform_Cube_mesh_layer_1[];
+extern Gfx tipping_platform_material_revert_render_settings[];

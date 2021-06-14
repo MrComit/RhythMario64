@@ -6212,7 +6212,6 @@ const BehaviorScript bhvSmallWhompCircle[] = {
         CALL_NATIVE(bhv_whomp_circle_loop),
     END_LOOP(),
 };
-<<<<<<< HEAD
 
 const BehaviorScript bhvSpikePillar[] = {
     BEGIN(OBJ_LIST_SURFACE),
@@ -6226,6 +6225,18 @@ const BehaviorScript bhvSpikePillar[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvTippingPlatform[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(tipping_platform_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_FLOAT(oCollisionDistance, 2500),
+    CALL_NATIVE(bhv_platform_normals_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_tilting_inverted_pyramid_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
 
-=======
->>>>>>> 486c64263a9e0f3f55c9a7aef3d81a4ee5786382
+

@@ -2980,8 +2980,8 @@ s32 cur_obj_beat_hit_and_reset(s32 *timer, s32 timerDivisor) {
 
 void reset_for_checkpoint(s32 *timer, s32 *prevTimer, s32 originalOffset, s32 resetPitchRoll, s32 resetYaw) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
-    *prevTimer = 0;
-    *timer = originalOffset;
+    *prevTimer = seqPlayer->globalSongTimer;
+    *timer = originalOffset + (seqPlayer->globalSongTimer % 96);
     cur_obj_set_pos_to_home();
     if(resetPitchRoll) {
         o->oFaceAnglePitch = o->oMoveAnglePitch = o->oFaceAngleRoll = o->oMoveAngleRoll = 0;
@@ -2990,4 +2990,5 @@ void reset_for_checkpoint(s32 *timer, s32 *prevTimer, s32 originalOffset, s32 re
         o->oFaceAngleYaw = o->oMoveAngleYaw = 0;
     }
     o->oAction = 0;
+    o->oForwardVel = o->oVelX = o->oVelY = o->oVelZ = 0;
 }
