@@ -3147,6 +3147,8 @@ void handle_objectives(void) {
     s32 objectives = save_file_get_objectives();
     unsigned char text1[] = { TEXT_OBJECTIVE1 };
     unsigned char text2[] = { TEXT_OBJECTIVE2 };
+    unsigned char text3[] = { TEXT_OBJECTIVE3 };
+    unsigned char text4[] = { TEXT_OBJECTIVE4 };
     switch (gCurrLevelNum) {
         case LEVEL_BOB:
             if (sTextAlpha1)
@@ -3166,6 +3168,21 @@ void handle_objectives(void) {
             }
             break;
         case LEVEL_JRB:
+            if (sTextAlpha1)
+                print_objective_string(20, 40, sTextAlpha1, text3);
+            if (sTextAlpha2)
+                print_objective_string(20, 20, sTextAlpha2, text4);
+
+            if (objectives & 1) {
+                sTextAlpha1 = approach_s16_symmetric(sTextAlpha1, 0, 0x10);
+            } else {
+                sTextAlpha1 = approach_s16_symmetric(sTextAlpha1, 255, 0x10);
+            }
+            if (objectives & 2) {
+                sTextAlpha2 = approach_s16_symmetric(sTextAlpha2, 0, 0x10);
+            } else {
+                sTextAlpha2 = approach_s16_symmetric(sTextAlpha2, 255, 0x10);
+            }
             break;
     }
 }
