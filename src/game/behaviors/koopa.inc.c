@@ -598,7 +598,7 @@ static void koopa_the_quick_act_race(void) {
 
     if (obj_begin_race(TRUE)) {
         // Hitbox is slightly larger while racing
-        cur_obj_push_mario_away_from_cylinder(180.0f, 300.0f);
+        //cur_obj_push_mario_away_from_cylinder(180.0f, 300.0f);
 
         if (cur_obj_follow_path(0) == PATH_REACHED_END) {
             o->oAction = KOOPA_THE_QUICK_ACT_DECELERATE;
@@ -618,9 +618,9 @@ static void koopa_the_quick_act_race(void) {
                         && (o->oPathedPrevWaypointFlags & WAYPOINT_MASK_00FF) < 28) {
                         // Move faster if mario has already finished the race or
                         // cheated by shooting from cannon
-                        o->oKoopaAgility = 8.0f;
+                        o->oKoopaAgility = 4.0f;
                     } else if (o->oKoopaTheQuickRaceIndex != KOOPA_THE_QUICK_BOB_INDEX) {
-                        o->oKoopaAgility = 6.0f;
+                        o->oKoopaAgility = 4.0f;
                     } else {
                         o->oKoopaAgility = 4.0f;
                     }
@@ -788,7 +788,7 @@ static void koopa_the_quick_update(void) {
     }
 
     if (o->oAction != KOOPA_THE_QUICK_ACT_AFTER_RACE) {
-        cur_obj_push_mario_away_from_cylinder(140.0f, 300.0f);
+        //cur_obj_push_mario_away_from_cylinder(140.0f, 300.0f);
         cur_obj_move_standard(-78);
     }
 

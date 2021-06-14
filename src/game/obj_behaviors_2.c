@@ -968,3 +968,4 @@ void obj_spit_fire(s16 relativePosX, s16 relativePosY, s16 relativePosZ, f32 sca
 #include "behaviors/laser_ring.inc.c"
 #include "behaviors/beat_block.inc.c"
 #include "behaviors/block.inc.c"
+#include "behaviors/castle_objects.inc.c"

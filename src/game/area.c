@@ -22,6 +22,7 @@
 #include "engine/geo_layout.h"
 #include "save_file.h"
 #include "level_table.h"
+#include "audio/synthesis.h"
 
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *gGraphNodePointers[MODEL_ID_COUNT];
@@ -222,6 +223,10 @@ void clear_area_graph_nodes(void) {
 }
 
 void load_area(s32 index) {
+    gBulletLauncherIndex[0] = 0;
+    gBulletLauncherIndex[1] = 0;
+    gBulletLauncherIndex[2] = 0;
+    gBulletLauncherIndex[3] = 0;
     if (gCurrentArea == NULL && gAreaData[index].unk04 != NULL) {
         gCurrentArea = &gAreaData[index];
         gCurrAreaIndex = gCurrentArea->index;

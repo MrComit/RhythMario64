@@ -53,6 +53,7 @@
 #include "levels/wf/header.h"
 #include "levels/bowser_2/header.h"
 #include "levels/ttm/header.h"
+#include "levels/ccm/header.h"
 
 #include "make_const_nonconst.h"
 #include "behavior_data.h"
@@ -6223,4 +6224,19 @@ const BehaviorScript bhvHitboxObjective[] = {
         CALL_NATIVE(bhv_hitbox_objective_loop),
         SPAWN_CHILD_WITH_PARAM(/*Bhv param*/ 0, /*Model*/ MODEL_NONE, /*Behavior*/ bhvSparkleSpawn),
     END_LOOP(),
+};
+
+
+const BehaviorScript bhvLavaSpire[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    SET_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    SET_HOME(),
+    LOAD_COLLISION_DATA(lava_spire_collision),
+    SET_FLOAT(oDrawingDistance, 0x6000),
+    SET_FLOAT(oCollisionDistance, 0x4000),
+    CALL_NATIVE(bhv_lava_spire_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_lava_spire_loop),
+    END_LOOP(),
+
 };

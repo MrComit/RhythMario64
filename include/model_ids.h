@@ -576,6 +576,7 @@
 #define MODEL_BLOCK                       0x3F
 #define MODEL_WHOMP                       0x34        // whomp_geo
 #define MODEL_GHOST_KOOPA                 0x35
+#define MODEL_LAVA_SPIRE                  0x36
 
 // Menu Models (overwrites Level Geometry IDs)
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON         MODEL_LEVEL_GEOMETRY_03   // main_menu_geo_0001D0
