@@ -19,6 +19,17 @@ static struct ObjectHitbox sRedCoinHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
+
+
+void bhv_hitbox_objective_loop(void) {
+    if (obj_check_if_collided_with_object(o, gMarioObject) == 1) {
+        save_file_set_objectives(1 << o->oBehParams2ndByte);
+        play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
+        o->activeFlags = 0;
+    }
+}
+
+
 /**
  * Red coin initialization function. Sets the coin's hitbox and parent object.
  */
@@ -50,11 +61,18 @@ void bhv_red_coin_init(void) {
  * the orange number counter.
  */
 void bhv_red_coin_loop(void) {
+    if ((o->oBehParams >> 24) == 1) {
+        struct Object *obj = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+        obj->oPosY += 200.0f;
+    }
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         gRedCoinsCollected++;
         // Spawn the orange number counter, as long as it isn't the last coin.
         if (gRedCoinsCollected != 8) {
             spawn_orange_number(gRedCoinsCollected, 0, 0, 0);
+        } else {
+            save_file_set_objectives(1 << o->oBehParams2ndByte);
+            play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
         }
 
          play_sound(SOUND_MENU_COLLECT_RED_COIN + (((u8) gRedCoinsCollected - 1) << 16),

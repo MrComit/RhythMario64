@@ -23,3 +23,6 @@
 #include "levels/ccm/areas/1/10/geo.inc.c"
 #include "levels/ccm/areas/1/geo.inc.c"
 #include "levels/ccm/areas/2/geo.inc.c"
+#include "levels/ccm/geo.inc.c"
+
+#include "levels/ccm/ghost_koopa/geo.inc.c"

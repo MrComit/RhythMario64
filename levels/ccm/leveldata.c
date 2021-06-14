@@ -45,3 +45,6 @@
 #include "levels/ccm/areas/2/collision.inc.c"
 #include "levels/ccm/areas/2/macro.inc.c"
 #include "levels/ccm/areas/2/trajectory.inc.c"
+#include "levels/ccm/leveldata.inc.c"
+
+#include "levels/ccm/ghost_koopa/model.inc.c"

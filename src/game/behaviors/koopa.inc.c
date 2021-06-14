@@ -80,7 +80,7 @@ void bhv_koopa_init(void) {
         // Koopa the Quick. Race index is 0 for BoB and 1 for THI
         o->oKoopaTheQuickRaceIndex = o->oKoopaMovementType - KOOPA_BP_KOOPA_THE_QUICK_BASE;
         o->oKoopaAgility = 4.0f;
-        cur_obj_scale(3.0f);
+        cur_obj_scale(2.0f);
     } else {
         o->oKoopaAgility = 1.0f;
     }

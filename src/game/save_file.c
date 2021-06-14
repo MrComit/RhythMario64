@@ -548,6 +548,22 @@ u32 save_file_get_flags(void) {
     return gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags;
 }
 
+
+void save_file_set_objectives(u16 objectives) {
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].sideObjectives |= objectives;
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    gSaveFileModified = TRUE;
+}
+
+u32 save_file_get_objectives(void) {
+    if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
+        return 0;
+    }
+    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].sideObjectives;
+}
+
+
+
 /**
  * Return the bitset of obtained stars in the specified course.
  * If course is -1, return the bitset of obtained castle secret stars.
@@ -600,23 +616,23 @@ void save_file_set_cannon_unlocked(void) {
 }
 
 void save_file_set_cap_pos(s16 x, s16 y, s16 z) {
-    struct SaveFile *saveFile = &gSaveBuffer.files[gCurrSaveFileNum - 1][0];
+    /*struct SaveFile *saveFile = &gSaveBuffer.files[gCurrSaveFileNum - 1][0];
 
     saveFile->capLevel = gCurrLevelNum;
     saveFile->capArea = gCurrAreaIndex;
     vec3s_set(saveFile->capPos, x, y, z);
-    save_file_set_flags(SAVE_FLAG_CAP_ON_GROUND);
+    save_file_set_flags(SAVE_FLAG_CAP_ON_GROUND);*/
 }
 
 s32 save_file_get_cap_pos(Vec3s capPos) {
-    struct SaveFile *saveFile = &gSaveBuffer.files[gCurrSaveFileNum - 1][0];
+    /*struct SaveFile *saveFile = &gSaveBuffer.files[gCurrSaveFileNum - 1][0];
     s32 flags = save_file_get_flags();
 
     if (saveFile->capLevel == gCurrLevelNum && saveFile->capArea == gCurrAreaIndex
         && (flags & SAVE_FLAG_CAP_ON_GROUND)) {
         vec3s_copy(capPos, saveFile->capPos);
         return TRUE;
-    }
+    }*/
     return FALSE;
 }
 
@@ -633,7 +649,7 @@ u16 save_file_get_sound_mode(void) {
 }
 
 void save_file_move_cap_to_default_location(void) {
-    if (save_file_get_flags() & SAVE_FLAG_CAP_ON_GROUND) {
+    /*if (save_file_get_flags() & SAVE_FLAG_CAP_ON_GROUND) {
         switch (gSaveBuffer.files[gCurrSaveFileNum - 1][0].capLevel) {
             case LEVEL_SSL:
                 save_file_set_flags(SAVE_FLAG_CAP_ON_KLEPTO);
@@ -646,7 +662,7 @@ void save_file_move_cap_to_default_location(void) {
                 break;
         }
         save_file_clear_flags(SAVE_FLAG_CAP_ON_GROUND);
-    }
+    }*/
 }
 
 #ifdef VERSION_EU

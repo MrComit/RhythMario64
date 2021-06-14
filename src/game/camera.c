@@ -3097,7 +3097,7 @@ void update_camera(struct Camera *c) {
                     mode_mario_camera(c);
             }
         } else {
-            switch (c->mode) {
+            /*switch (c->mode) {
                 case CAMERA_MODE_BEHIND_MARIO:
                     mode_behind_mario_camera(c);
                     break;
@@ -3152,7 +3152,8 @@ void update_camera(struct Camera *c) {
                 case CAMERA_MODE_SPIRAL_STAIRS:
                     mode_spiral_stairs_camera(c);
                     break;
-            }
+            }*/
+            mode_8_directions_camera(c);
         }
     }
     // Start any Mario-related cutscenes
@@ -3427,7 +3428,10 @@ void init_camera(struct Camera *c) {
     gLakituState.nextYaw = gLakituState.yaw;
     c->yaw = gLakituState.yaw;
     c->nextYaw = gLakituState.yaw;
-    s8DirModeBaseYaw = gMarioSpawnInfo->startAngle[1] + 0x8000;
+    s8DirModeBaseYaw = gMarioSpawnInfo->startAngle[1];
+    if (gCurrLevelNum != LEVEL_BOB)
+        s8DirModeBaseYaw += 0x8000;
+
 }
 
 /**
@@ -6231,9 +6235,7 @@ struct CameraTrigger sCamCotMC[] = {
  * The CCM triggers are used to set the flag that says when Mario is in the slide shortcut.
  */
 struct CameraTrigger sCamCCM[] = {
-    { 2, cam_ccm_enter_slide_shortcut, -4846, 2061, 27, 1229, 1342, 396, 0 },
-    { 2, cam_ccm_leave_slide_shortcut, -6412, -3917, -6246, 307, 185, 132, 0 },
-    NULL_TRIGGER
+	NULL_TRIGGER
 };
 
 /**
@@ -6366,6 +6368,9 @@ struct CameraTrigger sCamBBH[] = {
  * Each table is terminated with NULL_TRIGGER
  */
 struct CameraTrigger sCamJRB[] = {
+	NULL_TRIGGER
+};
+struct CameraTrigger sCamCastleGrounds[] = {
 	NULL_TRIGGER
 };
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {
