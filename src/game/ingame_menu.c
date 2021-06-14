@@ -23,6 +23,7 @@
 #include "text_strings.h"
 #include "types.h"
 #include "config.h"
+#include "game/object_helpers.h"
 
 u16 gDialogColorFadeTimer;
 s8 gLastDialogLineNum;
@@ -3124,4 +3125,47 @@ s16 render_menus_and_dialogs(void) {
         gDialogColorFadeTimer = (s16) gDialogColorFadeTimer + 0x1000;
     }
     return mode;
+}
+
+s16 sTextAlpha1 = 0;
+s16 sTextAlpha2 = 0;
+
+void print_objective_string(s16 x, s16 y, u8 alpha, const u8 *str) {
+    create_dl_ortho_matrix();
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+
+    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, alpha);
+    print_generic_string(x + 1, y - 1, str);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, alpha);
+    print_generic_string(x, y, str);
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+}
+
+void handle_objectives(void) {
+    struct MarioState *m = gMarioState;
+    s32 objectives = save_file_get_objectives();
+    unsigned char text1[] = { TEXT_OBJECTIVE1 };
+    unsigned char text2[] = { TEXT_OBJECTIVE2 };
+    switch (gCurrLevelNum) {
+        case LEVEL_BOB:
+            if (sTextAlpha1)
+                print_objective_string(20, 40, sTextAlpha1, text1);
+            if (sTextAlpha2)
+                print_objective_string(20, 20, sTextAlpha2, text2);
+
+            if (objectives & 1) {
+                sTextAlpha1 = approach_s16_symmetric(sTextAlpha1, 0, 0x10);
+            } else {
+                sTextAlpha1 = approach_s16_symmetric(sTextAlpha1, 255, 0x10);
+            }
+            if (objectives & 2) {
+                sTextAlpha2 = approach_s16_symmetric(sTextAlpha2, 0, 0x10);
+            } else {
+                sTextAlpha2 = approach_s16_symmetric(sTextAlpha2, 255, 0x10);
+            }
+            break;
+        case LEVEL_JRB:
+            break;
+    }
 }

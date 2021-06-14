@@ -481,4 +481,11 @@
 #define TEXT_MENU_STARS_DE _("   GEHEIME STERNE")
 #endif // VERSION_EU
 
+
+
+#define TEXT_OBJECTIVE1 _("OBJECTIVE 1: Collect All 8 Red Coins")
+#define TEXT_OBJECTIVE2 _("OBJECTIVE 2: Reach the top of the Flagpole")
+
+
+
 #endif // TEXT_STRINGS_H

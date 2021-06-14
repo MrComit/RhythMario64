@@ -188,10 +188,10 @@ static void enemy_lakitu_act_main(void) {
     cur_obj_move_standard(78);
 
     // Die and drop held spiny when attacked by mario
-    if (obj_check_attacks(&sEnemyLakituHitbox, o->oAction)) {
+    //if (obj_check_attacks(&sEnemyLakituHitbox, o->oAction)) {
         // The spiny uses this as a signal to get thrown
-        o->prevObj = NULL;
-    }
+    //    o->prevObj = NULL;
+    //}
 }
 
 /**
