@@ -61,7 +61,7 @@ struct KoopaTheQuickProperties {
  * Properties for the BoB race and the THI race.
  */
 static struct KoopaTheQuickProperties sKoopaTheQuickProperties[] = {
-    { DIALOG_005, DIALOG_007, bob_seg7_trajectory_koopa, { 3030, 4500, -4600 } },
+    { DIALOG_005, DIALOG_007, ccm_area_1_spline_KoopaPath, { 3030, 4500, -4600 } },
     { DIALOG_009, DIALOG_031, thi_seg7_trajectory_koopa, { 7100, -1300, -6000 } }
 };
 
@@ -469,7 +469,7 @@ static void koopa_unshelled_update(void) {
  * optionally begin the timer.
  */
 s32 obj_begin_race(s32 noTimer) {
-    if (o->oTimer == 50) {
+    if (o->oTimer == 15) {
         cur_obj_play_sound_2(SOUND_GENERAL_RACE_GUN_SHOT);
 
         if (!noTimer) {
@@ -478,13 +478,13 @@ s32 obj_begin_race(s32 noTimer) {
             level_control_timer(TIMER_CONTROL_SHOW);
             level_control_timer(TIMER_CONTROL_START);
 
-            o->parentObj->oKoopaRaceEndpointRaceBegun = TRUE;
         }
+        o->parentObj->oKoopaRaceEndpointRaceBegun = TRUE;
 
         // Unfreeze mario and disable time stop to begin the race
         set_mario_npc_dialog(0);
         disable_time_stop_including_mario();
-    } else if (o->oTimer > 50) {
+    } else if (o->oTimer > 15) {
         return TRUE;
     }
 
@@ -515,10 +515,10 @@ static void koopa_the_quick_act_wait_before_race(void) {
  * return to the waiting action.
  */
 static void koopa_the_quick_act_show_init_text(void) {
-    s32 response = obj_update_race_proposition_dialog(
+    /*s32 response = obj_update_race_proposition_dialog(
         sKoopaTheQuickProperties[o->oKoopaTheQuickRaceIndex].initText);
 
-    if (response == 1) {
+    if (response == 1) {*/
         UNUSED s32 unused;
 
         gMarioShotFromCannon = FALSE;
@@ -531,10 +531,10 @@ static void koopa_the_quick_act_show_init_text(void) {
 
         o->oKoopaTurningAwayFromWall = FALSE;
         o->oFlags |= OBJ_FLAG_ACTIVE_FROM_AFAR;
-    } else if (response == 2) {
+    /*} else if (response == 2) {
         o->oAction = KOOPA_THE_QUICK_ACT_WAIT_BEFORE_RACE;
         o->oKoopaTheQuickInitTextboxCooldown = 60;
-    }
+    }*/
 }
 
 /**
@@ -596,7 +596,7 @@ static void koopa_the_quick_act_race(void) {
     f32 downhillSteepness;
     s32 bowlingBallStatus;
 
-    if (obj_begin_race(FALSE)) {
+    if (obj_begin_race(TRUE)) {
         // Hitbox is slightly larger while racing
         cur_obj_push_mario_away_from_cylinder(180.0f, 300.0f);
 
@@ -705,9 +705,16 @@ static void koopa_the_quick_act_stop(void) {
  * the star.
  */
 static void koopa_the_quick_act_after_race(void) {
-    cur_obj_init_animation_with_sound(7);
+    cur_obj_init_animation_with_sound(12);
+    if (o->oTimer > 5) {
+        o->oPosY -= 15.0f;
+    }
+    if (o->oTimer > 30) {
+        o->activeFlags = 0;
+    }
 
-    if (o->parentObj->oKoopaRaceEndpointUnk100 == 0) {
+
+    /*if (o->parentObj->oKoopaRaceEndpointUnk100 == 0) {
         if (cur_obj_can_mario_activate_textbox_2(400.0f, 400.0f)) {
             stop_background_music(SEQUENCE_ARGS(4, SEQ_LEVEL_SLIDE));
 
@@ -742,7 +749,7 @@ static void koopa_the_quick_act_after_race(void) {
                    sKoopaTheQuickProperties[o->oKoopaTheQuickRaceIndex].starPos[2]);
 
         o->parentObj->oKoopaRaceEndpointRaceStatus = 0;
-    }
+    }*/
 }
 
 /**
@@ -780,8 +787,11 @@ static void koopa_the_quick_update(void) {
         }
     }
 
-    cur_obj_push_mario_away_from_cylinder(140.0f, 300.0f);
-    cur_obj_move_standard(-78);
+    if (o->oAction != KOOPA_THE_QUICK_ACT_AFTER_RACE) {
+        cur_obj_push_mario_away_from_cylinder(140.0f, 300.0f);
+        cur_obj_move_standard(-78);
+    }
+
 }
 
 /**
@@ -827,11 +837,13 @@ void bhv_koopa_race_endpoint_update(void) {
             level_control_timer(TIMER_CONTROL_STOP);
 
             if (!o->oKoopaRaceEndpointKoopaFinished) {
-                play_race_fanfare();
+                //play_race_fanfare();
                 if (gMarioShotFromCannon) {
                     o->oKoopaRaceEndpointRaceStatus = -1;
                 } else {
                     o->oKoopaRaceEndpointRaceStatus = 1;
+                    save_file_set_objectives(1 << o->oBehParams2ndByte);
+                    play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
                 }
             }
         }

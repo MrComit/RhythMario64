@@ -41,6 +41,7 @@ const LevelScript level_ccm_entry[] = {
 		WARP_NODE(0xF1, LEVEL_CCM, 0x01, 0x0B, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, -9136, 3117, 6625, 0, -180, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_GHOST_KOOPA, -9121, 2817, 5761, 0, 0, 0, 0x00020000, bhvKoopa),
+		OBJECT(MODEL_NONE, -8528, 2817, 6912, 0, 0, 0, 0x00000000, bhvKoopaRaceEndpoint),
 		OBJECT(MODEL_NONE, -9136, 3117, 6825, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
 		MARIO_POS(0x01, -180, -9136, 3117, 6825),
 		TERRAIN(ccm_area_1_collision),
