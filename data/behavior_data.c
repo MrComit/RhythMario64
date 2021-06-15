@@ -6116,8 +6116,10 @@ const BehaviorScript bhvGate[] = {
     LOAD_COLLISION_DATA(gate_collision),
     SET_FLOAT(oCollisionDistance, 0x4000),
     SET_HOME(),
-    DEACTIVATE(),
+    SET_INT(oOpacity, 255),
+    CALL_NATIVE(bhv_gate_init),
     BEGIN_LOOP(),
+        CALL_NATIVE(bhv_gate_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
@@ -6299,5 +6301,16 @@ const BehaviorScript bhvBarrier[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_barrier_loop),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvStationaryOrangeNumber[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    //BILLBOARD(),
+    SET_HOME(),
+    SCALE(0, 200),
+    CALL_NATIVE(bhv_orange_number_init),
+    BEGIN_LOOP(),
     END_LOOP(),
 };

@@ -1,3 +1,55 @@
+void spawn_orange_number_gate(u16 behParam, s16 relX, s16 relY, s16 relZ, s16 x2nd, s16 z2nd) {
+    struct Object *orangeNumber, *orangeNumber2;
+
+    if (behParam >= 10) {
+        orangeNumber = spawn_object_relative(behParam % 10, relX + x2nd, relY, relZ + z2nd, o, MODEL_NUMBER_DECAL, bhvStationaryOrangeNumber);
+        orangeNumber2 = spawn_object_relative(behParam / 10, relX - x2nd, relY, relZ - z2nd, o, MODEL_NUMBER_DECAL, bhvStationaryOrangeNumber);
+        o->oObjF4 = orangeNumber;
+        o->oObjF8 = orangeNumber2;
+        orangeNumber->oFaceAngleYaw -= 0x4000;
+        orangeNumber2->oFaceAngleYaw -= 0x4000;
+    } else {
+        orangeNumber = spawn_object_relative(behParam, relX, relY, relZ, o, MODEL_NUMBER_DECAL, bhvStationaryOrangeNumber);
+        o->oObjF4 = orangeNumber;
+        o->oObjF8 = NULL;
+        orangeNumber->oFaceAngleYaw -= 0x4000;
+    }
+}
+void bhv_gate_init(void) {
+    o->oFC = o->oBehParams >> 24;
+    spawn_orange_number_gate(o->oFC, 0, 320, 0, 0, 50);
+    o->oFC--;
+}
+
+void bhv_gate_loop(void) {
+    if (o->oFC < 0) {
+        o->oFC = 0;
+    }
+    if (o->oTimer > 30) {
+        if (o->oObjF4 != NULL)
+            o->oObjF4->activeFlags = 0;
+        if (o->oObjF8 != NULL)
+            o->oObjF8->activeFlags = 0;
+        spawn_orange_number_gate(o->oFC, 0, 320, 0, 0, 50);
+        o->oFC--;
+        o->oTimer = 0;
+    }
+    if (gCurrentCheckpoint >= o->oBehParams2ndByte) {
+        o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 0x20);
+        if (o->oOpacity < 0x20) {
+            o->activeFlags = 0;
+            if (o->oObjF4 != NULL)
+                o->oObjF4->activeFlags = 0;
+            if (o->oObjF8 != NULL)
+                o->oObjF8->activeFlags = 0;
+        }
+    }
+
+}
+
+
+
+
 void bhv_c3_barrier_loop(void) {
 
 }

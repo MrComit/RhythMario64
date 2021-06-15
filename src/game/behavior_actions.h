@@ -602,7 +602,8 @@ void bhv_sawblade_init(void);
 void bhv_sawblade_spawner_loop(void);
 void bhv_sawblade_spawner_init(void);
 void bhv_barrier_loop(void);
-
+void bhv_gate_loop(void);
+void bhv_gate_init(void);
 
 
 

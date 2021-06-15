@@ -122,6 +122,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_WHOMP,                   whomp_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SPIKE_PILLAR,            spike_pillar_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BARRIER,                 barrier_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_NUMBER_DECAL,                  number_decal_geo),
     FREE_LEVEL_POOL(),
     CALL(/*arg*/ 0, /*func*/ lvl_init_from_save_file),
     LOOP_BEGIN(),
