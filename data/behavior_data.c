@@ -6287,3 +6287,16 @@ const BehaviorScript bhvSawbladeSpawner[] = {
         CALL_NATIVE(bhv_sawblade_spawner_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBarrier[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(barrier_collision),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_barrier_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

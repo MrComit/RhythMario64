@@ -569,6 +569,7 @@
 #define MODEL_LASER_RING                  0xFB
 #define MODEL_BEAT_BLOCK                  0xFA
 #define MODEL_SPIKE_PILLAR                0xF9        // whomp_geo
+#define MODEL_BARRIER                     0xF8
 
 
 //0x30 - 0x53 are free

@@ -560,6 +560,7 @@ extern const BehaviorScript bhvSpikePillar[];
 extern const BehaviorScript bhvTippingPlatform[];
 extern const BehaviorScript bhvSawblade[];
 extern const BehaviorScript bhvSawbladeSpawner[];
+extern const BehaviorScript bhvBarrier[];
 
 
 #endif // BEHAVIOR_DATA_H

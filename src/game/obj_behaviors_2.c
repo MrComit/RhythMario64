@@ -970,3 +970,4 @@ void obj_spit_fire(s16 relativePosX, s16 relativePosY, s16 relativePosZ, f32 sca
 #include "behaviors/block.inc.c"
 #include "behaviors/castle_objects.inc.c"
 #include "behaviors/spike_pillar.inc.c"
+#include "behaviors/barrier.inc.c"
