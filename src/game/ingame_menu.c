@@ -24,6 +24,7 @@
 #include "types.h"
 #include "config.h"
 #include "game/object_helpers.h"
+#include "game/object_list_processor.h"
 
 u16 gDialogColorFadeTimer;
 s8 gLastDialogLineNum;
@@ -3154,16 +3155,16 @@ void handle_objectives(void) {
     switch (gCurrLevelNum) {
         case LEVEL_BOB:
             if (sTextAlpha1)
-                print_objective_string(20, 40, sTextAlpha1, text1);
+                print_objective_string(20, 20, sTextAlpha1, text1);
             if (sTextAlpha2)
                 print_objective_string(20, 20, sTextAlpha2, text2);
 
-            if (objectives & 0x1) {
+            if (objectives & 0x1 || gCurrentCheckpoint != 1) {
                 sTextAlpha1 = approach_s16_symmetric(sTextAlpha1, 0, 0x10);
             } else {
                 sTextAlpha1 = approach_s16_symmetric(sTextAlpha1, 255, 0x10);
             }
-            if (objectives & 0x2) {
+            if (objectives & 0x2 || gCurrentCheckpoint != 2) {
                 sTextAlpha2 = approach_s16_symmetric(sTextAlpha2, 0, 0x10);
             } else {
                 sTextAlpha2 = approach_s16_symmetric(sTextAlpha2, 255, 0x10);
@@ -3171,16 +3172,16 @@ void handle_objectives(void) {
             break;
         case LEVEL_JRB:
             if (sTextAlpha1)
-                print_objective_string(20, 40, sTextAlpha1, text3);
+                print_objective_string(20, 20, sTextAlpha1, text3);
             if (sTextAlpha2)
                 print_objective_string(20, 20, sTextAlpha2, text4);
 
-            if (objectives & 0x4) {
+            if (objectives & 0x4 || gCurrentCheckpoint != 1) {
                 sTextAlpha1 = approach_s16_symmetric(sTextAlpha1, 0, 0x10);
             } else {
                 sTextAlpha1 = approach_s16_symmetric(sTextAlpha1, 255, 0x10);
             }
-            if (objectives & 0x8) {
+            if (objectives & 0x8 || gCurrentCheckpoint != 2) {
                 sTextAlpha2 = approach_s16_symmetric(sTextAlpha2, 0, 0x10);
             } else {
                 sTextAlpha2 = approach_s16_symmetric(sTextAlpha2, 255, 0x10);
@@ -3188,16 +3189,16 @@ void handle_objectives(void) {
             break;
         case LEVEL_CCM:
             if (sTextAlpha1)
-                print_objective_string(20, 40, sTextAlpha1, text5);
+                print_objective_string(20, 20, sTextAlpha1, text5);
             if (sTextAlpha2)
                 print_objective_string(20, 20, sTextAlpha2, text6);
 
-            if (objectives & 0x10) {
+            if (objectives & 0x10 || gCurrentCheckpoint != 1) {
                 sTextAlpha1 = approach_s16_symmetric(sTextAlpha1, 0, 0x10);
             } else {
                 sTextAlpha1 = approach_s16_symmetric(sTextAlpha1, 255, 0x10);
             }
-            if (objectives & 0x20) {
+            if (objectives & 0x20 || gCurrentCheckpoint != 2) {
                 sTextAlpha2 = approach_s16_symmetric(sTextAlpha2, 0, 0x10);
             } else {
                 sTextAlpha2 = approach_s16_symmetric(sTextAlpha2, 255, 0x10);
