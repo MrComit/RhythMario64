@@ -200,6 +200,10 @@ void bully_act_level_death(void) {
             if (o->oBullySubtype == BULLY_STYPE_MINION)
                 o->parentObj->oBullyKBTimerAndMinionKOCounter++;
             bully_spawn_coin();
+            if (cur_obj_nearest_object_with_behavior(bhvSmallBully) == NULL) {
+                save_file_set_objectives(1 << (o->oBehParams >> 24));
+                play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
+            }
         } else {
             spawn_mist_particles();
 
