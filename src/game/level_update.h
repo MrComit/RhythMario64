@@ -129,4 +129,6 @@ s32 lvl_set_current_level(UNUSED s16 arg0, s32 levelNum);
 s32 lvl_play_the_end_screen_sound(UNUSED s16 arg0, UNUSED s32 arg1);
 void basic_update(UNUSED s16 *arg);
 
+extern u8 gSpikePillarIndex;
+
 #endif // LEVEL_UPDATE_H

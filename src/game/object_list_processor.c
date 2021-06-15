@@ -311,7 +311,9 @@ u32 go_to_checkpoint(u32 checkpoint) {
             cmd = seqPlayer->seqData[seqPointer];
         }
         totalTimer += m64_read_compressed_u16_but_epic(&seqPlayer->seqData[seqPointer + 1]);
-        while(cmd != 0x90) {
+        seqPointer += 3;
+        cmd = seqPlayer->seqData[seqPointer];
+        while(cmd < 0x90 && cmd > 0x9F) {
             seqPointer++;
             cmd = seqPlayer->seqData[seqPointer];
         }
@@ -325,6 +327,7 @@ u32 go_to_checkpoint(u32 checkpoint) {
     gCheckpointLoaded = 1;
     gLastBeatHit = 0;
     gBeatHit = 0;
+    gSpikePillarIndex = 0;
     return totalTimer;
 }
 
@@ -398,13 +401,17 @@ void bhv_mario_update(void) {
             gLastBeatHit = 1;
         }
         gBeatTimer -= 24;
+        gSpikePillarIndex++;
+        if(gSpikePillarIndex > count_objects_with_behavior(bhvSpikePillar)) {
+            gSpikePillarIndex = 1;
+        }
     } else {
         gBeatHit = 0;
     }
 
     gCheckpointLoaded = 0;
     if(gPlayer1Controller->buttonPressed & L_TRIG) {
-        seqPlayer->globalSongTimer = go_to_checkpoint(0);
+        seqPlayer->globalSongTimer = go_to_checkpoint(1);
     }
 
     //print_text_fmt_int(20, 20, "%d", gLastBeatHit);

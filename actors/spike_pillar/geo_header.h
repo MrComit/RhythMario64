@@ -1,0 +1,14 @@
+extern const GeoLayout spike_pillar_geo[];
+extern Lights1 spike_pillar_white_lights;
+extern Lights1 spike_pillar_wood_lights;
+extern u8 spike_pillar_xx_3_ci8[];
+extern u8 spike_pillar_xx_3_ci8_pal_rgba16[];
+extern Vtx spike_pillar_Cube_mesh_layer_1_vtx_0[12];
+extern Gfx spike_pillar_Cube_mesh_layer_1_tri_0[];
+extern Vtx spike_pillar_Cube_mesh_layer_1_vtx_1[16];
+extern Gfx spike_pillar_Cube_mesh_layer_1_tri_1[];
+extern Gfx mat_spike_pillar_white[];
+extern Gfx mat_spike_pillar_wood[];
+extern Gfx mat_revert_spike_pillar_wood[];
+extern Gfx spike_pillar_Cube_mesh_layer_1[];
+extern Gfx spike_pillar_material_revert_render_settings[];

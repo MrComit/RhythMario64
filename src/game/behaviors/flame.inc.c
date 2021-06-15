@@ -3,7 +3,7 @@
 void bhv_small_piranha_flame_loop(void) {
     if ((u16)(o->oBehParams >> 16) == 0) {
         if (o->oTimer > 0) {
-            obj_mark_for_deletion(o);
+            o->activeFlags = 0;
         } else {
             f32 rnd = random_float() - 0.5f;
             o->header.gfx.scale[1] = o->header.gfx.scale[2] * (1.0f + 0.7f * rnd);
@@ -14,7 +14,7 @@ void bhv_small_piranha_flame_loop(void) {
     } else {
         cur_obj_update_floor_and_walls();
         if (approach_f32_ptr(&o->oSmallPiranhaFlameStartSpeed, o->oSmallPiranhaFlameEndSpeed, 0.6f)) {
-            cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x200);
+            //cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x200);
         }
 
         obj_compute_vel_from_move_pitch(o->oSmallPiranhaFlameStartSpeed);

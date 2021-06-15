@@ -556,5 +556,7 @@ extern const BehaviorScript bhvHitboxObjective[];
 
 extern const BehaviorScript bhvLavaSpire[];
 extern const BehaviorScript bhvSmallWhompCircle[];
+extern const BehaviorScript bhvSpikePillar[];
+extern const BehaviorScript bhvTippingPlatform[];
 
 #endif // BEHAVIOR_DATA_H

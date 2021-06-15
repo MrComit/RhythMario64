@@ -2966,9 +2966,12 @@ void reset_beat_timer(s32 *timer) {
 }
 
 
-s32 cur_obj_beat_hit_and_reset(s32 *timer) {
-    if(*timer >= 96) {
-        *timer -= 96;
+s32 cur_obj_beat_hit_and_reset(s32 *timer, s32 timerDivisor) {
+    if(timerDivisor == 0) {
+        timerDivisor = 1;
+    }
+    if(*timer >= (96 / timerDivisor)) {
+        *timer -= (96 / timerDivisor);
         return 1;
     } else {
         return 0;
@@ -2977,14 +2980,15 @@ s32 cur_obj_beat_hit_and_reset(s32 *timer) {
 
 void reset_for_checkpoint(s32 *timer, s32 *prevTimer, s32 originalOffset, s32 resetPitchRoll, s32 resetYaw) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
-    *prevTimer = 0;
-    *timer = originalOffset;
+    *prevTimer = seqPlayer->globalSongTimer;
+    *timer = originalOffset + (seqPlayer->globalSongTimer % 96);
     cur_obj_set_pos_to_home();
     if(resetPitchRoll) {
         o->oFaceAnglePitch = o->oMoveAnglePitch = o->oFaceAngleRoll = o->oMoveAngleRoll = 0;
     }
     if(resetYaw) {
-        o->oFaceAngleYaw = o->oMoveAngleYaw;
+        o->oFaceAngleYaw = o->oMoveAngleYaw = 0;
     }
     o->oAction = 0;
+    o->oForwardVel = o->oVelX = o->oVelY = o->oVelZ = 0;
 }

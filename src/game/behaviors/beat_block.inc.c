@@ -1,9 +1,23 @@
 #include "audio/load.h"
 void bhv_bounce_hill_init(void) {
+    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
+    s32 beatState = (((seqPlayer->globalSongTimer) % 192) / 96);
     o->oAnimState = o->oBehParams >> 24;
-    reset_for_checkpoint(&o->oBeatTimer, &o->oPrevSongTimer, 32, 1, 0);
-    if (o->oBehParams2ndByte)
+    reset_for_checkpoint(&o->oBeatTimer, &o->oPrevSongTimer, 0, 1, 0);
+    if (o->oBehParams2ndByte) {
         o->oAction = 1;
+    }
+    if(seqPlayer->globalSongTimer != 0) {
+            if(o->oAction == 0) {
+                o->header.gfx.scale[1] = 1.0f;
+                o->header.gfx.scale[0] = 1.0f;
+                o->header.gfx.scale[2] = o->header.gfx.scale[0];
+            } else {
+                o->header.gfx.scale[1] = 0.6f;
+                o->header.gfx.scale[0] = 1.2f;
+                o->header.gfx.scale[2] = o->header.gfx.scale[0];
+            }
+        }
 }
 
 void bhv_bounce_hill_loop(void) {
@@ -15,7 +29,7 @@ void bhv_bounce_hill_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (cur_obj_beat_hit_and_reset(&o->oBeatTimer)) {
+            if (cur_obj_beat_hit_and_reset(&o->oBeatTimer, 1)) {
                 o->oAction = 1;
             }
             //o->header.gfx.scale[1] = approach_f32(o->header.gfx.scale[1], 1.0f, 0.05f, 0.05f);
@@ -32,7 +46,7 @@ void bhv_bounce_hill_loop(void) {
             }
             break;
         case 1:
-            if (cur_obj_beat_hit_and_reset(&o->oBeatTimer)) {
+            if (cur_obj_beat_hit_and_reset(&o->oBeatTimer, 1)) {
                 o->oAction = 0;
             }
             //o->header.gfx.scale[1] = approach_f32(o->header.gfx.scale[1], 0.6f, 0.05f, 0.05f);
@@ -57,15 +71,25 @@ void bhv_bounce_hill_loop(void) {
 
 
 void bhv_beat_block_init(void) {
+    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
+    s32 beatState = (((seqPlayer->globalSongTimer) % 768) / 48);
     switch(o->oBehParams2ndByte) {
         case 0:
-            o->oBeatBlockTimer = 0;
+            if(o->oAction = 0) {
+                o->oBeatBlockTimer = 0;
+            } else
+                o->oBeatBlockTimer = beatState;
             o->oAnimState = 1;
             break;
         case 1:
-            o->oBeatBlockTimer = 8;
+            if(o->oAction = 0) {
+                o->oBeatBlockTimer = 8;
+            } else
+                o->oBeatBlockTimer = (beatState + 8) % 16;
             o->oAnimState = 0;
+            break;
     }
+    o->oAction = 1;
 }
 
 void bhv_beat_block_update(void) {

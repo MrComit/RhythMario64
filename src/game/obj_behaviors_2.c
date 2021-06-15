@@ -493,7 +493,7 @@ static s32 obj_grow_then_shrink(f32 *scaleVel, f32 shootFireScale, f32 endScale)
         if ((*scaleVel -= 0.01f) > -0.03f) {
             o->oTimer = 0;
         }
-    } else if (o->oTimer > 10) {
+    } else if (o->oTimer > 5) {
         if (approach_f32_ptr(&o->header.gfx.scale[0], endScale, 0.05f)) {
             return -1;
         } else if (*scaleVel != 0.0f && o->header.gfx.scale[0] < shootFireScale) {
@@ -969,3 +969,4 @@ void obj_spit_fire(s16 relativePosX, s16 relativePosY, s16 relativePosZ, f32 sca
 #include "behaviors/beat_block.inc.c"
 #include "behaviors/block.inc.c"
 #include "behaviors/castle_objects.inc.c"
+#include "behaviors/spike_pillar.inc.c"
