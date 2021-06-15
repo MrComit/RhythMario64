@@ -28,7 +28,7 @@ Gfx mat_barrier_Border_001[] = {
 	gsDPSetCombineLERP(0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT),
 	gsSPClearGeometryMode(G_CULL_BACK),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsDPSetEnvColor(118, 189, 254, 127),
+	gsDPSetEnvColor(118, 189, 254, 191),
 	gsSPEndDisplayList(),
 };
 

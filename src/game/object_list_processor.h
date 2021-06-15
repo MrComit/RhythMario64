@@ -133,6 +133,7 @@ extern s32 gBeatHit;
 extern s32 gPrevSongTimer;
 extern s32 gLastBeatHit;
 extern s32 gCheckpointLoaded;
+extern s32 gCurrentCheckpoint;
 
 
 #endif // OBJECT_LIST_PROCESSOR_H

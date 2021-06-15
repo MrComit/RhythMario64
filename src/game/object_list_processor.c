@@ -288,7 +288,7 @@ u16 m64_read_compressed_u16_but_epic(u8 *state) {
     return ret;
 }
 
-s32 gBeatTimer, gPrevSongTimer, gBeatHit, gLastBeatHit;
+s32 gBeatTimer, gPrevSongTimer, gBeatHit, gLastBeatHit, gCurrentCheckpoint;
 
 u32 go_to_checkpoint(u32 checkpoint) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
@@ -329,6 +329,40 @@ u32 go_to_checkpoint(u32 checkpoint) {
     gBeatHit = 0;
     gSpikePillarIndex = 0;
     return totalTimer;
+}
+
+void get_current_checkpoint(void) {
+    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
+    u8 checkpointIncrement = 0;
+    u8 cmd;
+    u32 seqPointer = 0;
+    u32 totalTimer = 0;
+    while(cmd != 0x90) {
+        seqPointer++;
+        cmd = seqPlayer->seqData[seqPointer];
+    }
+    while(checkpointIncrement != 2) {
+        while(cmd != 0xFD) {
+            if(cmd >= 0x90 && cmd <= 0x9F) {
+                seqPointer += 0x3;
+            } else if(cmd == 0xDD || cmd == 0xDB) {
+                seqPointer += 0x2;
+            }
+            cmd = seqPlayer->seqData[seqPointer];
+        }
+        totalTimer += m64_read_compressed_u16_but_epic(&seqPlayer->seqData[seqPointer + 1]);
+        seqPointer += 3;
+        cmd = seqPlayer->seqData[seqPointer];
+        while(cmd < 0x90 && cmd > 0x9F) {
+            seqPointer++;
+            cmd = seqPlayer->seqData[seqPointer];
+        }
+        if (seqPlayer->globalSongTimer >= totalTimer) {
+            gCurrentCheckpoint = ++checkpointIncrement;
+        } else {
+            break;
+        }
+    }
 }
 
 u8 onScreenLayers[CHANNELS_MAX];
@@ -411,8 +445,9 @@ void bhv_mario_update(void) {
 
     gCheckpointLoaded = 0;
     if(gPlayer1Controller->buttonPressed & L_TRIG) {
-        seqPlayer->globalSongTimer = go_to_checkpoint(1);
+        seqPlayer->globalSongTimer = go_to_checkpoint(2);
     }
+    get_current_checkpoint();
 
     //print_text_fmt_int(20, 20, "%d", gLastBeatHit);
 }

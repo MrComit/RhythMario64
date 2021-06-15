@@ -227,6 +227,7 @@ void load_area(s32 index) {
     gBulletLauncherIndex[1] = 0;
     gBulletLauncherIndex[2] = 0;
     gBulletLauncherIndex[3] = 0;
+    gCurrentCheckpoint = 0;
     if (gCurrentArea == NULL && gAreaData[index].unk04 != NULL) {
         gCurrentArea = &gAreaData[index];
         gCurrAreaIndex = gCurrentArea->index;
