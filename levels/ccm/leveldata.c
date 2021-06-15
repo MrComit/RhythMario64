@@ -50,3 +50,4 @@
 #include "levels/ccm/ghost_koopa/model.inc.c"
 #include "levels/ccm/lava_spire/model.inc.c"
 #include "levels/ccm/lava_spire/collision.inc.c"
+#include "levels/ccm/sawblade/model.inc.c"

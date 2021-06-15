@@ -597,6 +597,13 @@ void bhv_bounce_hill_loop(void);
 void bhv_hitbox_objective_loop(void);
 void bhv_lava_spire_init(void);
 void bhv_lava_spire_loop(void);
+void bhv_sawblade_loop(void);
+void bhv_sawblade_init(void);
+void bhv_sawblade_spawner_loop(void);
+void bhv_sawblade_spawner_init(void);
+
+
+
 
 
 

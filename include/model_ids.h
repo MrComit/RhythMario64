@@ -579,6 +579,7 @@
 #define MODEL_TIPPING_PLATFORM            0x33
 #define MODEL_GHOST_KOOPA                 0x35
 #define MODEL_LAVA_SPIRE                  0x36
+#define MODEL_SAWBLADE                    0x37
 
 // Menu Models (overwrites Level Geometry IDs)
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON         MODEL_LEVEL_GEOMETRY_03   // main_menu_geo_0001D0

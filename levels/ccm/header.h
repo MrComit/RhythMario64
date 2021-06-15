@@ -65,4 +65,6 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/lava_spire/collision_header.h"
 
+#include "levels/ccm/sawblade/geo_header.h"
+
 #endif

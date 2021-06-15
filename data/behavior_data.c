@@ -6195,7 +6195,6 @@ const BehaviorScript bhvBounceHill[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_bounce_hill_loop),
     END_LOOP(),
-
 };
 
 const BehaviorScript bhvSmallWhompCircle[] = {
@@ -6264,4 +6263,27 @@ const BehaviorScript bhvLavaSpire[] = {
         CALL_NATIVE(bhv_lava_spire_loop),
     END_LOOP(),
 
+};
+
+const BehaviorScript bhvSawblade[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    SET_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_sawblade_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sawblade_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvSawbladeSpawner[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    SET_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_sawblade_spawner_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sawblade_spawner_loop),
+    END_LOOP(),
 };

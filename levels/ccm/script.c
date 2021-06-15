@@ -35,6 +35,7 @@ const LevelScript level_ccm_entry[] = {
 	JUMP_LINK(script_func_global_15), 
 	LOAD_MODEL_FROM_GEO(MODEL_GHOST_KOOPA, ghost_koopa_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_LAVA_SPIRE, lava_spire_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SAWBLADE, sawblade_geo), 
 
 	AREA(1, ccm_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -49,6 +50,9 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_NONE, -8528, 2817, 6912, 0, 0, 0, 0x00050000, bhvKoopaRaceEndpoint),
 		OBJECT(MODEL_LAVA_SPIRE, -8222, 310, 3849, 0, 0, 0, 0x00000000, bhvLavaSpire),
 		OBJECT(MODEL_LAVA_SPIRE, -9934, 310, 3849, 0, 0, 0, 0x00010000, bhvLavaSpire),
+		OBJECT(MODEL_NONE, 51, 3129, -274, 0, -180, 0, 0x00000000, bhvSawbladeSpawner),
+		OBJECT(MODEL_NONE, 562, 3129, -3160, 0, 0, 0, 0x00000000, bhvSawbladeSpawner),
+		OBJECT(MODEL_NONE, 887, 3129, -2235, 0, 50, 0, 0x00000000, bhvSawbladeSpawner),
 		OBJECT(MODEL_NONE, -4401, 3129, -1750, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
 		MARIO_POS(0x01, -180, -4401, 3129, -1750),
 		TERRAIN(ccm_area_1_collision),
