@@ -20,6 +20,12 @@
             [32700, 29430],
             "hang"
         ],
+        "envelopeGuitar": [
+            [2, 32700],
+            [1, 32700],
+            [32700, 29430],
+            "hang"
+        ],
         "envelope3": [
             [2, 32700],
             [1, 32700],
@@ -94,6 +100,11 @@
             "sound_lo": "23_strings_1",
             "sound": "24_strings_2",
             "sound_hi": "25_strings_3"
+        },
+        "instGuitar": {
+            "release_rate": 208,
+            "envelope": "envelopeGuitar",
+            "sound": "31_rarefaction-convolution"
         },
         "inst3": {
             "release_rate": 90,
@@ -215,7 +226,7 @@
     "instrument_list": [
         "inst0",
         "inst1",
-        "inst2",
+        "instGuitar",
         "inst3",
         "inst4",
         "inst5",
@@ -225,6 +236,7 @@
         null,
         "inst10",
         "inst8",
-        "inst9"
+        "inst9",
+        "inst2"
     ]
 }
