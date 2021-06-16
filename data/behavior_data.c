@@ -53,6 +53,7 @@
 #include "levels/wf/header.h"
 #include "levels/bowser_2/header.h"
 #include "levels/ttm/header.h"
+#include "levels/ccm/header.h"
 
 #include "make_const_nonconst.h"
 #include "behavior_data.h"
@@ -6115,8 +6116,10 @@ const BehaviorScript bhvGate[] = {
     LOAD_COLLISION_DATA(gate_collision),
     SET_FLOAT(oCollisionDistance, 0x4000),
     SET_HOME(),
-    DEACTIVATE(),
+    SET_INT(oOpacity, 255),
+    CALL_NATIVE(bhv_gate_init),
     BEGIN_LOOP(),
+        CALL_NATIVE(bhv_gate_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
@@ -6194,7 +6197,6 @@ const BehaviorScript bhvBounceHill[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_bounce_hill_loop),
     END_LOOP(),
-
 };
 
 const BehaviorScript bhvSmallWhompCircle[] = {
@@ -6247,5 +6249,68 @@ const BehaviorScript bhvHitboxObjective[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_hitbox_objective_loop),
         SPAWN_CHILD_WITH_PARAM(/*Bhv param*/ 0, /*Model*/ MODEL_NONE, /*Behavior*/ bhvSparkleSpawn),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvLavaSpire[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    SET_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    SET_HOME(),
+    LOAD_COLLISION_DATA(lava_spire_collision),
+    SET_FLOAT(oDrawingDistance, 0x6000),
+    SET_FLOAT(oCollisionDistance, 0x4000),
+    CALL_NATIVE(bhv_lava_spire_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_lava_spire_loop),
+    END_LOOP(),
+
+};
+
+const BehaviorScript bhvSawblade[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    SET_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_sawblade_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sawblade_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvSawbladeSpawner[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    SET_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_sawblade_spawner_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sawblade_spawner_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvBarrier[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(barrier_collision),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_barrier_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvStationaryOrangeNumber[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    //BILLBOARD(),
+    SET_HOME(),
+    SCALE(0, 200),
+    CALL_NATIVE(bhv_orange_number_init),
+    BEGIN_LOOP(),
     END_LOOP(),
 };

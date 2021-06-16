@@ -1,0 +1,18 @@
+extern const GeoLayout lava_spire_geo[];
+extern Lights1 lava_spire_Lava_001_lights;
+extern Lights1 lava_spire_Grounds_001_lights;
+extern u8 lava_spire_flowing_lava_ci4[];
+extern u8 lava_spire_flowing_lava_ci4_pal_rgba16[];
+extern u8 lava_spire_dirtwall_ci8[];
+extern u8 lava_spire_dirtwall_ci8_pal_rgba16[];
+extern Vtx lava_spire_LavaSpire_mesh_layer_1_vtx_cull[8];
+extern Vtx lava_spire_LavaSpire_mesh_layer_1_vtx_0[27];
+extern Gfx lava_spire_LavaSpire_mesh_layer_1_tri_0[];
+extern Vtx lava_spire_LavaSpire_mesh_layer_1_vtx_1[36];
+extern Gfx lava_spire_LavaSpire_mesh_layer_1_tri_1[];
+extern Gfx mat_lava_spire_Lava_001[];
+extern Gfx mat_revert_lava_spire_Lava_001[];
+extern Gfx mat_lava_spire_Grounds_001[];
+extern Gfx mat_revert_lava_spire_Grounds_001[];
+extern Gfx lava_spire_LavaSpire_mesh_layer_1[];
+extern Gfx lava_spire_material_revert_render_settings[];

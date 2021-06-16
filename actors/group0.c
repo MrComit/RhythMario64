@@ -45,3 +45,5 @@
 #include "whomp/anims/table.inc.c"
 #include "whomp/collision.inc.c"
 #include "spike_pillar/model.inc.c"
+#include "barrier/model.inc.c"
+#include "barrier/collision.inc.c"

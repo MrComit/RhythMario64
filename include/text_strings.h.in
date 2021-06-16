@@ -487,6 +487,8 @@
 #define TEXT_OBJECTIVE2 _("OBJECTIVE 2: Reach the top of the Flagpole")
 #define TEXT_OBJECTIVE3 _("OBJECTIVE 1: Cock")
 #define TEXT_OBJECTIVE4 _("OBJECTIVE 2: Balls")
+#define TEXT_OBJECTIVE5 _("OBJECTIVE 1: Take down the Bullies")
+#define TEXT_OBJECTIVE6 _("OBJECTIVE 2: Beat Koopa the Ghost in a Race")
 
 
 

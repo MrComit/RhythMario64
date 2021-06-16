@@ -553,10 +553,14 @@ extern const BehaviorScript bhvBlock[];
 extern const BehaviorScript bhvBounceHill[];
 
 extern const BehaviorScript bhvHitboxObjective[];
-
-
+extern const BehaviorScript bhvStationaryOrangeNumber[];
+extern const BehaviorScript bhvLavaSpire[];
 extern const BehaviorScript bhvSmallWhompCircle[];
 extern const BehaviorScript bhvSpikePillar[];
 extern const BehaviorScript bhvTippingPlatform[];
+extern const BehaviorScript bhvSawblade[];
+extern const BehaviorScript bhvSawbladeSpawner[];
+extern const BehaviorScript bhvBarrier[];
+
 
 #endif // BEHAVIOR_DATA_H
