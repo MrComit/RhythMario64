@@ -14,6 +14,8 @@
 #include "surface_terrains.h"
 #include "macros.h"
 
+#define POW2(x) ((x) * (x))
+
 // Crash handler enhancement
 #ifdef CRASH_SCREEN_INCLUDED
 #define DEBUG_ASSERT(exp) do { if (!(exp)) _n64_assert(__FILE__, __LINE__, #exp, 1); } while (0)

@@ -564,6 +564,14 @@ void bhv_block_update(void);
 void bhv_whomp_circle_loop(void);
 void bhv_spike_pillar_init(void);
 void bhv_spike_pillar_loop(void);
+void bhv_spike_init(void);
+void bhv_spike_update(void);
+void bhv_spike_bar_update(void);
+void bhv_torpedo_update(void);
+void bhv_torpedo_spawner_init(void);
+void bhv_torpedo_spawner_update(void);
+void bhv_angry_bubba_init(void);
+void bhv_angry_bubba_loop(void);
 
 Gfx *geo_move_mario_part_from_parent(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 

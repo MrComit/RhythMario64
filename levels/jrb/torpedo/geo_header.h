@@ -1,0 +1,10 @@
+extern const GeoLayout torpedo_geo[];
+extern Lights1 torpedo_f3d_material_lights;
+extern u8 torpedo_MetalPlate_ci4[];
+extern u8 torpedo_MetalPlate_ci4_pal_rgba16[];
+extern Vtx torpedo_Circle_mesh_layer_1_vtx_0[148];
+extern Gfx torpedo_Circle_mesh_layer_1_tri_0[];
+extern Gfx mat_torpedo_f3d_material[];
+extern Gfx mat_revert_torpedo_f3d_material[];
+extern Gfx torpedo_Circle_mesh_layer_1[];
+extern Gfx torpedo_material_revert_render_settings[];

@@ -1193,6 +1193,18 @@ void mode_8_directions_camera(struct Camera *c) {
     set_camera_height(c, pos[1]);
 }
 
+void mode_cliff_camera(struct Camera *c) {
+    Vec3f pos;
+
+    c->nextYaw = 0;
+    c->pos[0] = c->focus[0] = gMarioState->pos[0];
+    c->pos[2] = -4000.0f;
+    c->focus[2] = -5500.0f;
+    sAreaYawChange = 0;
+    c->focus[1] = gMarioState->pos[1];
+    c->pos[1] = c->focus[1] + 50.0f;
+}
+
 /**
  * Updates the camera in outward radial mode.
  * sModeOffsetYaw is calculated in radial_camera_move, which calls offset_yaw_outward_radial
@@ -3153,7 +3165,12 @@ void update_camera(struct Camera *c) {
                     mode_spiral_stairs_camera(c);
                     break;
             }*/
-            mode_8_directions_camera(c);
+            if(gCurrLevelNum == LEVEL_JRB && gMarioState->pos[2] < -5404.5f && gMarioState->pos[1] < 875.0f) {
+                mode_cliff_camera(c);
+            }
+            else {
+                mode_8_directions_camera(c);
+            }
         }
     }
     // Start any Mario-related cutscenes

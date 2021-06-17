@@ -17,6 +17,7 @@
 #include "object_list_processor.h"
 #include "engine/behavior_script.h"
 #include "engine/math_util.h"
+#include "object_helpers.h"
 
 /* @file hud.c
  * This file implements HUD rendering and power meter animations.
@@ -624,11 +625,185 @@ void render_water_tri(void) {
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 
+/* tan_u16:
+ADDIU SP, SP, 0xFFE8
+SW RA, 0x14 (SP)
+ANDI A0, A0, 0xFFFF
+ORI AT, R0, 0x8000
+SLTU T0, A0, AT
+JAL cos_u16
+SW T0, 0x10 (SP)
+MTC1 R0, F4
+LUI AT, 0x3F80
+C.EQ.S F4, F0
+MTC1 AT, F5
+BC1T @@return_nan
+MUL.S F4, F0, F0
+SUB.S F4, F5, F4
+SQRT.S F4, F4
+DIV.S F0, F4, F0
+LW T0, 0x10 (SP)
+BNE T0, R0, @@return
+NOP
+NEG.S F0, F0
+@@return:
+LW RA, 0x14 (SP)
+JR RA
+ADDIU SP, SP, 0x18
+@@return_nan:
+LUI AT, 0x7F80
+ORI AT, AT, 0x1
+B @@return
+MTC1 AT, F0 */
+
+#define tans(x) (sins(x)/coss(x))
+
+
+s32 convert_3d_to_2d(f32 x, f32 y, f32 z, s32 *x_2d, s32 *y_2d) {
+    f32 xOff, yOff, zOff, cx, cz, idkf, tan, tan2;
+    s32 idk, idk2, fovThing, yaw, yawAbs, pitch, pitchAbs;
+
+    /*ADDIU SP, SP, 0xFFE0
+    SW RA, 0x1C (SP)
+
+    @@HALF_SCREEN_WIDTH equ float( 0x280 )
+    @@HALF_SCREEN_HEIGHT equ float( 0x1E0 )
+
+    LI T0, g_camera_state
+    L.S F4, cam_x (T0)
+    L.S F5, cam_y (T0)
+    L.S F6, cam_z (T0)
+    
+    SUB.S F4, F12, F4
+    SUB.S F5, F13, F5
+    SUB.S F6, F14, F6*/
+    xOff = x - gCamera->pos[0];
+    yOff = y - gCamera->pos[1];
+    zOff = z - gCamera->pos[2];
+
+    /*MOV.S F14, F4
+    MOV.S F12, F6
+
+    S.S F5, 0x10 (SP)
+    MUL.S F4, F12, F12
+    MUL.S F5, F14, F14
+    ADD.S F4, F4, F5
+    SQRT.S F4, F4*/
+    cx = POW2(x);
+    cz = POW2(z);
+    idkf = sqrtf(cx + cz);
+    
+    /*JAL atan2s
+    S.S F4, 0x14 (SP)
+    SW V0, 0x18 (SP)*/
+    idk = atan2s(zOff, xOff);
+
+    /*LI AT, 0x42B60B61
+    MTC1 AT, F5
+    L.S F4, g_camera_fov
+    MUL.S F4, F4, F5
+    CVT.W.S F4, F4
+    MFC1 A0, F4
+    JAL tan_u16
+    NOP
+    LI AT, @@HALF_SCREEN_HEIGHT
+    MTC1 AT, F4
+    LH V0, 0x1A (SP)
+    DIV.S F4, F4, F0
+    S.S F4, 0x18 (SP)*/
+    fovThing = (s32)(sFOVState.fov*91.0222244263f);
+    tan = tans(fovThing);
+    tan = 480.0f / tan;
+
+    /*LI T0, g_camera_state
+    LH T1, cam_yaw (T0)
+    SUBU T1, T1, V0
+
+    SLL T1, T1, 0x10
+    SRA A0, T1, 0x10
+    
+    ABS T1, A0*/
+    yaw = gCamera->yaw - (s16)(idk);
+    yaw <<= 0x10;
+    yaw >>= 0x10;
+    yawAbs = absi(yaw);
+
+    /*SLTI AT, T1, 0x4000
+    BEQ AT, R0, @@behind_camera
+    NOP*/
+    if(yawAbs < 0x4000) {
+        //behind camera
+        /*ORI V0, R0, 0x0
+        LW RA, 0x1C (SP)
+        JR RA
+        ADDIU SP, SP, 0x20*/
+        return 0;
+    }
+    /*L.S F4, 0x18 (SP)
+    LI AT, @@HALF_SCREEN_WIDTH
+    MTC1 AT, F5
+    MUL.S F4, F4, F0
+    ADD.S F4, F4, F5*/
+    tan2 = tans(yaw);
+    tan2 *= tan;
+    tan2 += 640.0f;
+
+    /*L.S F12, 0x14 (SP)
+    S.S F4, 0x14 (SP)
+    JAL atan2s
+    L.S F14, 0x10 (SP)*/
+    idk2 = atan2s(idkf, yOff);
+
+    /*LI T0, g_camera_state
+    LH T1, cam_pitch (T0)
+    SUBU T1, T1, V0
+
+    SLL T1, T1, 0x10
+    SRA A0, T1, 0x10
+
+    ABS T1, A0*/
+    pitch = gLakituState.oldPitch - (s16)(idk2);
+    pitch <<= 0x10;
+    pitch >>= 0x10;
+    pitchAbs = absi(pitch);
+    /*SLTI AT, T1, 0x4000
+    BEQ AT, R0, @@behind_camera
+    NOP*/
+    if(pitchAbs < 0x4000) {
+        //behind camera
+        /*ORI V0, R0, 0x0
+        LW RA, 0x1C (SP)
+        JR RA
+        ADDIU SP, SP, 0x20*/
+        return 0;
+    }
+    /*JAL tan_u16
+    NOP
+
+    L.S F4, 0x18 (SP)
+    LI AT, @@HALF_SCREEN_WIDTH
+    MTC1 AT, F5
+    MUL.S F4, F4, F0
+    ADD.S F4, F4, F5
+    L.S F0, 0x14 (SP)
+    ORI V0, R0, 0x1
+
+    LW RA, 0x1C (SP)
+    JR RA
+    ADDIU SP, SP, 0x20*/
+    *y_2d = (s32)((tan*tans(pitch)) + 480.0f);
+    *x_2d = (s32)(idkf);
+    return 1;
+}
+
+Vec3f reticlePos;
+
 void render_hud(void) {
     s16 hudDisplayFlags;
 #ifdef VERSION_EU
     Mtx *mtx;
 #endif
+    s32 x, y;
 
     hudDisplayFlags = gHudDisplay.flags;
 
@@ -695,5 +870,11 @@ void render_hud(void) {
             render_water_tri();
         }
         render_audiovisual_bars();
+
+        if(convert_3d_to_2d(0.0f, 0.0f, 0.0f, &x, &y)) {
+            print_text(x, y, "S");
+        }
+        print_text_fmt_int(40, 40, "%d", x);
+        print_text_fmt_int(40, 20, "%d", y);
     }
 }

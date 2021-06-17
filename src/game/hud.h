@@ -24,4 +24,6 @@ enum CameraHUDLut {
 void set_hud_camera_status(s16 status);
 void render_hud(void);
 
+extern Vec3f reticlePos;
+
 #endif // HUD_H

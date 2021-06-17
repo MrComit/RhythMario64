@@ -162,3 +162,54 @@ void bhv_bubba_loop(void) {
         o->oPosY = o->oFloorHeight;
     }
 }
+
+void bhv_angry_bubba_init(void) {
+    reset_for_checkpoint(&o->oBeatTimer, &o->oPrevSongTimer, 0, 1, 0);
+}
+
+void bhv_angry_bubba_loop(void) {
+    stay_on_beat(&o->oBeatTimer, &o->oPrevSongTimer);
+
+    if(cur_obj_beat_hit_and_reset(&o->oBeatTimer, 1)) {
+        o->oBeatBlockTimer++;
+        if(o->oBeatBlockTimer > 1) {
+            o->oAction++;
+            o->oSubAction = 0;
+            if(o->oAction > 1) {
+                o->oAction = 0;
+            }
+            o->oBeatBlockTimer = 0;
+        }
+    }
+
+    if(gCheckpointLoaded) {
+        bhv_angry_bubba_init();
+    }
+    
+    switch(o->oAction) {
+        case 0:
+            o->oPosX = gMarioObject->oPosX + 500.0f;
+            o->oPosY = gMarioObject->oPosY + 500.0f;
+            o->oPosZ = gMarioObject->oPosZ + 500.0f;
+            o->oMoveAngleYaw = o->oAngleToMario;
+            o->oBubbaTargetX = gMarioObject->oPosX;
+            o->oBubbaTargetY = gMarioObject->oPosY;
+            o->oBubbaTargetZ = gMarioObject->oPosZ;
+            break;
+        case 1:
+            if(o->oSubAction == 0) {
+                o->oPosX = approach_f32_symmetric(o->oPosX, o->oBubbaTargetX, 25.0f);
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oBubbaTargetY, 1.0f + absf((o->oPosY - o->oBubbaTargetY) / 10.0f));
+                o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oBubbaTargetZ, 25.0f);
+                if(o->oPosX == o->oBubbaTargetX && o->oPosZ == o->oBubbaTargetZ) {
+                    o->oSubAction = 1;
+                }
+            } else {
+                o->oPosX = approach_f32_symmetric(o->oPosX, o->oBubbaTargetX - 1000.0f, 25.0f);
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oBubbaTargetY + 500.0f, 1.0f + absf((o->oPosY - o->oBubbaTargetY) / 10.0f));
+                o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oBubbaTargetZ - 1000.0f, 25.0f);
+            }
+            break;
+    }
+}
+

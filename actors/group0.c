@@ -47,3 +47,7 @@
 #include "spike_pillar/model.inc.c"
 #include "barrier/model.inc.c"
 #include "barrier/collision.inc.c"
+#include "spike/model.inc.c"
+#include "spike/anims/data.inc.c"
+#include "spike/anims/table.inc.c"
+#include "spike_bar/model.inc.c"

@@ -24,3 +24,4 @@
 #include "levels/jrb/geo.inc.c"
 
 #include "levels/jrb/tipping_platform/geo.inc.c"
+#include "levels/jrb/torpedo/geo.inc.c"

@@ -11,6 +11,7 @@
 #include "shadow.h"
 #include "sm64.h"
 #include "game_init.h"
+#include "level_update.h"
 
 #include "config.h"
 
@@ -376,6 +377,8 @@ static void make_roll_matrix(Mtx *mtx, s16 angle) {
 /**
  * Process a camera node.
  */
+
+s32 gMarioScreenX, gMarioScreenY;
 static void geo_process_camera(struct GraphNodeCamera *node) {
     Mat4 cameraTransform;
     Mtx *rollMtx = alloc_display_list(sizeof(*rollMtx));
@@ -399,6 +402,16 @@ static void geo_process_camera(struct GraphNodeCamera *node) {
         geo_process_node_and_siblings(node->fnNode.node.children);
         gCurGraphNodeCamera = NULL;
     }
+
+    Vec3s marioPos3s;
+
+    vec3f_to_vec3s(marioPos3s, gMarioState->pos);
+
+    mtxf_mul_vec3s(gMatStack[gMatStackIndex], marioPos3s);
+
+    gMarioScreenX = 2 * (0.5f - marioPos3s[0] / (f32)marioPos3s[2]) * (gCurGraphNodeRoot->width);
+    gMarioScreenY = 2 * (0.5f - marioPos3s[1] / (f32)marioPos3s[2]) * (gCurGraphNodeRoot->height);
+
     gMatStackIndex--;
 }
 

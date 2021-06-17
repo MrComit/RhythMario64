@@ -1220,6 +1220,13 @@
 #define /*0x0F4*/ oBeatTimer          OBJECT_FIELD_S32(0x1B)
 #define /*0x0F8*/ oPrevSongTimer      OBJECT_FIELD_S32(0x1C)
 
+#define /*0x094*/ oShotDelay                  OBJECT_FIELD_S32(0x03)    // overwrites oUnk94
+#define /*0x0BC*/ oMaxShotDelay               OBJECT_FIELD_S32(0x0D)    // overwrites oUnkBC
+#define /*0x1A8*/ oShotSpeed                  OBJECT_FIELD_F32(0x48)    // overwrites oUnk1A8
+
+#define /*0x0FC*/ oBubbaTargetX        OBJECT_FIELD_F32(0x1D)
+#define /*0x100*/ oBubbaTargetY        OBJECT_FIELD_F32(0x1E)
+#define /*0x104*/ oBubbaTargetZ        OBJECT_FIELD_F32(0x1F)
 
 
 #endif // OBJECT_FIELDS_H

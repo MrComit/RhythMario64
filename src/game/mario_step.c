@@ -463,7 +463,8 @@ s32 perform_air_quarter_step(struct MarioState *m, Vec3f intendedPos, u32 stepAr
         }
 
         m->pos[1] = nextPos[1];
-        return AIR_STEP_HIT_WALL;
+        //return AIR_STEP_HIT_WALL;
+        return 0;
     }
 
     //! When the wall is not completely vertical or there is a slight wall
@@ -585,7 +586,7 @@ void apply_vertical_wind(struct MarioState *m) {
     f32 offsetY;
 
     //if (m->action != ACT_GROUND_POUND) {
-        offsetY = m->pos[1] - 2750.0f;
+        offsetY = m->pos[1] - 7500.0f;
 
         if (m->floor->type == SURFACE_VERTICAL_WIND/*  && -3000.0f < offsetY && offsetY < 2000.0f */) {
             if (offsetY >= 0.0f) {

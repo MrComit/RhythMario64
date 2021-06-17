@@ -571,6 +571,8 @@
 #define MODEL_SPIKE_PILLAR                0xF9        // whomp_geo
 #define MODEL_BARRIER                     0xF8
 #define MODEL_NUMBER_DECAL                0xF7
+#define MODEL_SPIKE                       0xF6
+#define MODEL_SPIKE_BAR                   0xF5
 
 
 //0x30 - 0x53 are free
@@ -582,6 +584,7 @@
 #define MODEL_GHOST_KOOPA                 0x35
 #define MODEL_LAVA_SPIRE                  0x36
 #define MODEL_SAWBLADE                    0x37
+#define MODEL_TORPEDO                     0x32
 
 // Menu Models (overwrites Level Geometry IDs)
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON         MODEL_LEVEL_GEOMETRY_03   // main_menu_geo_0001D0
