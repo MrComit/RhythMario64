@@ -51,3 +51,5 @@
 #include "levels/ccm/lava_spire/model.inc.c"
 #include "levels/ccm/lava_spire/collision.inc.c"
 #include "levels/ccm/sawblade/model.inc.c"
+#include "levels/ccm/castle_rock/collision.inc.c"
+#include "levels/ccm/castle_rock/model.inc.c"

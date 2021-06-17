@@ -12,6 +12,31 @@ struct ObjectHitbox sSawbladeHitbox = {
     /* hurtboxHeight:     */ 50,
 };
 
+void bhv_castle_rock_init(void) {
+    o->oAnimState = o->oBehParams2ndByte;
+    if (o->oBehParams2ndByte)
+        o->oAction = 1;
+}
+
+void bhv_castle_rock_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (onScreenLayers[0] > 15) {
+                o->oAction = 1;
+            }
+            o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, 0.2f);
+            break;
+        case 1:
+            if (onScreenLayers[0] > 15) {
+                o->oAction = 0;
+            }
+            o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY - 200.0f, 0.2f);
+            break;
+    }
+}
+
+
+
 void bhv_sawblade_spawner_init(void) {
     u8 i;
     u8 bparam1 = o->oBehParams >> 24;
@@ -24,7 +49,7 @@ void bhv_sawblade_spawner_init(void) {
 
 void bhv_sawblade_spawner_loop(void) {
     u8 bparam1 = o->oBehParams >> 24;;
-    if (o->oDistanceToMario > 8000.0f) {
+    if (o->oDistanceToMario > 10000.0f) {
         return;
     }
 

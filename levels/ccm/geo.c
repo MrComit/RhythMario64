@@ -28,3 +28,4 @@
 #include "levels/ccm/ghost_koopa/geo.inc.c"
 #include "levels/ccm/lava_spire/geo.inc.c"
 #include "levels/ccm/sawblade/geo.inc.c"
+#include "levels/ccm/castle_rock/geo.inc.c"

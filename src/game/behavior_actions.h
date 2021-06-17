@@ -604,6 +604,10 @@ void bhv_sawblade_spawner_init(void);
 void bhv_barrier_loop(void);
 void bhv_gate_loop(void);
 void bhv_gate_init(void);
+void bhv_castle_rock_init(void);
+void bhv_castle_rock_loop(void);
+
+
 
 
 

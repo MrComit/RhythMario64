@@ -104,7 +104,7 @@
         "instGuitar": {
             "release_rate": 208,
             "envelope": "envelopeGuitar",
-            "sound": "31_rarefaction-convolution"
+            "sound": "49_ele_guitar"
         },
         "inst3": {
             "release_rate": 90,
