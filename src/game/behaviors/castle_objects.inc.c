@@ -52,6 +52,10 @@ void bhv_sawblade_spawner_loop(void) {
     if (o->oDistanceToMario > 10000.0f) {
         return;
     }
+    if (bparam1 < 2 && gCurrentCheckpoint > 1)
+        return;
+    if (bparam1 >= 2 && gCurrentCheckpoint <= 1)
+        return;
 
     if(gBulletLauncherIndex[bparam1] >= count_objects_with_behavior_and_bparams(bhvSawbladeSpawner, 0xFF000000, o->oBehParams & 0xFF000000)) {
         gBulletLauncherIndex[bparam1] = 0;
