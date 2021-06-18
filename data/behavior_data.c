@@ -6323,6 +6323,7 @@ const BehaviorScript bhvCastleRock[] = {
     LOAD_COLLISION_DATA(castle_rock_collision),
     SET_FLOAT(oDrawingDistance, 0x6000),
     SET_FLOAT(oCollisionDistance, 0xA00),
+    //SCALE(0, 120),
     CALL_NATIVE(bhv_castle_rock_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_castle_rock_loop),
