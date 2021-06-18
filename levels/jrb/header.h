@@ -69,4 +69,6 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/tipping_platform/collision_header.h"
 
+#include "levels/jrb/torpedo/geo_header.h"
+
 #endif

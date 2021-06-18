@@ -43,3 +43,4 @@
 
 #include "levels/jrb/tipping_platform/model.inc.c"
 #include "levels/jrb/tipping_platform/collision.inc.c"
+#include "levels/jrb/torpedo/model.inc.c"

@@ -392,4 +392,9 @@ extern const Collision whomp_seg6_collision_06020A0C[];
 
 #include "barrier/collision_header.h"
 
+#include "spike/geo_header.h"
+#include "spike/anim_header.h"
+
+#include "spike_bar/geo_header.h"
+
 #endif

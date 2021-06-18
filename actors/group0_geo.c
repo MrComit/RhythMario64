@@ -28,3 +28,5 @@
 #include "whomp/geo.inc.c"
 #include "spike_pillar/geo.inc.c"
 #include "barrier/geo.inc.c"
+#include "spike/geo.inc.c"
+#include "spike_bar/geo.inc.c"

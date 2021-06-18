@@ -562,6 +562,11 @@ extern const BehaviorScript bhvSawblade[];
 extern const BehaviorScript bhvSawbladeSpawner[];
 extern const BehaviorScript bhvBarrier[];
 extern const BehaviorScript bhvCastleRock[];
+extern const BehaviorScript bhvSpike[];
+extern const BehaviorScript bhvSpikeBar[];
+extern const BehaviorScript bhvTorpedo[];
+extern const BehaviorScript bhvTorpedoSpawner[];
+extern const BehaviorScript bhvAngryBubba[];
 
 
 #endif // BEHAVIOR_DATA_H

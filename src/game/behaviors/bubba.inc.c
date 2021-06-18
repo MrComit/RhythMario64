@@ -2,14 +2,14 @@
 
 static struct ObjectHitbox sBubbaHitbox = {
     /* interactType:      */ INTERACT_CLAM_OR_BUBBA,
-    /* downOffset:        */ 0,
-    /* damageOrCoinValue: */ 1,
+    /* downOffset:        */ 100,
+    /* damageOrCoinValue: */ 2,
     /* health:            */ 99,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 300,
-    /* height:            */ 200,
-    /* hurtboxRadius:     */ 300,
-    /* hurtboxHeight:     */ 200,
+    /* radius:            */ 400,
+    /* height:            */ 300,
+    /* hurtboxRadius:     */ 400,
+    /* hurtboxHeight:     */ 300,
 };
 
 void bubba_act_0(void) {
@@ -60,7 +60,7 @@ void bubba_act_1(void) {
             s16 val06 = 10000 - (s16)(20.0f * (find_water_level(o->oPosX, o->oPosZ) - o->oPosY));
             o->oBubbaUnk1AC -= val06;
             o->oMoveAnglePitch = o->oBubbaUnk1AC;
-            o->oBubbaUnkF4 = 40.0f;
+            o->oBubbaUnkF4 = 32.0f;
             obj_compute_vel_from_move_pitch(o->oBubbaUnkF4);
             o->oAnimState = 0;
         } else {
@@ -162,3 +162,95 @@ void bhv_bubba_loop(void) {
         o->oPosY = o->oFloorHeight;
     }
 }
+
+void bhv_angry_bubba_init(void) {
+    obj_set_hitbox(o, &sBubbaHitbox);
+    reset_for_checkpoint(&o->oBeatTimer, &o->oPrevSongTimer, 0, 1, 0);
+}
+
+void angry_bubba_stay_in_place(s32 side) {
+    if(side != 0) {
+        side = -1;
+    } else {
+        side = 1;
+    }
+    o->oPosX = approach_f32_symmetric(o->oPosX, gMarioObject->oPosX + (500.0f * side), 75.0f) + 50.0f*cosf((gGlobalTimer % 0x10000)*0x800);
+    o->oPosY = approach_f32_symmetric(o->oPosY, gMarioObject->oPosY + 750.0f, 75.0f) + 50.0f*sinf((gGlobalTimer % 0x10000)*0x800);
+    o->oPosZ = approach_f32_symmetric(o->oPosZ, gMarioObject->oPosZ + (500.0f * side), 75.0f) + 50.0f*cosf((gGlobalTimer % 0x10000)*0x800);
+    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
+    o->oBubbaTargetX = gMarioObject->oPosX;
+    o->oBubbaTargetY = gMarioObject->oPosY;
+    o->oBubbaTargetZ = gMarioObject->oPosZ;
+}
+
+void bhv_angry_bubba_loop(void) {
+    stay_on_beat(&o->oBeatTimer, &o->oPrevSongTimer);
+
+    if(cur_obj_beat_hit_and_reset(&o->oBeatTimer, 1)) {
+        o->oBubbaTimer++;
+        if(o->oBubbaTimer > 1) {
+            o->oAction++;
+            o->oSubAction = 0;
+            if(o->oAction > 3) {
+                o->oAction = 0;
+            }
+            o->oBubbaTimer = 0;
+        }
+    }
+
+    if(gCheckpointLoaded) {
+        bhv_angry_bubba_init();
+    }
+    if(gMarioObject->oPosZ > -5404.5f || gMarioObject->oPosY > 6000.0f) {
+        switch(o->oAction) {
+            case 0:
+                angry_bubba_stay_in_place(0);
+                break;
+            case 1:
+                if(o->oSubAction == 0) {
+                    o->oPosX = approach_f32_symmetric(o->oPosX, o->oBubbaTargetX, 32.0f);
+                    o->oPosY = approach_f32_symmetric(o->oPosY, o->oBubbaTargetY, 1.0f + absf((o->oPosY - o->oBubbaTargetY) / 7.0f));
+                    o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oBubbaTargetZ, 32.0f);
+                    if(o->oPosX == o->oBubbaTargetX && o->oPosZ == o->oBubbaTargetZ) {
+                        o->oSubAction = 1;
+                    }
+                } else if(o->oSubAction == 1) {
+                    o->oPosX = approach_f32_symmetric(o->oPosX, o->oBubbaTargetX - 500.0f, 32.0f);
+                    o->oPosY = approach_f32_symmetric(o->oPosY, o->oBubbaTargetY + 750.0f, 1.0f + absf((o->oPosY - o->oBubbaTargetY) / 7.0f));
+                    o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oBubbaTargetZ - 500.0f, 32.0f);
+                    if(o->oPosX == o->oBubbaTargetX - 500.0f && o->oPosZ == o->oBubbaTargetZ - 500.0f) {
+                        o->oSubAction = 2;
+                    }
+                } else {
+                    angry_bubba_stay_in_place(1);
+                }
+                break;
+            case 2:
+                angry_bubba_stay_in_place(1);
+                break;
+            case 3:
+                if(o->oSubAction == 0) {
+                    o->oPosX = approach_f32_symmetric(o->oPosX, o->oBubbaTargetX, 32.0f);
+                    o->oPosY = approach_f32_symmetric(o->oPosY, o->oBubbaTargetY, 1.0f + absf((o->oPosY - o->oBubbaTargetY) / 7.0f));
+                    o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oBubbaTargetZ, 32.0f);
+                    if(o->oPosX == o->oBubbaTargetX && o->oPosZ == o->oBubbaTargetZ) {
+                        o->oSubAction = 1;
+                    }
+                } else if(o->oSubAction == 1) {
+                    o->oPosX = approach_f32_symmetric(o->oPosX, o->oBubbaTargetX + 500.0f, 32.0f);
+                    o->oPosY = approach_f32_symmetric(o->oPosY, o->oBubbaTargetY + 750.0f, 1.0f + absf((o->oPosY - o->oBubbaTargetY) / 7.0f));
+                    o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oBubbaTargetZ + 500.0f, 32.0f);
+                    if(o->oPosX == o->oBubbaTargetX - 500.0f && o->oPosZ == o->oBubbaTargetZ - 500.0f) {
+                        o->oSubAction = 2;
+                    }
+                } else {
+                    angry_bubba_stay_in_place(0);
+                }
+                break;
+        }
+    } else {
+        o->oPosY = approach_f32_symmetric(o->oPosY, 7250.0f, 50.0f);
+    }
+    o->oIntangibleTimer = o->oInteractStatus = 0;
+}
+
