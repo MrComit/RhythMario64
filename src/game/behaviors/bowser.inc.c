@@ -1,5 +1,5 @@
 // bowser.c.inc
-
+#include "actors/group2.h"
 void bowser_tail_anchor_act_0(void) {
     struct Object *bowser = o->parentObj;
     cur_obj_become_tangible();

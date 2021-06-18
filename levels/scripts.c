@@ -216,6 +216,8 @@ const LevelScript script_func_global_2[] = {
 };
 
 const LevelScript script_func_global_3[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_BOWSER,                  bowser_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_NEW_BOWSER,              new_bowser_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BLARGG,                  blargg_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BULLY,                   bully_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BULLY_BOSS,              bully_boss_geo),
@@ -300,7 +302,6 @@ const LevelScript script_func_global_12[] = {
 };
 
 const LevelScript script_func_global_13[] = {
-    LOAD_MODEL_FROM_GEO(MODEL_BOWSER,                  bowser_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_BOMB_CHILD_OBJ,   bowser_bomb_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_BOMB,             bowser_bomb_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_SMOKE,            bowser_impact_smoke_geo),

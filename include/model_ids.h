@@ -583,6 +583,7 @@
 #define MODEL_LAVA_SPIRE                  0x36
 #define MODEL_SAWBLADE                    0x37
 #define MODEL_CASTLE_ROCK                 0x38
+#define MODEL_NEW_BOWSER                  0x39
 
 // Menu Models (overwrites Level Geometry IDs)
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON         MODEL_LEVEL_GEOMETRY_03   // main_menu_geo_0001D0
