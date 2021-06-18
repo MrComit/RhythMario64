@@ -15,3 +15,10 @@ UNUSED static const u64 binid_0 = 0;
 #include "blargg/anims/data.inc.c"
 #include "blargg/anims/table.inc.c"
 UNUSED static const u64 binid_1 = 1;
+
+#include "bowser/model.inc.c"
+#include "bowser/anims/data.inc.c"
+#include "bowser/anims/table.inc.c"
+#include "bowser/flames_pos.inc.c"
+
+#include "new_bowser/model.inc.c"

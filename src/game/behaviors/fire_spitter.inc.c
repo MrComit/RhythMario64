@@ -1,7 +1,7 @@
 
 static void fire_spitter_act_idle(void) {
     approach_f32_ptr(&o->header.gfx.scale[0], 0.2f, 0.05f);
-    if (o->oDistanceToMario < 5000.0f && onScreenLayers[1] > 15) {
+    if (o->oDistanceToMario < 3000.0f && onScreenLayers[1] > 15) {
         o->oAction = FIRE_SPITTER_ACT_SPIT_FIRE;
         o->oFireSpitterScaleVel = 0.05f;
     }

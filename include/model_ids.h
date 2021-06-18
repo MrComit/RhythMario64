@@ -584,6 +584,8 @@
 #define MODEL_GHOST_KOOPA                 0x35
 #define MODEL_LAVA_SPIRE                  0x36
 #define MODEL_SAWBLADE                    0x37
+#define MODEL_CASTLE_ROCK                 0x38
+#define MODEL_NEW_BOWSER                  0x39
 #define MODEL_TORPEDO                     0x32
 
 // Menu Models (overwrites Level Geometry IDs)

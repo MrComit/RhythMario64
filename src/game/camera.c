@@ -4952,7 +4952,7 @@ s32 radial_camera_input(struct Camera *c, UNUSED f32 unused) {
             gCameraMovementFlags &= ~CAM_MOVE_ZOOMED_OUT;
             play_sound_cbutton_up();
         } else {
-            set_mode_c_up(c);
+            //set_mode_c_up(c);
         }
     }
 
@@ -5000,12 +5000,12 @@ void handle_c_button_movement(struct Camera *c) {
             gCameraMovementFlags &= ~CAM_MOVE_ZOOMED_OUT;
             play_sound_cbutton_up();
         } else {
-            set_mode_c_up(c);
+            /*set_mode_c_up(c);
             if (sZeroZoomDist > gCameraZoomDist) {
                 sZoomAmount = -gCameraZoomDist;
             } else {
                 sZoomAmount = gCameraZoomDist;
-            }
+            }*/
         }
     }
     if (c->mode != CAMERA_MODE_FIXED) {
@@ -10826,7 +10826,7 @@ u8 sDanceCutsceneIndexTable[][4] = {
 u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
-	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // BBH            | CCM
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 1, 0, 0), // BBH            | CCM
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // CASTLE_INSIDE  | HMC
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SSL            | BOB
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SL             | WDW

@@ -1404,13 +1404,13 @@ void update_mario_inputs(struct MarioState *m) {
 
     debug_print_speed_action_normal(m);
 
-    if (gCameraMovementFlags & CAM_MOVE_C_UP_MODE) {
+    /*if (gCameraMovementFlags & CAM_MOVE_C_UP_MODE) {
         if (m->action & ACT_FLAG_ALLOW_FIRST_PERSON) {
             m->input |= INPUT_FIRST_PERSON;
         } else {
             gCameraMovementFlags &= ~CAM_MOVE_C_UP_MODE;
         }
-    }
+    }*/
 
     if (!(m->input & (INPUT_NONZERO_ANALOG | INPUT_A_PRESSED))) {
         m->input |= INPUT_UNKNOWN_5;

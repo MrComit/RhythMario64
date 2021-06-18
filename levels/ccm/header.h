@@ -67,4 +67,8 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/sawblade/geo_header.h"
 
+#include "levels/ccm/castle_rock/collision_header.h"
+
+#include "levels/ccm/castle_rock/geo_header.h"
+
 #endif

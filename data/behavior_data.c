@@ -6315,6 +6315,21 @@ const BehaviorScript bhvStationaryOrangeNumber[] = {
     END_LOOP(),
 };
 
+
+const BehaviorScript bhvCastleRock[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    SET_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    SET_HOME(),
+    LOAD_COLLISION_DATA(castle_rock_collision),
+    SET_FLOAT(oDrawingDistance, 0x6000),
+    SET_FLOAT(oCollisionDistance, 0xA00),
+    //SCALE(0, 120),
+    CALL_NATIVE(bhv_castle_rock_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_castle_rock_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
 const BehaviorScript bhvSpike[] = {
     BEGIN(OBJ_LIST_PUSHABLE),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_ACTIVE_FROM_AFAR)),
