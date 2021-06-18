@@ -379,6 +379,7 @@ static void make_roll_matrix(Mtx *mtx, s16 angle) {
  */
 
 s32 gMarioScreenX, gMarioScreenY;
+f32 gTorpedoTargetX, gTorpedoTargetY, gTorpedoTargetZ;
 static void geo_process_camera(struct GraphNodeCamera *node) {
     Mat4 cameraTransform;
     Mtx *rollMtx = alloc_display_list(sizeof(*rollMtx));
@@ -405,7 +406,10 @@ static void geo_process_camera(struct GraphNodeCamera *node) {
 
     Vec3s marioPos3s;
 
-    vec3f_to_vec3s(marioPos3s, gMarioState->pos);
+    //vec3f_to_vec3s(marioPos3s, gMarioState->pos);
+    vec3s_set(marioPos3s, gTorpedoTargetX, gTorpedoTargetY, gTorpedoTargetZ);
+
+    marioPos3s[1] += 75;
 
     mtxf_mul_vec3s(gMatStack[gMatStackIndex], marioPos3s);
 

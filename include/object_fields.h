@@ -1227,6 +1227,7 @@
 #define /*0x0FC*/ oBubbaTargetX        OBJECT_FIELD_F32(0x1D)
 #define /*0x100*/ oBubbaTargetY        OBJECT_FIELD_F32(0x1E)
 #define /*0x104*/ oBubbaTargetZ        OBJECT_FIELD_F32(0x1F)
+#define /*0x108*/ oBubbaTimer          OBJECT_FIELD_S32(0x20)
 
 
 #endif // OBJECT_FIELDS_H

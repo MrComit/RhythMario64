@@ -4,9 +4,9 @@ static struct ObjectHitbox sSpikePillarHitbox = {
     /* damageOrCoinValue: */ 1,
     /* health:            */ 0,
     /* numLootCoins:      */ 1,
-    /* radius:            */ 60,
+    /* radius:            */ 100,
     /* height:            */ 600,
-    /* hurtboxRadius:     */ 60,
+    /* hurtboxRadius:     */ 105,
     /* hurtboxHeight:     */ 600,
 };
 
@@ -21,8 +21,8 @@ void bhv_spike_pillar_init(void) {
 }
 
 void bhv_spike_pillar_loop(void) {
-    if(gCheckpointLoaded == 1) {
-        
+    if(gCheckpointLoaded == 1 || o->oTimer < 2) {
+        o->oPosY = o->oHomeY - 625.0f;
     }
     if(gSpikePillarIndex != 0 && gSpikePillarIndex - 1 == o->oBehParams2ndByte) {
         o->oPosY = o->oHomeY;

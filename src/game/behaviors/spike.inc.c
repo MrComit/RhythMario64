@@ -157,10 +157,10 @@ void bhv_spike_update(void) {
 void bhv_spike_bar_update(void) {
     stay_on_beat(&o->oBeatTimer, &o->oPrevSongTimer);
     if(cur_obj_beat_hit_and_reset(&o->oBeatTimer, 1)) {
-        o->oBeatBlockTimer++;
-        if(o->oBeatBlockTimer > 1) {
+        o->oBubbaTimer++;
+        if(o->oBubbaTimer > 1) {
             o->oVelY = 40.0f;
-            o->oBeatBlockTimer = 0;
+            o->oBubbaTimer = 0;
         }
     }
 
