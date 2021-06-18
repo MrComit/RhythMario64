@@ -50,7 +50,7 @@ void scroll_castle_grounds_dl_L3Box_mesh_layer_1_vtx_0() {
 	currentX += deltaX;
 
 }
-void scroll_castle_grounds_dl_L3Box_mesh_layer_1_vtx_4() {
+void scroll_castle_grounds_dl_L3Box_mesh_layer_1_vtx_3() {
 	int i = 0;
 	int count = 57;
 	int width = 64 * 0x20;
@@ -58,7 +58,7 @@ void scroll_castle_grounds_dl_L3Box_mesh_layer_1_vtx_4() {
 
 	static int currentY = 0;
 	int deltaY;
-	Vtx *vertices = segmented_to_virtual(castle_grounds_dl_L3Box_mesh_layer_1_vtx_4);
+	Vtx *vertices = segmented_to_virtual(castle_grounds_dl_L3Box_mesh_layer_1_vtx_3);
 
 	deltaY = (int)(-1.7999999523162842 * 0x20) % height;
 
@@ -75,5 +75,5 @@ void scroll_castle_grounds_dl_L3Box_mesh_layer_1_vtx_4() {
 void scroll_castle_grounds() {
 	scroll_castle_grounds_dl_L1Box_mesh_layer_1_vtx_5();
 	scroll_castle_grounds_dl_L3Box_mesh_layer_1_vtx_0();
-	scroll_castle_grounds_dl_L3Box_mesh_layer_1_vtx_4();
+	scroll_castle_grounds_dl_L3Box_mesh_layer_1_vtx_3();
 }
