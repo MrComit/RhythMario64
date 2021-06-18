@@ -123,6 +123,7 @@ void unload_objects_from_area(UNUSED s32 unused, s32 areaIndex);
 void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo);
 void clear_objects(void);
 void update_objects(UNUSED s32 unused);
+u32 go_to_checkpoint(u32 checkpoint);
 
 // extern s32 gLoadingCheckpoint;
 extern u8 onScreenLayers[CHANNELS_MAX];

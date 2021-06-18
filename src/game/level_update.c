@@ -25,6 +25,8 @@
 #include "seq_ids.h"
 #include "audio/seqplayer.h"
 #include "audio/synthesis.h"
+#include "object_helpers.h"
+#include "include/behavior_data.h"
 #ifdef VERSION_EU
 #include "memory.h"
 #include "eu_translation.h"
@@ -835,12 +837,31 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
 /**
  * If a delayed warp is ready, initiate it.
  */
+
+s32 gDead = 0;
+s32 gIntendedCheckpoint = 0;
+
+struct Rank gRank;
+
+void reset_rank(void) {
+    gRank.deaths = 0;
+    gRank.prevHealth = 0x0880;
+    gRank.damage = 0;
+    gRank.coins = 0;
+    gRank.objective1 = 0;
+    gRank.objective2 = 0;
+    gDead = 0;
+}
+
 void initiate_delayed_warp(void) {
     struct ObjectWarpNode *warpNode;
     s32 destWarpNode;
 
     if (sDelayedWarpOp != WARP_OP_NONE && --sDelayedWarpTimer == 0) {
         reset_dialog_render_state();
+
+        reset_rank();
+        go_to_checkpoint(gIntendedCheckpoint);
 
         if (gDebugLevelSelect && (sDelayedWarpOp & WARP_OP_TRIGGERS_LEVEL_SELECT)) {
             warp_special(-9);
@@ -978,6 +999,14 @@ void basic_update(UNUSED s16 *arg) {
     }
 }
 
+void obj_explode(struct Object *obj, s16 dontDeactivate) {
+    struct Object *explosion;
+    explosion = spawn_object(obj, MODEL_EXPLOSION, bhvExplosion);
+    explosion->oGraphYOffset += 100.0f;
+    if(dontDeactivate == 0)
+        obj->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+}
+
 s32 play_mode_normal(void) {
     if (gCurrDemoInput != NULL) {
         print_intro_text();
@@ -1022,6 +1051,37 @@ s32 play_mode_normal(void) {
             gCameraMovementFlags |= CAM_MOVE_PAUSE_SCREEN;
             set_play_mode(PLAY_MODE_PAUSED);
         }
+    }
+
+    if(gRank.prevHealth > gMarioState->health) {
+        gRank.damage += gRank.prevHealth - gMarioState->health;
+        gRank.prevHealth = gMarioState->health;
+    }
+
+    if(gMarioState->health < 0x100 && gDead == 0) {
+        obj_explode(gMarioObject, 1);
+        set_mario_action(gMarioState, ACT_DISAPPEARED, 0);
+        stop_background_music(sCurrentBackgroundMusicSeqId);
+        gDialogResponse = 0;
+        gDead = 1;
+    }
+    if(gMarioState->health < 0x100 && gDead != 0) {
+        if(gDead == 15) {
+            if(gDialogResponse == 1) {
+                level_trigger_warp(gMarioState, WARP_OP_DEATH);
+                gIntendedCheckpoint = gCurrentCheckpoint; 
+                gDead = 16;
+            } else if(gDialogResponse == 2) {
+                level_trigger_warp(gMarioState, WARP_OP_DEATH);
+                gIntendedCheckpoint = 0;
+                gDead = 16;
+            }
+            create_dialog_box_with_response(0);
+        } else if(gDead < 15) {
+            gDead++;
+        }
+    } else {
+        gDead = 0;
     }
 
     return 0;
@@ -1255,6 +1315,8 @@ s32 init_level(void) {
     seqPlayer->globalSongTimer = gPrevSongTimer = gLastBeatHit = 0;
     gBulletLauncherIndex[0] = gBulletLauncherIndex[1] = gBulletLauncherIndex[2] = gBulletLauncherIndex[3] = 0;
     gSpikePillarIndex = 0;
+
+    reset_rank();
 
     return 1;
 }
