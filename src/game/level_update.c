@@ -379,6 +379,21 @@ void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg
     set_mario_initial_cap_powerup(m);
 }
 
+s32 gDead = 0;
+s32 gIntendedCheckpoint = 0;
+
+struct Rank gRank;
+
+void reset_rank(void) {
+    gRank.deaths = 0;
+    gRank.prevHealth = 0x0880;
+    gRank.damage = 0;
+    gRank.coins = 0;
+    gRank.objective1 = 0;
+    gRank.objective2 = 0;
+    gDead = 0;
+}
+
 void init_mario_after_warp(void) {
     struct ObjectWarpNode *spawnNode = area_get_warp_node(sWarpDest.nodeId);
     u32 marioSpawnType = get_mario_spawn_type(spawnNode->object);
@@ -483,6 +498,9 @@ void warp_area(void) {
         }
 
         init_mario_after_warp();
+
+        // reset_rank();
+        // go_to_checkpoint(gIntendedCheckpoint);
     }
 }
 
@@ -838,30 +856,12 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
  * If a delayed warp is ready, initiate it.
  */
 
-s32 gDead = 0;
-s32 gIntendedCheckpoint = 0;
-
-struct Rank gRank;
-
-void reset_rank(void) {
-    gRank.deaths = 0;
-    gRank.prevHealth = 0x0880;
-    gRank.damage = 0;
-    gRank.coins = 0;
-    gRank.objective1 = 0;
-    gRank.objective2 = 0;
-    gDead = 0;
-}
-
 void initiate_delayed_warp(void) {
     struct ObjectWarpNode *warpNode;
     s32 destWarpNode;
 
     if (sDelayedWarpOp != WARP_OP_NONE && --sDelayedWarpTimer == 0) {
         reset_dialog_render_state();
-
-        reset_rank();
-        go_to_checkpoint(gIntendedCheckpoint);
 
         if (gDebugLevelSelect && (sDelayedWarpOp & WARP_OP_TRIGGERS_LEVEL_SELECT)) {
             warp_special(-9);
@@ -997,6 +997,7 @@ void basic_update(UNUSED s16 *arg) {
     if (gCurrentArea != NULL) {
         update_camera(gCurrentArea->camera);
     }
+
 }
 
 void obj_explode(struct Object *obj, s16 dontDeactivate) {
@@ -1006,6 +1007,8 @@ void obj_explode(struct Object *obj, s16 dontDeactivate) {
     if(dontDeactivate == 0)
         obj->activeFlags = ACTIVE_FLAG_DEACTIVATED;
 }
+
+s32 gLoadingCheckpoint;
 
 s32 play_mode_normal(void) {
     if (gCurrDemoInput != NULL) {
@@ -1063,6 +1066,7 @@ s32 play_mode_normal(void) {
         set_mario_action(gMarioState, ACT_DISAPPEARED, 0);
         stop_background_music(sCurrentBackgroundMusicSeqId);
         gDialogResponse = 0;
+        gRank.deaths++;
         gDead = 1;
     }
     if(gMarioState->health < 0x100 && gDead != 0) {
@@ -1071,10 +1075,12 @@ s32 play_mode_normal(void) {
                 level_trigger_warp(gMarioState, WARP_OP_DEATH);
                 gIntendedCheckpoint = gCurrentCheckpoint; 
                 gDead = 16;
+                gLoadingCheckpoint = 1;
             } else if(gDialogResponse == 2) {
                 level_trigger_warp(gMarioState, WARP_OP_DEATH);
                 gIntendedCheckpoint = 0;
                 gDead = 16;
+                gLoadingCheckpoint = 1;
             }
             create_dialog_box_with_response(0);
         } else if(gDead < 15) {
@@ -1082,6 +1088,11 @@ s32 play_mode_normal(void) {
         }
     } else {
         gDead = 0;
+    }
+
+    if(sCurrentBackgroundMusicSeqId != 0xFF && gLoadingCheckpoint != 0 && gSequencePlayers[0].scriptState.pc[0] >= 0x90 && gSequencePlayers[0].scriptState.pc[0] <= 0x9F) {
+        go_to_checkpoint(gIntendedCheckpoint);
+        gLoadingCheckpoint = 0;
     }
 
     return 0;
