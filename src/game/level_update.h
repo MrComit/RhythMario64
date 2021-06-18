@@ -131,4 +131,15 @@ void basic_update(UNUSED s16 *arg);
 
 extern u8 gSpikePillarIndex;
 
+struct Rank {
+    u16 deaths;
+    u16 damage;
+    u16 prevHealth;
+    u16 coins;
+    u8 objective1;
+    u8 objective2;
+};
+
+extern struct Rank gRank;
+
 #endif // LEVEL_UPDATE_H

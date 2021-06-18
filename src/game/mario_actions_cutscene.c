@@ -432,7 +432,8 @@ s32 act_waiting_for_dialog(struct MarioState *m) {
 s32 act_disappeared(struct MarioState *m) {
     set_mario_animation(m, MARIO_ANIM_A_POSE);
     stop_and_set_height_to_floor(m);
-    m->marioObj->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
+    //m->marioObj->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
+    m->marioObj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
     if (m->actionArg) {
         m->actionArg--;
         if ((m->actionArg & 0xFFFF) == 0) {
@@ -686,7 +687,8 @@ s32 common_death_handler(struct MarioState *m, s32 animation, s32 frameToDeathWa
     }
     m->marioBodyState->eyeState = MARIO_EYES_DEAD;
     stop_and_set_height_to_floor(m);
-    return animFrame;
+    return 0;
+    //return animFrame;
 }
 
 s32 act_standing_death(struct MarioState *m) {

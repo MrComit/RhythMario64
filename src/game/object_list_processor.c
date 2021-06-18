@@ -328,6 +328,7 @@ u32 go_to_checkpoint(u32 checkpoint) {
     gLastBeatHit = 0;
     gBeatHit = 0;
     gSpikePillarIndex = 0;
+
     return totalTimer;
 }
 

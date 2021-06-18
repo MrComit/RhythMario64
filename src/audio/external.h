@@ -69,4 +69,6 @@ struct SPTask *unused_80321460();
 struct SPTask *unused_80321460(void);
 #endif
 
+extern u8 sCurrentBackgroundMusicSeqId;
+
 #endif // AUDIO_EXTERNAL_H
