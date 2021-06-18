@@ -40,6 +40,9 @@ void bhv_castle_rock_loop(void) {
 void bhv_sawblade_spawner_init(void) {
     u8 i;
     u8 bparam1 = o->oBehParams >> 24;
+    if (((o->oBehParams >> 8) & 0xFF) == 1) {
+        return;
+    }
     o->oBehParams2ndByte = gBulletLauncherIndex[bparam1];
     gBulletLauncherIndex[bparam1]++;
     if(gBulletLauncherIndex[bparam1] >= count_objects_with_behavior_and_bparams(bhvSawbladeSpawner, 0xFF000000, o->oBehParams & 0xFF000000)) {
@@ -47,9 +50,30 @@ void bhv_sawblade_spawner_init(void) {
     }
 }
 
+void bhv_sawblade_nogroup_loop(void) {
+    if (o->oDistanceToMario > 5000.0f)
+        return;
+
+    if (gCurrentCheckpoint <= 1)
+        return;
+
+    if (onScreenLayers[2] > 15) {
+        if(o->oAction == 0) {
+            spawn_object(o, MODEL_SAWBLADE, bhvSawblade);
+            o->oAction = 1;
+        }
+    } else {
+        o->oAction = 0;
+    }
+}
+
 void bhv_sawblade_spawner_loop(void) {
     u8 bparam1 = o->oBehParams >> 24;;
     if (o->oDistanceToMario > 10000.0f) {
+        return;
+    }
+    if (((o->oBehParams >> 8) & 0xFF) == 1) {
+        bhv_sawblade_nogroup_loop();
         return;
     }
     if (bparam1 < 2 && gCurrentCheckpoint > 1)
