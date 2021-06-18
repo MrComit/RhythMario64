@@ -40,7 +40,7 @@ s32 check_common_idle_cancels(struct MarioState *m) {
     }
 
     if (m->input & INPUT_FIRST_PERSON) {
-        return set_mario_action(m, ACT_FIRST_PERSON, 0);
+        //return set_mario_action(m, ACT_FIRST_PERSON, 0);
     }
 
     if (m->input & INPUT_NONZERO_ANALOG) {
@@ -494,7 +494,7 @@ s32 act_standing_against_wall(struct MarioState *m) {
     }
 
     if (m->input & INPUT_FIRST_PERSON) {
-        return set_mario_action(m, ACT_FIRST_PERSON, 0);
+        //return set_mario_action(m, ACT_FIRST_PERSON, 0);
     }
 
     if (m->input & INPUT_B_PRESSED) {

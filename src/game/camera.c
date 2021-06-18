@@ -4935,7 +4935,7 @@ s32 radial_camera_input(struct Camera *c, UNUSED f32 unused) {
             gCameraMovementFlags &= ~CAM_MOVE_ZOOMED_OUT;
             play_sound_cbutton_up();
         } else {
-            set_mode_c_up(c);
+            //set_mode_c_up(c);
         }
     }
 
@@ -4983,12 +4983,12 @@ void handle_c_button_movement(struct Camera *c) {
             gCameraMovementFlags &= ~CAM_MOVE_ZOOMED_OUT;
             play_sound_cbutton_up();
         } else {
-            set_mode_c_up(c);
+            /*set_mode_c_up(c);
             if (sZeroZoomDist > gCameraZoomDist) {
                 sZoomAmount = -gCameraZoomDist;
             } else {
                 sZoomAmount = gCameraZoomDist;
-            }
+            }*/
         }
     }
     if (c->mode != CAMERA_MODE_FIXED) {
