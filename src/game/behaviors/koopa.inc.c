@@ -499,7 +499,7 @@ static void koopa_the_quick_act_wait_before_race(void) {
 
     if (o->oKoopaTheQuickInitTextboxCooldown != 0) {
         o->oKoopaTheQuickInitTextboxCooldown -= 1;
-    } else if (cur_obj_can_mario_activate_textbox_2(400.0f, 400.0f)) {
+    } else if (o->oDistanceToMario < 5000.0f && gMarioState->pos[0] > 9300.00f) {
         //! The next action doesn't execute until next frame, giving mario one
         //  frame where he can jump, and thus no longer be ready to speak.
         //  (On J, he has two frames and doing this enables time stop - see
@@ -618,11 +618,11 @@ static void koopa_the_quick_act_race(void) {
                         && (o->oPathedPrevWaypointFlags & WAYPOINT_MASK_00FF) < 28) {
                         // Move faster if mario has already finished the race or
                         // cheated by shooting from cannon
-                        o->oKoopaAgility = 4.0f;
+                        o->oKoopaAgility = 5.0f;
                     } else if (o->oKoopaTheQuickRaceIndex != KOOPA_THE_QUICK_BOB_INDEX) {
-                        o->oKoopaAgility = 4.0f;
+                        o->oKoopaAgility = 5.0f;
                     } else {
-                        o->oKoopaAgility = 4.0f;
+                        o->oKoopaAgility = 5.0f;
                     }
 
                     obj_forward_vel_approach(o->oKoopaAgility * 6.0f * downhillSteepness,

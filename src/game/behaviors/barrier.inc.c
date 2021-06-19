@@ -19,6 +19,9 @@ void bhv_gate_init(void) {
     o->oFC = o->oBehParams >> 24;
     spawn_orange_number_gate(o->oFC, 0, 320, 0, 0, 50);
     o->oFC--;
+    if (gCurrLevelNum == LEVEL_CCM) {
+        o->header.gfx.scale[2] = 1.5f;
+    }
 }
 
 void bhv_gate_loop(void) {
@@ -51,7 +54,81 @@ void bhv_gate_loop(void) {
 
 
 void bhv_c3_barrier_loop(void) {
-
+    struct Object *obj;
+    switch (o->oBehParams2ndByte) {
+        case 0:
+            if (o->oTimer == 0) {
+                o->header.gfx.scale[2] = 0.7f;
+            }
+            if (o->oTimer < 90)
+                break;
+            if (o->oF4 == 0) {
+                o->oPosY = approach_f32(o->oPosY, o->oHomeY, 80.0f, 80.0f);
+                o->oPosZ = approach_f32(o->oPosZ, o->oHomeZ - 8000.0f, 15.0f, 15.0f);
+                if (o->oPosZ == o->oHomeZ - 8000.0f) {
+                    o->oF4 = 1;
+                }
+            }
+            break;
+        case 1:
+            obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 0);
+            if (obj != NULL && obj->oF4 == 1 && o->oF4 == 0) {
+                o->oPosY = approach_f32(o->oPosY, o->oHomeY, 80.0f, 80.0f);
+                o->oPosX = approach_f32(o->oPosX, o->oHomeX + 15900.0f, 20.0f, 20.0f);
+                if (o->oPosX == o->oHomeX + 15900.0f) {
+                    o->oF4 = 1;
+                }
+            }
+            break;
+        case 2:
+            if (gCurrentCheckpoint > 1 && o->oF4 == 0) {
+                o->oPosY = approach_f32(o->oPosY, o->oHomeY, 80.0f, 80.0f);
+                o->oPosX = approach_f32(o->oPosX, o->oHomeX + 11100.0f, 20.0f, 20.0f);
+                if (o->oPosX == o->oHomeX + 11100.0f) {
+                    o->oF4 = 1;
+                }
+            }
+            break;
+        case 3:
+            if (o->oTimer == 0) {
+                o->header.gfx.scale[2] = 0.25f;
+            }
+            obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 2 << 16);
+            if (obj != NULL && obj->oF4 == 1 && o->oF4 == 0) {
+                o->oPosY = approach_f32(o->oPosY, o->oHomeY, 200.0f, 200.0f);
+                o->oPosZ = approach_f32(o->oPosZ, o->oHomeZ - 11475.0f, 30.0f, 30.0f);
+                if (o->oPosZ == o->oHomeZ - 11475.0f) {
+                    o->oF4 = 1;
+                }
+            }
+            break;
+        case 4:
+            if (o->oTimer == 0) {
+                o->header.gfx.scale[2] = 0.25f;
+            }
+            obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 3 << 16);
+            if (obj != NULL && obj->oF4 == 1 && o->oF4 == 0) {
+                o->oPosY = o->oHomeY;
+                o->oPosX = approach_f32(o->oPosX, o->oHomeX + 6975.0f, 30.0f, 30.0f);
+                if (o->oPosX == o->oHomeX + 6975.0f) {
+                    o->oF4 = 1;
+                }
+            }
+            break;
+        case 5:
+            if (o->oTimer == 0) {
+                o->header.gfx.scale[2] = 0.25f;
+            }
+            obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 4 << 16);
+            if (obj != NULL && obj->oF4 == 1 && o->oF4 == 0) {
+                o->oPosY = o->oHomeY;
+                o->oPosZ = approach_f32(o->oPosZ, o->oHomeZ + 12475.0f, 30.0f, 30.0f);
+                if (o->oPosZ == o->oHomeZ + 12475.0f) {
+                    o->oF4 = 1;
+                }
+            }
+            break;
+    }
 }
 
 void bhv_c2_barrier_loop(void) {
@@ -62,6 +139,7 @@ void bhv_c1_barrier_loop(void) {
     switch (o->oBehParams2ndByte) {
         case 0:
             if (gCurrentCheckpoint > 0 && o->oF4 == 0) {
+                o->oPosY = approach_f32(o->oPosY, o->oHomeY, 80.0f, 80.0f);
                 o->oPosX = approach_f32(o->oPosX, o->oHomeX + 18500.0f, 15.0f, 15.0f);
                 if (o->oPosX == o->oHomeX + 18500.0f) {
                     o->oF4 = 1;
@@ -74,6 +152,7 @@ void bhv_c1_barrier_loop(void) {
             }
             struct Object *obj = cur_obj_nearest_object_with_behavior(bhvBarrier);
             if (gCurrentCheckpoint > 0 && obj != NULL && obj->oF4 == 1 && o->oF4 == 0) {
+                o->oPosY = approach_f32(o->oPosY, o->oHomeY, 80.0f, 80.0f);
                 o->oPosZ = approach_f32(o->oPosZ, o->oHomeZ + 19500.0f, 20.0f, 20.0f);
                 if (o->oPosZ == o->oHomeZ + 19500.0f) {
                     o->oF4 = 1;
@@ -85,6 +164,9 @@ void bhv_c1_barrier_loop(void) {
 
 
 void bhv_barrier_loop(void) {
+    if (o->oTimer == 0) {
+        o->oPosY += 10000.0f;
+    }
     switch (gCurrLevelNum) {
         case LEVEL_BOB:
             bhv_c1_barrier_loop();

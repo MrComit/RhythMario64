@@ -449,7 +449,7 @@ void bhv_mario_update(void) {
         seqPlayer->globalSongTimer = go_to_checkpoint(2);
     }
     if (gCurrLevelNum != LEVEL_JRB)
-    get_current_checkpoint();
+        get_current_checkpoint();
 
     //print_text_fmt_int(20, 20, "%d", gLastBeatHit);
 }
