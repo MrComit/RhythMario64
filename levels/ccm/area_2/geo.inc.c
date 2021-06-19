@@ -4,6 +4,7 @@ const GeoLayout ccm_area_2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(1, ccm_dl_Lava_002_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 0, 500, 0, ccm_dl_Lava_003_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 187, 141, -1830, ccm_dl_Record_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
