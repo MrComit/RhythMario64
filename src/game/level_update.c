@@ -352,6 +352,7 @@ void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg
             break;
         case MARIO_SPAWN_FLYING:
             set_mario_action(m, ACT_FLYING, 2);
+            m->health = 0x0880;
             break;
         case MARIO_SPAWN_SWIMMING:
             set_mario_action(m, ACT_WATER_IDLE, 1);
@@ -1073,6 +1074,10 @@ s32 play_mode_normal(void) {
     }
     if(gMarioState->health < 0x100 && gDead != 0) {
         if(gDead == 15) {
+            if(gCurrAreaIndex == 1)
+                get_current_checkpoint();
+            else
+                gCurrentCheckpoint = 0;
             if(gDialogResponse == 1) {
                 level_trigger_warp(gMarioState, WARP_OP_DEATH);
                 gIntendedCheckpoint = gCurrentCheckpoint; 
