@@ -37,6 +37,7 @@ const LevelScript level_ccm_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_LAVA_SPIRE, lava_spire_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SAWBLADE, sawblade_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_ROCK, castle_rock_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_DISCO_BALL, disco_ball_geo), 
 
 	AREA(1, ccm_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -159,6 +160,7 @@ const LevelScript level_ccm_entry[] = {
 		WARP_NODE(0xF1, LEVEL_CCM, 0x01, 0x0B, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NEW_BOWSER, 187, 0, -2066, 0, 0, 0, 0x00000000, bhvBowser),
 		OBJECT(MODEL_NONE, 203, 300, -173, 0, -180, 0, 0x000B0000, bhvAirborneDeathWarp),
+		OBJECT(MODEL_DISCO_BALL, 174, 661, -1923, 0, 0, 0, 0x00000000, bhvDiscoBall),
 		MARIO_POS(0x01, -180, 203, 300, 27),
 		OBJECT(MODEL_NONE, 203, 300, 27, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
 		TERRAIN(ccm_area_2_collision),

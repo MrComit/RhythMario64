@@ -973,3 +973,5 @@ void obj_spit_fire(s16 relativePosX, s16 relativePosY, s16 relativePosZ, f32 sca
 #include "behaviors/barrier.inc.c"
 #include "behaviors/spike.inc.c"
 #include "behaviors/torpedo.inc.c"
+#include "behaviors/boss_objects.inc.c"
+

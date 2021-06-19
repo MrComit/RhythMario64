@@ -29,3 +29,4 @@
 #include "levels/ccm/lava_spire/geo.inc.c"
 #include "levels/ccm/sawblade/geo.inc.c"
 #include "levels/ccm/castle_rock/geo.inc.c"
+#include "levels/ccm/disco_ball/geo.inc.c"

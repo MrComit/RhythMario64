@@ -572,6 +572,7 @@ void bhv_torpedo_spawner_init(void);
 void bhv_torpedo_spawner_update(void);
 void bhv_angry_bubba_init(void);
 void bhv_angry_bubba_loop(void);
+void bhv_disco_loop(void);
 
 Gfx *geo_move_mario_part_from_parent(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 
@@ -614,7 +615,8 @@ void bhv_gate_loop(void);
 void bhv_gate_init(void);
 void bhv_castle_rock_init(void);
 void bhv_castle_rock_loop(void);
-
+void bhv_disco_lock_loop(void);
+void bhv_disco_switch_loop(void);
 
 
 
