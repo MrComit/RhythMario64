@@ -396,6 +396,9 @@ void reset_rank(void) {
 
 void init_mario_after_warp(void) {
     struct ObjectWarpNode *spawnNode = area_get_warp_node(sWarpDest.nodeId);
+    if(gIntendedCheckpoint != 0) {
+        spawnNode = area_get_warp_node(0xA + gIntendedCheckpoint);
+    }
     u32 marioSpawnType = get_mario_spawn_type(spawnNode->object);
 
     if (gMarioState->action != ACT_UNINITIALIZED) {
