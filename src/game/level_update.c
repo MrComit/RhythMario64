@@ -1074,9 +1074,7 @@ s32 play_mode_normal(void) {
     }
     if(gMarioState->health < 0x100 && gDead != 0) {
         if(gDead == 15) {
-            if(gCurrAreaIndex == 1)
-                get_current_checkpoint();
-            else
+            if(gCurrAreaIndex != 1)
                 gCurrentCheckpoint = 0;
             if(gDialogResponse == 1) {
                 level_trigger_warp(gMarioState, WARP_OP_DEATH);
