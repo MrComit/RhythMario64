@@ -51,7 +51,7 @@ void beh_explode_object(struct Object *obj, s16 noDamage) {
 
 void bhv_disco_lock_loop(void) {
     struct Object *obj = cur_obj_nearest_object_with_behavior(bhvDiscoBullet);
-    struct Object *obj2 = cur_obj_nearest_object_with_behavior(bhvDiscoLock);
+    struct Object *obj2 = cur_obj_nearest_object_with_behavior(bhvDiscoBall);
     if (obj2 == NULL) {
         o->activeFlags = 0;
         return;
@@ -62,9 +62,9 @@ void bhv_disco_lock_loop(void) {
     if (dist_between_objects(o, obj) < 400.0f) {
         obj->activeFlags = 0;
         obj = cur_obj_nearest_object_with_behavior(bhvBowser);
-        obj->o104 = 0;
+        //obj->o104 = 0;
         obj2->oF4++;
-        obj->oAction = 4 + obj2->oF4;
+        //obj->oAction = 4 + obj2->oF4;
         beh_explode_object(o, 1);
     }
 }
@@ -78,13 +78,14 @@ void bhv_disco_loop(void) {
     }
     switch (o->oAction) {
         case 0:
+            o->oFaceAngleYaw += 0x200;
             if (o->oF4 >= 3) {
                 o->oAction = 2;
                 //o->oPosZ = obj->oPosZ;
             }
             break;
         case 1:
-            o->oPosY = approach_f32_asymptotic(o->oPosY, 0.0f, 0.6f);
+            o->oPosY = approach_f32(o->oPosY, 0.0f, 40.0f, 40.0f);
             /*if (o->oPosY == 0.0f) {
                 beh_explode_object(o, 1);
                 obj->oBehParams2ndByte = 1;
