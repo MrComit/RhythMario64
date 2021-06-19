@@ -448,7 +448,7 @@ void bhv_mario_update(void) {
     if(gPlayer1Controller->buttonPressed & L_TRIG) {
         seqPlayer->globalSongTimer = go_to_checkpoint(2);
     }
-    if (gCurrAreaIndex != 1) {
+    if (gCurrAreaIndex == 1) {
         get_current_checkpoint();
     }
 
