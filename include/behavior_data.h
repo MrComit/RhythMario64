@@ -567,6 +567,7 @@ extern const BehaviorScript bhvSpikeBar[];
 extern const BehaviorScript bhvTorpedo[];
 extern const BehaviorScript bhvTorpedoSpawner[];
 extern const BehaviorScript bhvAngryBubba[];
+extern const BehaviorScript bhvEgadd[];
 
 
 #endif // BEHAVIOR_DATA_H

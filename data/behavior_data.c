@@ -6379,3 +6379,15 @@ const BehaviorScript bhvAngryBubba[] = {
         CALL_NATIVE(bhv_angry_bubba_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvEgadd[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, egadd_anims),
+    DROP_TO_FLOOR(),
+    ANIMATE(0),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+    END_LOOP(),
+};

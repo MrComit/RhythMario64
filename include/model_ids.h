@@ -573,6 +573,7 @@
 #define MODEL_NUMBER_DECAL                0xF7
 #define MODEL_SPIKE                       0xF6
 #define MODEL_SPIKE_BAR                   0xF5
+#define MODEL_EGADD                       0xF4
 
 
 //0x30 - 0x53 are free

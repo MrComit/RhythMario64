@@ -51,3 +51,6 @@
 #include "spike/anims/data.inc.c"
 #include "spike/anims/table.inc.c"
 #include "spike_bar/model.inc.c"
+#include "egadd/model.inc.c"
+#include "egadd/anims/data.inc.c"
+#include "egadd/anims/table.inc.c"

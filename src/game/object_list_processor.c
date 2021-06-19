@@ -445,11 +445,17 @@ void bhv_mario_update(void) {
     }
 
     gCheckpointLoaded = 0;
-    if(gPlayer1Controller->buttonPressed & L_TRIG) {
-        seqPlayer->globalSongTimer = go_to_checkpoint(2);
-    }
+    // if(gPlayer1Controller->buttonPressed & L_TRIG) {
+    //     seqPlayer->globalSongTimer = go_to_checkpoint(2);
+    // }
     if (gCurrAreaIndex == 1) {
         get_current_checkpoint();
+    }
+
+    if(seqPlayer->scriptState.pc[-1] == 0xFF && seqPlayer->scriptState.pc[-2] == 0xFF) {
+        if(gMarioState->action != ACT_STAR_DANCE_EXIT) {
+            set_mario_action(gMarioState, ACT_STAR_DANCE_EXIT, 0);
+        }
     }
 
     //print_text_fmt_int(20, 20, "%d", gLastBeatHit);
