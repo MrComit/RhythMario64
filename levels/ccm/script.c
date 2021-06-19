@@ -163,7 +163,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_NONE, 203, 300, 27, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
 		TERRAIN(ccm_area_2_collision),
 		MACRO_OBJECTS(ccm_area_2_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_CASTLE),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_BOSS),
 		TERRAIN_TYPE(TERRAIN_STONE),
 	END_AREA(),
 
