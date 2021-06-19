@@ -83,8 +83,8 @@ void bhv_c3_barrier_loop(void) {
         case 2:
             if (gCurrentCheckpoint > 1 && o->oF4 == 0) {
                 o->oPosY = approach_f32(o->oPosY, o->oHomeY, 80.0f, 80.0f);
-                o->oPosX = approach_f32(o->oPosX, o->oHomeX + 11300.0f, 20.0f, 20.0f);
-                if (o->oPosX == o->oHomeX + 11300.0f) {
+                o->oPosX = approach_f32(o->oPosX, o->oHomeX + 11100.0f, 20.0f, 20.0f);
+                if (o->oPosX == o->oHomeX + 11100.0f) {
                     o->oF4 = 1;
                 }
             }

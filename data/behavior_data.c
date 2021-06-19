@@ -6114,6 +6114,7 @@ const BehaviorScript bhvGate[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(gate_collision),
+    SET_FLOAT(oDrawingDistance, 0x6000),
     SET_FLOAT(oCollisionDistance, 0x4000),
     SET_HOME(),
     SET_INT(oOpacity, 255),

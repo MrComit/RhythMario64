@@ -8,7 +8,7 @@ const GeoLayout ccm_area_1_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(1, -497, 310, -1717, ccm_dl_Castle_002_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 11436, 2704, -7253, ccm_dl_Castle_004_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 51, 2723, -1717, ccm_dl_Castle_005_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 2095, 2646, -1717, ccm_dl_Castle_006_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 2264, 2646, -1717, ccm_dl_Castle_006_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 1131, 2760, -3149, ccm_dl_Castle_007_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -914, 2760, -143, ccm_dl_Castle_008_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 10774, 2723, -2982, ccm_dl_Castle_009_mesh_layer_1),
