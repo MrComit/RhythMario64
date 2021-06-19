@@ -492,4 +492,15 @@
 
 
 
+#define TEXT_COMPLETION   _("Completion Bonus:")
+#define TEXT_DAMAGE       _("Damage:")
+#define TEXT_DEATHS       _("Deaths:")
+#define TEXT_COINS        _("Coins:")
+#define TEXT_OBJ_1        _("Objective 1:")
+#define TEXT_OBJ_2        _("Objective 2:")
+#define TEXT_COMPLETED    _("COMPLETED")
+#define TEXT_FAILED       _("FAILED")
+#define TEXT_TOTAL_POINTS _("Total Points:")
+#define TEXT_RANK         _("Rank:")
+
 #endif // TEXT_STRINGS_H

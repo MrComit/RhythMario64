@@ -3206,3 +3206,366 @@ void handle_objectives(void) {
             break;
     }
 }
+
+Lights1 rank_checker_layer1_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
+
+Gfx rank_rankcheckerboard_rgba16_aligner[] = {gsSPEndDisplayList()};
+u8 rank_rankcheckerboard_rgba16[] = {
+	0x04, 0xbf, 0x04, 0xbf, 0x04, 0xbf, 0x04, 0xbf, 
+	0x01, 0x7f, 0x01, 0x7f, 0x01, 0x7f, 0x01, 0x7f, 
+	0x04, 0xbf, 0x04, 0xbf, 0x04, 0xbf, 0x04, 0xbf, 
+	0x01, 0x7f, 0x01, 0x7f, 0x01, 0x7f, 0x01, 0x7f, 
+	0x04, 0xbf, 0x04, 0xbf, 0x04, 0xbf, 0x04, 0xbf, 
+	0x01, 0x7f, 0x01, 0x7f, 0x01, 0x7f, 0x01, 0x7f, 
+	0x04, 0xbf, 0x04, 0xbf, 0x04, 0xbf, 0x04, 0xbf, 
+	0x01, 0x7f, 0x01, 0x7f, 0x01, 0x7f, 0x01, 0x7f, 
+	0x01, 0x7f, 0x01, 0x7f, 0x01, 0x7f, 0x01, 0x7f, 
+	0x04, 0xbf, 0x04, 0xbf, 0x04, 0xbf, 0x04, 0xbf, 
+	0x01, 0x7f, 0x01, 0x7f, 0x01, 0x7f, 0x01, 0x7f, 
+	0x04, 0xbf, 0x04, 0xbf, 0x04, 0xbf, 0x04, 0xbf, 
+	0x01, 0x7f, 0x01, 0x7f, 0x01, 0x7f, 0x01, 0x7f, 
+	0x04, 0xbf, 0x04, 0xbf, 0x04, 0xbf, 0x04, 0xbf, 
+	0x01, 0x7f, 0x01, 0x7f, 0x01, 0x7f, 0x01, 0x7f, 
+	0x04, 0xbf, 0x04, 0xbf, 0x04, 0xbf, 0x04, 0xbf, 
+	
+};
+
+Vtx rank_screen_mesh_vtx_0[24] = {
+	{{{120, 16, 0},0, {-640, 768},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{208, 16, 0},0, {768, 768},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{208, 104, 0},0, {768, -640},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{120, 104, 0},0, {-640, -640},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{120, 104, 0},0, {-512, 768},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{208, 104, 0},0, {896, 768},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{208, 192, 0},0, {896, -640},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{120, 192, 0},0, {-512, -640},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{32, 104, 0},0, {-640, 768},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{120, 104, 0},0, {768, 768},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{120, 192, 0},0, {768, -640},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{32, 192, 0},0, {-640, -640},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{32, 16, 0},0, {-512, 768},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{120, 16, 0},0, {896, 768},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{120, 104, 0},0, {896, -640},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{32, 104, 0},0, {-512, -640},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{208, 16, 0},0, {-512, 768},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{288, 16, 0},0, {768, 768},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{288, 104, 0},0, {768, -640},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{208, 104, 0},0, {-512, -640},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{208, 104, 0},0, {-384, 768},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{288, 104, 0},0, {896, 768},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{288, 192, 0},0, {896, -640},{0xFF, 0xFF, 0xFF, 0xBF}}},
+	{{{208, 192, 0},0, {-384, -640},{0xFF, 0xFF, 0xFF, 0xBF}}},
+};
+
+Gfx rank_screen_mesh_tri_0[] = {
+	gsSPVertex(rank_screen_mesh_vtx_0 + 0, 16, 0),
+	gsSP1Triangle(0, 1, 2, 0),
+	gsSP1Triangle(0, 2, 3, 0),
+	gsSP1Triangle(4, 5, 6, 0),
+	gsSP1Triangle(4, 6, 7, 0),
+	gsSP1Triangle(8, 9, 10, 0),
+	gsSP1Triangle(8, 10, 11, 0),
+	gsSP1Triangle(12, 13, 14, 0),
+	gsSP1Triangle(12, 14, 15, 0),
+	gsSPVertex(rank_screen_mesh_vtx_0 + 16, 8, 0),
+	gsSP1Triangle(0, 1, 2, 0),
+	gsSP1Triangle(0, 2, 3, 0),
+	gsSP1Triangle(4, 5, 6, 0),
+	gsSP1Triangle(4, 6, 7, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx rank_screen_mesh_vtx_1[24] = {
+	{{{288, 200, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{32, 200, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{32, 192, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{288, 192, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{288, 16, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{32, 16, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{32, 8, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{288, 8, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{24, 16, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{26, 10, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{32, 8, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{32, 16, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{24, 192, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{32, 192, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{32, 200, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{26, 198, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{296, 192, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{294, 198, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{288, 200, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{288, 192, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{296, 16, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{288, 16, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{288, 8, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+	{{{294, 10, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xBF}}},
+};
+
+Gfx rank_screen_mesh_tri_1[] = {
+	gsSPVertex(rank_screen_mesh_vtx_1 + 0, 16, 0),
+	gsSP1Triangle(0, 1, 2, 0),
+	gsSP1Triangle(0, 2, 3, 0),
+	gsSP1Triangle(4, 5, 6, 0),
+	gsSP1Triangle(4, 6, 7, 0),
+	gsSP1Triangle(8, 9, 10, 0),
+	gsSP1Triangle(8, 10, 11, 0),
+	gsSP1Triangle(12, 8, 11, 0),
+	gsSP1Triangle(12, 11, 13, 0),
+	gsSP1Triangle(14, 12, 13, 0),
+	gsSP1Triangle(14, 15, 12, 0),
+	gsSPVertex(rank_screen_mesh_vtx_1 + 16, 8, 0),
+	gsSP1Triangle(0, 1, 2, 0),
+	gsSP1Triangle(0, 2, 3, 0),
+	gsSP1Triangle(3, 4, 0, 0),
+	gsSP1Triangle(3, 5, 4, 0),
+	gsSP1Triangle(6, 4, 5, 0),
+	gsSP1Triangle(6, 7, 4, 0),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_rank_checker_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, SHADE, 0, 0, 0, TEXEL0, 0, 0, 0, SHADE),
+	gsSPClearGeometryMode(G_LIGHTING),
+	gsDPSetTextureFilter(G_TF_POINT),
+	gsDPSetRenderMode(G_RM_ZB_XLU_SURF, G_RM_ZB_XLU_SURF2),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPTileSync(),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, rank_rankcheckerboard_rgba16),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 3, 0, G_TX_WRAP | G_TX_NOMIRROR, 3, 0),
+	gsDPLoadSync(),
+	gsDPLoadBlock(7, 0, 0, 63, 1024),
+	gsDPPipeSync(),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 3, 0, G_TX_WRAP | G_TX_NOMIRROR, 3, 0),
+	gsDPSetTileSize(0, 0, 0, 28, 28),
+	gsSPSetLights1(rank_checker_layer1_lights),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_rank_checker_layer1[] = {
+	gsDPPipeSync(),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsDPSetTextureFilter(G_TF_BILERP),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_rank_black_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_rank_black_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsSPEndDisplayList(),
+};
+
+Gfx rank_screen_mesh[] = {
+	gsSPDisplayList(mat_rank_checker_layer1),
+	gsSPDisplayList(rank_screen_mesh_tri_0),
+	gsSPDisplayList(mat_revert_rank_checker_layer1),
+	gsSPDisplayList(mat_rank_black_layer1),
+	gsSPDisplayList(rank_screen_mesh_tri_1),
+	gsSPDisplayList(mat_revert_rank_black_layer1),
+	gsDPPipeSync(),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPClearGeometryMode(G_TEXTURE_GEN),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 0),
+	gsSPEndDisplayList(),
+};
+
+
+u8 textCompletion[] = { TEXT_COMPLETION };
+u8 textDamage[] = { TEXT_DAMAGE };
+u8 textDeaths[] = { TEXT_DEATHS };
+u8 textCoins[] = { TEXT_COINS };
+u8 textObj1[] = { TEXT_OBJ_1 };
+u8 textObj2[] = { TEXT_OBJ_2 };
+u8 textCompleted[] = { TEXT_COMPLETED };
+u8 textFailed[] = { TEXT_FAILED };
+u8 textTotalPoints[] = { TEXT_TOTAL_POINTS };
+u8 textRank[] = { TEXT_RANK };
+
+u8 numberCompletion[8];
+u8 numberDamage[8];
+u8 numberDeaths[8];
+u8 deathPoints[8];
+u8 numberCoins[8];
+u8 numberTotalPoints[8];
+u8 numberRank[8];
+
+void print_epic_number(u8 *str, s32 value, u8 appendNegative) {
+    u8 i;
+    for(i = 0; i < 8; i++) {
+        str[i] = 0;
+    }
+    sprintf(str, "%d", value);
+    for(i = 0; i < 8; i++) {
+        if(str[i] >= 0x30 && str[i] < 0x3A) {
+            str[i] -= 0x30;
+        } else if (str[i] < 0x30) {
+            str[i] = 0xFF;
+            i = 8;
+        }
+    }
+    if(appendNegative && value > 0) {
+        for(i = 8; i > 0; i--) {
+            str[i] = str[i - 1];
+        }
+        str[0] = 0x9F; 
+    }
+}
+
+#define WHITE 0
+#define RED 1
+#define GREEN 2
+
+s32 determine_text_color(s32 value, s32 negative) {
+    if(value > 0) {
+        if(negative) {
+            return RED;
+        } else {
+            return GREEN;
+        }
+    } else {
+        return WHITE;
+    }
+}
+
+void print_rank_string(s16 x, s16 y, const u8 *str, u8 color) {
+    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+    print_generic_string(x - 1, y - 1, str);
+    switch(color) {
+        case WHITE:
+            gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+            break;
+        case RED:
+            gDPSetEnvColor(gDisplayListHead++, 240, 0, 0, 255);
+            break;
+        case GREEN:
+            gDPSetEnvColor(gDisplayListHead++, 0, 240, 0, 255);
+            break;
+    }
+    print_generic_string(x, y, str);
+}
+
+u8 rank_s[] = "S";
+u8 rank_a[] = "A";
+u8 rank_b[] = "B";
+u8 rank_c[] = "C";
+u8 rank_d[] = "D";
+u8 rank_f[] = "F";
+
+void render_rank_screen(void) {
+    u8 i;
+    u8 negative = 0;
+    s32 totalPoints;
+    u8 color;
+    u8 *rankText;
+    s32 objectives = save_file_get_objectives();
+    
+    create_dl_ortho_matrix();
+
+    gSPDisplayList(gDisplayListHead++, &rank_screen_mesh);
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+
+    print_rank_string(40, 175, textCompletion, WHITE);
+    print_epic_number(&numberCompletion, COMPLETION_BONUS, 0);
+    print_rank_string(140, 175, numberCompletion, GREEN);
+
+    print_rank_string(40, 155, textDamage, WHITE);
+    if(gRankTimer >= 20) {
+        color = determine_text_color(gRank.damage, 1);
+        print_epic_number(&numberDamage, gRank.damage / 9.6, 1);
+        print_rank_string(140, 155, numberDamage, color);
+    }
+    print_rank_string(40, 135, textDeaths, WHITE);
+    if(gRankTimer >= 40) {
+        color = determine_text_color(gRank.deaths, 1);
+        print_epic_number(&numberDeaths, gRank.deaths, 0);
+        print_rank_string(140, 135, numberDeaths, color);
+        
+        if(gRank.deaths > 0) {
+            print_epic_number(&deathPoints, gRank.deaths*50, 1);
+            print_rank_string(180, 135, deathPoints, RED);
+        }
+    }
+
+    print_rank_string(40, 115, textCoins, WHITE);
+    if(gRankTimer >= 60) {
+        color = determine_text_color(gMarioState->numCoins, 0);
+        print_epic_number(&numberCoins, gMarioState->numCoins*15, 0);
+        print_rank_string(140, 115, numberCoins, color);
+    }
+
+    print_rank_string(40, 95, textTotalPoints, WHITE);
+    totalPoints = gRank.totalPoints;
+    if(totalPoints < 0) {
+        totalPoints = 0 - totalPoints;
+        negative = 1;
+    }
+    if(gRankTimer >= 80) {
+        color = determine_text_color(totalPoints, negative);
+        print_epic_number(&numberTotalPoints, totalPoints, negative);
+        print_rank_string(140, 95, numberTotalPoints, color);
+    }
+
+
+
+    print_rank_string(40, 60, textObj1, WHITE);
+    if(gRankTimer >= 100) {
+        if(((objectives >> ((gCurrCourseNum - 1)*2)) & 0x1) != 0) {
+            print_rank_string(140, 60, textCompleted, GREEN);
+        } else {
+            print_rank_string(140, 60, textFailed, RED);
+        }
+    }
+    print_rank_string(40, 40, textObj2, WHITE);
+    if(gRankTimer >= 120) {
+        if(((objectives >> (((gCurrCourseNum - 1)*2) + 1)) & 0x1) != 0) {
+            print_rank_string(140, 40, textCompleted, GREEN);
+        } else {
+            print_rank_string(140, 40, textFailed, RED);
+        }
+    }
+
+    print_rank_string(40, 20, textRank, WHITE);
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+
+    switch(gRank.rank) {
+        case RANK_S:
+            rankText = rank_s;
+            break;
+        case RANK_A:
+            rankText = rank_a;
+            break;
+        case RANK_B:
+            rankText = rank_b;
+            break;
+        case RANK_C:
+            rankText = rank_c;
+            break;
+        case RANK_D:
+            rankText = rank_d;
+            break;
+        case RANK_F:
+            rankText = rank_f;
+            break;
+    }
+
+    if(gRankTimer >= 160) {
+        print_text(140, 20, rankText);
+    }
+
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}

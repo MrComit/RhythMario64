@@ -130,16 +130,27 @@ s32 lvl_play_the_end_screen_sound(UNUSED s16 arg0, UNUSED s32 arg1);
 void basic_update(UNUSED s16 *arg);
 
 extern u8 gSpikePillarIndex;
+extern s32 gRankTimer;
 
 struct Rank {
     u16 deaths;
     u16 damage;
     u16 prevHealth;
-    u16 coins;
     u8 objective1;
     u8 objective2;
+    u8 rank;
+    s32 totalPoints;
 };
 
 extern struct Rank gRank;
+
+#define RANK_S 0
+#define RANK_A 1
+#define RANK_B 2
+#define RANK_C 3
+#define RANK_D 4
+#define RANK_F 5
+
+#define COMPLETION_BONUS 2000
 
 #endif // LEVEL_UPDATE_H

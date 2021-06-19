@@ -1,0 +1,11 @@
+extern Lights1 rank_checker_layer1_lights;
+extern u8 rank_rankcheckerboard_rgba16[];
+extern Vtx rank_screen_mesh_vtx_0[24];
+extern Gfx rank_screen_mesh_tri_0[];
+extern Vtx rank_screen_mesh_vtx_1[24];
+extern Gfx rank_screen_mesh_tri_1[];
+extern Gfx mat_rank_checker_layer1[];
+extern Gfx mat_revert_rank_checker_layer1[];
+extern Gfx mat_rank_black_layer1[];
+extern Gfx mat_revert_rank_black_layer1[];
+extern Gfx rank_screen_mesh[];

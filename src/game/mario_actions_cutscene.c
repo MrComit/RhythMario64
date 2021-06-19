@@ -592,11 +592,12 @@ s32 act_debug_free_move(struct MarioState *m) {
 
 void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
     s32 dialogID;
+    u32 sound;
     if (m->actionState == 0) {
         switch (++m->actionTimer) {
             case 1:
                 spawn_object(m->marioObj, MODEL_STAR, bhvCelebrationStar);
-                disable_background_sound();
+                //disable_background_sound();
                 if (m->actionArg & 1) {
                     play_course_clear();
                 } else {
@@ -613,30 +614,84 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
                 break;
 
             case 80:
-                if ((m->actionArg & 1) == 0) {
-                    level_trigger_warp(m, WARP_OP_STAR_EXIT);
-                } else {
-                    enable_time_stop();
-                    create_dialog_box_with_response(gLastCompletedStarNum == 7 ? DIALOG_013 : DIALOG_014);
-                    m->actionState = 1;
-                }
+                // if ((m->actionArg & 1) == 0) {
+                //     level_trigger_warp(m, WARP_OP_STAR_EXIT);
+                // } else {
+                //     enable_time_stop();
+                //     create_dialog_box_with_response(gLastCompletedStarNum == 7 ? DIALOG_013 : DIALOG_014);
+                //     m->actionState = 1;
+                // }
+                enable_time_stop();
+                m->actionState = 1;
+                gRankTimer = 0;
                 break;
         }
-    } else if (m->actionState == 1 && gDialogResponse) {
-        if (gDialogResponse == 1) {
-            save_file_do_save(gCurrSaveFileNum - 1);
+    } else if (m->actionState == 1 /*&& gDialogResponse*/) {
+        // if (gDialogResponse == 1) {
+        //     save_file_do_save(gCurrSaveFileNum - 1);
+        // }
+        // m->actionState = 2;
+        gRankTimer++;
+        if(gPlayer1Controller->buttonPressed & A_BUTTON) {
+            u8 i;
+            for(i = 0; i < 6; i++) {
+                if(gRankTimer < i*20) {
+                    gRankTimer = i*20;
+                    i = 6;
+                }
+            }
         }
-        m->actionState = 2;
-    } else if (m->actionState == 2 && is_anim_at_end(m)) {
+        if(gRankTimer <= 120 && gRankTimer % 20 == 0) {
+            play_sound(SOUND_OBJ_POUNDING1_HIGHPRIO, gGlobalSoundSource);
+        }
+        if(gRankTimer == 159) {
+            switch(gRank.rank) {
+                case RANK_S:
+                    sound = SOUND_MARIO_HERE_WE_GO;
+                    break;
+                case RANK_A:
+                    sound = SOUND_MARIO_YAHOO;
+                    break;
+                case RANK_B:
+                    sound = SOUND_MARIO_YAHOO_WAHA_YIPPEE + 0x40000;
+                    break;
+                case RANK_C:
+                    sound = SOUND_MARIO_HAHA;
+                    break;
+                case RANK_D:
+                    sound = SOUND_MARIO_WAAAOOOW;
+                    break;
+                case RANK_F:
+                    sound = SOUND_MARIO_MAMA_MIA;
+                    break;
+            }
+            play_sound(sound, gGlobalSoundSource);
+        }
+        if(gRankTimer > 160) {
+            gRankTimer = 160;
+            if(gPlayer1Controller->buttonPressed & A_BUTTON) {
+                m->actionState = 2;
+            }
+        }
+    } else if (m->actionState >= 2 && is_anim_at_end(m)) {
         disable_time_stop();
         enable_background_sound();
-        dialogID = get_star_collection_dialog(m);
-        if (dialogID != 0) {
-            // look up for dialog
-            set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, dialogID);
-        } else {
-            set_mario_action(m, isInWater ? ACT_WATER_IDLE : ACT_IDLE, 0);
+        if(m->actionState == 2) {
+            gSaveFileModified = TRUE;
+            if(gRank.rank < save_file_get_rank(gCurrCourseNum - 1)) {
+                save_file_set_rank(gCurrCourseNum - 1, gRank.rank);
+            }
+            save_file_do_save(gCurrSaveFileNum - 1);
+            level_trigger_warp(m, WARP_OP_STAR_EXIT);
+            m->actionState = 3;
         }
+        // dialogID = get_star_collection_dialog(m);
+        // if (dialogID != 0) {
+        //     // look up for dialog
+        //     set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, dialogID);
+        // } else {
+        //     set_mario_action(m, isInWater ? ACT_WATER_IDLE : ACT_IDLE, 0);
+        // }
     }
 }
 

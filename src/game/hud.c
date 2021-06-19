@@ -1023,5 +1023,8 @@ void render_hud(void) {
         // }
         // print_text_fmt_int(40, 40, "%d", x);
         // print_text_fmt_int(40, 20, "%d", y);
+        
+        if(gRankTimer > 0)
+            render_rank_screen();
     }
 }
