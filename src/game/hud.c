@@ -957,6 +957,41 @@ Gfx target_rect_mesh[] = {
 	gsSPEndDisplayList(),
 };
 
+
+Vtx note_rect_mesh_vtx_0[4] = {
+	{{{0, 0, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{4, 0, 0},0, {1008, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{4, 4, 0},0, {1008, -16},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{0, 4, 0},0, {-16, -16},{0x0, 0x0, 0x7F, 0xFF}}},
+};
+
+Gfx note_rect_mesh_tri_0[] = {
+	gsSPVertex(note_rect_mesh_vtx_0 + 0, 4, 0),
+	gsSP1Triangle(0, 1, 2, 0),
+	gsSP1Triangle(0, 2, 3, 0),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_note_note[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, ENVIRONMENT, 0, 0, 0, 1, 0, 0, 0, ENVIRONMENT, 0, 0, 0, 1),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsSPEndDisplayList(),
+};
+
+Gfx note_rect_mesh[] = {
+	gsSPDisplayList(mat_note_note),
+	gsSPDisplayList(note_rect_mesh_tri_0),
+	gsDPPipeSync(),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPClearGeometryMode(G_TEXTURE_GEN),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 0),
+	gsSPEndDisplayList(),
+};
+
+
+
 s32 gRenderTarget, gTargetX, gTargetY;
 
 void render_target(void) {
@@ -1022,6 +1057,20 @@ void spawn_hud_notes(void) {
 
 }
 
+u8 sHudNoteChannelEnvs[3][4] = {
+{0xFF, 0, 0, 0xC0},
+{0, 0, 0xFF, 0xC0},
+{0, 0xFF, 0, 0xC0},
+};
+
+void render_hud_note_helper(s16 x, s16 y, u8 channel) {
+    create_dl_translation_matrix(G_MTX_PUSH, (f32)x, (f32)y, 0.0f);
+    gDPSetEnvColor(gDisplayListHead++, sHudNoteChannelEnvs[0][channel], sHudNoteChannelEnvs[1][channel], 
+                    sHudNoteChannelEnvs[2][channel], sHudNoteChannelEnvs[3][channel]);
+    gSPDisplayList(gDisplayListHead++, &note_rect_mesh);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
+
 void render_hud_notes(void) {
     s32 i = 0;
     for (i = 0; i < HUD_NOTE_POOL_CAPACITY; i++) {
@@ -1034,7 +1083,8 @@ void render_hud_notes(void) {
             } else {
                 sCurrentHudNote->xPos = 300;
             }
-            print_text(sCurrentHudNote->xPos, 209 - (sCurrentHudNote->channel * 15), "D");
+            //print_text(sCurrentHudNote->xPos, 209 - (sCurrentHudNote->channel * 15), "D");
+            render_hud_note_helper(sCurrentHudNote->xPos, 209 - (sCurrentHudNote->channel * 15), sCurrentHudNote->channel);
             if (sCurrentHudNote->timer > 60+15) {
                 delete_note(sCurrentHudNote);
             }
