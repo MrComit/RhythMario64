@@ -590,9 +590,56 @@ s32 act_debug_free_move(struct MarioState *m) {
     return FALSE;
 }
 
+void rank_increment(void) {
+        u32 sound;
+        gRankTimer++;
+        if(gPlayer1Controller->buttonPressed & A_BUTTON) {
+            u8 i;
+            for(i = 0; i < 7; i++) {
+                if(gRankTimer < i*20) {
+                    gRankTimer = i*20;
+                    i = 7;
+                }
+            }
+        }
+        if(gRankTimer <= 120 && gRankTimer % 20 == 0) {
+            play_sound(SOUND_OBJ_POUNDING1_HIGHPRIO, gGlobalSoundSource);
+        }
+        if(gRankTimer == 159) {
+            switch(gRank.rank) {
+                case RANK_S:
+                    sound = SOUND_MARIO_HERE_WE_GO;
+                    break;
+                case RANK_A:
+                    sound = SOUND_MARIO_YAHOO;
+                    break;
+                case RANK_B:
+                    sound = SOUND_MARIO_YAHOO_WAHA_YIPPEE + 0x40000;
+                    break;
+                case RANK_C:
+                    sound = SOUND_MARIO_HAHA;
+                    break;
+                case RANK_D:
+                    sound = SOUND_MARIO_WAAAOOOW;
+                    break;
+                case RANK_F:
+                    sound = SOUND_MARIO_MAMA_MIA;
+                    break;
+            }
+            play_sound(sound, gGlobalSoundSource);
+        }
+}
+
+void rank_save(void) {
+    gSaveFileModified = TRUE;
+    if(gRank.rank < save_file_get_rank(gCurrCourseNum - 1)) {
+        save_file_set_rank(gCurrCourseNum - 1, gRank.rank);
+    }
+    save_file_do_save(gCurrSaveFileNum - 1);
+}
+
 void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
     s32 dialogID;
-    u32 sound;
     if (m->actionState == 0) {
         switch (++m->actionTimer) {
             case 1:
@@ -631,42 +678,7 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
         //     save_file_do_save(gCurrSaveFileNum - 1);
         // }
         // m->actionState = 2;
-        gRankTimer++;
-        if(gPlayer1Controller->buttonPressed & A_BUTTON) {
-            u8 i;
-            for(i = 0; i < 6; i++) {
-                if(gRankTimer < i*20) {
-                    gRankTimer = i*20;
-                    i = 6;
-                }
-            }
-        }
-        if(gRankTimer <= 120 && gRankTimer % 20 == 0) {
-            play_sound(SOUND_OBJ_POUNDING1_HIGHPRIO, gGlobalSoundSource);
-        }
-        if(gRankTimer == 159) {
-            switch(gRank.rank) {
-                case RANK_S:
-                    sound = SOUND_MARIO_HERE_WE_GO;
-                    break;
-                case RANK_A:
-                    sound = SOUND_MARIO_YAHOO;
-                    break;
-                case RANK_B:
-                    sound = SOUND_MARIO_YAHOO_WAHA_YIPPEE + 0x40000;
-                    break;
-                case RANK_C:
-                    sound = SOUND_MARIO_HAHA;
-                    break;
-                case RANK_D:
-                    sound = SOUND_MARIO_WAAAOOOW;
-                    break;
-                case RANK_F:
-                    sound = SOUND_MARIO_MAMA_MIA;
-                    break;
-            }
-            play_sound(sound, gGlobalSoundSource);
-        }
+        rank_increment();
         if(gRankTimer > 160) {
             gRankTimer = 160;
             if(gPlayer1Controller->buttonPressed & A_BUTTON) {
@@ -677,11 +689,7 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
         disable_time_stop();
         enable_background_sound();
         if(m->actionState == 2) {
-            gSaveFileModified = TRUE;
-            if(gRank.rank < save_file_get_rank(gCurrCourseNum - 1)) {
-                save_file_set_rank(gCurrCourseNum - 1, gRank.rank);
-            }
-            save_file_do_save(gCurrSaveFileNum - 1);
+            rank_save();
             level_trigger_warp(m, WARP_OP_STAR_EXIT);
             m->actionState = 3;
         }

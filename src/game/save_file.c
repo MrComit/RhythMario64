@@ -563,10 +563,16 @@ u32 save_file_get_objectives(void) {
 }
 
 void save_file_set_rank(u8 course, u8 rank) {
+    if(course > 0) {
+        course--;
+    }
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].ranks[course] = rank;
 }
 
 u32 save_file_get_rank(u8 course) {
+    if(course > 0) {
+        course--;
+    }
     return gSaveBuffer.files[gCurrSaveFileNum - 1][0].ranks[course];
 }
 

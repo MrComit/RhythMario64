@@ -136,8 +136,6 @@ struct Rank {
     u16 deaths;
     u16 damage;
     u16 prevHealth;
-    u8 objective1;
-    u8 objective2;
     u8 rank;
     s32 totalPoints;
 };

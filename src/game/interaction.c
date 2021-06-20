@@ -14,9 +14,11 @@
 #include "interaction.h"
 #include "level_update.h"
 #include "mario.h"
+#include "mario_actions_cutscene.h"
 #include "mario_step.h"
 #include "memory.h"
 #include "obj_behaviors.h"
+#include "object_list_processor.h"
 #include "object_helpers.h"
 #include "save_file.h"
 #include "seq_ids.h"
@@ -1861,7 +1863,7 @@ void pss_end_slide(struct MarioState *m) {
 }
 
 void mario_handle_special_floors(struct MarioState *m) {
-    if ((m->action & ACT_GROUP_MASK) == ACT_GROUP_CUTSCENE) {
+    if ((m->action & ACT_GROUP_MASK) == ACT_GROUP_CUTSCENE && m->action != ACT_WAITING_FOR_DIALOG) {
         return;
     }
 
@@ -1875,7 +1877,22 @@ void mario_handle_special_floors(struct MarioState *m) {
                 break;
 
             case SURFACE_WARP:
-                level_trigger_warp(m, WARP_OP_WARP_FLOOR);
+                gMarioState->pos[1] = gMarioObject->header.gfx.pos[1] = m->floorHeight;
+                set_mario_action(m, ACT_WAITING_FOR_DIALOG, 0);
+                if(gRankTimer == 0) {
+                    fadeout_level_music(240);
+                }
+                if(gRankTimer < 170) {
+                    rank_increment();
+                    if(gRankTimer > 160) {
+                        gRankTimer = 160;
+                        if(gPlayer1Controller->buttonPressed & A_BUTTON) {
+                            rank_save();
+                            level_trigger_warp(m, WARP_OP_WARP_FLOOR);
+                            gRankTimer = 170;
+                        }
+                    }
+                }
                 break;
 
             case SURFACE_TIMER_START:

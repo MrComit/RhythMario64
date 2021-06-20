@@ -45,6 +45,7 @@ enum SeqId {
     SEQ_TEST,                         // 0x23
     SEQ_CASTLE,                       // 0x24
     SEQ_BOSS,                         // 0x25
+    SEQ_TRAINING,                     // 0x26
     SEQ_COUNT
 };
 

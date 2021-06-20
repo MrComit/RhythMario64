@@ -452,7 +452,7 @@ void bhv_mario_update(void) {
         get_current_checkpoint();
     }
 
-    if(seqPlayer->scriptState.pc[-1] == 0xFF && seqPlayer->scriptState.pc[-2] == 0xFF) {
+    if(seqPlayer->scriptState.pc[-1] == 0xFF && seqPlayer->scriptState.pc[-2] == 0xFF && gCurrCourseNum != 0x4) {
         if(gMarioState->action != ACT_STAR_DANCE_EXIT) {
             set_mario_action(gMarioState, ACT_STAR_DANCE_EXIT, 0);
         }
