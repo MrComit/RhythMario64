@@ -11,6 +11,7 @@
 #include "game/game_init.h"
 #include "audio/external.h"
 #include "prevent_bss_reordering.h"
+#include "levels/intro/title_screen/header.h"
 
 // frame counts for the zoom in, hold, and zoom out of title model
 #define INTRO_STEPS_ZOOM_IN 20
@@ -80,10 +81,10 @@ Gfx *geo_intro_super_mario_64_logo(s32 state, struct GraphNode *node, UNUSED voi
             scaleY = 0.0f;
             scaleZ = 0.0f;
         }
-        guScale(scaleMat, scaleX, scaleY, scaleZ);
+        guScale(scaleMat, 1.0f, 1.0f, 1.0f);
 
         gSPMatrix(dlIter++, scaleMat, G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
-        gSPDisplayList(dlIter++, &intro_seg7_dl_0700B3A0);  // draw model
+        gSPDisplayList(dlIter++, &title_screen_title_mesh);  // draw model
         gSPPopMatrix(dlIter++, G_MTX_MODELVIEW);
         gSPEndDisplayList(dlIter);
 
