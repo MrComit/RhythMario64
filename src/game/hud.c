@@ -37,14 +37,23 @@ s32 sHudNotePoolCount = 0;
 struct HudNote *sCurrentHudNote;
 
 u16 sCurrentNote1 = 0;
+u16 sCurrentNote2 = 0;
+u16 sCurrentNote3 = 0;
+u16 sCurrentNote4 = 0;
+
 s16 sC1Channel1Notes[] = {65, 70, 80, 90, 100, -1};
 
-u16 sCurrentNote2 = 0;
 s16 sC1Channel2Notes[] = {120, 150, -1};
 
-u16 sCurrentNote3 = 0;
 s16 sC1Channel3Notes[] = {70, 80, -1};
 
+
+s16 *sHudNoteLists[4][4] = {
+{sC1Channel1Notes, sC1Channel2Notes, sC1Channel3Notes, NULL},
+{NULL, NULL, NULL, NULL},
+{sC1Channel1Notes, sC1Channel2Notes, sC1Channel3Notes, NULL},
+{NULL, sC1Channel2Notes, sC1Channel3Notes, sC1Channel1Notes},
+};
 
 
 
@@ -958,11 +967,32 @@ Gfx target_rect_mesh[] = {
 };
 
 
+Gfx note_note_ia4_aligner[] = {gsSPEndDisplayList()};
+u8 note_note_ia4[] = {
+	0xee, 0xee, 0xee, 0xee, 0xee, 0xee, 0xee, 0xee, 
+	0xee, 0xee, 0x11, 0x11, 0x11, 0x11, 0xee, 0xee, 
+	0xee, 0xe1, 0x11, 0x11, 0x11, 0x11, 0x1e, 0xee, 
+	0xee, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0xee, 
+	0xe1, 0x11, 0x11, 0xff, 0xff, 0x11, 0x11, 0x1e, 
+	0xe1, 0x11, 0x1f, 0xff, 0xff, 0xf1, 0x11, 0x1e, 
+	0xe1, 0x11, 0xff, 0xff, 0xff, 0xff, 0x11, 0x1e, 
+	0xe1, 0x11, 0xff, 0xff, 0xff, 0xff, 0x11, 0x1e, 
+	0xe1, 0x11, 0xff, 0xff, 0xff, 0xff, 0x11, 0x1e, 
+	0xe1, 0x11, 0xff, 0xff, 0xff, 0xff, 0x11, 0x1e, 
+	0xe1, 0x11, 0x1f, 0xff, 0xff, 0xf1, 0x11, 0x1e, 
+	0xe1, 0x11, 0x11, 0xff, 0xff, 0x11, 0x11, 0x1e, 
+	0xee, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0xee, 
+	0xee, 0xe1, 0x11, 0x11, 0x11, 0x11, 0x1e, 0xee, 
+	0xee, 0xee, 0x11, 0x11, 0x11, 0x11, 0xee, 0xee, 
+	0xee, 0xee, 0xee, 0xee, 0xee, 0xee, 0xee, 0xee, 
+	
+};
+
 Vtx note_rect_mesh_vtx_0[4] = {
-	{{{0, 0, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{4, 0, 0},0, {1008, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{4, 4, 0},0, {1008, -16},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{0, 4, 0},0, {-16, -16},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{0, 0, 0},0, {0, 512},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{6, 0, 0},0, {512, 512},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{6, 6, 0},0, {512, 0},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{0, 6, 0},0, {0, 0},{0x0, 0x0, 0x7F, 0xFF}}},
 };
 
 Gfx note_rect_mesh_tri_0[] = {
@@ -972,16 +1002,34 @@ Gfx note_rect_mesh_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_note_note[] = {
+Gfx mat_note_note_layer1[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(0, 0, 0, ENVIRONMENT, 0, 0, 0, 1, 0, 0, 0, ENVIRONMENT, 0, 0, 0, 1),
+	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, TEXEL0),
+	gsDPSetTextureFilter(G_TF_POINT),
+	gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
 	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPTileSync(),
+	gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_8b, 8, note_note_ia4),
+	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_8b, 1, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
+	gsDPLoadSync(),
+	gsDPLoadTile(7, 0, 0, 30, 60),
+	gsDPPipeSync(),
+	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_4b, 1, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
+	gsDPSetTileSize(0, 0, 0, 60, 60),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_note_note_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetTextureFilter(G_TF_BILERP),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
 	gsSPEndDisplayList(),
 };
 
 Gfx note_rect_mesh[] = {
-	gsSPDisplayList(mat_note_note),
+	gsSPDisplayList(mat_note_note_layer1),
 	gsSPDisplayList(note_rect_mesh_tri_0),
+	gsSPDisplayList(mat_revert_note_note_layer1),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),
@@ -989,6 +1037,7 @@ Gfx note_rect_mesh[] = {
 	gsSPTexture(65535, 65535, 0, 0, 0),
 	gsSPEndDisplayList(),
 };
+
 
 
 
@@ -1042,31 +1091,41 @@ void create_note(u8 channel) {
 
 void spawn_hud_notes(void) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
-    if (seqPlayer->globalSongTimer > (sC1Channel1Notes[sCurrentNote1] * 8) - SEC_TO_M64_TIMER(2)) {
+    s16 *notes1 = sHudNoteLists[gCurrCourseNum - 1][0];
+    s16 *notes2 = sHudNoteLists[gCurrCourseNum - 1][1];
+    s16 *notes3 = sHudNoteLists[gCurrCourseNum - 1][2];
+    s16 *notes4 = sHudNoteLists[gCurrCourseNum - 1][3];
+
+    if (notes1 != NULL && seqPlayer->globalSongTimer > (notes1[sCurrentNote1] * 8) - SEC_TO_M64_TIMER(1)) {
         create_note(0);
         sCurrentNote1++;
     }
-    if (seqPlayer->globalSongTimer > (sC1Channel2Notes[sCurrentNote2] * 8) - SEC_TO_M64_TIMER(2)) {
+    if (notes2 != NULL && seqPlayer->globalSongTimer > (notes2[sCurrentNote2] * 8) - SEC_TO_M64_TIMER(1)) {
         create_note(1);
         sCurrentNote2++;
     }
-    if (seqPlayer->globalSongTimer > (sC1Channel3Notes[sCurrentNote3] * 8) - SEC_TO_M64_TIMER(2)) {
+    if (notes3 != NULL && seqPlayer->globalSongTimer > (notes3[sCurrentNote3] * 8) - SEC_TO_M64_TIMER(1)) {
         create_note(2);
         sCurrentNote3++;
+    }
+    if (notes4 != NULL && seqPlayer->globalSongTimer > (notes4[sCurrentNote4] * 8) - SEC_TO_M64_TIMER(1)) {
+        create_note(3);
+        sCurrentNote4++;
     }
 
 }
 
-u8 sHudNoteChannelEnvs[3][4] = {
+u8 sHudNoteChannelEnvs[4][4] = {
 {0xFF, 0, 0, 0xC0},
 {0, 0, 0xFF, 0xC0},
 {0, 0xFF, 0, 0xC0},
+{0xFF, 0xFF, 0, 0xC0},
 };
 
 void render_hud_note_helper(s16 x, s16 y, u8 channel) {
     create_dl_translation_matrix(G_MTX_PUSH, (f32)x, (f32)y, 0.0f);
-    gDPSetEnvColor(gDisplayListHead++, sHudNoteChannelEnvs[0][channel], sHudNoteChannelEnvs[1][channel], 
-                    sHudNoteChannelEnvs[2][channel], sHudNoteChannelEnvs[3][channel]);
+    gDPSetEnvColor(gDisplayListHead++, sHudNoteChannelEnvs[channel][0], sHudNoteChannelEnvs[channel][1], 
+                    sHudNoteChannelEnvs[channel][2], sHudNoteChannelEnvs[channel][3]);
     gSPDisplayList(gDisplayListHead++, &note_rect_mesh);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
@@ -1078,21 +1137,21 @@ void render_hud_notes(void) {
             //play_puzzle_jingle();
             sCurrentHudNote = &sHudNotePool[i];
             sCurrentHudNote->timer++;
-            if (sCurrentHudNote->xPos < 300) {
-                sCurrentHudNote->xPos += 5;
+            if (sCurrentHudNote->xPos < 60) {
+                sCurrentHudNote->xPos += 2;
             } else {
-                sCurrentHudNote->xPos = 300;
+                sCurrentHudNote->xPos = 60;
             }
             //print_text(sCurrentHudNote->xPos, 209 - (sCurrentHudNote->channel * 15), "D");
-            render_hud_note_helper(sCurrentHudNote->xPos, 209 - (sCurrentHudNote->channel * 15), sCurrentHudNote->channel);
-            if (sCurrentHudNote->timer > 60+15) {
+            render_hud_note_helper(sCurrentHudNote->xPos, 220 - (sCurrentHudNote->channel * 15), sCurrentHudNote->channel);
+            if (sCurrentHudNote->timer > 30+15) {
                 delete_note(sCurrentHudNote);
             }
         }
     }
-    print_text(300, 209, "A");
-    print_text(300, 194, "B");
-    print_text(300, 179, "C");
+    print_text(60, 220, "A");
+    print_text(60, 205, "B");
+    print_text(60, 190, "C");
 }
 
 

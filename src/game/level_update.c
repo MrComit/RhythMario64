@@ -36,6 +36,7 @@
 #include "course_table.h"
 #include "rumble_init.h"
 #include "game/spawn_object.h"
+#include "hud.h"
 
 #define PLAY_MODE_NORMAL 0
 #define PLAY_MODE_PAUSED 2
@@ -558,6 +559,14 @@ void init_mario_after_warp(void) {
                 gMarioState->health = 0x0880;
                 gRank.prevHealth = 0x0880;
                 reset_objects(gCurrentArea->objectSpawnInfos);
+                gBulletLauncherIndex[0] = 0;
+                gBulletLauncherIndex[1] = 0;
+                gBulletLauncherIndex[2] = 0;
+                gBulletLauncherIndex[3] = 0;
+                sCurrentNote1 = 0;
+                sCurrentNote2 = 0;
+                sCurrentNote3 = 0;
+                sCurrentNote4 = 0;
             }
             play_transition(WARP_TRANSITION_FADE_FROM_STAR, 0x10, 0x00, 0x00, 0x00);
             break;
@@ -568,6 +577,14 @@ void init_mario_after_warp(void) {
                 gMarioState->health = 0x0880;
                 gRank.prevHealth = 0x0880;
                 //reset_objects(gCurrentArea->objectSpawnInfos);
+                gBulletLauncherIndex[0] = 0;
+                gBulletLauncherIndex[1] = 0;
+                gBulletLauncherIndex[2] = 0;
+                gBulletLauncherIndex[3] = 0;
+                sCurrentNote1 = 0;
+                sCurrentNote2 = 0;
+                sCurrentNote3 = 0;
+                sCurrentNote4 = 0;
             }
             play_transition(WARP_TRANSITION_FADE_FROM_STAR, 0x10, 0x00, 0x00, 0x00);
             break;
@@ -578,6 +595,14 @@ void init_mario_after_warp(void) {
                 gMarioState->health = 0x0880;
                 gRank.prevHealth = 0x0880;
                 //reset_objects(gCurrentArea->objectSpawnInfos);
+                gBulletLauncherIndex[0] = 0;
+                gBulletLauncherIndex[1] = 0;
+                gBulletLauncherIndex[2] = 0;
+                gBulletLauncherIndex[3] = 0;
+                sCurrentNote1 = 0;
+                sCurrentNote2 = 0;
+                sCurrentNote3 = 0;
+                sCurrentNote4 = 0;
             }
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x10, 0x00, 0x00, 0x00);
             break;
