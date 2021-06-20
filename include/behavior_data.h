@@ -568,6 +568,10 @@ extern const BehaviorScript bhvTorpedo[];
 extern const BehaviorScript bhvTorpedoSpawner[];
 extern const BehaviorScript bhvAngryBubba[];
 extern const BehaviorScript bhvEgadd[];
+extern const BehaviorScript bhvDiscoBall[];
+extern const BehaviorScript bhvDiscoLock[];
+extern const BehaviorScript bhvDiscoBullet[];
+extern const BehaviorScript bhvDiscoBillSwitch[];
 
 
 #endif // BEHAVIOR_DATA_H

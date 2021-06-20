@@ -3188,6 +3188,8 @@ void handle_objectives(void) {
             }
             break;
         case LEVEL_CCM:
+            if (gCurrAreaIndex != 1)
+                break;
             if (sTextAlpha1)
                 print_objective_string(20, 20, sTextAlpha1, text5);
             if (sTextAlpha2)

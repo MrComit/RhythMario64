@@ -19,6 +19,8 @@ void bhv_castle_rock_init(void) {
 }
 
 void bhv_castle_rock_loop(void) {
+    if (gMarioState->pos[0] < -5000.0f)
+        return;
     switch (o->oAction) {
         case 0:
             if (onScreenLayers[0] > 15) {
@@ -119,6 +121,8 @@ void bhv_lava_spire_init(void) {
 }
 
 void bhv_lava_spire_loop(void) {
+    if (gMarioState->pos[0] > -5000.0f)
+        return;
     switch (o->oAction) {
         case 0:
             if (onScreenLayers[0] > 15) {

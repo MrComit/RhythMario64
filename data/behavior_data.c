@@ -1967,7 +1967,7 @@ const BehaviorScript bhvBowser[] = {
     LOAD_ANIMATIONS(oAnimations, bowser_seg6_anims_06057690),
     SPAWN_CHILD(/*Model*/ MODEL_NONE, /*Behavior*/ bhvBowserBodyAnchor),
     SPAWN_CHILD(/*Model*/ MODEL_BOWSER_BOMB_CHILD_OBJ, /*Behavior*/ bhvBowserFlameSpawn),
-    SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvBowserTailAnchor),
+    //SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvBowserTailAnchor),
     SET_INT(oNumLootCoins, 50),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 0, /*Gravity*/ -400, /*Bounciness*/ -70, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     SET_HOME(),
@@ -5784,6 +5784,7 @@ const BehaviorScript bhvSmallPiranhaFlame[] = {
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     BILLBOARD(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_small_piranha_flame_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_small_piranha_flame_loop),
         ADD_INT(oAnimState, 1),
@@ -6260,7 +6261,7 @@ const BehaviorScript bhvLavaSpire[] = {
     SET_HOME(),
     LOAD_COLLISION_DATA(lava_spire_collision),
     SET_FLOAT(oDrawingDistance, 0x6000),
-    SET_FLOAT(oCollisionDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0xC00),
     CALL_NATIVE(bhv_lava_spire_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_lava_spire_loop),
@@ -6323,7 +6324,7 @@ const BehaviorScript bhvCastleRock[] = {
     SET_HOME(),
     LOAD_COLLISION_DATA(castle_rock_collision),
     SET_FLOAT(oDrawingDistance, 0x6000),
-    SET_FLOAT(oCollisionDistance, 0xA00),
+    SET_FLOAT(oCollisionDistance, 0x800),
     //SCALE(0, 120),
     CALL_NATIVE(bhv_castle_rock_init),
     BEGIN_LOOP(),
@@ -6389,5 +6390,60 @@ const BehaviorScript bhvEgadd[] = {
     SET_HOME(),
     BEGIN_LOOP(),
         SET_INT(oIntangibleTimer, 0),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvDiscoBall[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_disco_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvDiscoLock[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SCALE(0, 50),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_disco_lock_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvDiscoBullet[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    //SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 50, /*Downwards offset*/ 50),
+    //SET_INTERACT_TYPE(INTERACT_DAMAGE),
+    //SET_INT(oDamageOrCoinValue, 3),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SCALE(/*Unused*/ 0, /*Field*/ 120),
+    //SET_INT(oIntangibleTimer, 0),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 0, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_bullet_bill_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bullet_bill_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvDiscoBillSwitch[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    // Floor switch - common:
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0xA00),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_disco_switch_loop),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
