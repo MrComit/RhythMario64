@@ -86,3 +86,6 @@
 #include "levels/castle_inside/areas/3/trajectory.inc.c"
 #include "levels/castle_inside/areas/3/movtext.inc.c"
 #include "levels/castle_inside/leveldata.inc.c"
+
+#include "levels/castle_inside/booba/model.inc.c"
+#include "levels/castle_inside/portal/model.inc.c"

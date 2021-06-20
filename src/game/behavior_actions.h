@@ -576,6 +576,11 @@ void bhv_angry_bubba_loop(void);
 void bhv_disco_loop(void);
 void bhv_peach_cutscene_loop(void);
 void bhv_toad_cutscene_loop(void);
+void bhv_booba_loop(void);
+void bhv_bowsah_cutscene_loop(void);
+void bhv_goombah_cutscene_loop(void);
+void bhv_lakitu_cutscene_loop(void);
+void bhv_whomp_cutscene_loop(void);
 
 Gfx *geo_move_mario_part_from_parent(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 

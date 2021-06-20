@@ -1880,7 +1880,7 @@ void mario_handle_special_floors(struct MarioState *m) {
                 gMarioState->pos[1] = gMarioObject->header.gfx.pos[1] = m->floorHeight;
                 set_mario_action(m, ACT_WAITING_FOR_DIALOG, 0);
                 if(gRankTimer == 0) {
-                    fadeout_level_music(240);
+                    fadeout_level_music(480);
                 }
                 if(gRankTimer < 170) {
                     rank_increment();

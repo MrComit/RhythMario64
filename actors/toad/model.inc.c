@@ -16,6 +16,10 @@ ALIGNED8 static const Texture toad_seg6_texture_06006120[] = {
 #include "actors/toad/toad_head.rgba16.inc.c"
 };
 
+ALIGNED8 static const Texture bupensive[] = {
+#include "actors/toad/CUSTOM_bupensive.rgba16.inc.c"
+};
+
 // 0x06006920
 static const Vtx toad_seg6_vertex_06006920[] = {
     {{{   -43,   -102,    106}, 0, {    36,    848}, {0xba, 0xcc, 0x5b, 0xff}}},
@@ -253,6 +257,40 @@ const Gfx toad_seg6_dl_06007300[] = {
     gsSPEndDisplayList(),
 };
 
+const Gfx toad_pensive_model[] = {
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bupensive),
+    gsDPLoadSync(),
+    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
+    gsSPLight(&toad_seg6_lights_06005908.l, 1),
+    gsSPLight(&toad_seg6_lights_06005908.a, 2),
+    gsSPVertex(toad_seg6_vertex_06006920, 15, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  3,  0,  4, 0x0),
+    gsSP2Triangles( 2,  4,  0, 0x0,  0,  5,  6, 0x0),
+    gsSP2Triangles( 3,  5,  0, 0x0,  6,  1,  0, 0x0),
+    gsSP2Triangles( 6,  5,  7, 0x0,  3,  7,  5, 0x0),
+    gsSP2Triangles( 1,  6,  8, 0x0,  8,  6,  9, 0x0),
+    gsSP2Triangles( 7,  9,  6, 0x0, 10,  9,  7, 0x0),
+    gsSP2Triangles( 3, 11,  7, 0x0,  7, 11, 10, 0x0),
+    gsSP2Triangles( 8, 12,  1, 0x0, 13, 14,  8, 0x0),
+    gsSP2Triangles( 9, 13,  8, 0x0, 12,  8, 14, 0x0),
+    gsSPVertex(toad_seg6_vertex_06006A10, 16, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
+    gsSP2Triangles( 5,  6,  3, 0x0,  7,  8,  9, 0x0),
+    gsSP2Triangles( 9, 10,  7, 0x0,  1, 11, 12, 0x0),
+    gsSP2Triangles(13, 11,  1, 0x0,  1, 12,  2, 0x0),
+    gsSP2Triangles(13,  1,  0, 0x0,  2, 12, 14, 0x0),
+    gsSP1Triangle( 2, 14, 15, 0x0),
+    gsSPVertex(toad_seg6_vertex_06006B10, 12, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  2,  1,  3, 0x0),
+    gsSP2Triangles( 4,  0,  5, 0x0,  4,  5,  6, 0x0),
+    gsSP2Triangles( 2,  3,  7, 0x0,  5,  0,  2, 0x0),
+    gsSP2Triangles( 5,  2,  8, 0x0,  8,  2,  7, 0x0),
+    gsSP2Triangles( 8,  7,  9, 0x0,  6,  5,  8, 0x0),
+    gsSP2Triangles( 6,  8, 10, 0x0, 10,  8,  9, 0x0),
+    gsSP1Triangle(10,  9, 11, 0x0),
+    gsSPEndDisplayList(),
+};
+
 // 0x06007498 - 0x060076C0
 const Gfx toad_seg6_dl_06007498[] = {
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, toad_seg6_texture_06006120),
@@ -318,6 +356,24 @@ const Gfx toad_seg6_dl_06007710[] = {
     gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 5, G_TX_NOLOD),
     gsDPSetTileSize(0, 0, 0, (32 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC),
     gsSPDisplayList(toad_seg6_dl_06007300),
+    gsSPDisplayList(toad_seg6_dl_06007498),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_SHADEFADEA, G_CC_SHADEFADEA),
+    gsSPDisplayList(toad_seg6_dl_060076C0),
+    gsDPPipeSync(),
+    gsSPEndDisplayList(),
+};
+
+const Gfx toad_head_pensive[] = {
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_MODULATERGBFADE, G_CC_MODULATERGBFADE),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPTileSync(),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 5, G_TX_NOLOD),
+    gsDPSetTileSize(0, 0, 0, (32 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC),
+    gsSPDisplayList(toad_pensive_model),
     gsSPDisplayList(toad_seg6_dl_06007498),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
     gsDPPipeSync(),

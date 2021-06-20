@@ -574,6 +574,11 @@ extern const BehaviorScript bhvDiscoBullet[];
 extern const BehaviorScript bhvDiscoBillSwitch[];
 extern const BehaviorScript bhvCutscenePeach[];
 extern const BehaviorScript bhvCutsceneToad[];
-
+extern const BehaviorScript bhvBooba[];
+extern const BehaviorScript bhvCutsceneBowsah[];
+extern const BehaviorScript bhvCutsceneGoomba[];
+extern const BehaviorScript bhvCutsceneLakitu[];
+extern const BehaviorScript bhvCutsceneWhomp[];
+extern const BehaviorScript bhvCutscenePortal[];
 
 #endif // BEHAVIOR_DATA_H

@@ -97,8 +97,8 @@ s32 sGameLoopTicked = 0;
 
 u8 sDialogSpeaker[] = {
     //       0      1      2      3      4      5      6      7      8      9
-    /* 0*/ _,     _,     _,     _,     BOWS1,  KOOPA, KOOPA, KOOPA, _,     KOOPA,
-    /* 1*/ _,     _,     _,     _,     _,     _,     _,     KBOMB, _,     _,
+    /* 0*/ _,     _,     _,     _,     BOWS2,  KOOPA, _,    BOWS2, KBOMB,     KOOPA,
+    /* 1*/ _,     _,     _,     _,     _,     BOWS2,  _,    KBOMB, _,     _,
     /* 2*/ _,     BOWS1, BOWS1, BOWS1, BOWS1, BOWS1, BOWS1, BOWS1, BOWS1, BOWS1,
     /* 3*/ _,     _,     _,     _,     _,     _,     _,     DIFF,  _,     _,
     /* 4*/ _,     KOOPA, _,     _,     _,     _,     _,     BOMB,  _,     _,
@@ -124,7 +124,7 @@ s32 sDialogSpeakerVoice[] = {
     SOUND_OBJ_BIG_PENGUIN_YELL,
     SOUND_OBJ_BOWSER_INTRO_LAUGH,
     SOUND_OBJ_KOOPA_TALK,
-    SOUND_OBJ_KING_BOBOMB_TALK,
+    SOUND_OBJ_WHOMP_LOWPRIO,
     SOUND_OBJ_BOO_LAUGH_LONG,
     SOUND_OBJ_BOBOMB_BUDDY_TALK,
     SOUND_OBJ_BOWSER_LAUGH,

@@ -10352,8 +10352,40 @@ BAD_RETURN(s32) cutscene_epic_intro(struct Camera *c) {
     set_mario_action(gMarioState, ACT_WAITING_FOR_DIALOG, 0);
     switch(gMyCutsceneState) {
         case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
             vec3f_set(c->pos, -1500.00f, 50.0f, -99.5505f);
-            vec3f_set(c->focus, -2474.205f, 0.0f, -108.86);
+            vec3f_set(c->focus, -2474.205f, 0.0f, -108.86f);
+            break;
+        case 5:
+        case 6:
+        case 7:
+        case 10:
+        case 11:
+        case 12:
+            vec3f_set(c->pos, -2851.43f, 405.955f, -443.975f);
+            vec3f_set(c->focus, -766.855f, 0.0f, -77.4585f);
+            break;
+        case 8:
+        case 9:
+            vec3f_set(c->pos, -1193.21f, 50.0f, -550.415);
+            vec3f_set(c->focus, -1120.575, 375.0f, 543.2f);
+            break;
+        case 13:
+            vec3f_set(c->pos, -2851.43f, 405.955f, -443.975f);
+            vec3f_set(c->focus, -2198.975f, -12.5f, 88.285f);
+            if(gMyCutsceneTimer < 60) {
+                sFOVState.fov = 45.0f - ((f32)gMyCutsceneTimer / 2.0f);
+            } else {
+                sFOVState.fov = 45;
+            }
+            break;
+        case 14:
+            vec3f_set(c->pos, -3428.4f, 432.3795f, 1181.27f);
+            vec3f_set(c->focus, -3441.145f, 222.06925f, 1557.7825f);
+            sFOVState.fov = 25;
             break;
     }
     gMyCutsceneTimer++;

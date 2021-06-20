@@ -1,0 +1,10 @@
+extern const GeoLayout portal_geo[];
+extern Lights1 portal_portal_lights;
+extern u8 portal_epicportal_ci4[];
+extern u8 portal_epicportal_ci4_pal_rgba16[];
+extern Vtx portal_mesh_mesh_layer_4_vtx_0[4];
+extern Gfx portal_mesh_mesh_layer_4_tri_0[];
+extern Gfx mat_portal_portal[];
+extern Gfx mat_revert_portal_portal[];
+extern Gfx portal_mesh_mesh_layer_4[];
+extern Gfx portal_material_revert_render_settings[];
