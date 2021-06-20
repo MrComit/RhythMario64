@@ -29,6 +29,7 @@
 #include "engine/graph_node.h"
 #include "level_table.h"
 #include "config.h"
+#include "mario.h"
 
 #define CBUTTON_MASK (U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
 
@@ -106,6 +107,9 @@ s16 sCreditsPlayer2Yaw;
  * Used to decide when to zoom out in the pause menu.
  */
 u8 sFramesPaused;
+
+u32 gMyCutsceneState;
+u32 gMyCutsceneTimer;
 
 extern struct CameraFOVStatus sFOVState;
 extern struct TransitionInfo sModeTransition;
@@ -3023,6 +3027,9 @@ void update_camera(struct Camera *c) {
 
     gCamera = c;
     update_camera_hud_status(c);
+    if(gCurrLevelNum == 0x06) {
+        c->cutscene = CUTSCENE_EPIC_INTRO;
+    }
     if (c->cutscene == 0) {
         // Only process R_TRIG if 'fixed' is not selected in the menu
         if (cam_select_alt_mode(0) == CAM_SELECTION_MARIO) {
@@ -6263,43 +6270,7 @@ struct CameraTrigger sCamCCM[] = {
  * and one trigger that starts the enter pool cutscene when Mario enters HMC.
  */
 struct CameraTrigger sCamCastle[] = {
-    { 1, cam_castle_close_mode, -1100, 657, -1346, 300, 150, 300, 0 },
-    { 1, cam_castle_enter_lobby, -1099, 657, -803, 300, 150, 300, 0 },
-    { 1, cam_castle_close_mode, -2304, -264, -4072, 140, 150, 140, 0 },
-    { 1, cam_castle_close_mode, -2304, 145, -1344, 140, 150, 140, 0 },
-    { 1, cam_castle_enter_lobby, -2304, 145, -802, 140, 150, 140, 0 },
-    //! Sets the camera mode when leaving secret aquarium
-    { 1, cam_castle_close_mode, 2816, 1200, -256, 100, 100, 100, 0 },
-    { 1, cam_castle_close_mode, 256, -161, -4226, 140, 150, 140, 0 },
-    { 1, cam_castle_close_mode, 256, 145, -1344, 140, 150, 140, 0 },
-    { 1, cam_castle_enter_lobby, 256, 145, -802, 140, 150, 140, 0 },
-    { 1, cam_castle_close_mode, -1023, 44, -4870, 140, 150, 140, 0 },
-    { 1, cam_castle_close_mode, -459, 145, -1020, 140, 150, 140, 0x6000 },
-    { 1, cam_castle_enter_lobby, -85, 145, -627, 140, 150, 140, 0 },
-    { 1, cam_castle_close_mode, -1589, 145, -1020, 140, 150, 140, -0x6000 },
-    { 1, cam_castle_enter_lobby, -1963, 145, -627, 140, 150, 140, 0 },
-    { 1, cam_castle_leave_lobby_sliding_door, -2838, 657, -1659, 200, 150, 150, 0x2000 },
-    { 1, cam_castle_enter_lobby_sliding_door, -2319, 512, -1266, 300, 150, 300, 0x2000 },
-    { 1, cam_castle_close_mode, 844, 759, -1657, 40, 150, 40, -0x2000 },
-    { 1, cam_castle_enter_lobby, 442, 759, -1292, 140, 150, 140, -0x2000 },
-    { 2, cam_castle_enter_spiral_stairs, -1000, 657, 1740, 200, 300, 200, 0 },
-    { 2, cam_castle_enter_spiral_stairs, -996, 1348, 1814, 200, 300, 200, 0 },
-    { 2, cam_castle_close_mode, -946, 657, 2721, 50, 150, 50, 0 },
-    { 2, cam_castle_close_mode, -996, 1348, 907, 50, 150, 50, 0 },
-    { 2, cam_castle_close_mode, -997, 1348, 1450, 140, 150, 140, 0 },
-    { 1, cam_castle_close_mode, -4942, 452, -461, 140, 150, 140, 0x4000 },
-    { 1, cam_castle_close_mode, -3393, 350, -793, 140, 150, 140, 0x4000 },
-    { 1, cam_castle_enter_lobby, -2851, 350, -792, 140, 150, 140, 0x4000 },
-    { 1, cam_castle_enter_lobby, 803, 350, -228, 140, 150, 140, -0x4000 },
-    //! Duplicate camera trigger outside JRB door
-    { 1, cam_castle_enter_lobby, 803, 350, -228, 140, 150, 140, -0x4000 },
-    { 1, cam_castle_close_mode, 1345, 350, -229, 140, 150, 140, 0x4000 },
-    { 1, cam_castle_close_mode, -946, -929, 622, 300, 150, 300, 0 },
-    { 2, cam_castle_look_upstairs, -205, 1456, 2508, 210, 928, 718, 0 },
-    { 1, cam_castle_basement_look_downstairs, -1027, -587, -718, 318, 486, 577, 0 },
-    { 1, cam_castle_lobby_entrance, -1023, 376, 1830, 300, 400, 300, 0 },
-    { 3, cam_castle_hmc_start_pool_cutscene, 2485, -1689, -2659, 600, 50, 600, 0 },
-    NULL_TRIGGER
+	NULL_TRIGGER
 };
 
 /**
@@ -10377,6 +10348,17 @@ BAD_RETURN(s32) cutscene_door_mode(struct Camera *c) {
     }
 }
 
+BAD_RETURN(s32) cutscene_epic_intro(struct Camera *c) {
+    set_mario_action(gMarioState, ACT_WAITING_FOR_DIALOG, 0);
+    switch(gMyCutsceneState) {
+        case 0:
+            vec3f_set(c->pos, -1500.00f, 50.0f, -99.5505f);
+            vec3f_set(c->focus, -2474.205f, 0.0f, -108.86);
+            break;
+    }
+    gMyCutsceneTimer++;
+}
+
 /******************************************************************************************************
  * Cutscenes
  ******************************************************************************************************/
@@ -10775,6 +10757,10 @@ struct Cutscene sCutsceneReadMessage[] = {
     { cutscene_read_message_end, 0 }
 };
 
+struct Cutscene sCutsceneEpicIntro[] = {
+    { cutscene_epic_intro, CUTSCENE_LOOP },
+};
+
 /* TODO:
  * The next two arrays are both related to levels, and they look generated.
  * These should be split into their own file.
@@ -10827,7 +10813,7 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 1, 0, 0), // BBH            | CCM
-	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // CASTLE_INSIDE  | HMC
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // CASTLE_INSIDE  | HMC
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SSL            | BOB
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SL             | WDW
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 1, 0, 0), // JRB            | THI
@@ -11240,6 +11226,7 @@ void play_cutscene(struct Camera *c) {
         CUTSCENE(CUTSCENE_RACE_DIALOG, sCutsceneDialog)
         CUTSCENE(CUTSCENE_ENTER_PYRAMID_TOP, sCutsceneEnterPyramidTop)
         CUTSCENE(CUTSCENE_SSL_PYRAMID_EXPLODE, sCutscenePyramidTopExplode)
+        CUTSCENE(CUTSCENE_EPIC_INTRO, sCutsceneEpicIntro)
     }
 
 #undef CUTSCENE

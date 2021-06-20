@@ -22,3 +22,11 @@ UNUSED static const u64 binid_1 = 1;
 #include "bowser/flames_pos.inc.c"
 
 #include "new_bowser/model.inc.c"
+
+#include "peach/model.inc.c"
+#include "peach/anims/data.inc.c"
+#include "peach/anims/table.inc.c"
+
+#include "toad/model.inc.c"
+#include "toad/anims/data.inc.c"
+#include "toad/anims/table.inc.c"

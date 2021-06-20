@@ -8,5 +8,5 @@
 #include "group10.h"
 
 #include "bird/geo.inc.c"
-#include "peach/geo.inc.c"
+// #include "peach/geo.inc.c"
 #include "yoshi/geo.inc.c"

@@ -18,6 +18,8 @@
 #include "make_const_nonconst.h"
 #include "levels/menu/header.h"
 
+extern s32 determine_starting_level(void);
+
 const LevelScript level_main_menu_entry_1[] = {
     INIT_LEVEL(),
     FIXED_LOAD(/*loadAddr*/ _goddardSegmentStart, /*romStart*/ _goddardSegmentRomStart, /*romEnd*/ _goddardSegmentRomEnd),
@@ -53,7 +55,8 @@ const LevelScript level_main_menu_entry_1[] = {
     SLEEP(/*frames*/ 16),
     CLEAR_LEVEL(),
     SLEEP_BEFORE_EXIT(/*frames*/ 1),
-    SET_REG(/*value*/ LEVEL_CASTLE_GROUNDS),
+    //SET_REG(/*value*/ LEVEL_CASTLE_GROUNDS),
+    CALL(0, determine_starting_level),
     EXIT_AND_EXECUTE(/*seg*/ 0x15, _scriptsSegmentRomStart, _scriptsSegmentRomEnd, level_main_scripts_entry),
 };
 
