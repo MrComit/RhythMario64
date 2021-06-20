@@ -125,6 +125,7 @@ void clear_objects(void);
 void update_objects(UNUSED s32 unused);
 u32 go_to_checkpoint(u32 checkpoint);
 void get_current_checkpoint(void);
+s32 unload_deactivated_objects_in_list(struct ObjectNode *objList);
 
 // extern s32 gLoadingCheckpoint;
 extern u8 onScreenLayers[CHANNELS_MAX];
