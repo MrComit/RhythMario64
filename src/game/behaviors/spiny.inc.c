@@ -143,7 +143,7 @@ static void spiny_act_held_by_lakitu(void) {
         }
         //print_text_fmt_int(20, 80, "%d", o->oMoveAnglePitch);
         // Move more quickly if the lakitu is moving forward
-        o->oForwardVel = 30.0f;
+        o->oForwardVel = 23.0f;
             //o->parentObj->oForwardVel * coss(o->oMoveAngleYaw - o->parentObj->oMoveAngleYaw) + 10.0f;
         //o->oVelY = 30.0f;
 

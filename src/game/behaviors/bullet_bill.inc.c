@@ -70,8 +70,10 @@ void bhv_bullet_bill_loop(void) {
     cur_obj_call_action_function(sBulletBillActions);
     if (cur_obj_check_interacted())
         o->oAction = 4;
-    if(o->oTimer < 20 && !(cur_obj_has_behavior(bhvDiscoBullet)))
+    if(o->oTimer < 20 && !(cur_obj_has_behavior(bhvDiscoBullet))) {
         o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1] + 80.0f, 30.0f, 30.0f);
+        o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x40);
+    }
 }
 
 void bhv_bullet_bill_launcher_init(void) {

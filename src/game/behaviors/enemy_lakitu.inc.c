@@ -24,7 +24,7 @@ static struct ObjectHitbox sEnemyLakituHitbox = {
  * Wait for mario to approach, then spawn the cloud and become visible.
  */
 static void enemy_lakitu_act_uninitialized(void) {
-    if (o->oDistanceToMario < 2000.0f) {
+    if (gCurrentCheckpoint > 0/*o->oDistanceToMario < 2000.0f*/) {
         spawn_object_relative_with_scale(CLOUD_BP_LAKITU_CLOUD, 0, 0, 0, 2.0f, o, MODEL_MIST, bhvCloud);
 
         cur_obj_unhide();
