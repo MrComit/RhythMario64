@@ -180,6 +180,11 @@
             "envelope": "envelope14",
             "sound": "43_harmonica"
         },
+        "instSawWave": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "37_square_synth"
+        },
         "percussion": [
             {"release_rate": 10, "pan": 62, "envelope": "envelope11", "sound": {"sample": "06_kick_drum_1", "tuning": 0.210224}},
             {"release_rate": 10, "pan": 62, "envelope": "envelope11", "sound": {"sample": "06_kick_drum_1", "tuning": 0.2227245}},
@@ -263,6 +268,7 @@
         "inst8",
         null,
         "inst13",
-        "inst11"
+        "inst11",
+        "instSawWave"
     ]
 }

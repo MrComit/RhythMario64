@@ -3471,6 +3471,7 @@ void render_rank_screen(void) {
     u8 color;
     u8 *rankText;
     s32 objectives = save_file_get_objectives();
+    u32 courseNum = gCurrCourseNum;
     
     create_dl_ortho_matrix();
 
@@ -3522,8 +3523,11 @@ void render_rank_screen(void) {
 
 
     print_rank_string(40, 60, textObj1, WHITE);
+    if(gCurrCourseNum > 1) {
+        courseNum = gCurrCourseNum - 1;
+    }
     if(gRankTimer >= 100) {
-        if(((objectives >> ((gCurrCourseNum - 1)*2)) & 0x1) != 0) {
+        if(((objectives >> ((courseNum - 1)*2)) & 0x1) != 0) {
             print_rank_string(140, 60, textCompleted, GREEN);
         } else {
             print_rank_string(140, 60, textFailed, RED);
@@ -3531,7 +3535,7 @@ void render_rank_screen(void) {
     }
     print_rank_string(40, 40, textObj2, WHITE);
     if(gRankTimer >= 120) {
-        if(((objectives >> (((gCurrCourseNum - 1)*2) + 1)) & 0x1) != 0) {
+        if(((objectives >> (((courseNum - 1)*2) + 1)) & 0x1) != 0) {
             print_rank_string(140, 40, textCompleted, GREEN);
         } else {
             print_rank_string(140, 40, textFailed, RED);

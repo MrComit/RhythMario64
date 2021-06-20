@@ -391,8 +391,6 @@ void reset_rank(void) {
     gRank.deaths = 0;
     gRank.prevHealth = 0x0880;
     gRank.damage = 0;
-    gRank.objective1 = 0;
-    gRank.objective2 = 0;
     gDead = 0;
     gRankTimer = 0;
 }
@@ -736,6 +734,7 @@ void initiate_painting_warp(void) {
  */
 s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
     s32 val04 = TRUE;
+    u32 sound;
 
     if (sDelayedWarpOp == WARP_OP_NONE) {
         m->invincTimer = -1;
@@ -791,8 +790,50 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                         //}
                     }
                 }
-                sDelayedWarpTimer = 20;
-                play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0x14, 0x00, 0x00, 0x00);
+
+                // gRankTimer++;
+                // if(gPlayer1Controller->buttonPressed & A_BUTTON) {
+                //     u8 i;
+                //     for(i = 0; i < 6; i++) {
+                //         if(gRankTimer < i*20) {
+                //             gRankTimer = i*20;
+                //             i = 6;
+                //         }
+                //     }
+                // }
+                // if(gRankTimer <= 120 && gRankTimer % 20 == 0) {
+                //     play_sound(SOUND_OBJ_POUNDING1_HIGHPRIO, gGlobalSoundSource);
+                // }
+                // if(gRankTimer == 159) {
+                //     switch(gRank.rank) {
+                //         case RANK_S:
+                //             sound = SOUND_MARIO_HERE_WE_GO;
+                //             break;
+                //         case RANK_A:
+                //             sound = SOUND_MARIO_YAHOO;
+                //             break;
+                //         case RANK_B:
+                //             sound = SOUND_MARIO_YAHOO_WAHA_YIPPEE + 0x40000;
+                //             break;
+                //         case RANK_C:
+                //             sound = SOUND_MARIO_HAHA;
+                //             break;
+                //         case RANK_D:
+                //             sound = SOUND_MARIO_WAAAOOOW;
+                //             break;
+                //         case RANK_F:
+                //             sound = SOUND_MARIO_MAMA_MIA;
+                //             break;
+                //     }
+                //     play_sound(sound, gGlobalSoundSource);
+                // }
+                // if(gRankTimer > 160) {
+                //     gRankTimer = 160;
+                //     if(gPlayer1Controller->buttonPressed & A_BUTTON) {
+                        sDelayedWarpTimer = 20;
+                        play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0x14, 0x00, 0x00, 0x00);
+                //     }
+                // }
                 break;
 
             case WARP_OP_UNKNOWN_01: // enter totwc
@@ -866,6 +907,7 @@ void initiate_delayed_warp(void) {
     s32 destWarpNode;
 
     if (sDelayedWarpOp != WARP_OP_NONE && --sDelayedWarpTimer == 0) {
+        gRankTimer = 0;
         reset_dialog_render_state();
 
         if (gDebugLevelSelect && (sDelayedWarpOp & WARP_OP_TRIGGERS_LEVEL_SELECT)) {
@@ -1015,6 +1057,11 @@ void obj_explode(struct Object *obj, s16 dontDeactivate) {
 
 void determine_rank(void) {
     s32 objectives = save_file_get_objectives();
+    u32 courseNum = gCurrCourseNum;
+
+    if(gCurrCourseNum > 1) {
+        courseNum = gCurrCourseNum - 1;
+    }
 
     gRank.totalPoints = COMPLETION_BONUS - (gRank.damage / 9.6) - (gRank.deaths*50) + (gMarioState->numCoins*15);
     if(gRank.totalPoints < 1200) {
@@ -1029,7 +1076,7 @@ void determine_rank(void) {
         gRank.rank = RANK_A;
     }
 
-    if(((objectives >> ((gCurrCourseNum - 1)*2)) & 0x1) != 0 && ((objectives >> (((gCurrCourseNum - 1)*2) + 1)) & 0x1) != 0) {
+    if(((objectives >> ((courseNum - 1)*2)) & 0x1) != 0 && ((objectives >> (((courseNum - 1)*2) + 1)) & 0x1) != 0) {
         gRank.rank--;
     }
 }
@@ -1120,6 +1167,9 @@ s32 play_mode_normal(void) {
 
     if(sCurrentBackgroundMusicSeqId != 0xFF && gLoadingCheckpoint != 0 && gSequencePlayers[0].scriptState.pc[0] >= 0x90 && gSequencePlayers[0].scriptState.pc[0] <= 0x9F) {
         gSequencePlayers[0].globalSongTimer = go_to_checkpoint(gIntendedCheckpoint);
+        if(gIntendedCheckpoint == 0) {
+            reset_rank();
+        }
         gLoadingCheckpoint = 0;
     }
 
