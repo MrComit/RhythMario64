@@ -514,6 +514,7 @@ void bhv_book_switch_loop(void);
 void bhv_fire_piranha_plant_init(void);
 void bhv_fire_piranha_plant_update(void);
 void bhv_small_piranha_flame_loop(void);
+void bhv_small_piranha_flame_init(void);
 void bhv_fire_spitter_update(void);
 void bhv_fly_guy_flame_loop(void);
 void bhv_snufit_loop(void);
