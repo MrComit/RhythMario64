@@ -53,8 +53,8 @@ void bhv_sawblade_spawner_init(void) {
 }
 
 void bhv_sawblade_nogroup_loop(void) {
-    if (o->oDistanceToMario > 5000.0f)
-        return;
+//    if (o->oDistanceToMario > 5000.0f)
+//        return;
 
     if (gCurrentCheckpoint <= 1)
         return;

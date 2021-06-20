@@ -18,12 +18,37 @@
 #include "engine/behavior_script.h"
 #include "engine/math_util.h"
 #include "object_helpers.h"
+#include "include/types.h"
+#include "audio/internal.h"
+#include "audio/load.h"
+#include "audio/external.h"
+
 
 /* @file hud.c
  * This file implements HUD rendering and power meter animations.
  * That includes stars, lives, coins, camera status, power meter, timer
  * cannon reticle, and the unused keys.
  **/
+
+#define SEC_TO_M64_TIMER(x) x*240
+#define HUD_NOTE_POOL_CAPACITY 30
+struct HudNote sHudNotePool[HUD_NOTE_POOL_CAPACITY];
+s32 sHudNotePoolCount = 0;
+struct HudNote *sCurrentHudNote;
+
+u16 sCurrentNote1 = 0;
+s16 sC1Channel1Notes[] = {65, 70, 80, 90, 100, -1};
+
+u16 sCurrentNote2 = 0;
+s16 sC1Channel2Notes[] = {120, 150, -1};
+
+u16 sCurrentNote3 = 0;
+s16 sC1Channel3Notes[] = {70, 80, -1};
+
+
+
+
+
 
 // ------------- FPS COUNTER ---------------
 // To use it, call print_fps(x,y); every frame.
@@ -316,9 +341,9 @@ void render_hud_mario_lives(void) {
  * Renders the amount of coins collected.
  */
 void render_hud_coins(void) {
-    print_text(168, HUD_TOP_Y, "+"); // 'Coin' glyph
-    print_text(184, HUD_TOP_Y, "*"); // 'X' glyph
-    print_text_fmt_int(198, HUD_TOP_Y, "%d", gHudDisplay.coins);
+    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22), 10, "+"); // 'Coin' glyph
+    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(38), 10, "*"); // 'X' glyph
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(54), 10, "%d", gHudDisplay.coins);
 }
 
 #ifdef VERSION_JP
@@ -941,6 +966,86 @@ void render_target(void) {
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 
+void clear_notes(void) {
+    s32 i, k;
+    for (i = 0, k = 0; i < HUD_NOTE_POOL_CAPACITY; i++) {
+        if (sHudNotePool[i].flags == 0) {
+            sHudNotePool[i].xPos = 0;
+            sHudNotePool[i].channel = 0;
+            sHudNotePool[i].timer = 0;
+            sHudNotePool[i].filler = 0;
+        }
+    }
+    sHudNotePoolCount = 0;
+}
+
+void delete_note(struct HudNote *n) {
+    n->flags = 0;
+}
+
+void create_note(u8 channel) {
+    s32 i = 0;
+    s32 k = 0;
+    while (sHudNotePool[i].flags != 0) {
+        i++;
+    }
+    //play_puzzle_jingle();
+    sHudNotePool[i].flags = 0x1;
+    sHudNotePool[i].xPos = 0;
+    sHudNotePool[i].channel = channel;
+    sHudNotePool[i].timer = 0;
+    sHudNotePool[i].filler = 0;
+
+
+    sHudNotePoolCount = 0;
+    for (i = 0, k = 0; i < HUD_NOTE_POOL_CAPACITY; i++) {
+        if (sHudNotePool[i].flags != 0) {
+            sHudNotePoolCount++;
+        }
+    }
+}
+
+void spawn_hud_notes(void) {
+    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
+    if (seqPlayer->globalSongTimer > (sC1Channel1Notes[sCurrentNote1] * 8) - SEC_TO_M64_TIMER(2)) {
+        create_note(0);
+        sCurrentNote1++;
+    }
+    if (seqPlayer->globalSongTimer > (sC1Channel2Notes[sCurrentNote2] * 8) - SEC_TO_M64_TIMER(2)) {
+        create_note(1);
+        sCurrentNote2++;
+    }
+    if (seqPlayer->globalSongTimer > (sC1Channel3Notes[sCurrentNote3] * 8) - SEC_TO_M64_TIMER(2)) {
+        create_note(2);
+        sCurrentNote3++;
+    }
+
+}
+
+void render_hud_notes(void) {
+    s32 i = 0;
+    for (i = 0; i < HUD_NOTE_POOL_CAPACITY; i++) {
+        if (sHudNotePool[i].flags != 0) {
+            //play_puzzle_jingle();
+            sCurrentHudNote = &sHudNotePool[i];
+            sCurrentHudNote->timer++;
+            if (sCurrentHudNote->xPos < 300) {
+                sCurrentHudNote->xPos += 5;
+            } else {
+                sCurrentHudNote->xPos = 300;
+            }
+            print_text(sCurrentHudNote->xPos, 209 - (sCurrentHudNote->channel * 15), "D");
+            if (sCurrentHudNote->timer > 60+15) {
+                delete_note(sCurrentHudNote);
+            }
+        }
+    }
+    print_text(300, 209, "A");
+    print_text(300, 194, "B");
+    print_text(300, 179, "C");
+}
+
+
 void render_hud(void) {
     s16 hudDisplayFlags;
 #ifdef VERSION_EU
@@ -984,7 +1089,7 @@ void render_hud(void) {
         }
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT) {
-            render_hud_stars();
+            //render_hud_stars();
         }
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
@@ -1009,6 +1114,11 @@ void render_hud(void) {
             print_text(10, 60, "SURFACE NODE POOL FULL");
         }
 
+        if (gCurrCourseNum) {
+            spawn_hud_notes();
+            render_hud_notes();
+            clear_notes();
+        }
         if(gCurrCourseNum == 3) {
             render_water_tri();
         }
