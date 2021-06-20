@@ -353,6 +353,7 @@ void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg
         case MARIO_SPAWN_FLYING:
             set_mario_action(m, ACT_FLYING, 2);
             m->health = 0x0880;
+            gRank.prevHealth = 0x0880;
             break;
         case MARIO_SPAWN_SWIMMING:
             set_mario_action(m, ACT_WATER_IDLE, 1);
@@ -382,6 +383,7 @@ void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg
 
 s32 gDead = 0;
 s32 gIntendedCheckpoint = 0;
+s32 gRankTimer = 0;
 
 struct Rank gRank;
 
@@ -389,10 +391,10 @@ void reset_rank(void) {
     gRank.deaths = 0;
     gRank.prevHealth = 0x0880;
     gRank.damage = 0;
-    gRank.coins = 0;
     gRank.objective1 = 0;
     gRank.objective2 = 0;
     gDead = 0;
+    gRankTimer = 0;
 }
 
 void init_mario_after_warp(void) {
@@ -1011,6 +1013,27 @@ void obj_explode(struct Object *obj, s16 dontDeactivate) {
         obj->activeFlags = ACTIVE_FLAG_DEACTIVATED;
 }
 
+void determine_rank(void) {
+    s32 objectives = save_file_get_objectives();
+
+    gRank.totalPoints = COMPLETION_BONUS - (gRank.damage / 9.6) - (gRank.deaths*50) + (gMarioState->numCoins*15);
+    if(gRank.totalPoints < 1200) {
+        gRank.rank = RANK_F;
+    } else if(gRank.totalPoints < 1500) {
+        gRank.rank = RANK_D;
+    } else if(gRank.totalPoints < 1800) {
+        gRank.rank = RANK_C;
+    } else if(gRank.totalPoints < 2000) {
+        gRank.rank = RANK_B;
+    } else {
+        gRank.rank = RANK_A;
+    }
+
+    if(((objectives >> ((gCurrCourseNum - 1)*2)) & 0x1) != 0 && ((objectives >> (((gCurrCourseNum - 1)*2) + 1)) & 0x1) != 0) {
+        gRank.rank--;
+    }
+}
+
 s32 gLoadingCheckpoint;
 
 s32 play_mode_normal(void) {
@@ -1061,8 +1084,8 @@ s32 play_mode_normal(void) {
 
     if(gRank.prevHealth > gMarioState->health) {
         gRank.damage += gRank.prevHealth - gMarioState->health;
-        gRank.prevHealth = gMarioState->health;
     }
+    gRank.prevHealth = gMarioState->health;
 
     if(gMarioState->health < 0x100 && gDead == 0) {
         obj_explode(gMarioObject, 1);
@@ -1096,9 +1119,11 @@ s32 play_mode_normal(void) {
     }
 
     if(sCurrentBackgroundMusicSeqId != 0xFF && gLoadingCheckpoint != 0 && gSequencePlayers[0].scriptState.pc[0] >= 0x90 && gSequencePlayers[0].scriptState.pc[0] <= 0x9F) {
-        go_to_checkpoint(gIntendedCheckpoint);
+        gSequencePlayers[0].globalSongTimer = go_to_checkpoint(gIntendedCheckpoint);
         gLoadingCheckpoint = 0;
     }
+
+    determine_rank();
 
     return 0;
 }
