@@ -498,7 +498,7 @@ extern s16 s8DirModeBaseYaw;
 
 void init_mario_after_warp(void) {
     struct ObjectWarpNode *spawnNode = area_get_warp_node(sWarpDest.nodeId);
-    if(gIntendedCheckpoint != 0) {
+    if(gIntendedCheckpoint != 0 && sDelayedWarpOp == WARP_OP_DEATH) {
         spawnNode = area_get_warp_node(0xA + gIntendedCheckpoint);
     }
     u32 marioSpawnType = get_mario_spawn_type(spawnNode->object);
@@ -552,7 +552,7 @@ void init_mario_after_warp(void) {
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x10, 0x00, 0x00, 0x00);
             break;
         case MARIO_SPAWN_AIRBORNE_DEATH:
-            if (sWarpDest.nodeId = WARP_NODE_DEATH) {
+            if (sWarpDest.nodeId == WARP_NODE_DEATH) {
                 gMarioState->faceAngle[1] = spawnNode->object->oFaceAngleYaw;
                 s8DirModeBaseYaw = spawnNode->object->oFaceAngleYaw + 0x8000;
                 gRedCoinsCollected = 0;
@@ -571,7 +571,7 @@ void init_mario_after_warp(void) {
             play_transition(WARP_TRANSITION_FADE_FROM_STAR, 0x10, 0x00, 0x00, 0x00);
             break;
         case MARIO_SPAWN_FLYING:
-            if (sWarpDest.nodeId = WARP_NODE_DEATH) {
+            if (sWarpDest.nodeId == WARP_NODE_DEATH) {
                 reset_objects(gCurrentArea->objectSpawnInfos);
                 gRedCoinsCollected = 0;
                 gMarioState->health = 0x0880;
@@ -588,7 +588,7 @@ void init_mario_after_warp(void) {
             play_transition(WARP_TRANSITION_FADE_FROM_STAR, 0x10, 0x00, 0x00, 0x00);
             break;
         default:
-            if (sWarpDest.nodeId = WARP_NODE_DEATH) {
+            if (sWarpDest.nodeId == WARP_NODE_DEATH) {
                 reset_objects(gCurrentArea->objectSpawnInfos);
                 gRedCoinsCollected = 0;
                 gMarioState->health = 0x0880;
@@ -1229,6 +1229,10 @@ void determine_rank(void) {
 
     if(((objectives >> ((courseNum - 1)*2)) & 0x1) != 0 && ((objectives >> (((courseNum - 1)*2) + 1)) & 0x1) != 0) {
         gRank.rank--;
+    }
+
+    if(gRank.deaths > 0 && gRank.rank == 0) {
+        gRank.rank++;
     }
 }
 

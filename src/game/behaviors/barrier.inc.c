@@ -50,7 +50,11 @@ void bhv_gate_loop(void) {
 
 }
 
-
+void kill_mario_if_behind(void) {
+    if(o->oAngleToMario > 0x8000) {
+        gMarioState->health = 0;
+    }
+}
 
 
 void bhv_c3_barrier_loop(void) {
@@ -68,6 +72,9 @@ void bhv_c3_barrier_loop(void) {
                 if (o->oPosZ == o->oHomeZ - 8000.0f) {
                     o->oF4 = 1;
                 }
+                print_text_fmt_int(40, 60, "%x", o->oFaceAngleYaw);
+                print_text_fmt_int(40, 40, "%x", o->oAngleToMario);
+                kill_mario_if_behind();
             }
             break;
         case 1:
@@ -78,6 +85,7 @@ void bhv_c3_barrier_loop(void) {
                 if (o->oPosX == o->oHomeX + 15900.0f) {
                     o->oF4 = 1;
                 }
+                kill_mario_if_behind();
             }
             break;
         case 2:
@@ -87,6 +95,7 @@ void bhv_c3_barrier_loop(void) {
                 if (o->oPosX == o->oHomeX + 11100.0f) {
                     o->oF4 = 1;
                 }
+                kill_mario_if_behind();
             }
             break;
         case 3:
@@ -100,6 +109,7 @@ void bhv_c3_barrier_loop(void) {
                 if (o->oPosZ == o->oHomeZ - 11475.0f) {
                     o->oF4 = 1;
                 }
+                kill_mario_if_behind();
             }
             break;
         case 4:
@@ -113,6 +123,7 @@ void bhv_c3_barrier_loop(void) {
                 if (o->oPosX == o->oHomeX + 6975.0f) {
                     o->oF4 = 1;
                 }
+                kill_mario_if_behind();
             }
             break;
         case 5:
@@ -126,6 +137,7 @@ void bhv_c3_barrier_loop(void) {
                 if (o->oPosZ == o->oHomeZ + 12475.0f) {
                     o->oF4 = 1;
                 }
+                kill_mario_if_behind();
             }
             break;
     }
@@ -144,6 +156,7 @@ void bhv_c1_barrier_loop(void) {
                 if (o->oPosX == o->oHomeX + 18500.0f) {
                     o->oF4 = 1;
                 }
+                kill_mario_if_behind();
             }
             break;
         case 1:
@@ -157,6 +170,7 @@ void bhv_c1_barrier_loop(void) {
                 if (o->oPosZ == o->oHomeZ + 19500.0f) {
                     o->oF4 = 1;
                 }
+                kill_mario_if_behind();
             }
             break;
     }
@@ -166,6 +180,10 @@ void bhv_c1_barrier_loop(void) {
 void bhv_barrier_loop(void) {
     if (o->oTimer == 0) {
         o->oPosY += 10000.0f;
+    }
+    o->oAngleToMario = (obj_angle_to_object(o, gMarioObject) - o->oFaceAngleYaw) % 0x10000;
+    while(o->oAngleToMario < 0) {
+        o->oAngleToMario += 0x10000;
     }
     switch (gCurrLevelNum) {
         case LEVEL_BOB:

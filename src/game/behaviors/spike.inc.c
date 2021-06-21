@@ -84,7 +84,7 @@ void bhv_spike_update(void) {
 
             if (o->oShotDelay == 0)
             {
-                if (o->oAnimState == 0 && i == 1)
+                if (o->oAnimState == 0 && i == 1 && o->oDistanceToMario < 10000.0f)
                 {
                     cur_obj_init_animation(1);
                     o->oAnimState = 1;

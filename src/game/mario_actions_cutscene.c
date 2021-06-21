@@ -632,6 +632,7 @@ void rank_increment(void) {
 
 void rank_save(void) {
     gSaveFileModified = TRUE;
+    save_file_set_star_flags(gCurrSaveFileNum - 1, gCurrCourseNum, gCurrAreaIndex);
     if(gRank.rank < save_file_get_rank(gCurrCourseNum - 1)) {
         save_file_set_rank(gCurrCourseNum - 1, gRank.rank);
     }
