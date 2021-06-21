@@ -20,7 +20,7 @@ void bhv_peach_cutscene_loop(void) {
         }
     }
     if(gMyCutsceneState == 11) {
-        if(gMyCutsceneTimer > 15) {
+        if(gMyCutsceneTimer > 16) {
             if(gDialogResponse != 0) {
                 gMyCutsceneState++;
                 gMyCutsceneTimer = 0;
