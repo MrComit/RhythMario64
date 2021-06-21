@@ -88,17 +88,19 @@ void bhv_laser_ring_spawner_loop(void)
     f32 xDel = gMarioState->pos[0] - o->oPosX;
     f32 zDel = gMarioState->pos[2] - o->oPosZ;
     f32 marioXZDist = sqrtf(xDel * xDel + zDel * zDel);
-    switch (o->oAction)
-    {
-        case ZH_LASER_RING_SPAWNER_ACT_IDLE:
-            laser_ring_spawner_act_idle(marioXZDist);
-            break;
-        case ZH_LASER_RING_SPAWNER_ACT_CHARGING:
-            laser_ring_spawner_act_charging(marioXZDist);
-            break;
-        case ZH_LASER_RING_SPAWNER_ACT_COOLDOWN:
-            laser_ring_spawner_act_cooldown();
-            break;
+    if(o->oTimer > 5) {
+        switch (o->oAction)
+        {
+            case ZH_LASER_RING_SPAWNER_ACT_IDLE:
+                laser_ring_spawner_act_idle(marioXZDist);
+                break;
+            case ZH_LASER_RING_SPAWNER_ACT_CHARGING:
+                laser_ring_spawner_act_charging(marioXZDist);
+                break;
+            case ZH_LASER_RING_SPAWNER_ACT_COOLDOWN:
+                laser_ring_spawner_act_cooldown();
+                break;
+        }
     }
     o->oInteractStatus = 0;
 }

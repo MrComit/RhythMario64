@@ -497,10 +497,8 @@ extern s16 s8DirModeBaseYaw;
 
 
 void init_mario_after_warp(void) {
-    struct ObjectWarpNode *spawnNode = area_get_warp_node(sWarpDest.nodeId);
-    if(gIntendedCheckpoint != 0 && sDelayedWarpOp == WARP_OP_DEATH) {
-        spawnNode = area_get_warp_node(0xA + gIntendedCheckpoint);
-    }
+    struct ObjectWarpNode *spawnNode;
+    spawnNode = area_get_warp_node(sWarpDest.nodeId);
     u32 marioSpawnType = get_mario_spawn_type(spawnNode->object);
 
     if (gMarioState->action != ACT_UNINITIALIZED) {
@@ -530,7 +528,7 @@ void init_mario_after_warp(void) {
 
     reset_camera(gCurrentArea->camera);
     sWarpDest.type = WARP_TYPE_NOT_WARPING;
-    sDelayedWarpOp = WARP_OP_NONE;
+    //sDelayedWarpOp = WARP_OP_NONE;
 
     switch (marioSpawnType) {
         case MARIO_SPAWN_UNKNOWN_03:
@@ -552,7 +550,7 @@ void init_mario_after_warp(void) {
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x10, 0x00, 0x00, 0x00);
             break;
         case MARIO_SPAWN_AIRBORNE_DEATH:
-            if (sWarpDest.nodeId == WARP_NODE_DEATH) {
+            if (sDelayedWarpOp == WARP_OP_DEATH) {
                 gMarioState->faceAngle[1] = spawnNode->object->oFaceAngleYaw;
                 s8DirModeBaseYaw = spawnNode->object->oFaceAngleYaw + 0x8000;
                 gRedCoinsCollected = 0;
@@ -571,7 +569,7 @@ void init_mario_after_warp(void) {
             play_transition(WARP_TRANSITION_FADE_FROM_STAR, 0x10, 0x00, 0x00, 0x00);
             break;
         case MARIO_SPAWN_FLYING:
-            if (sWarpDest.nodeId == WARP_NODE_DEATH) {
+            if (sDelayedWarpOp == WARP_OP_DEATH) {
                 reset_objects(gCurrentArea->objectSpawnInfos);
                 gRedCoinsCollected = 0;
                 gMarioState->health = 0x0880;
@@ -588,7 +586,7 @@ void init_mario_after_warp(void) {
             play_transition(WARP_TRANSITION_FADE_FROM_STAR, 0x10, 0x00, 0x00, 0x00);
             break;
         default:
-            if (sWarpDest.nodeId == WARP_NODE_DEATH) {
+            if (sDelayedWarpOp == WARP_OP_DEATH) {
                 reset_objects(gCurrentArea->objectSpawnInfos);
                 gRedCoinsCollected = 0;
                 gMarioState->health = 0x0880;
@@ -605,6 +603,8 @@ void init_mario_after_warp(void) {
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x10, 0x00, 0x00, 0x00);
             break;
     }
+
+    sDelayedWarpOp = WARP_OP_NONE;
 
     if (gCurrDemoInput == NULL) {
         set_background_music(gCurrentArea->musicParam, gCurrentArea->musicParam2, 0);
@@ -1056,6 +1056,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
 void initiate_delayed_warp(void) {
     struct ObjectWarpNode *warpNode;
     s32 destWarpNode;
+    u16 epicNode;
 
     if (sDelayedWarpOp != WARP_OP_NONE && --sDelayedWarpTimer == 0) {
         gRankTimer = 0;
@@ -1109,6 +1110,12 @@ void initiate_delayed_warp(void) {
 
                 default:
                     warpNode = area_get_warp_node(sSourceWarpNodeId);
+
+                    if(gIntendedCheckpoint != 0 && sDelayedWarpOp == WARP_OP_DEATH) {
+                        epicNode = warpNode->node.destNode += gIntendedCheckpoint;
+                    } else {
+                        epicNode = warpNode->node.destNode;
+                    }
 
                     initiate_warp(warpNode->node.destLevel & 0x7F, warpNode->node.destArea,
                                   warpNode->node.destNode, sDelayedWarpArg);
@@ -1309,6 +1316,7 @@ s32 play_mode_normal(void) {
             } else if(gDialogResponse == 2) {
                 level_trigger_warp(gMarioState, WARP_OP_DEATH);
                 gIntendedCheckpoint = 0;
+                gCurrentCheckpoint = 0;
                 gDead = 16;
                 gLoadingCheckpoint = 1;
             }

@@ -445,10 +445,10 @@ void bhv_mario_update(void) {
     }
 
     gCheckpointLoaded = 0;
-    // if(gPlayer1Controller->buttonPressed & L_TRIG) {
-    //     seqPlayer->globalSongTimer = go_to_checkpoint(2);
-    // }
-    if (gCurrAreaIndex == 1 && gCurrCourseNum >= 1 && gCurrCourseNum <= 4       && gCurrCourseNum != 3) {
+    if(gPlayer1Controller->buttonPressed & L_TRIG) {
+        seqPlayer->globalSongTimer = go_to_checkpoint(2);
+    }
+    if (gCurrAreaIndex == 1 && gCurrCourseNum >= 1 && gCurrCourseNum <= 4 && gMarioState->health >= 0x100       && gCurrCourseNum != 3) {
         get_current_checkpoint();
     }
 
