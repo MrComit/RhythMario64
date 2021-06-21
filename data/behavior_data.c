@@ -6536,3 +6536,15 @@ const BehaviorScript bhvCutscenePortal[] = {
         ADD_INT(oFaceAngleRoll, 0x200),
     END_LOOP(),
 };
+
+
+
+const BehaviorScript bhvRotatingSawblade[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    SET_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_rotating_sawblade_spawner_loop),
+    END_LOOP(),
+};
