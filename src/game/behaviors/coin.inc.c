@@ -175,13 +175,15 @@ void spawn_coin_in_formation(s32 sp50, s32 sp54) {
 }
 
 void bhv_coin_formation_init(void) {
-    o->oCoinUnkF4 = (o->oBehParams >> 8) & 0xFF;
+    o->oCoinUnkF4 = 0;//(o->oBehParams >> 8) & 0xFF;
     //cur_obj_set_model(MODEL_BULLET_BILL);
 }
 
+#include "game/print.h"
+
 void bhv_coin_formation_loop(void) {
     s32 bitIndex;
-    o->oCoinUnkF4 = (o->oBehParams >> 8) & 0xFF;
+    //o->oCoinUnkF4 = (o->oBehParams >> 8) & 0xFF;
     switch (o->oAction) {
         case 0:
             if (o->oDistanceToMario < 2000.0f) {
@@ -202,7 +204,7 @@ void bhv_coin_formation_loop(void) {
     }
 
     // Casting to u8 doesn't seem to match
-    set_object_respawn_info_bits(o, o->oCoinUnkF4 & 0xFF);
+    //set_object_respawn_info_bits(o, o->oCoinUnkF4 & 0xFF);
 }
 
 void coin_inside_boo_act_1(void) {

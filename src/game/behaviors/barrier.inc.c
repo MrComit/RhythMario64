@@ -71,7 +71,7 @@ void bhv_c3_barrier_loop(void) {
             }
             break;
         case 1:
-            obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 0);
+            obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 0x0000FF00);
             if (obj != NULL && obj->oF4 == 1 && o->oF4 == 0) {
                 o->oPosY = approach_f32(o->oPosY, o->oHomeY, 80.0f, 80.0f);
                 o->oPosX = approach_f32(o->oPosX, o->oHomeX + 15900.0f, 20.0f, 20.0f);
@@ -93,7 +93,7 @@ void bhv_c3_barrier_loop(void) {
             if (o->oTimer == 0) {
                 o->header.gfx.scale[2] = 0.25f;
             }
-            obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 2 << 16);
+            obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 0x0002FF00);
             if (obj != NULL && obj->oF4 == 1 && o->oF4 == 0) {
                 o->oPosY = approach_f32(o->oPosY, o->oHomeY, 200.0f, 200.0f);
                 o->oPosZ = approach_f32(o->oPosZ, o->oHomeZ - 11475.0f, 30.0f, 30.0f);
@@ -106,7 +106,7 @@ void bhv_c3_barrier_loop(void) {
             if (o->oTimer == 0) {
                 o->header.gfx.scale[2] = 0.25f;
             }
-            obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 3 << 16);
+            obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 0x0003FF00);
             if (obj != NULL && obj->oF4 == 1 && o->oF4 == 0) {
                 o->oPosY = o->oHomeY;
                 o->oPosX = approach_f32(o->oPosX, o->oHomeX + 6975.0f, 30.0f, 30.0f);
@@ -119,7 +119,7 @@ void bhv_c3_barrier_loop(void) {
             if (o->oTimer == 0) {
                 o->header.gfx.scale[2] = 0.25f;
             }
-            obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 4 << 16);
+            obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 0x0004FF00);
             if (obj != NULL && obj->oF4 == 1 && o->oF4 == 0) {
                 o->oPosY = o->oHomeY;
                 o->oPosZ = approach_f32(o->oPosZ, o->oHomeZ + 12475.0f, 30.0f, 30.0f);
