@@ -76,6 +76,46 @@
             "envelope": "envelopeWave",
             "sound": "37_square_synth"
         },
+        "instYeah": {
+            "release_rate": 208,
+            "envelope": "envelopeWave",
+            "sound": "4A_yeah"
+        },
+        "instLaugh": {
+            "release_rate": 208,
+            "envelope": "envelopeWave",
+            "sound": "4B_laugh"
+        },
+        "instYouCantDoAnything": {
+            "release_rate": 208,
+            "envelope": "envelopeWave",
+            "sound": "4C_lyric1"
+        },
+        "instSoDontEvenTry": {
+            "release_rate": 208,
+            "envelope": "envelopeWave",
+            "sound": "4D_lyric2"
+        },
+        "instGetSomeHelp": {
+            "release_rate": 208,
+            "envelope": "envelopeWave",
+            "sound": "4E_lyric3"
+        },
+        "instDontDoWhatMarioDoes": {
+            "release_rate": 208,
+            "envelope": "envelopeWave",
+            "sound": "4F_lyric4"
+        },
+        "instMarioDeadOrAliveIs": {
+            "release_rate": 208,
+            "envelope": "envelopeWave",
+            "sound": "50_lyric5"
+        },
+        "instMine": {
+            "release_rate": 208,
+            "envelope": "envelopeWave",
+            "sound": "51_lyric6"
+        },
         "percussion": [
             {"release_rate": 10, "pan": 62, "envelope": "envelopePerc", "sound": {"sample": "06_kick_drum_1", "tuning": 0.210224}},
             {"release_rate": 10, "pan": 62, "envelope": "envelopePerc", "sound": {"sample": "06_kick_drum_1", "tuning": 0.2227245}},
@@ -149,6 +189,14 @@
         "instOrchHit",
         "instElePiano",
         "instChoir",
-        "instSawWave"
+        "instSawWave",
+        "instYeah",
+        "instLaugh",
+        "instYouCantDoAnything",
+        "instSoDontEvenTry",
+        "instGetSomeHelp",
+        "instDontDoWhatMarioDoes",
+        "instMarioDeadOrAliveIs",
+        "instMine"
     ]
 }
