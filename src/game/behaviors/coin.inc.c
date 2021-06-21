@@ -176,10 +176,12 @@ void spawn_coin_in_formation(s32 sp50, s32 sp54) {
 
 void bhv_coin_formation_init(void) {
     o->oCoinUnkF4 = (o->oBehParams >> 8) & 0xFF;
+    //cur_obj_set_model(MODEL_BULLET_BILL);
 }
 
 void bhv_coin_formation_loop(void) {
     s32 bitIndex;
+    o->oCoinUnkF4 = (o->oBehParams >> 8) & 0xFF;
     switch (o->oAction) {
         case 0:
             if (o->oDistanceToMario < 2000.0f) {
