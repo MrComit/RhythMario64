@@ -397,7 +397,7 @@ void bhv_mario_update(void) {
         i++;
     }
 
-    print_text_fmt_int(260, 10, "%x", seqPlayer->globalSongTimer);
+    //print_text_fmt_int(260, 10, "%x", seqPlayer->globalSongTimer); //goodbye my love............
 
     for(i = 0; i < CHANNELS_MAX; i++) {
         barsCovered[i] = 0;
@@ -448,7 +448,7 @@ void bhv_mario_update(void) {
     // if(gPlayer1Controller->buttonPressed & L_TRIG) {
     //     seqPlayer->globalSongTimer = go_to_checkpoint(2);
     // }
-    if (gCurrAreaIndex == 1) {
+    if (gCurrAreaIndex == 1 && gCurrCourseNum >= 1 && gCurrCourseNum <= 4       && gCurrCourseNum != 3) {
         get_current_checkpoint();
     }
 

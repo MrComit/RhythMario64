@@ -395,6 +395,7 @@ void reset_rank(void) {
     gRank.damage = 0;
     gDead = 0;
     gRankTimer = 0;
+    gMarioState->numCoins = 0;
 }
 
 
@@ -1562,6 +1563,8 @@ s32 init_level(void) {
 
     reset_rank();
 
+    gMyCutsceneState = gMyCutsceneTimer = 0;
+
     return 1;
 }
 
@@ -1626,6 +1629,7 @@ s32 lvl_set_current_level(UNUSED s16 arg0, s32 levelNum) {
     sWarpCheckpointActive = FALSE;
     gCurrLevelNum = levelNum;
     gCurrCourseNum = gLevelToCourseNumTable[levelNum - 1];
+	if (gCurrLevelNum == LEVEL_CASTLE) return 0;
 	if (gCurrLevelNum == LEVEL_CCM) return 0;
 	if (gCurrLevelNum == LEVEL_CASTLE_GROUNDS) return 0;
 	if (gCurrLevelNum == LEVEL_JRB) return 0;

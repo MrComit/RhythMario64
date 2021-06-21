@@ -174,4 +174,6 @@ void eu_set_language(u16 language);
 u16 eu_get_language(void);
 #endif
 
+extern struct SaveBuffer gSaveBuffer;
+
 #endif // SAVE_FILE_H

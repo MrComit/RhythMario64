@@ -757,6 +757,13 @@ static void level_cmd_get_or_set_var(void) {
     sCurrentCmd = CMD_NEXT;
 }
 
+s32 determine_starting_level(void) {
+    if(save_file_exists(gCurrSaveFileNum - 1))
+        return LEVEL_CASTLE_GROUNDS;
+    else
+        return 0x06;
+}
+
 static void (*LevelScriptJumpTable[])(void) = {
     /*00*/ level_cmd_load_and_execute,
     /*01*/ level_cmd_exit_and_execute,

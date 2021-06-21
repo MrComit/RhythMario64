@@ -12,3 +12,6 @@
 #include "bowser/geo.inc.c"
 
 #include "new_bowser/geo.inc.c"
+
+#include "toad/geo.inc.c"
+#include "peach/geo.inc.c"

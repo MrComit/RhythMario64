@@ -243,6 +243,7 @@
 #define CUTSCENE_EXIT_WATERFALL       179
 #define CUTSCENE_EXIT_FALL_WMOTR      180
 #define CUTSCENE_ENTER_POOL           181
+#define CUTSCENE_EPIC_INTRO           182
 
 /**
  * Stop the cutscene.
@@ -771,5 +772,8 @@ void obj_rotate_towards_point(struct Object *o, Vec3f point, s16 pitchOff, s16 y
 Gfx *geo_camera_fov(s32 callContext, struct GraphNode *g, UNUSED void *context);
 
 extern struct CameraFOVStatus sFOVState;
+
+extern u32 gMyCutsceneState;
+extern u32 gMyCutsceneTimer;
 
 #endif // CAMERA_H
