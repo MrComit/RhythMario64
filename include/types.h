@@ -348,4 +348,15 @@ struct MarioState
     /*0xC4*/ f32 unkC4;
 };
 
+
+struct HudNote
+{
+    /*0x00*/ s16 xPos;
+    /*0x02*/ u8 flags;
+    /*0x03*/ u8 channel;
+    /*0x04*/ s16 timer;
+    /*0x06*/ u16 filler;
+};
+
+
 #endif // TYPES_H

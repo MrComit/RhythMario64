@@ -44,6 +44,7 @@
 #define OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO           (1 << 13) // 0x00002000
 #define OBJ_FLAG_PERSISTENT_RESPAWN               (1 << 14) // 0x00004000
 #define OBJ_FLAG_8000                             (1 << 15) // 0x00008000
+#define OBJ_FLAG_SPAWNED_OBJECT                   (1 << 17) // 0x00020000
 #define OBJ_FLAG_30                               (1 << 30) // 0x40000000
 
 /* oHeldState */

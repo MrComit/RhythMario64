@@ -18,12 +18,46 @@
 #include "engine/behavior_script.h"
 #include "engine/math_util.h"
 #include "object_helpers.h"
+#include "include/types.h"
+#include "audio/internal.h"
+#include "audio/load.h"
+#include "audio/external.h"
+
 
 /* @file hud.c
  * This file implements HUD rendering and power meter animations.
  * That includes stars, lives, coins, camera status, power meter, timer
  * cannon reticle, and the unused keys.
  **/
+
+#define SEC_TO_M64_TIMER(x) x*240
+#define HUD_NOTE_POOL_CAPACITY 30
+struct HudNote sHudNotePool[HUD_NOTE_POOL_CAPACITY];
+s32 sHudNotePoolCount = 0;
+struct HudNote *sCurrentHudNote;
+
+u16 sCurrentNote1 = 0;
+u16 sCurrentNote2 = 0;
+u16 sCurrentNote3 = 0;
+u16 sCurrentNote4 = 0;
+
+s16 sC1Channel1Notes[] = {65, 70, 80, 90, 100, -1};
+
+s16 sC1Channel2Notes[] = {120, 150, -1};
+
+s16 sC1Channel3Notes[] = {70, 80, -1};
+
+
+s16 *sHudNoteLists[4][4] = {
+{sC1Channel1Notes, sC1Channel2Notes, sC1Channel3Notes, NULL},
+{NULL, NULL, NULL, NULL},
+{sC1Channel1Notes, sC1Channel2Notes, sC1Channel3Notes, NULL},
+{NULL, sC1Channel2Notes, sC1Channel3Notes, sC1Channel1Notes},
+};
+
+
+
+
 
 // ------------- FPS COUNTER ---------------
 // To use it, call print_fps(x,y); every frame.
@@ -316,9 +350,9 @@ void render_hud_mario_lives(void) {
  * Renders the amount of coins collected.
  */
 void render_hud_coins(void) {
-    print_text(168, HUD_TOP_Y, "+"); // 'Coin' glyph
-    print_text(184, HUD_TOP_Y, "*"); // 'X' glyph
-    print_text_fmt_int(198, HUD_TOP_Y, "%d", gHudDisplay.coins);
+    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22), 10, "+"); // 'Coin' glyph
+    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(38), 10, "*"); // 'X' glyph
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(54), 10, "%d", gHudDisplay.coins);
 }
 
 #ifdef VERSION_JP
@@ -932,6 +966,81 @@ Gfx target_rect_mesh[] = {
 	gsSPEndDisplayList(),
 };
 
+
+Gfx note_note_ia4_aligner[] = {gsSPEndDisplayList()};
+u8 note_note_ia4[] = {
+	0xee, 0xee, 0xee, 0xee, 0xee, 0xee, 0xee, 0xee, 
+	0xee, 0xee, 0x11, 0x11, 0x11, 0x11, 0xee, 0xee, 
+	0xee, 0xe1, 0x11, 0x11, 0x11, 0x11, 0x1e, 0xee, 
+	0xee, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0xee, 
+	0xe1, 0x11, 0x11, 0xff, 0xff, 0x11, 0x11, 0x1e, 
+	0xe1, 0x11, 0x1f, 0xff, 0xff, 0xf1, 0x11, 0x1e, 
+	0xe1, 0x11, 0xff, 0xff, 0xff, 0xff, 0x11, 0x1e, 
+	0xe1, 0x11, 0xff, 0xff, 0xff, 0xff, 0x11, 0x1e, 
+	0xe1, 0x11, 0xff, 0xff, 0xff, 0xff, 0x11, 0x1e, 
+	0xe1, 0x11, 0xff, 0xff, 0xff, 0xff, 0x11, 0x1e, 
+	0xe1, 0x11, 0x1f, 0xff, 0xff, 0xf1, 0x11, 0x1e, 
+	0xe1, 0x11, 0x11, 0xff, 0xff, 0x11, 0x11, 0x1e, 
+	0xee, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0xee, 
+	0xee, 0xe1, 0x11, 0x11, 0x11, 0x11, 0x1e, 0xee, 
+	0xee, 0xee, 0x11, 0x11, 0x11, 0x11, 0xee, 0xee, 
+	0xee, 0xee, 0xee, 0xee, 0xee, 0xee, 0xee, 0xee, 
+	
+};
+
+Vtx note_rect_mesh_vtx_0[4] = {
+	{{{0, 0, 0},0, {0, 512},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{6, 0, 0},0, {512, 512},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{6, 6, 0},0, {512, 0},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{0, 6, 0},0, {0, 0},{0x0, 0x0, 0x7F, 0xFF}}},
+};
+
+Gfx note_rect_mesh_tri_0[] = {
+	gsSPVertex(note_rect_mesh_vtx_0 + 0, 4, 0),
+	gsSP1Triangle(0, 1, 2, 0),
+	gsSP1Triangle(0, 2, 3, 0),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_note_note_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, TEXEL0),
+	gsDPSetTextureFilter(G_TF_POINT),
+	gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPTileSync(),
+	gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_8b, 8, note_note_ia4),
+	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_8b, 1, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
+	gsDPLoadSync(),
+	gsDPLoadTile(7, 0, 0, 30, 60),
+	gsDPPipeSync(),
+	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_4b, 1, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
+	gsDPSetTileSize(0, 0, 0, 60, 60),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_note_note_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetTextureFilter(G_TF_BILERP),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsSPEndDisplayList(),
+};
+
+Gfx note_rect_mesh[] = {
+	gsSPDisplayList(mat_note_note_layer1),
+	gsSPDisplayList(note_rect_mesh_tri_0),
+	gsSPDisplayList(mat_revert_note_note_layer1),
+	gsDPPipeSync(),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPClearGeometryMode(G_TEXTURE_GEN),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 0),
+	gsSPEndDisplayList(),
+};
+
+
+
+
 s32 gRenderTarget, gTargetX, gTargetY;
 
 void render_target(void) {
@@ -940,6 +1049,111 @@ void render_target(void) {
     gSPDisplayList(gDisplayListHead++, &target_rect_mesh);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
+
+void clear_notes(void) {
+    s32 i, k;
+    for (i = 0, k = 0; i < HUD_NOTE_POOL_CAPACITY; i++) {
+        if (sHudNotePool[i].flags == 0) {
+            sHudNotePool[i].xPos = 0;
+            sHudNotePool[i].channel = 0;
+            sHudNotePool[i].timer = 0;
+            sHudNotePool[i].filler = 0;
+        }
+    }
+    sHudNotePoolCount = 0;
+}
+
+void delete_note(struct HudNote *n) {
+    n->flags = 0;
+}
+
+void create_note(u8 channel) {
+    s32 i = 0;
+    s32 k = 0;
+    while (sHudNotePool[i].flags != 0) {
+        i++;
+    }
+    //play_puzzle_jingle();
+    sHudNotePool[i].flags = 0x1;
+    sHudNotePool[i].xPos = 0;
+    sHudNotePool[i].channel = channel;
+    sHudNotePool[i].timer = 0;
+    sHudNotePool[i].filler = 0;
+
+
+    sHudNotePoolCount = 0;
+    for (i = 0, k = 0; i < HUD_NOTE_POOL_CAPACITY; i++) {
+        if (sHudNotePool[i].flags != 0) {
+            sHudNotePoolCount++;
+        }
+    }
+}
+
+void spawn_hud_notes(void) {
+    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
+    s16 *notes1 = sHudNoteLists[gCurrCourseNum - 1][0];
+    s16 *notes2 = sHudNoteLists[gCurrCourseNum - 1][1];
+    s16 *notes3 = sHudNoteLists[gCurrCourseNum - 1][2];
+    s16 *notes4 = sHudNoteLists[gCurrCourseNum - 1][3];
+
+    if (notes1 != NULL && seqPlayer->globalSongTimer > (notes1[sCurrentNote1] * 8) - SEC_TO_M64_TIMER(1)) {
+        create_note(0);
+        sCurrentNote1++;
+    }
+    if (notes2 != NULL && seqPlayer->globalSongTimer > (notes2[sCurrentNote2] * 8) - SEC_TO_M64_TIMER(1)) {
+        create_note(1);
+        sCurrentNote2++;
+    }
+    if (notes3 != NULL && seqPlayer->globalSongTimer > (notes3[sCurrentNote3] * 8) - SEC_TO_M64_TIMER(1)) {
+        create_note(2);
+        sCurrentNote3++;
+    }
+    if (notes4 != NULL && seqPlayer->globalSongTimer > (notes4[sCurrentNote4] * 8) - SEC_TO_M64_TIMER(1)) {
+        create_note(3);
+        sCurrentNote4++;
+    }
+
+}
+
+u8 sHudNoteChannelEnvs[4][4] = {
+{0xFF, 0, 0, 0xC0},
+{0, 0, 0xFF, 0xC0},
+{0, 0xFF, 0, 0xC0},
+{0xFF, 0xFF, 0, 0xC0},
+};
+
+void render_hud_note_helper(s16 x, s16 y, u8 channel) {
+    create_dl_translation_matrix(G_MTX_PUSH, (f32)x, (f32)y, 0.0f);
+    gDPSetEnvColor(gDisplayListHead++, sHudNoteChannelEnvs[channel][0], sHudNoteChannelEnvs[channel][1], 
+                    sHudNoteChannelEnvs[channel][2], sHudNoteChannelEnvs[channel][3]);
+    gSPDisplayList(gDisplayListHead++, &note_rect_mesh);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
+
+void render_hud_notes(void) {
+    s32 i = 0;
+    for (i = 0; i < HUD_NOTE_POOL_CAPACITY; i++) {
+        if (sHudNotePool[i].flags != 0) {
+            //play_puzzle_jingle();
+            sCurrentHudNote = &sHudNotePool[i];
+            sCurrentHudNote->timer++;
+            if (sCurrentHudNote->xPos < 60) {
+                sCurrentHudNote->xPos += 2;
+            } else {
+                sCurrentHudNote->xPos = 60;
+            }
+            //print_text(sCurrentHudNote->xPos, 209 - (sCurrentHudNote->channel * 15), "D");
+            render_hud_note_helper(sCurrentHudNote->xPos, 220 - (sCurrentHudNote->channel * 15), sCurrentHudNote->channel);
+            if (sCurrentHudNote->timer > 30+15) {
+                delete_note(sCurrentHudNote);
+            }
+        }
+    }
+    print_text(60, 220, "A");
+    print_text(60, 205, "B");
+    print_text(60, 190, "C");
+}
+
 
 void render_hud(void) {
     s16 hudDisplayFlags;
@@ -984,7 +1198,7 @@ void render_hud(void) {
         }
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT) {
-            render_hud_stars();
+            //render_hud_stars();
         }
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
@@ -1009,6 +1223,11 @@ void render_hud(void) {
             print_text(10, 60, "SURFACE NODE POOL FULL");
         }
 
+        if (gCurrCourseNum) {
+            spawn_hud_notes();
+            render_hud_notes();
+            clear_notes();
+        }
         if(gCurrCourseNum == 3) {
             render_water_tri();
         }
