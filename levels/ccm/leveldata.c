@@ -54,3 +54,4 @@
 #include "levels/ccm/castle_rock/collision.inc.c"
 #include "levels/ccm/castle_rock/model.inc.c"
 #include "levels/ccm/disco_ball/model.inc.c"
+#include "levels/ccm/disco_lock/model.inc.c"

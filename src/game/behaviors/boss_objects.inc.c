@@ -1,3 +1,10 @@
+Vec3f sDiscoBulletPos[3] = {
+{2767.0f, 1500.0f, 4842.0f},
+{0.0f, 1500.0f, 4842.0f},
+{-2767.0f, 1500.0f, 4842.0f},
+};
+
+
 void bhv_disco_switch_loop(void) {
     switch (o->oAction) {
         case 0:
@@ -13,11 +20,9 @@ void bhv_disco_switch_loop(void) {
             cur_obj_scale_over_time(2, 3, 1.5f, 0.2f);
             if (o->oTimer == 3) {
                 struct Object *obj = spawn_object(o, MODEL_BULLET_BILL, bhvDiscoBullet);
-                struct Object *obj2 = cur_obj_nearest_object_with_behavior(bhvDiscoLock);
-                if (obj2 != NULL) {
-                    obj->oPosY = obj2->oPosY;
-                    obj->oFaceAngleYaw = obj->oMoveAngleYaw = obj_angle_to_object(obj, obj2);
-                }
+                vec3f_copy(&obj->oPosX, sDiscoBulletPos[o->oBehParams2ndByte]);
+                obj->oMoveAngleYaw = 0x8000;
+
                 cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
                 o->oAction = 2;
                 cur_obj_shake_screen(SHAKE_POS_SMALL);

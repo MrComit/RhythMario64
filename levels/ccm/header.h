@@ -73,4 +73,6 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/disco_ball/geo_header.h"
 
+#include "levels/ccm/disco_lock/geo_header.h"
+
 #endif

@@ -33,7 +33,10 @@ void bullet_bill_act_2(void) {
     cur_obj_update_floor_and_walls();
     //}
     spawn_object(o, MODEL_SMOKE, bhvWhitePuffSmoke);
-    o->oForwardVel = 60.0f;
+    if (cur_obj_has_behavior(bhvDiscoBullet))
+        o->oForwardVel = 120.0f;
+    else
+        o->oForwardVel = 60.0f;
     //if (o->oDistanceToMario > 300.0f)
     //    cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x100);
     //if (o->oTimer == 50) {
