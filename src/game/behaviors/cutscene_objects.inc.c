@@ -224,3 +224,50 @@ void bhv_whomp_cutscene_loop(void) {
         o->oPosZ += 15.0f*coss(o->oFaceAngleYaw);
     }
 }
+
+void bhv_egadd_loop(void) {
+    switch(save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1)) {
+        case 0:
+        default:
+            o->oBehParams2ndByte = 19;
+            o->oPosX = -1348.32f;
+            o->oPosZ = -772.037f;
+            break;
+        case 1:
+            o->oBehParams2ndByte = 30;
+            o->oPosX = -40.1771f;
+            o->oPosZ = -817.658f;
+            break;
+        case 2:
+            o->oBehParams2ndByte = 31;
+            o->oPosX = 1133.07f;
+            o->oPosZ = -787.75f;
+            break;
+        case 3:
+            o->oBehParams2ndByte = 32;
+            o->oPosX = 1133.07f;
+            o->oPosZ = -787.75f;
+            break;
+        case 4:
+            o->oBehParams2ndByte = 33;
+            o->oPosX = 2368.8f;
+            o->oPosZ = -655.241f;
+            break;
+    }
+    o->oInteractionSubtype = INT_SUBTYPE_NPC;
+    if(gPlayer1Controller->buttonPressed & B_BUTTON && o->oAction == 0 && o->oInteractStatus != 0) {
+        o->activeFlags &= ~ACTIVE_FLAG_INITIATED_TIME_STOP;
+        o->oAction = 1;
+        set_mario_action(gMarioState, ACT_WAITING_FOR_DIALOG, 0);
+    }
+    if(o->oAction == 1) {
+        if(cutscene_object_with_dialog(CUTSCENE_DIALOG, o, o->oBehParams2ndByte) == 3) {
+            o->oAction = 0;
+            set_mario_action(gMarioState, ACT_IDLE, 0);
+        } else {
+            set_mario_npc_dialog(1);
+        }
+    }
+    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
+    o->oInteractStatus = 0;
+}

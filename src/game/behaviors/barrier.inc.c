@@ -72,8 +72,6 @@ void bhv_c3_barrier_loop(void) {
                 if (o->oPosZ == o->oHomeZ - 8000.0f) {
                     o->oF4 = 1;
                 }
-                print_text_fmt_int(40, 60, "%x", o->oFaceAngleYaw);
-                print_text_fmt_int(40, 40, "%x", o->oAngleToMario);
                 kill_mario_if_behind();
             }
             break;

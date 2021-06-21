@@ -161,9 +161,31 @@ Wait actually\n\
 I know some guys who\n\
 can deal with this"))
 
-DEFINE_DIALOG(DIALOG_019, 1, 2, 30, 200, _("\
-Shhh! Please walk\n\
-quietly in the hallway!"))
+DEFINE_DIALOG(DIALOG_019, 1, 3, 30, 200, _("\
+Eh, well if it isn't Mario!\n\
+It's been a while since I\n\
+saw you in the kingdom.\n\
+Trying to stop Bowser\n\
+again, are you? I have\n\
+just the tools for you!\n\
+I'm opening up portals to\n\
+the last recorded\n\
+locations of Bowser.\n\
+I need you to go in there\n\
+and clean them out while I\n\
+work on the next portal.\n\
+But beware, his supersonic\n\
+army is no joke! You need\n\
+my new special gadget.\n\
+The Ultra-Note-Display\n\
+3000 tells you when foes\n\
+are going to strike!\n\
+Use it and the music\n\
+around you wisely to\n\
+get yourself ahead.\n\
+We've got no time to\n\
+spare, Mario! Take it\n\
+and go find Bowser!"))
 
 DEFINE_DIALOG(DIALOG_020, 1, 6, 95, 150, _("\
 Dear Mario:\n\
@@ -227,70 +249,29 @@ stairs, you need 70\n\
 Stars.\n\
 Bwa ha ha!"))
 
-DEFINE_DIALOG(DIALOG_030, 1, 6, 30, 200, _("\
-Hello! The Lakitu Bros.,\n\
-cutting in with a live\n\
-update on Mario's\n\
-progress. He's about to\n\
-learn a technique for\n\
-sneaking up on enemies.\n\
-The trick is this: He has\n\
-to walk very slowly in\n\
-order to walk quietly.\n\
+DEFINE_DIALOG(DIALOG_030, 1, 4, 30, 200, _("\
+Good going, Mario! It's\n\
+sad to see Bowser wasn't\n\
+in that world, but we\n\
+have more data to use.\n\
+It looks like Bowser's\n\
+next location is the\n\
+bottom of the sea...\n\
 \n\
+It seems that his\n\
+trademark submarines\n\
+are stationed down here.\n\
 \n\
-\n\
-And wrapping up filming\n\
-techniques reported on\n\
-earlier, you can take a\n\
-look around using [C]> and\n\
-[C]<. Press [C]| to view the\n\
-action from a distance.\n\
-When you can't move the\n\
-camera any farther, the\n\
-buzzer will sound. This is\n\
-the Lakitu Bros.,\n\
-signing off."))
+Be extra careful, Mario!"))
 
 DEFINE_DIALOG(DIALOG_031, 1, 5, 30, 200, _("\
-No way! You beat me...\n\
-again!! And I just spent\n\
-my entire savings on\n\
-these new Koopa\n\
-Mach 1 Sprint shoes!\n\
-Here, I guess I have to\n\
-hand over this Star to\n\
-the winner of the race.\n\
-Congrats, Mario!"))
+egadd3"))
 
 DEFINE_DIALOG(DIALOG_032, 1, 5, 30, 200, _("\
-If you get the Wing Cap,\n\
-you can fly! Put the cap\n\
-on, then do a Triple\n\
-Jump--jump three times\n\
-in a row--to take off.\n\
-You can fly even higher\n\
-if you blast out of a\n\
-cannon wearing the\n\
-Wing Cap!\n\
-\n\
-Use the [C] Buttons to look\n\
-around while flying, and\n\
-press [Z] to land."))
+egadd4"))
 
 DEFINE_DIALOG(DIALOG_033, 1, 6, 30, 200, _("\
-Ciao! You've reached\n\
-Princess Toadstool's\n\
-castle via a warp pipe.\n\
-Using the controller is a\n\
-piece of cake. Press [A] to\n\
-jump and [B] to attack.\n\
-Press [B] to read signs,\n\
-too. Use the Control Stick\n\
-in the center of the\n\
-controller to move Mario\n\
-around. Now, head for\n\
-the castle."))
+egadd5"))
 
 DEFINE_DIALOG(DIALOG_034, 1, 6, 30, 200, _("\
 Good afternoon. The\n\

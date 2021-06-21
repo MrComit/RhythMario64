@@ -385,7 +385,8 @@ void render_game(void) {
         render_text_labels();
         do_cutscene_handler();
         print_displaying_credits_entry();
-        handle_objectives();
+        if(gMarioState->action != ACT_STAR_DANCE_EXIT && gMarioState->action != ACT_WAITING_FOR_DIALOG)
+            handle_objectives();
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, BORDER_HEIGHT, SCREEN_WIDTH,
                       SCREEN_HEIGHT - BORDER_HEIGHT);
         gPauseScreenMode = render_menus_and_dialogs();
