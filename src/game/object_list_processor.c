@@ -580,6 +580,7 @@ s32 unload_deactivated_objects_in_list(struct ObjectNode *objList) {
  * list. For other objects, it points to the 32 bit behaviorArg in the
  * SpawnInfo.
  */
+ 
 void set_object_respawn_info_bits(struct Object *obj, u8 bits) {
     u32 *info32;
     u16 *info16;

@@ -74,7 +74,7 @@ void bhv_sawblade_spawner_loop(void) {
     if (o->oDistanceToMario > 10000.0f) {
         return;
     }
-    if (((o->oBehParams >> 8) & 0xFF) == 1) {
+    if (bparam1 == 0xFF) {
         bhv_sawblade_nogroup_loop();
         return;
     }

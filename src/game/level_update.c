@@ -453,7 +453,6 @@ void reset_objects(struct SpawnInfo *spawnInfo) {
             spawnInfo = spawnInfo->next;
             continue;
         }
-
         // If the object was previously killed/collected, don't respawn it
         if ((spawnInfo->behaviorArg & (RESPAWN_INFO_DONT_RESPAWN << 8))
             == (RESPAWN_INFO_DONT_RESPAWN << 8)) {
@@ -577,7 +576,6 @@ void init_mario_after_warp(void) {
                 gRedCoinsCollected = 0;
                 gMarioState->health = 0x0880;
                 gRank.prevHealth = 0x0880;
-                //reset_objects(gCurrentArea->objectSpawnInfos);
                 gBulletLauncherIndex[0] = 0;
                 gBulletLauncherIndex[1] = 0;
                 gBulletLauncherIndex[2] = 0;
@@ -595,7 +593,6 @@ void init_mario_after_warp(void) {
                 gRedCoinsCollected = 0;
                 gMarioState->health = 0x0880;
                 gRank.prevHealth = 0x0880;
-                //reset_objects(gCurrentArea->objectSpawnInfos);
                 gBulletLauncherIndex[0] = 0;
                 gBulletLauncherIndex[1] = 0;
                 gBulletLauncherIndex[2] = 0;
