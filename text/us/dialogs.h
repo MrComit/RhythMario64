@@ -264,14 +264,41 @@ are stationed down here.\n\
 \n\
 Be extra careful, Mario!"))
 
-DEFINE_DIALOG(DIALOG_031, 1, 5, 30, 200, _("\
-egadd3"))
+DEFINE_DIALOG(DIALOG_031, 1, 4, 30, 200, _("\
+Alright Mario, I've\n\
+been through this song\n\
+and dance before. \n\
+\n\
+If Bowser is anywhere,\n\
+he's gonna be in a \n\
+castle, and I think I've\n\
+found just the place.\n\
+Jump into this portal\n\
+Mario, I just know that\n\
+he's here!"))
 
-DEFINE_DIALOG(DIALOG_032, 1, 5, 30, 200, _("\
-egadd4"))
+DEFINE_DIALOG(DIALOG_032, 1, 4, 30, 200, _("\
+Alright Mario, I've\n\
+been through this song\n\
+and dance before. \n\
+\n\
+If Bowser is anywhere,\n\
+he's gonna be in a \n\
+castle, and I think I've\n\
+found just the place.\n\
+Jump into this portal\n\
+Mario, I just know that\n\
+he's here!"))
 
-DEFINE_DIALOG(DIALOG_033, 1, 6, 30, 200, _("\
-egadd5"))
+DEFINE_DIALOG(DIALOG_033, 1, 4, 30, 200, _("\
+You've done it Mario!\n\
+Thank you so much, we\n\
+couldn't have done it\n\
+without you!\n\
+Although, I think the\n\
+Ultra-Note-Display 3000\n\
+helped quite a bit as\n\
+well, hehe..."))
 
 DEFINE_DIALOG(DIALOG_034, 1, 6, 30, 200, _("\
 Good afternoon. The\n\
