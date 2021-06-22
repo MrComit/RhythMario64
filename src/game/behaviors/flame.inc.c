@@ -1,5 +1,31 @@
 // flame.inc.c
 
+static s32 obj_check_attacks_nolava(struct ObjectHitbox *hitbox, s32 attackedMarioAction) {
+    s32 attackType;
+
+    obj_set_hitbox(o, hitbox);
+
+    //! Dies immediately if above lava
+    if (o->oInteractStatus & INT_STATUS_INTERACTED) {
+        if (o->oInteractStatus & INT_STATUS_ATTACKED_MARIO) {
+            if (o->oAction != attackedMarioAction) {
+                o->oAction = attackedMarioAction;
+                o->oTimer = 0;
+            }
+        } else {
+            attackType = o->oInteractStatus & INT_STATUS_ATTACK_MASK;
+            obj_die_if_health_non_positive();
+            o->oInteractStatus = 0;
+            return attackType;
+        }
+    }
+
+    o->oInteractStatus = 0;
+    return 0;
+}
+
+
+
 void bhv_small_piranha_flame_init(void) {
     cur_obj_update_floor_and_walls();
     o->oFloat108 = o->oFloorHeight;
@@ -36,7 +62,7 @@ void bhv_small_piranha_flame_loop(void) {
             o->oTimer = 0;
         }*/
 
-        obj_check_attacks(&sPiranhaPlantFireHitbox, o->oAction);
+        obj_check_attacks_nolava(&sPiranhaPlantFireHitbox, o->oAction);
         o->oSmallPiranhaFlameSpeed += o->oSmallPiranhaFlameStartSpeed;
 
         if (o->oTimer > 60 || (o->oMoveFlags & (OBJ_MOVE_HIT_WALL | OBJ_MOVE_MASK_IN_WATER))) {

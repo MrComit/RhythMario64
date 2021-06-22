@@ -127,7 +127,7 @@ extern Gfx ccm_dl_Lava_mesh_layer_1_tri_0[];
 extern Vtx ccm_dl_Lava_mesh_layer_1_vtx_1[16];
 extern Gfx ccm_dl_Lava_mesh_layer_1_tri_1[];
 extern Vtx ccm_dl_castle_mesh_layer_1_vtx_cull[8];
-extern Vtx ccm_dl_castle_mesh_layer_1_vtx_0[39];
+extern Vtx ccm_dl_castle_mesh_layer_1_vtx_0[144];
 extern Gfx ccm_dl_castle_mesh_layer_1_tri_0[];
 extern Vtx ccm_dl_castle_pillars_mesh_layer_1_vtx_cull[8];
 extern Vtx ccm_dl_castle_pillars_mesh_layer_1_vtx_0[224];

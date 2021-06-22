@@ -3,8 +3,8 @@ s32 cur_obj_beat_hit_and_reset_slower(s32 *timer, s32 timerDivisor) {
     if(timerDivisor == 0) {
         timerDivisor = 1;
     }
-    if(*timer >= (96*2 / timerDivisor)) {
-        *timer -= (96*2 / timerDivisor);
+    if(*timer >= (96*4 / timerDivisor)) {
+        *timer -= (96*4 / timerDivisor);
         return 1;
     } else {
         return 0;
@@ -16,6 +16,7 @@ void bhv_boss_rock_init(void) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
     s32 beatState = (((seqPlayer->globalSongTimer) % 192) / 96);
     reset_for_checkpoint(&o->oBeatTimer, &o->oPrevSongTimer, 0, 1, 0);
+    o->oFC = count_objects_with_behavior(bhvDiscoLock);
     o->oAnimState = o->oBehParams2ndByte;
     if (o->oBehParams2ndByte)
         o->oAction = 1;
@@ -27,28 +28,29 @@ void bhv_boss_rock_loop(void) {
     if(gCheckpointLoaded) {
         bhv_boss_rock_init();
     }
-    s32 speed = count_objects_with_behavior(bhvDiscoLock);
     switch (o->oAction) {
         case 0:
-            if (cur_obj_beat_hit_and_reset_slower(&o->oBeatTimer, (4 - speed))) {
+            if (cur_obj_beat_hit_and_reset_slower(&o->oBeatTimer, (4 - o->oFC))) {
                 o->oAction = 1;
+                o->oFC = count_objects_with_behavior(bhvDiscoLock);
             }
-            o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, (f32)(5 - speed)/10.0f);
+            o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, (f32)(5 - o->oFC)/10.0f);
             break;
         case 1:
-            if (cur_obj_beat_hit_and_reset_slower(&o->oBeatTimer, (4 - speed))) {
+            if (cur_obj_beat_hit_and_reset_slower(&o->oBeatTimer, (4 - o->oFC))) {
                 o->oAction = 0;
+                o->oFC = count_objects_with_behavior(bhvDiscoLock);
             }
-            o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY - 500.0f, (f32)(5 - speed)/10.0f);
+            o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY - 500.0f, (f32)(5 - o->oFC)/10.0f);
             break;
     }
 }
 
 
 Vec3f sDiscoBulletPos[3] = {
-{2767.0f, 1500.0f, 4842.0f},
-{0.0f, 1500.0f, 4842.0f},
-{-2767.0f, 1500.0f, 4842.0f},
+{2767.0f, 1100.0f, 4842.0f},
+{0.0f, 1100.0f, 4842.0f},
+{-2767.0f, 1100.0f, 4842.0f},
 };
 
 
