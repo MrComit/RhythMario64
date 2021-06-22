@@ -1221,7 +1221,7 @@ void determine_rank(void) {
         courseNum = gCurrCourseNum - 1;
     }
 
-    gRank.totalPoints = COMPLETION_BONUS - (gRank.damage / 9.6) - (gRank.deaths*50) + (gMarioState->numCoins*15);
+    gRank.totalPoints = COMPLETION_BONUS - (gRank.damage / DAMAGE_DIVISOR) - (gRank.deaths*DEATH_MULTIPLIER) + (gMarioState->numCoins*COIN_MULTIPLIER);
     if(gRank.totalPoints < 1200) {
         gRank.rank = RANK_F;
     } else if(gRank.totalPoints < 1500) {

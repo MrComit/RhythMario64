@@ -3488,7 +3488,7 @@ void render_rank_screen(void) {
     print_rank_string(40, 155, textDamage, WHITE);
     if(gRankTimer >= 20) {
         color = determine_text_color(gRank.damage, 1);
-        print_epic_number(&numberDamage, gRank.damage / 9.6, 1);
+        print_epic_number(&numberDamage, gRank.damage / DAMAGE_DIVISOR, 1);
         print_rank_string(140, 155, numberDamage, color);
     }
     print_rank_string(40, 135, textDeaths, WHITE);
@@ -3498,7 +3498,7 @@ void render_rank_screen(void) {
         print_rank_string(140, 135, numberDeaths, color);
         
         if(gRank.deaths > 0) {
-            print_epic_number(&deathPoints, gRank.deaths*50, 1);
+            print_epic_number(&deathPoints, gRank.deaths*DEATH_MULTIPLIER, 1);
             print_rank_string(180, 135, deathPoints, RED);
         }
     }
@@ -3506,7 +3506,7 @@ void render_rank_screen(void) {
     print_rank_string(40, 115, textCoins, WHITE);
     if(gRankTimer >= 60) {
         color = determine_text_color(gMarioState->numCoins, 0);
-        print_epic_number(&numberCoins, gMarioState->numCoins*15, 0);
+        print_epic_number(&numberCoins, gMarioState->numCoins*COIN_MULTIPLIER, 0);
         print_rank_string(140, 115, numberCoins, color);
     }
 
