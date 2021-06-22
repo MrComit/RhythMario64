@@ -33,7 +33,7 @@ void bhv_spike_init(void) {
     o->oFriction = 0.5;
     o->oBuoyancy = 1.3;
 
-    o->oMaxShotDelay = 5;
+    o->oMaxShotDelay = 0;
     o->oShotDelay = o->oMaxShotDelay;
     o->oShotSpeed = 20;
 
@@ -158,7 +158,7 @@ void bhv_spike_bar_update(void) {
     stay_on_beat(&o->oBeatTimer, &o->oPrevSongTimer);
     if(cur_obj_beat_hit_and_reset(&o->oBeatTimer, 1)) {
         o->oBubbaTimer++;
-        if(o->oBubbaTimer > 1) {
+        if(o->oBubbaTimer > 1 && o->oTimer > 10) {
             o->oVelY = 40.0f;
             o->oBubbaTimer = 0;
         }
@@ -171,13 +171,14 @@ void bhv_spike_bar_update(void) {
 
     o->oGraphYOffset = 80.0f;
 
-    if (o->oTimer > 1200)
+    if (o->oTimer > 800 || o->oMoveFlags & OBJ_MOVE_HIT_WALL)
     {
         obj_mark_for_deletion(o);
     }
     if(o->oIntangibleTimer == 0 && sqrtf(POW2(o->oPosX - gMarioObject->oPosX) + POW2((o->oPosY + 75.0f) - gMarioObject->oPosY)) < 100.0f && absf(o->oPosZ - gMarioObject->oPosZ) < 625.0f) {
         set_mario_action(gMarioState, determine_knockback_action(gMarioState, 2), 2);
         o->oIntangibleTimer = 75;
+        take_damage_and_knock_back(gMarioState, o);
     } else if (o->oIntangibleTimer > 0) {
         o->oIntangibleTimer--;
     }
