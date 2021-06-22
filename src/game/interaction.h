@@ -114,5 +114,6 @@ u32 get_door_save_file_flag(struct Object *door);
 void mario_process_interactions(struct MarioState *m);
 void mario_handle_special_floors(struct MarioState *m);
 u32 determine_knockback_action(struct MarioState *m, UNUSED s32 arg);
+u32 take_damage_and_knock_back(struct MarioState *m, struct Object *o);
 
 #endif // INTERACTION_H

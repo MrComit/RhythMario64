@@ -6348,6 +6348,7 @@ const BehaviorScript bhvSpikeBar[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_ACTIVE_FROM_AFAR)),
     SET_INT(oIntangibleTimer, 0),
+    SET_INT(oDamageOrCoinValue, 2),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_spike_bar_update),
     END_LOOP(),
