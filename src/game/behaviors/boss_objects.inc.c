@@ -1,3 +1,4 @@
+#include "game/sound_init.h"
 s32 cur_obj_beat_hit_and_reset_slower(s32 *timer, s32 timerDivisor) {
     if(timerDivisor == 0) {
         timerDivisor = 1;
@@ -42,9 +43,6 @@ void bhv_boss_rock_loop(void) {
             break;
     }
 }
-
-
-
 
 
 Vec3f sDiscoBulletPos[3] = {
@@ -136,6 +134,8 @@ void bhv_disco_loop(void) {
             if (o->oF4 >= 3) {
                 o->oAction = 2;
                 //o->oPosZ = obj->oPosZ;
+                obj->oAction = 50;
+                fadeout_music(5);
             }
             break;
         case 1:
@@ -153,5 +153,11 @@ void bhv_disco_loop(void) {
                 o->oAction = 1;
             }
             break;
+    }
+    if (o->oAction) {
+        gMarioState->pos[0] = gMarioState->pos[1] = 0;
+        gMarioState->pos[2] = 677.0;
+        gMarioState->faceAngle[1] = 0x8000;
+        set_mario_npc_dialog(1);
     }
 }

@@ -25,3 +25,4 @@
 #include "anim_06055984.inc.c"
 #include "anim_06056774.inc.c"
 #include "anim_06057678.inc.c"
+#include "anim_bowser_look_up.inc.c"
