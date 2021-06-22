@@ -103,7 +103,13 @@ void bhv_booba_loop(void) {
     if(gMyCutsceneState == 5 && o->oBehParams2ndByte == 0) {
         o->oPosY = 0.0f;
     }
-    o->header.gfx.scale[2] = 1.375f + sins(gMyCutsceneTimer*8000);
+
+    if(gCurrCourseNum == 0x04) {
+        o->header.gfx.scale[2] = 1.375f + sins(gCutsceneTimer*8000);
+        o->header.gfx.scale[0] = o->header.gfx.scale[1] = 2.0f;
+    } else {
+        o->header.gfx.scale[2] = 1.375f + sins(gMyCutsceneTimer*8000);
+    }
 
     if(gMyCutsceneState >= 10) {
         obj_mark_for_deletion(o);

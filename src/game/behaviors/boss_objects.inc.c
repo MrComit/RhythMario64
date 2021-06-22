@@ -159,5 +159,14 @@ void bhv_disco_loop(void) {
         gMarioState->pos[2] = 677.0;
         gMarioState->faceAngle[1] = 0x8000;
         set_mario_npc_dialog(1);
+        gCamera->cutscene = CUTSCENE_SWAG_BOWSAH_DEATH;
+        vec3f_set(gLakituState.goalFocus, o->oPosX, o->oPosY, o->oPosZ);
+        if(gCutsceneTimer == 30) {
+            struct Object *BOOBA = spawn_object_rel_with_rot(obj, MODEL_BOOBA, bhvBooba, 0, 500, 0, 0xC000, 0, 0);
+            BOOBA->header.gfx.scale[0] = BOOBA->header.gfx.scale[1] = 2.0f;
+        }
+        if(gCutsceneTimer == 90) {
+            warp_special(-1);
+        }
     }
 }

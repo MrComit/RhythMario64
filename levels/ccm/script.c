@@ -40,7 +40,8 @@ const LevelScript level_ccm_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_DISCO_BALL, disco_ball_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_DISCO_LOCK, disco_lock_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOSS_ROCK, boss_rock_geo), 
-
+	LOAD_MODEL_FROM_GEO(MODEL_BOOBA, booba2_geo),
+	
 	AREA(1, ccm_area_1),
 		WARP_NODE(0x0A, LEVEL_CCM, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0B, LEVEL_CCM, 0x01, 0x0B, WARP_NO_CHECKPOINT),

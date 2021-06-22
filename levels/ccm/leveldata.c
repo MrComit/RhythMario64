@@ -57,3 +57,4 @@
 #include "levels/ccm/disco_lock/model.inc.c"
 #include "levels/ccm/boss_rock/model.inc.c"
 #include "levels/ccm/boss_rock/collision.inc.c"
+#include "levels/ccm/booba/model.inc.c"

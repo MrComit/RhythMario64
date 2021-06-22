@@ -244,6 +244,7 @@
 #define CUTSCENE_EXIT_FALL_WMOTR      180
 #define CUTSCENE_ENTER_POOL           181
 #define CUTSCENE_EPIC_INTRO           182
+#define CUTSCENE_SWAG_BOWSAH_DEATH    183
 
 /**
  * Stop the cutscene.
@@ -775,5 +776,7 @@ extern struct CameraFOVStatus sFOVState;
 
 extern u32 gMyCutsceneState;
 extern u32 gMyCutsceneTimer;
+
+extern s16 gCutsceneTimer;
 
 #endif // CAMERA_H

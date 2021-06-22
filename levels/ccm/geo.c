@@ -32,3 +32,4 @@
 #include "levels/ccm/disco_ball/geo.inc.c"
 #include "levels/ccm/disco_lock/geo.inc.c"
 #include "levels/ccm/boss_rock/geo.inc.c"
+#include "levels/ccm/booba/geo.inc.c"

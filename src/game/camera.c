@@ -10391,6 +10391,11 @@ BAD_RETURN(s32) cutscene_epic_intro(struct Camera *c) {
     gMyCutsceneTimer++;
 }
 
+BAD_RETURN(s32) cutscene_swag_bowsah_death(struct Camera *c) {
+    vec3f_set(c->pos, 100.0f, 100.0f, 900.0f);
+}
+
+
 /******************************************************************************************************
  * Cutscenes
  ******************************************************************************************************/
@@ -10791,6 +10796,10 @@ struct Cutscene sCutsceneReadMessage[] = {
 
 struct Cutscene sCutsceneEpicIntro[] = {
     { cutscene_epic_intro, CUTSCENE_LOOP },
+};
+
+struct Cutscene sCutsceneSwagBowsahDeath[] = {
+    { cutscene_swag_bowsah_death, CUTSCENE_LOOP },
 };
 
 /* TODO:
@@ -11259,6 +11268,7 @@ void play_cutscene(struct Camera *c) {
         CUTSCENE(CUTSCENE_ENTER_PYRAMID_TOP, sCutsceneEnterPyramidTop)
         CUTSCENE(CUTSCENE_SSL_PYRAMID_EXPLODE, sCutscenePyramidTopExplode)
         CUTSCENE(CUTSCENE_EPIC_INTRO, sCutsceneEpicIntro)
+        CUTSCENE(CUTSCENE_SWAG_BOWSAH_DEATH, sCutsceneSwagBowsahDeath)
     }
 
 #undef CUTSCENE
