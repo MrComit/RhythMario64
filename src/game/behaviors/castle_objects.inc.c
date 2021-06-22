@@ -43,7 +43,8 @@ void bhv_rotating_sawblade_spawner_loop(void) {
     o->oMoveAngleYaw = o->oAngleToMario;
     if (onScreenLayers[0] > 15) {
         if(o->oAction == 0) {
-            spawn_object(o, MODEL_SAWBLADE, bhvSawblade);
+            struct Object *obj = spawn_object(o, MODEL_SAWBLADE, bhvSawblade);
+            obj->oPosY = gMarioState->pos[1] + 100.0f;
             o->oAction = 1;
         }
     } else {

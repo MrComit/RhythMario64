@@ -1,0 +1,15 @@
+extern const GeoLayout boss_rock_switch_opt1[];
+extern const GeoLayout boss_rock_geo[];
+extern Lights1 boss_rock_Rock_002_lights;
+extern Lights1 boss_rock_Rock2_001_lights;
+extern u8 boss_rock_ss_ceiling_2_i4_dark2_i8[];
+extern u8 boss_rock_ss_ceiling_2_i4_light_i8[];
+extern Vtx boss_rock_dl_mesh_layer_1_vtx_0[14];
+extern Gfx boss_rock_dl_mesh_layer_1_tri_0[];
+extern Gfx mat_boss_rock_Rock_002[];
+extern Gfx mat_revert_boss_rock_Rock_002[];
+extern Gfx mat_boss_rock_Rock2_001[];
+extern Gfx mat_revert_boss_rock_Rock2_001[];
+extern Gfx boss_rock_dl_mesh_layer_1[];
+extern Gfx boss_rock_dl_mesh_layer_1_mat_override_Rock2_001_0[];
+extern Gfx boss_rock_material_revert_render_settings[];
