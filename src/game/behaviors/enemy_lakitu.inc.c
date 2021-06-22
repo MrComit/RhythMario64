@@ -25,6 +25,9 @@ static struct ObjectHitbox sEnemyLakituHitbox = {
  */
 static void enemy_lakitu_act_uninitialized(void) {
     if (gCurrentCheckpoint > 0/*o->oDistanceToMario < 2000.0f*/) {
+        o->oPosX = gMarioState->pos[0];
+        o->oPosY = gMarioState->pos[1] + 1500.0f;
+        o->oPosZ = gMarioState->pos[2];
         spawn_object_relative_with_scale(CLOUD_BP_LAKITU_CLOUD, 0, 0, 0, 2.0f, o, MODEL_MIST, bhvCloud);
 
         cur_obj_unhide();
@@ -192,6 +195,7 @@ static void enemy_lakitu_act_main(void) {
         // The spiny uses this as a signal to get thrown
     //    o->prevObj = NULL;
     //}
+    o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1] + 400.0f, 20.0f, 20.0f);
 }
 
 /**

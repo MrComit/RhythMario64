@@ -136,7 +136,7 @@ void cur_obj_enable_rendering_2(void);
 void obj_set_face_angle_to_move_angle(struct Object *obj);
 u32 get_object_list_from_behavior(const BehaviorScript *behavior);
 struct Object *cur_obj_nearest_object_with_behavior(const BehaviorScript *behavior);
-struct Object *cur_obj_nearest_object_behavior_params(const BehaviorScript *behavior, u32 params);
+struct Object *cur_obj_nearest_object_behavior_params(const BehaviorScript *behavior, u16 params);
 f32 cur_obj_dist_to_nearest_object_with_behavior(const BehaviorScript* behavior);
 struct Object *cur_obj_find_nearest_object_with_behavior(const BehaviorScript * behavior, f32 *dist);
 struct Object *find_unimportant_object(void);

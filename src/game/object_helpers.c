@@ -865,7 +865,7 @@ struct Object *cur_obj_find_nearest_object_with_behavior(const BehaviorScript *b
     return closestObj;
 }
 
-struct Object *cur_obj_nearest_object_behavior_params(const BehaviorScript *behavior, u32 params) {
+struct Object *cur_obj_nearest_object_behavior_params(const BehaviorScript *behavior, u16 params) {
     uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
     struct Object *closestObj = NULL;
     struct Object *obj;
@@ -876,7 +876,7 @@ struct Object *cur_obj_nearest_object_behavior_params(const BehaviorScript *beha
     obj = (struct Object *) listHead->next;
 
     while (obj != (struct Object *) listHead) {
-        if (obj->behavior == behaviorAddr && obj->oBehParams == params) {
+        if (obj->behavior == behaviorAddr && (obj->oBehParams >> 16) == params) {
             if (obj->activeFlags != ACTIVE_FLAG_DEACTIVATED && obj != o) {
                 f32 objDist = dist_between_objects(o, obj);
                 if (objDist < minDist) {
