@@ -1,3 +1,57 @@
+#include "game/sound_init.h"
+s32 cur_obj_beat_hit_and_reset_slower(s32 *timer, s32 timerDivisor) {
+    if(timerDivisor == 0) {
+        timerDivisor = 1;
+    }
+    if(*timer >= (96*2 / timerDivisor)) {
+        *timer -= (96*2 / timerDivisor);
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+
+void bhv_boss_rock_init(void) {
+    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
+    s32 beatState = (((seqPlayer->globalSongTimer) % 192) / 96);
+    reset_for_checkpoint(&o->oBeatTimer, &o->oPrevSongTimer, 0, 1, 0);
+    o->oAnimState = o->oBehParams2ndByte;
+    if (o->oBehParams2ndByte)
+        o->oAction = 1;
+}
+
+void bhv_boss_rock_loop(void) {
+    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
+    stay_on_beat(&o->oBeatTimer, &o->oPrevSongTimer);
+    if(gCheckpointLoaded) {
+        bhv_boss_rock_init();
+    }
+    s32 speed = count_objects_with_behavior(bhvDiscoLock);
+    switch (o->oAction) {
+        case 0:
+            if (cur_obj_beat_hit_and_reset_slower(&o->oBeatTimer, (4 - speed))) {
+                o->oAction = 1;
+            }
+            o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, (f32)(5 - speed)/10.0f);
+            break;
+        case 1:
+            if (cur_obj_beat_hit_and_reset_slower(&o->oBeatTimer, (4 - speed))) {
+                o->oAction = 0;
+            }
+            o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY - 500.0f, (f32)(5 - speed)/10.0f);
+            break;
+    }
+}
+
+
+Vec3f sDiscoBulletPos[3] = {
+{2767.0f, 1500.0f, 4842.0f},
+{0.0f, 1500.0f, 4842.0f},
+{-2767.0f, 1500.0f, 4842.0f},
+};
+
+
 void bhv_disco_switch_loop(void) {
     switch (o->oAction) {
         case 0:
@@ -13,11 +67,9 @@ void bhv_disco_switch_loop(void) {
             cur_obj_scale_over_time(2, 3, 1.5f, 0.2f);
             if (o->oTimer == 3) {
                 struct Object *obj = spawn_object(o, MODEL_BULLET_BILL, bhvDiscoBullet);
-                struct Object *obj2 = cur_obj_nearest_object_with_behavior(bhvDiscoLock);
-                if (obj2 != NULL) {
-                    obj->oPosY = obj2->oPosY;
-                    obj->oFaceAngleYaw = obj->oMoveAngleYaw = obj_angle_to_object(obj, obj2);
-                }
+                vec3f_copy(&obj->oPosX, sDiscoBulletPos[o->oBehParams2ndByte]);
+                obj->oMoveAngleYaw = 0x8000;
+
                 cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
                 o->oAction = 2;
                 cur_obj_shake_screen(SHAKE_POS_SMALL);
@@ -82,6 +134,8 @@ void bhv_disco_loop(void) {
             if (o->oF4 >= 3) {
                 o->oAction = 2;
                 //o->oPosZ = obj->oPosZ;
+                obj->oAction = 50;
+                fadeout_music(5);
             }
             break;
         case 1:
@@ -99,5 +153,11 @@ void bhv_disco_loop(void) {
                 o->oAction = 1;
             }
             break;
+    }
+    if (o->oAction) {
+        gMarioState->pos[0] = gMarioState->pos[1] = 0;
+        gMarioState->pos[2] = 677.0;
+        gMarioState->faceAngle[1] = 0x8000;
+        set_mario_npc_dialog(1);
     }
 }

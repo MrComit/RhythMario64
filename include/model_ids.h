@@ -589,6 +589,8 @@
 #define MODEL_NEW_BOWSER                  0x47
 #define MODEL_TORPEDO                     0x32
 #define MODEL_DISCO_BALL                  0x40
+#define MODEL_DISCO_LOCK                  0x41
+#define MODEL_BOSS_ROCK                   0x42
 #define MODEL_BOOBA                       0x46
 #define MODEL_PORTAL                      0x48
 

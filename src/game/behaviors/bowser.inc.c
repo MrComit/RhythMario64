@@ -1097,6 +1097,13 @@ void bowser_thrown_dropped_update(void) {
 void bhv_bowser_loop(void) {
     s16 angleToMario;  // AngleToMario    from Bowser's perspective
     s16 angleToCentre; // AngleToCentre from Bowser's perspective
+    if (o->oAction == 50) {
+        cur_obj_init_animation_with_sound(27);
+        if (o->oTimer > 70) {
+            o->header.gfx.scale[1] = approach_f32(o->header.gfx.scale[1], 0.0f, 0.08f, 0.08f);
+        }
+        return;
+    }
 
     o->oBowserDistToCentre = sqrtf(o->oPosX * o->oPosX + o->oPosZ * o->oPosZ);
     o->oBowserAngleToCentre = atan2s(0.0f - o->oPosZ, 0.0f - o->oPosX);

@@ -39,6 +39,21 @@ void bhv_castle_rock_loop(void) {
 
 
 
+void bhv_rotating_sawblade_spawner_loop(void) {
+    o->oMoveAngleYaw = o->oAngleToMario;
+    if (onScreenLayers[0] > 15) {
+        if(o->oAction == 0) {
+            struct Object *obj = spawn_object(o, MODEL_SAWBLADE, bhvSawblade);
+            obj->oPosY = gMarioState->pos[1] + 100.0f;
+            o->oAction = 1;
+        }
+    } else {
+        o->oAction = 0;
+    }
+}
+
+
+
 void bhv_sawblade_spawner_init(void) {
     u8 i;
     u8 bparam1 = o->oBehParams >> 24;
