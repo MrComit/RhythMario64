@@ -143,7 +143,6 @@ void bhv_c3_barrier_loop(void) {
 
 void bhv_c2_barrier_loop(void) {
     struct Object *obj;
-    gMarioState->health = 0x880;
     switch (o->oBehParams2ndByte) {
         case 0:
             if (o->oTimer == 0) {
