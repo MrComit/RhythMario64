@@ -1,3 +1,4 @@
+#include "actors/group13.h"
 
 void dorrie_raise_head(void) {
     s16 startAngle;

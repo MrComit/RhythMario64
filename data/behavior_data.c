@@ -6565,3 +6565,14 @@ const BehaviorScript bhvBossRock[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+const BehaviorScript bhvObjectiveChest[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    DROP_TO_FLOOR(),
+    CALL_NATIVE(bhv_treasure_chest_bottom_init),
+    SET_INT(oIntangibleTimer, -1),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_objective_chest_bottom_loop),
+    END_LOOP(),
+};

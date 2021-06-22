@@ -320,6 +320,21 @@ void set_mario_initial_cap_powerup(struct MarioState *m) {
     }
 }
 
+s32 gDead = 0;
+s32 gIntendedCheckpoint = 0;
+s32 gRankTimer = 0;
+
+struct Rank gRank;
+
+void reset_rank(void) {
+    gRank.deaths = 0;
+    gRank.prevHealth = 0x0880;
+    gRank.damage = 0;
+    gDead = 0;
+    gRankTimer = 0;
+    gMarioState->numCoins = 0;
+}
+
 void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg) {
     switch (spawnType) {
         case MARIO_SPAWN_DOOR_WARP:
@@ -351,6 +366,8 @@ void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg
             break;
         case MARIO_SPAWN_SPIN_AIRBORNE:
             set_mario_action(m, ACT_SPAWN_SPIN_AIRBORNE, 0);
+            m->health = 0x0880;
+            gRank.prevHealth = 0x0880;
             break;
         case MARIO_SPAWN_FLYING:
             set_mario_action(m, ACT_FLYING, 2);
@@ -380,22 +397,9 @@ void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg
             break;
     }
 
+    gIntendedCheckpoint = 0;
+
     set_mario_initial_cap_powerup(m);
-}
-
-s32 gDead = 0;
-s32 gIntendedCheckpoint = 0;
-s32 gRankTimer = 0;
-
-struct Rank gRank;
-
-void reset_rank(void) {
-    gRank.deaths = 0;
-    gRank.prevHealth = 0x0880;
-    gRank.damage = 0;
-    gDead = 0;
-    gRankTimer = 0;
-    gMarioState->numCoins = 0;
 }
 
 

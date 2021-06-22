@@ -206,3 +206,14 @@ void bhv_treasure_chest_loop(void) {
             break;
     }
 }
+
+void bhv_objective_chest_bottom_loop(void) {
+    if((save_file_get_objectives() & 0x4) != 0) {
+        o->oAction = 1;
+    } else if(dist_between_objects(gMarioObject, o) < 750.0f) {
+        o->oAction = 1;
+        save_file_set_objectives(0x04);
+        play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
+    }
+    cur_obj_push_mario_away_from_cylinder(150.0f, 150.0f);
+}

@@ -582,5 +582,6 @@ extern const BehaviorScript bhvCutsceneWhomp[];
 extern const BehaviorScript bhvCutscenePortal[];
 extern const BehaviorScript bhvRotatingSawblade[];
 extern const BehaviorScript bhvBossRock[];
+extern const BehaviorScript bhvObjectiveChest[];
 
 #endif // BEHAVIOR_DATA_H

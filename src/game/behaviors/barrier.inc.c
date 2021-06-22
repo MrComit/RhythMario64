@@ -180,7 +180,7 @@ void bhv_c2_barrier_loop(void) {
         case 2:
             if (o->oTimer == 0) {
                 o->header.gfx.scale[2] = 0.2f;
-                //o->header.gfx.scale[1] = 2.0f;
+                o->header.gfx.scale[1] = 2.0f;
             }
             obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 0x0001);
             if (obj != NULL && obj->oF4 == 1 && o->oF4 == 0) {
@@ -190,7 +190,7 @@ void bhv_c2_barrier_loop(void) {
                     o->oF4 = 1;
                 }
                 //kill_mario_if_behind();
-                if (gMarioState->pos[1] < o->oPosY) {
+                if (gMarioState->pos[1] <= o->oPosY) {
                     gMarioState->health = 0;
                 }
             }
@@ -201,6 +201,38 @@ void bhv_c2_barrier_loop(void) {
                 o->oPosY = approach_f32(o->oPosY, o->oHomeY, 80.0f, 80.0f);
                 o->oPosZ = approach_f32(o->oPosZ, o->oHomeZ - 3500.0f, 10.0f, 10.0f);
                 if (o->oPosZ == o->oHomeZ - 3500.0f) {
+                    o->oF4 = 1;
+                }
+                kill_mario_if_behind();
+            }
+            break;
+        case 4:
+            if (o->oTimer == 0) {
+                // o->header.gfx.scale[2] = 0.2f;
+                //o->header.gfx.scale[1] = 2.0f;
+            }
+            obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 0x0002);
+            if (obj != NULL && obj->oF4 == 1 && o->oF4 == 0) {
+                o->oPosY = approach_f32(o->oPosY, 1750.0f, 10.0f, 10.0f);
+                //o->oPosZ = approach_f32(o->oPosZ, o->oHomeZ - 7500.0f, 20.0f, 20.0f);
+                if (o->oPosY >= 1750.0f) {
+                    o->oF4 = 1;
+                }
+                //kill_mario_if_behind();
+                if (gMarioState->pos[1] < o->oPosY) {
+                    gMarioState->health = 0;
+                }
+            }
+            break;
+        case 5:
+            if (o->oTimer == 0) {
+                //o->header.gfx.scale[2] = 0.2f;
+                //o->header.gfx.scale[1] = 2.0f;
+            }
+            obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 0x0002);
+            if (obj != NULL && obj->oF4 == 1 && o->oF4 == 0) {
+                o->oPosX = approach_f32(o->oPosX, -2500.0f, 20.0f, 15.0f);
+                if (o->oPosX <= -2500.0f) {
                     o->oF4 = 1;
                 }
                 kill_mario_if_behind();

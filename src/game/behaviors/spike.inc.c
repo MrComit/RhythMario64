@@ -158,20 +158,26 @@ void bhv_spike_bar_update(void) {
     stay_on_beat(&o->oBeatTimer, &o->oPrevSongTimer);
     if(cur_obj_beat_hit_and_reset(&o->oBeatTimer, 1)) {
         o->oBubbaTimer++;
-        if(o->oBubbaTimer > 1 && o->oTimer > 10) {
-            o->oVelY = 40.0f;
+        if(o->oBubbaTimer > 1) {
+            if(o->oPosY - o->oFloorHeight < 50.0f) {
+                if(o->oTimer > 150) {
+                    o->oVelY = 50.0f;
+                } else if(o->oTimer > 30) {
+                    o->oVelY = 20.0f;
+                }
+            }
             o->oBubbaTimer = 0;
         }
     }
 
     o->oGravity = -4.0f;
 
-    cur_obj_update_floor_height();
     cur_obj_move_standard(-78);
+    cur_obj_update_floor_height();
 
     o->oGraphYOffset = 80.0f;
 
-    if (o->oTimer > 800 || o->oMoveFlags & OBJ_MOVE_HIT_WALL)
+    if (o->oTimer > 785 || o->oMoveFlags & OBJ_MOVE_HIT_WALL)
     {
         obj_mark_for_deletion(o);
     }

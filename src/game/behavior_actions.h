@@ -629,7 +629,7 @@ void bhv_disco_switch_loop(void);
 void bhv_rotating_sawblade_spawner_loop(void);
 void bhv_boss_rock_init(void);
 void bhv_boss_rock_loop(void);
-
+void bhv_objective_chest_bottom_loop(void);
 
 
 

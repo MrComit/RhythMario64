@@ -1233,8 +1233,9 @@ void render_hud(void) {
         }
         render_audiovisual_bars();
 
-        if(gRenderTarget == 1) {
+        if(gRenderTarget > 0) {
             render_target();
+            gRenderTarget--;
         }
 
         // if(convert_3d_to_2d(0.0f, 0.0f, 0.0f, &x, &y)) {

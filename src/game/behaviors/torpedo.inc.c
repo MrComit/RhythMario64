@@ -15,7 +15,7 @@ void bhv_torpedo_update(void) {
     o->oPosX += o->oVelX;
     o->oPosZ += o->oVelZ;
 
-    if(o->oTimer < 40) {
+    if(lateral_dist_between_objects(o, gMarioObject) > 1500.0f) {
         o->oPosX = gMarioObject->oPosX;
         o->oPosY = gMarioObject->oPosY + 75.0f;
         gTorpedoTargetX = gMarioObject->oPosX;
@@ -24,12 +24,13 @@ void bhv_torpedo_update(void) {
     }
     gTargetX = gMarioScreenX;
     gTargetY = gMarioScreenY;
-    gRenderTarget = 1;
+    gRenderTarget = 30;
 
-    if(cur_obj_resolve_wall_collisions()) {
+    if(cur_obj_resolve_wall_collisions() || lateral_dist_between_objects(o, gMarioObject) <= 101.0f || o->oTimer > 50) {
         explode(0);
         gRenderTarget = 0;
     }
+    spawn_object_relative(0, 0, 0, 200, o, MODEL_NONE, bhvBubbleParticleSpawner);
 }
 
 void bhv_torpedo_spawner_init(void) {
