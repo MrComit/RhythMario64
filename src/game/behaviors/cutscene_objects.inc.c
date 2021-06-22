@@ -1,6 +1,20 @@
 #include "game/ingame_menu.h"
 #include "game/sound_init.h"
 
+s32 Set_NPC_Dialog(s32 dialogId) {
+    if (set_mario_npc_dialog(1) == 2) {
+        o->activeFlags |= 0x20; /* bit 5 */
+        if (cutscene_object_with_dialog(CUTSCENE_DIALOG, o, dialogId)
+            != 0) {
+            set_mario_npc_dialog(0);
+            o->activeFlags &= ~0x20; /* bit 5 */
+            o->oInteractStatus = 0;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 void bhv_peach_cutscene_loop(void) {
     if((gMyCutsceneState == 0 || gMyCutsceneState == 2) && gMyCutsceneTimer > 15) {
         if(gDialogResponse != 0) {
@@ -260,19 +274,17 @@ void bhv_egadd_loop(void) {
             o->oPosZ = -655.241f;
             break;
     }
-    o->oInteractionSubtype = INT_SUBTYPE_NPC;
-    if(gPlayer1Controller->buttonPressed & B_BUTTON && o->oAction == 0 && o->oInteractStatus != 0) {
-        o->activeFlags &= ~ACTIVE_FLAG_INITIATED_TIME_STOP;
-        o->oAction = 1;
-        set_mario_action(gMarioState, ACT_WAITING_FOR_DIALOG, 0);
-    }
-    if(o->oAction == 1) {
-        if(cutscene_object_with_dialog(CUTSCENE_DIALOG, o, o->oBehParams2ndByte) == 3) {
-            o->oAction = 0;
-            set_mario_action(gMarioState, ACT_IDLE, 0);
-        } else {
-            set_mario_npc_dialog(1);
-        }
+    switch (o->oAction) {
+        case 0:
+            if(o->oInteractStatus == INT_STATUS_INTERACTED) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (Set_NPC_Dialog(o->oBehParams2ndByte)) {
+                o->oAction = 0;
+            }
+            break;
     }
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
     o->oInteractStatus = 0;

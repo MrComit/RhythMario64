@@ -30,7 +30,7 @@ void bullet_bill_act_1(void) {
 void bullet_bill_act_2(void) {
     //if (o->oTimer > 70) {
     //    o->activeFlags = 0;
-    cur_obj_update_floor_and_walls();
+    //cur_obj_update_floor_and_walls();
     //}
     spawn_object(o, MODEL_SMOKE, bhvWhitePuffSmoke);
     if (cur_obj_has_behavior(bhvDiscoBullet))
