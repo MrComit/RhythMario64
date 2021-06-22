@@ -56,6 +56,7 @@ struct CreditsEntry
     /*0x01*/ u8 areaIndex;
     /*0x02*/ u8 unk02;
     /*0x03*/ s8 marioAngle;
+    u8 lineFormat;
     /*0x04*/ Vec3s marioPos;
     /*0x0C*/ const char **unk0C;
 };
@@ -129,6 +130,8 @@ s32 lvl_set_current_level(UNUSED s16 arg0, s32 levelNum);
 s32 lvl_play_the_end_screen_sound(UNUSED s16 arg0, UNUSED s32 arg1);
 void basic_update(UNUSED s16 *arg);
 void warp_special(s32 arg);
+
+extern struct CreditsEntry sCreditsSequence[];
 
 extern u8 gSpikePillarIndex;
 extern s32 gRankTimer;

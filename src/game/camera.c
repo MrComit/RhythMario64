@@ -9773,6 +9773,10 @@ BAD_RETURN(s32) cutscene_credits(struct Camera *c) {
     cutscene_event(cutscene_credits_reset_spline, c, 0, 0);
 
     switch (gCurrLevelArea) {
+        case AREA_CASTLE_GROUNDS:
+            pos = sBobCreditsSplinePositions;
+            focus = sBobCreditsSplineFocus;
+            break;
         case AREA_BOB:
             pos = sBobCreditsSplinePositions;
             focus = sBobCreditsSplineFocus;
@@ -10913,19 +10917,19 @@ struct CutsceneSplinePoint sWfCreditsSplineFocus[] = {
 };
 
 struct CutsceneSplinePoint sJrbCreditsSplinePositions[] = {
-    { 0, 0, { 5538, -4272, 2376 } },
-    { 0, 0, { 5997, -3303, 2261 } },
-    { 0, 0, { 6345, -3255, 2179 } },
-    { 0, 0, { 6345, -3255, 2179 } },
-    { -1, 0, { 6694, -3203, 2116 } }
+    { 0, 480, { -26159, 1348, -3024 } },
+    { 0, 480, { -27130, 1348, 191 } },
+    { 0, 480, { -24358, 1348, 2633  } },
+    { 0, 480, { -22140, 266, 896 } },
+    { -1, 480, { -24637, 3298, -4446 } }
 };
 
 struct CutsceneSplinePoint sJrbCreditsSplineFocus[] = {
-    { 0, 50, { 5261, -4683, 2443 } },
-    { 0, 50, { 5726, -3675, 2456 } },
-    { 0, 50, { 6268, -2817, 2409 } },
-    { 0, 50, { 6596, -2866, 2369 } },
-    { -1, 50, { 7186, -3153, 2041 } }
+	{ 0, 600, { -24923, 250, 549 }},
+	{ 1, 600, { -25589, 250, 191 }},
+	{ 2, 600, { -25158, 250, -445 }},
+	{ 3, 600, { -24580, 250, 47 }},
+	{ -1, 600, { -24591, 250, 97 }},
 };
 
 struct CutsceneSplinePoint sCcmSlideCreditsSplinePositions[] = {

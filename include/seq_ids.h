@@ -48,6 +48,7 @@ enum SeqId {
     SEQ_TRAINING,                     // 0x26
     SEQ_UN_OWEN,                      // 0x27
     SEQ_TIME_RIFT,                    // 0x28
+    SEQ_STORM_EAGLE,                  // 0x29
     SEQ_COUNT
 };
 

@@ -1899,6 +1899,12 @@ u8 ascii_to_credits_char(u8 c) {
     if (c == '6') {
         return ASCII_TO_DIALOG('6');
     }
+    if (c == '0') {
+        return ASCII_TO_DIALOG('0');
+    }
+    if (c == '5') {
+        return ASCII_TO_DIALOG('5');
+    }
 
     return GLOBAL_CHAR_SPACE;
 }

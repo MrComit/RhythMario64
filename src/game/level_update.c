@@ -60,114 +60,62 @@
 #define WARP_NODE_CREDITS_MIN 0xF8
 
 // TODO: Make these ifdefs better
-const char *credits01[] = { "1GAME DIRECTOR", "SHIGERU MIYAMOTO" };
-const char *credits02[] = { "2ASSISTANT DIRECTORS", "YOSHIAKI KOIZUMI", "TAKASHI TEZUKA" };
-const char *credits03[] = { "2SYSTEM PROGRAMMERS", "YASUNARI NISHIDA", "YOSHINORI TANIMOTO" };
-const char *credits04[] = { "3PROGRAMMERS", "HAJIME YAJIMA", "DAIKI IWAMOTO", "TOSHIO IWAWAKI" };
-#if defined(VERSION_JP) || defined(VERSION_SH)
-const char *credits05[] = { "1CAMERA PROGRAMMER", "TAKUMI KAWAGOE" };
-const char *credits06[] = { "1MARIO FACE PROGRAMMER", "GILES GODDARD" };
-const char *credits07[] = { "2COURSE DIRECTORS", "YOICHI YAMADA", "YASUHISA YAMAMURA" };
-const char *credits08[] = { "2COURSE DESIGNERS", "KENTA USUI", "NAOKI MORI" };
-const char *credits09[] = { "3COURSE DESIGNERS", "YOSHIKI HARUHANA", "MAKOTO MIYANAGA",
-                            "KATSUHIKO KANNO" };
-const char *credits10[] = { "1SOUND COMPOSER", "KOJI KONDO" };
-
-#ifdef VERSION_SH
-const char *credits11[] = { "4SOUND EFFECTS", "SOUND PROGRAMMER", "YOJI INAGAKI", "HIDEAKI SHIMIZU" };
-const char *credits12[] = { "23D ANIMATORS", "YOSHIAKI KOIZUMI", "SATORU TAKIZAWA" };
-const char *credits13[] = { "1CG DESIGNER", "MASANAO ARIMOTO" };
-const char *credits14[] = { "3TECHNICAL SUPPORT", "TAKAO SAWANO", "HIROHITO YOSHIMOTO", "HIROTO YADA" };
-const char *credits15[] = { "1TECHNICAL SUPPORT", "SGI. 64PROJECT STAFF" };
-const char *credits16[] = { "2PROGRESS MANAGEMENT", "KIMIYOSHI FUKUI", "KEIZO KATO" };
-const char *credits17[] = { "4MARIO VOICE", "PEACH VOICE", "CHARLES MARTINET", "LESLIE SWAN" };
-const char *credits18[] = { "3SPECIAL THANKS TO", "JYOHO KAIHATUBU", "ALL NINTENDO",
-                            "MARIO CLUB STAFF" };
-const char *credits19[] = { "1PRODUCER", "SHIGERU MIYAMOTO" };
-const char *credits20[] = { "1EXECUTIVE PRODUCER", "HIROSHI YAMAUCHI" };
-#else // VERSION_JP
-const char *credits11[] = { "1SOUND EFFECTS", "YOJI INAGAKI" };
-const char *credits12[] = { "1SOUND PROGRAMMER", "HIDEAKI SHIMIZU" };
-const char *credits13[] = { "23D ANIMATORS", "YOSHIAKI KOIZUMI", "SATORU TAKIZAWA" };
-const char *credits14[] = { "1CG DESIGNER", "MASANAO ARIMOTO" };
-const char *credits15[] = { "3TECHNICAL SUPPORT", "TAKAO SAWANO", "HIROHITO YOSHIMOTO", "HIROTO YADA" };
-const char *credits16[] = { "1TECHNICAL SUPPORT", "SGI. 64PROJECT STAFF" };
-const char *credits17[] = { "2PROGRESS MANAGEMENT", "KIMIYOSHI FUKUI", "KEIZO KATO" };
-const char *credits18[] = { "3SPECIAL THANKS TO", "JYOHO KAIHATUBU", "ALL NINTENDO",
-                            "MARIO CLUB STAFF" };
-const char *credits19[] = { "1PRODUCER", "SHIGERU MIYAMOTO" };
-const char *credits20[] = { "1EXECUTIVE PRODUCER", "HIROSHI YAMAUCHI" };
-#endif
-#else // VERSION_US || VERSION_EU
-const char *credits05[] = {
-    "4CAMERA PROGRAMMER", "MARIO FACE PROGRAMMER", "TAKUMI KAWAGOE", "GILES GODDARD"
-}; // US combines camera programmer and Mario face programmer
-const char *credits06[] = { "2COURSE DIRECTORS", "YOICHI YAMADA", "YASUHISA YAMAMURA" };
-const char *credits07[] = { "2COURSE DESIGNERS", "KENTA USUI", "NAOKI MORI" };
-const char *credits08[] = { "3COURSE DESIGNERS", "YOSHIKI HARUHANA", "MAKOTO MIYANAGA",
-                            "KATSUHIKO KANNO" };
-#ifdef VERSION_US
-const char *credits09[] = { "1SOUND COMPOSER", "KOJI KONDO" };
-const char *credits10[] = { "4SOUND EFFECTS", "SOUND PROGRAMMER", "YOJI INAGAKI",
-                            "HIDEAKI SHIMIZU" }; // as well as sound effects and sound programmer
-const char *credits11[] = { "23-D ANIMATORS", "YOSHIAKI KOIZUMI", "SATORU TAKIZAWA" };
+const char *credits01[] = { "4RHYTHMARIO 64.5 ", "CHEEZEPIN", "BY TEAM SUBWAY", "MRCOMIT" };
+const char *credits02[] = { "4LEVEL MODELING", "MOSTLY COMIT", "ENGINE PROGRAMMING", "MOSTLY CHEEZEPIN" };
+const char *credits03[] = { "4ARRANGEMENTS BY", "MRCOMIT ", "TECHNOMANCER00 ", "CHEEZEPIN " };
+const char *credits04[] = { "8PEACHS CASTLE", "TRAINING  KIRBY 64", "BOWSER APPEARS", "U.N.OWEN WAS HER  TOUHOU 6", "GRASS LEVEL", "BOBOMB BATTLEFIELD  SM64", "WATER LEVEL", "COLLAPSING TIME RIFT  HAT IN TIME" };
+const char *credits05[] = { "8CASTLE LEVEL", "KOOPAS ROAD  SM64", "FINAL BOSS", "METALLIC MADNESS BF  SONIC CD", "HUB", "IDK", "CREDITS", "STORM EAGLE  MEGA MAN X" };
+const char *credits06[] = { "6BETA TESTING", "I", "FUCKED", "YOUR", "MOM", "DIPSHIT" };
+const char *credits07[] = { "7SPECIAL THANKS", "TECHNOMANCER0", "BANGIN TUNES", "MATT", "BUPENSIVE", "AGLAB2", "INSPIRATION" };
+const char *credits08[] = { "5MAKE SURE TO CHECK OUT YOSHI COMMITS", "", "TAX FRAUD 64  MY MAJOR HACK", "", "RELEASING IN THE FUTURE" };
+const char *credits09[] = { "3JUST ABOUT EVERYTHING", "CHEEZEPIN", "MRCOMIT" };
+const char *credits10[] = { "3JUST ABOUT EVERYTHING", "CHEEZEPIN", "MRCOMIT" };
+const char *credits11[] = { "3JUST ABOUT EVERYTHING", "CHEEZEPIN", "MRCOMIT" };
 const char *credits12[] = { "1ADDITIONAL GRAPHICS", "MASANAO ARIMOTO" };
 const char *credits13[] = { "3TECHNICAL SUPPORT", "TAKAO SAWANO", "HIROHITO YOSHIMOTO", "HIROTO YADA" };
 const char *credits14[] = { "1TECHNICAL SUPPORT", "SGI N64 PROJECT STAFF" };
 const char *credits15[] = { "2PROGRESS MANAGEMENT", "KIMIYOSHI FUKUI", "KEIZO KATO" };
 const char *credits16[] = { "5SCREEN TEXT WRITER", "TRANSLATION", "LESLIE SWAN", "MINA AKINO",
                             "HIRO YAMADA" }; // ...in order to make room for these 2 new lines
-#else // VERSION_EU
-const char *credits09[] = { "7SOUND COMPOSER", "SOUND EFFECTS", "SOUND PROGRAMMER", "KOJI KONDO",
-                            "YOJI INAGAKI", "HIDEAKI SHIMIZU" };
-const char *credits10[] = { "63-D ANIMATORS", "ADDITIONAL GRAPHICS", "YOSHIAKI KOIZUMI", "SATORU TAKIZAWA",
-                            "MASANAO ARIMOTO" };
-const char *credits11[] = { "3TECHNICAL SUPPORT", "TAKAO SAWANO", "HIROHITO YOSHIMOTO", "HIROTO YADA" };
-const char *credits12[] = { "1TECHNICAL SUPPORT", "SGI N64 PROJECT STAFF" };
-const char *credits13[] = { "2PROGRESS MANAGEMENT", "KIMIYOSHI FUKUI", "KEIZO KATO" };
-const char *credits14[] = { "5SCREEN TEXT WRITER", "ENGLISH TRANSLATION", "LESLIE SWAN", "MINA AKINO",
-                            "HIRO YAMADA" };
-const char *credits15[] = { "4SCREEN TEXT WRITER", "FRENCH TRANSLATION", "JULIEN BARDAKOFF",
-                            "KENJI HARAGUCHI" };
-const char *credits16[] = { "4SCREEN TEXT WRITER", "GERMAN TRANSLATION", "THOMAS GOERG",
-                            "THOMAS SPINDLER" };
-#endif
 const char *credits17[] = { "4MARIO VOICE", "PEACH VOICE", "CHARLES MARTINET", "LESLIE SWAN" };
 const char *credits18[] = { "3SPECIAL THANKS TO", "EAD STAFF", "ALL NINTENDO PERSONNEL",
-#ifdef VERSION_US
                            "MARIO CLUB STAFF" };
-#else // VERSION_EU
-                           "SUPER MARIO CLUB STAFF" };
-#endif
 const char *credits19[] = { "1PRODUCER", "SHIGERU MIYAMOTO" };
 const char *credits20[] = { "1EXECUTIVE PRODUCER", "HIROSHI YAMAUCHI" };
-#endif
 
 
 struct CreditsEntry sCreditsSequence[] = {
-    { LEVEL_CASTLE_GROUNDS, 1, 1, -128, { 0, 8000, 0 }, NULL },
-    { LEVEL_BOB, 1, 1, 117, { 713, 3918, -3889 }, credits01 },
-    { LEVEL_WF, 1, 50, 46, { 347, 5376, 326 }, credits02 },
-    { LEVEL_JRB, 1, 18, 22, { 3800, -4840, 2727 }, credits03 },
-    { LEVEL_CCM, 2, 34, 25, { -5464, 6656, -6575 }, credits04 },
-    { LEVEL_BBH, 1, 1, 60, { 257, 1922, 2580 }, credits05 },
-    { LEVEL_HMC, 1, -15, 123, { -6469, 1616, -6054 }, credits06 },
-    { LEVEL_THI, 3, 17, -32, { 508, 1024, 1942 }, credits07 },
-    { LEVEL_LLL, 2, 33, 124, { -73, 82, -1467 }, credits08 },
-    { LEVEL_SSL, 1, 65, 98, { -5906, 1024, -2576 }, credits09 },
-    { LEVEL_DDD, 1, 50, 47, { -4884, -4607, -272 }, credits10 },
-    { LEVEL_SL, 1, 17, -34, { 1925, 3328, 563 }, credits11 },
-    { LEVEL_WDW, 1, 33, 105, { -537, 1850, 1818 }, credits12 },
-    { LEVEL_TTM, 1, 2, -33, { 2613, 313, 1074 }, credits13 },
-    { LEVEL_THI, 1, 51, 54, { -2609, 512, 856 }, credits14 },
-    { LEVEL_TTC, 1, 17, -72, { -1304, -71, -967 }, credits15 },
-    { LEVEL_RR, 1, 33, 64, { 1565, 1024, -148 }, credits16 },
-    { LEVEL_SA, 1, 1, 24, { -1050, -1330, -1559 }, credits17 },
-    { LEVEL_COTMC, 1, 49, -16, { -254, 415, -6045 }, credits18 },
-    { LEVEL_DDD, 2, -111, -64, { 3948, 1185, -104 }, credits19 },
-    { LEVEL_CCM, 1, 33, 31, { 3169, -4607, 5240 }, credits20 },
-    { LEVEL_CASTLE_GROUNDS, 1, 1, -128, { 0, 906, -1200 }, NULL },
-    { LEVEL_NONE, 0, 1, 0, { 0, 0, 0 }, NULL },
+    { LEVEL_CASTLE_GROUNDS, 1, 1, -128, 0, { 0, 8000, 0 }, NULL },
+    { LEVEL_BOB, 1, 1, 117, 0, { 713, 3918, -3889 }, credits01 },
+    { LEVEL_JRB, 1, 18, 22, 0, { -25000, 0, -1000 }, credits02 },
+    { LEVEL_CCM, 1, 34, 25, 2, { -9136, 3034, 6127 }, credits03 },
+    { LEVEL_BOB, 1, 1, 117, 1, { 713, 3918, -3889 }, credits04 },
+    { LEVEL_JRB, 1, 18, 22, 1, { -25000, 0, -1000 }, credits05 },
+    { LEVEL_CCM, 1, 34, 25, 0, { -9136, 3034, 6127 }, credits06 },
+    { LEVEL_CCM, 2, 34, 25, 0, { 203, 300, 2799 }, credits07 },
+    { LEVEL_CASTLE_GROUNDS, 2, 34, 25, 0, { -5464, 6656, -6575 }, credits08 },
+    { LEVEL_BOB, 1, 1, 117, 0, { 713, 3918, -3889 }, credits01 },
+    { LEVEL_WF, 1, 50, 46, 0, { 347, 5376, 326 }, credits02 },
+    { LEVEL_JRB, 1, 18, 22, 0, { 3800, -4840, 2727 }, credits03 },
+    { LEVEL_CCM, 2, 34, 25, 0, { -5464, 6656, -6575 }, credits04 },
+    { LEVEL_BBH, 1, 1, 60, 0, { 257, 1922, 2580 }, credits05 },
+    { LEVEL_HMC, 1, -15, 123, 0, { -6469, 1616, -6054 }, credits06 },
+    { LEVEL_THI, 3, 17, -32, 0, { 508, 1024, 1942 }, credits07 },
+    { LEVEL_LLL, 2, 33, 124, 0, { -73, 82, -1467 }, credits08 },
+    { LEVEL_SSL, 1, 65, 98, 0, { -5906, 1024, -2576 }, credits09 },
+    { LEVEL_DDD, 1, 50, 47, 0, { -4884, -4607, -272 }, credits10 },
+    { LEVEL_SL, 1, 17, -34, 0, { 1925, 3328, 563 }, credits11 },
+    { LEVEL_WDW, 1, 33, 105, 0, { -537, 1850, 1818 }, credits12 },
+    { LEVEL_TTM, 1, 2, -33, 0, { 2613, 313, 1074 }, credits13 },
+    { LEVEL_THI, 1, 51, 54, 0, { -2609, 512, 856 }, credits14 },
+    { LEVEL_TTC, 1, 17, -72, 0, { -1304, -71, -967 }, credits15 },
+    { LEVEL_RR, 1, 33, 64, 0, { 1565, 1024, -148 }, credits16 },
+    { LEVEL_SA, 1, 1, 24, 0, { -1050, -1330, -1559 }, credits17 },
+    { LEVEL_COTMC, 1, 49, 0, -16, { -254, 415, -6045 }, credits18 },
+    { LEVEL_DDD, 2, -111, 0, -64, { 3948, 1185, -104 }, credits19 },
+    { LEVEL_CCM, 1, 33, 31, 0, { 3169, -4607, 5240 }, credits20 },
+    { LEVEL_CASTLE_GROUNDS, 1, 1, -128, 0, { 0, 906, -1200 }, NULL },
+    { LEVEL_NONE, 0, 1, 0, 0, { 0, 0, 0 }, NULL },
 };
 
 struct MarioState gMarioStates[1];
