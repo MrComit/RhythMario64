@@ -24,7 +24,12 @@ void bhv_spike_pillar_loop(void) {
     if(gCheckpointLoaded == 1 || o->oTimer < 2) {
         o->oPosY = o->oHomeY - 625.0f;
     }
-    if(gSpikePillarIndex != 0 && gSpikePillarIndex - 1 == o->oBehParams2ndByte) {
+    if(gCurrentCheckpoint == 0 && gSequencePlayers[0].globalSongTimer > 3100) {
+        o->oSpikePillarActivated = 1;
+    } else {
+        o->oSpikePillarActivated = 0;
+    }
+    if(gSpikePillarIndex != 0 && gSpikePillarIndex - 1 == o->oBehParams2ndByte && o->oSpikePillarActivated == 1) {
         o->oPosY = o->oHomeY;
     }
     if(o->oPosY > o->oHomeY - 625.0f) {

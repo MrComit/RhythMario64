@@ -60,7 +60,7 @@ const LevelScript level_castle_grounds_entry[] = {
 		TERRAIN(castle_grounds_area_1_collision),
 		MACRO_OBJECTS(castle_grounds_area_1_macro_objs),
 		//STOP_MUSIC(0),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_WATER),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_TIME_RIFT),
 		TERRAIN_TYPE(TERRAIN_STONE),
 	END_AREA(),
 
