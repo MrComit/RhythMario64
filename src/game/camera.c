@@ -1206,7 +1206,7 @@ void mode_cliff_camera(struct Camera *c) {
     c->focus[2] = -5500.0f;
     sAreaYawChange = 0;
     c->focus[1] = gMarioState->pos[1];
-    c->pos[1] = c->focus[1] + 50.0f;
+    c->pos[1] = c->focus[1] + 125.0f;
 }
 
 /**

@@ -592,7 +592,7 @@ void apply_vertical_wind(struct MarioState *m) {
             if (offsetY >= 0.0f) {
                 maxVelY = 10000.0f / (offsetY + 500.0f);
             } else {
-                maxVelY = 60.0f;
+                maxVelY = 120.0f;
             }
 
             if (m->vel[1] < maxVelY) {

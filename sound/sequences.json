@@ -39,5 +39,6 @@
     "24_castle": ["19"],
     "25_final_boss": ["26"],
     "26_training": ["25"],
-    "27_un_owen": ["25"]
+    "27_un_owen": ["25"],
+    "28_time_rift": ["27"]
 }
