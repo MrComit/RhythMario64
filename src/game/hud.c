@@ -2682,7 +2682,7 @@ Gfx spikepillar_rect_mesh[] = {
 s32 gRenderTarget, gTargetX, gTargetY;
 
 void render_target(void) {
-    create_dl_translation_matrix(G_MTX_PUSH, (f32)gTargetX, (f32)gTargetY, 0.0f);
+    create_dl_translation_matrix(MENU_MTX_PUSH, (f32)gTargetX, (f32)gTargetY, 0.0f);
     gDPSetEnvColor(gDisplayListHead++, 63, 192, 254, 63);
     gSPDisplayList(gDisplayListHead++, &target_rect_mesh);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
@@ -2813,7 +2813,7 @@ u8 sHudNoteChannelEnvs[4][4] = {
 };
 
 void render_hud_note_helper(s16 x, s16 y, u8 channel) {
-    create_dl_translation_matrix(G_MTX_PUSH, (f32)x, (f32)y, 0.0f);
+    create_dl_translation_matrix(MENU_MTX_PUSH, (f32)x, (f32)y, 0.0f);
     gDPSetEnvColor(gDisplayListHead++, sHudNoteChannelEnvs[channel][0], sHudNoteChannelEnvs[channel][1], 
                     sHudNoteChannelEnvs[channel][2], sHudNoteChannelEnvs[channel][3]);
     gSPDisplayList(gDisplayListHead++, &note_rect_mesh);
