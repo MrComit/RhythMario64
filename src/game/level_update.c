@@ -345,7 +345,7 @@ void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg
             break;
     }
 
-    gIntendedCheckpoint = 0;
+    //gIntendedCheckpoint = 0; //maybe uncomment?
 
     set_mario_initial_cap_powerup(m);
 }
@@ -1064,13 +1064,13 @@ void initiate_delayed_warp(void) {
                     warpNode = area_get_warp_node(sSourceWarpNodeId);
 
                     if(gIntendedCheckpoint != 0 && sDelayedWarpOp == WARP_OP_DEATH) {
-                        epicNode = warpNode->node.destNode += gIntendedCheckpoint;
+                        epicNode = warpNode->node.destNode + gIntendedCheckpoint;
                     } else {
                         epicNode = warpNode->node.destNode;
                     }
 
                     initiate_warp(warpNode->node.destLevel & 0x7F, warpNode->node.destArea,
-                                  warpNode->node.destNode, sDelayedWarpArg);
+                                  epicNode, sDelayedWarpArg);
 
                     check_if_should_set_warp_checkpoint(&warpNode->node);
                     if (sWarpDest.type != WARP_TYPE_CHANGE_LEVEL) {
