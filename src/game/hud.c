@@ -47,12 +47,18 @@ s16 sC1Channel2Notes[] = {120, 150, -1};
 
 s16 sC1Channel3Notes[] = {70, 80, -1};
 
+s16 sC2Channel1Notes[] = {65, 70, 80, 90, 100, -1};
+
+s16 sC2Channel2Notes[] = {120, 150, -1};
+
+s16 sC3Channel1Notes[] = {70, 80, -1};
+
 
 s16 *sHudNoteLists[4][4] = {
 {sC1Channel1Notes, sC1Channel2Notes, sC1Channel3Notes, NULL},
 {NULL, NULL, NULL, NULL},
-{sC1Channel1Notes, sC1Channel2Notes, sC1Channel3Notes, NULL},
-{NULL, sC1Channel2Notes, sC1Channel3Notes, sC1Channel1Notes},
+{sC2Channel1Notes, sC2Channel2Notes, NULL, NULL},
+{sC3Channel1Notes, NULL, NULL, NULL},
 };
 
 
