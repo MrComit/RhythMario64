@@ -133,8 +133,7 @@ void bhv_disco_loop(void) {
     switch (o->oAction) {
         case 0:
             o->oFaceAngleYaw += 0x200;
-            //if (o->oF4 >= 3) {
-            if(gCurrCreditsEntry == 0) {
+            if (o->oF4 >= 3 && gCurrCreditsEntry == 0) {
                 o->oAction = 2;
                 //o->oPosZ = obj->oPosZ;
                 obj->oAction = 50;

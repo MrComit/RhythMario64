@@ -96,7 +96,6 @@ void bhv_sawblade_spawner_loop(void) {
     if ((bparam1 < 2 && gCurrentCheckpoint > 1) || gCurrCreditsEntry != 0)
         return;
     if (bparam1 >= 2 && gCurrentCheckpoint <= 1 && gCurrCreditsEntry == 0) {
-        print_text(5, 5, "IM A LITTLE CRINGE BABY BOY");
         return;
     }
 
