@@ -256,6 +256,10 @@ ALIGNED8 static const Texture texture_credits_char_6[] = {
 #include "textures/segment2/segment2.06300.rgba16.inc.c"
 };
 
+ALIGNED8 static const Texture texture_credits_char_9[] = {
+#include "textures/segment2/CUSTOM_credits_9.rgba16.inc.c"
+};
+
 ALIGNED8 static const Texture texture_credits_char_A[] = {
 #include "textures/segment2/segment2.06380.rgba16.inc.c"
 };
@@ -2079,7 +2083,7 @@ const Texture *const main_font_lut[] = {
 const Texture *const main_credits_font_lut[] = {
     texture_credits_char_0, texture_credits_char_1, texture_credits_char_2, texture_credits_char_3,
     texture_credits_char_4, texture_credits_char_5, texture_credits_char_6,                    0x0,
-                       0x0,                    0x0, texture_credits_char_A, texture_credits_char_B,
+                       0x0, texture_credits_char_9, texture_credits_char_A, texture_credits_char_B,
     texture_credits_char_C, texture_credits_char_D, texture_credits_char_E, texture_credits_char_F,
     texture_credits_char_G, texture_credits_char_H, texture_credits_char_I, texture_credits_char_J,
     texture_credits_char_K, texture_credits_char_L, texture_credits_char_M, texture_credits_char_N,
