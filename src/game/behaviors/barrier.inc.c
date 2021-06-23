@@ -21,6 +21,9 @@ void bhv_gate_init(void) {
     o->oFC--;
     if (gCurrLevelNum == LEVEL_CCM) {
         o->header.gfx.scale[2] = 1.5f;
+        if (gCurrentCheckpoint > 0) {
+            o->oFC -= 31;
+        }
     }
 }
 
@@ -127,7 +130,7 @@ void bhv_c3_barrier_loop(void) {
                 if (o->oPosZ == o->oHomeZ - 11475.0f) {
                     o->oF4 = 1;
                 }
-                kill_mario_if_behind();
+                //kill_mario_if_behind();
             }
             break;
         case 4:
