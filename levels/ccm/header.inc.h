@@ -2,7 +2,13 @@ extern const GeoLayout ccm_area_1_geo[];
 extern const GeoLayout ccm_area_1[];
 extern const Collision ccm_area_1_collision[];
 extern const MacroObject ccm_area_1_macro_objs[];
+#include "src/game/camera.h"
+
+extern struct CutsceneSplinePoint ccm_area_1_spline_focus[];
+extern struct CutsceneSplinePoint ccm_area_1_spline_focus_001[];
 extern const Trajectory ccm_area_1_spline_KoopaPath[];
+extern struct CutsceneSplinePoint ccm_area_1_spline_pos[];
+extern struct CutsceneSplinePoint ccm_area_1_spline_pos_001[];
 extern const GeoLayout ccm_area_2_geo[];
 extern const GeoLayout ccm_area_2[];
 extern const Collision ccm_area_2_collision[];

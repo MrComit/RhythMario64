@@ -91,7 +91,6 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_BREAKABLE_BOX, -1588, 250, -10643, 0, 0, 0, 0x00010000, bhvBreakableBox),
 		OBJECT(MODEL_BREAKABLE_BOX, -1788, 250, -10643, 0, 0, 0, 0x00010000, bhvBreakableBox),
 		OBJECT(MODEL_BREAKABLE_BOX, 5496, 200, 435, 0, -180, 0, 0x00030000, bhvBreakableBox),
-		OBJECT(MODEL_NONE, -10750, 300, -6500, 0, 90, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_GATE, -8500, 0, -6000, 0, 0, 0, 0x35010000, bhvGate),
 		OBJECT(MODEL_GATE, -7500, 0, -6000, 0, 0, 0, 0x00000000, bhvGate),
 		OBJECT(MODEL_BOUNCE_HILL, -13406, -4000, -16739, 0, 21, 0, 0x00000000, bhvBounceHill),

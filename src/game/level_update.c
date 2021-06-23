@@ -63,8 +63,8 @@
 const char *credits01[] = { "4RHYTHMARIO 64.5 ", "CHEEZEPIN", "BY TEAM SUBWAY", "MRCOMIT" };
 const char *credits02[] = { "4LEVEL MODELING", "MOSTLY COMIT", "ENGINE PROGRAMMING", "MOSTLY CHEEZEPIN" };
 const char *credits03[] = { "4ARRANGEMENTS BY", "MRCOMIT ", "TECHNOMANCER00 ", "CHEEZEPIN " };
-const char *credits04[] = { "8PEACHS CASTLE", "TRAINING  KIRBY 64", "BOWSER APPEARS", "U.N.OWEN WAS HER  TOUHOU 6", "GRASS LEVEL", "BOBOMB BATTLEFIELD  SM64", "WATER LEVEL", "COLLAPSING TIME RIFT  HAT IN TIME" };
-const char *credits05[] = { "8CASTLE LEVEL", "KOOPAS ROAD  SM64", "FINAL BOSS", "METALLIC MADNESS BF  SONIC CD", "HUB", "IDK", "CREDITS", "STORM EAGLE  MEGA MAN X" };
+const char *credits04[] = { "8PEACHS CASTLE", "TRAINING  KIRBY 64", "BOWSER APPEARS", "U.N.OWEN WAS HER  TOUHOU 6", "STAGE 1", "BOBOMB BATTLEFIELD  SM64", "STAGE 2", "COLLAPSING TIME RIFT  HAT IN TIME" };
+const char *credits05[] = { "8STAGE 3", "KOOPAS ROAD  SM64", "FINAL BOSS", "METALLIC MADNESS BF  SONIC CD", "HUB", "IDK", "CREDITS", "STORM EAGLE  MEGA MAN X" };
 const char *credits06[] = { "6BETA TESTING", "I", "FUCKED", "YOUR", "MOM", "DIPSHIT" };
 const char *credits07[] = { "7SPECIAL THANKS", "TECHNOMANCER0", "BANGIN TUNES", "MATT", "BUPENSIVE", "AGLAB2", "INSPIRATION" };
 const char *credits08[] = { "5MAKE SURE TO CHECK OUT YOSHI COMMITS", "", "TAX FRAUD 64  MY MAJOR HACK", "", "RELEASING IN THE FUTURE" };
@@ -85,35 +85,35 @@ const char *credits20[] = { "1EXECUTIVE PRODUCER", "HIROSHI YAMAUCHI" };
 
 
 struct CreditsEntry sCreditsSequence[] = {
-    { LEVEL_CASTLE_GROUNDS, 1, 1, -128, 0, { 0, 8000, 0 }, NULL },
-    { LEVEL_BOB, 1, 1, 117, 0, { 713, 3918, -3889 }, credits01 },
-    { LEVEL_JRB, 1, 18, 22, 0, { -25000, 0, -1000 }, credits02 },
-    { LEVEL_CCM, 1, 34, 25, 2, { -9136, 3034, 6127 }, credits03 },
-    { LEVEL_BOB, 1, 1, 117, 1, { 713, 3918, -3889 }, credits04 },
-    { LEVEL_JRB, 1, 18, 22, 1, { -25000, 0, -1000 }, credits05 },
-    { LEVEL_CCM, 1, 34, 25, 0, { -9136, 3034, 6127 }, credits06 },
-    { LEVEL_CCM, 2, 34, 25, 0, { 203, 300, 2799 }, credits07 },
-    { LEVEL_CASTLE_GROUNDS, 2, 34, 25, 0, { -5464, 6656, -6575 }, credits08 },
-    { LEVEL_BOB, 1, 1, 117, 0, { 713, 3918, -3889 }, credits01 },
-    { LEVEL_WF, 1, 50, 46, 0, { 347, 5376, 326 }, credits02 },
-    { LEVEL_JRB, 1, 18, 22, 0, { 3800, -4840, 2727 }, credits03 },
-    { LEVEL_CCM, 2, 34, 25, 0, { -5464, 6656, -6575 }, credits04 },
-    { LEVEL_BBH, 1, 1, 60, 0, { 257, 1922, 2580 }, credits05 },
-    { LEVEL_HMC, 1, -15, 123, 0, { -6469, 1616, -6054 }, credits06 },
-    { LEVEL_THI, 3, 17, -32, 0, { 508, 1024, 1942 }, credits07 },
-    { LEVEL_LLL, 2, 33, 124, 0, { -73, 82, -1467 }, credits08 },
-    { LEVEL_SSL, 1, 65, 98, 0, { -5906, 1024, -2576 }, credits09 },
-    { LEVEL_DDD, 1, 50, 47, 0, { -4884, -4607, -272 }, credits10 },
-    { LEVEL_SL, 1, 17, -34, 0, { 1925, 3328, 563 }, credits11 },
-    { LEVEL_WDW, 1, 33, 105, 0, { -537, 1850, 1818 }, credits12 },
-    { LEVEL_TTM, 1, 2, -33, 0, { 2613, 313, 1074 }, credits13 },
-    { LEVEL_THI, 1, 51, 54, 0, { -2609, 512, 856 }, credits14 },
-    { LEVEL_TTC, 1, 17, -72, 0, { -1304, -71, -967 }, credits15 },
-    { LEVEL_RR, 1, 33, 64, 0, { 1565, 1024, -148 }, credits16 },
-    { LEVEL_SA, 1, 1, 24, 0, { -1050, -1330, -1559 }, credits17 },
-    { LEVEL_COTMC, 1, 49, 0, -16, { -254, 415, -6045 }, credits18 },
-    { LEVEL_DDD, 2, -111, 0, -64, { 3948, 1185, -104 }, credits19 },
-    { LEVEL_CCM, 1, 33, 31, 0, { 3169, -4607, 5240 }, credits20 },
+    { LEVEL_CASTLE_GROUNDS, 1, 1, -128, 0, 0, { 0, 8000, 0 }, NULL },
+    { LEVEL_BOB, 1, 1, 117, 0, 0, { 713, 3918, -3889 }, credits01 },
+    { LEVEL_JRB, 1, 18, 22, 0, 1, { -25000, 0, -1000 }, credits02 },
+    { LEVEL_CCM, 1, 34, 25, 2, 2, { -9136, 3034, 6127 }, credits03 },
+    { LEVEL_BOB, 1, 1, 117, 1, 3, { 5500, 500, 5361 }, credits04 },
+    { LEVEL_JRB, 1, 18, 22, 1, 4, { -25000, 0, -1000 }, credits05 },
+    { LEVEL_CCM, 1, 34, 25, 0, 5, { 9154, 2925, -12641 }, credits06 },
+    { LEVEL_CCM, 2, 34, 25, 0, 6, { 203, 300, 2799 }, credits07 },
+    { LEVEL_CASTLE_GROUNDS, 2, 7, 34, 25, 0, { -5464, 6656, -6575 }, credits08 },
+    // { LEVEL_BOB, 1, 1, 117, 0, { 713, 3918, -3889 }, credits01 },
+    // { LEVEL_WF, 1, 50, 46, 0, { 347, 5376, 326 }, credits02 },
+    // { LEVEL_JRB, 1, 18, 22, 0, { 3800, -4840, 2727 }, credits03 },
+    // { LEVEL_CCM, 2, 34, 25, 0, { -5464, 6656, -6575 }, credits04 },
+    // { LEVEL_BBH, 1, 1, 60, 0, { 257, 1922, 2580 }, credits05 },
+    // { LEVEL_HMC, 1, -15, 123, 0, { -6469, 1616, -6054 }, credits06 },
+    // { LEVEL_THI, 3, 17, -32, 0, { 508, 1024, 1942 }, credits07 },
+    // { LEVEL_LLL, 2, 33, 124, 0, { -73, 82, -1467 }, credits08 },
+    // { LEVEL_SSL, 1, 65, 98, 0, { -5906, 1024, -2576 }, credits09 },
+    // { LEVEL_DDD, 1, 50, 47, 0, { -4884, -4607, -272 }, credits10 },
+    // { LEVEL_SL, 1, 17, -34, 0, { 1925, 3328, 563 }, credits11 },
+    // { LEVEL_WDW, 1, 33, 105, 0, { -537, 1850, 1818 }, credits12 },
+    // { LEVEL_TTM, 1, 2, -33, 0, { 2613, 313, 1074 }, credits13 },
+    // { LEVEL_THI, 1, 51, 54, 0, { -2609, 512, 856 }, credits14 },
+    // { LEVEL_TTC, 1, 17, -72, 0, { -1304, -71, -967 }, credits15 },
+    // { LEVEL_RR, 1, 33, 64, 0, { 1565, 1024, -148 }, credits16 },
+    // { LEVEL_SA, 1, 1, 24, 0, { -1050, -1330, -1559 }, credits17 },
+    // { LEVEL_COTMC, 1, 49, 0, -16, { -254, 415, -6045 }, credits18 },
+    // { LEVEL_DDD, 2, -111, 0, -64, { 3948, 1185, -104 }, credits19 },
+    // { LEVEL_CCM, 1, 33, 31, 0, { 3169, -4607, 5240 }, credits20 },
     { LEVEL_CASTLE_GROUNDS, 1, 1, -128, 0, { 0, 906, -1200 }, NULL },
     { LEVEL_NONE, 0, 1, 0, 0, { 0, 0, 0 }, NULL },
 };
