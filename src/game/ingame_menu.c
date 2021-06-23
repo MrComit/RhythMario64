@@ -1890,20 +1890,26 @@ u8 ascii_to_credits_char(u8 c) {
     if (c == '.') {
         return 0x24;
     }
+    if (c == '0') {
+        return ASCII_TO_DIALOG('0');
+    }
+    if (c == '1') {
+        return ASCII_TO_DIALOG('1');
+    }
+    if (c == '2') {
+        return ASCII_TO_DIALOG('2');
+    }
     if (c == '3') {
         return ASCII_TO_DIALOG('3');
     }
     if (c == '4') {
         return ASCII_TO_DIALOG('4');
     }
-    if (c == '6') {
-        return ASCII_TO_DIALOG('6');
-    }
-    if (c == '0') {
-        return ASCII_TO_DIALOG('0');
-    }
     if (c == '5') {
         return ASCII_TO_DIALOG('5');
+    }
+    if (c == '6') {
+        return ASCII_TO_DIALOG('6');
     }
 
     return GLOBAL_CHAR_SPACE;

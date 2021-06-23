@@ -61,13 +61,13 @@
 
 // TODO: Make these ifdefs better
 const char *credits01[] = { "4RHYTHMARIO 64.5 ", "CHEEZEPIN", "BY TEAM SUBWAY", "MRCOMIT" };
-const char *credits02[] = { "4LEVEL MODELING", "MOSTLY COMIT", "ENGINE PROGRAMMING", "MOSTLY CHEEZEPIN" };
+const char *credits02[] = { "4LEVEL MODELING", "MOSTLY COMIT", "ENGINE PROGRAMMING", "MOSTLY CHEEZE" };
 const char *credits03[] = { "4ARRANGEMENTS BY", "MRCOMIT ", "TECHNOMANCER00 ", "CHEEZEPIN " };
 const char *credits04[] = { "8PEACHS CASTLE", "TRAINING  KIRBY 64", "BOWSER APPEARS", "U.N.OWEN WAS HER  TOUHOU 6", "STAGE 1", "BOBOMB BATTLEFIELD  SM64", "STAGE 2", "COLLAPSING TIME RIFT  HAT IN TIME" };
 const char *credits05[] = { "8STAGE 3", "KOOPAS ROAD  SM64", "FINAL BOSS", "METALLIC MADNESS BF  SONIC CD", "HUB", "IDK", "CREDITS", "STORM EAGLE  MEGA MAN X" };
 const char *credits06[] = { "6BETA TESTING", "I", "FUCKED", "YOUR", "MOM", "DIPSHIT" };
-const char *credits07[] = { "7SPECIAL THANKS", "TECHNOMANCER0", "BANGIN TUNES", "MATT", "BUPENSIVE", "AGLAB2", "INSPIRATION" };
-const char *credits08[] = { "5MAKE SURE TO CHECK OUT YOSHI COMMITS", "", "TAX FRAUD 64  MY MAJOR HACK", "", "RELEASING IN THE FUTURE" };
+const char *credits07[] = { "7SPECIAL THANKS", "TECHNOMANCER00", "BANGIN TUNES", "MATT", "BUPENSIVE", "AGLAB2", "INSPIRATION" };
+const char *credits08[] = { "7MAKE SURE TO CHECK OUT YOSHI COMMITS TAX", "", "FRAUD 64  MY MAJOR HACK RELEASING IN THE  ", "FUTURE                                                        ", "", "", "", };
 const char *credits09[] = { "3JUST ABOUT EVERYTHING", "CHEEZEPIN", "MRCOMIT" };
 const char *credits10[] = { "3JUST ABOUT EVERYTHING", "CHEEZEPIN", "MRCOMIT" };
 const char *credits11[] = { "3JUST ABOUT EVERYTHING", "CHEEZEPIN", "MRCOMIT" };
@@ -85,15 +85,17 @@ const char *credits20[] = { "1EXECUTIVE PRODUCER", "HIROSHI YAMAUCHI" };
 
 
 struct CreditsEntry sCreditsSequence[] = {
-    { LEVEL_CASTLE_GROUNDS, 1, 1, -128, 0, 0, { 0, 8000, 0 }, NULL },
+    { LEVEL_CASTLE_GROUNDS, 1, 1, -128, 0, 0, { -11750, 300, -6500 }, NULL },
     { LEVEL_BOB, 1, 1, 117, 0, 0, { 713, 3918, -3889 }, credits01 },
     { LEVEL_JRB, 1, 18, 22, 0, 1, { -25000, 0, -1000 }, credits02 },
     { LEVEL_CCM, 1, 34, 25, 2, 2, { -9136, 3034, 6127 }, credits03 },
     { LEVEL_BOB, 1, 1, 117, 1, 3, { 5500, 500, 5361 }, credits04 },
-    { LEVEL_JRB, 1, 18, 22, 1, 4, { -25000, 0, -1000 }, credits05 },
+    { LEVEL_JRB, 1, 18, 22, 1, 4, { -3481, 6234, -9000 }, credits05 },
     { LEVEL_CCM, 1, 34, 25, 0, 5, { 9154, 2925, -12641 }, credits06 },
     { LEVEL_CCM, 2, 34, 25, 0, 6, { 203, 300, 2799 }, credits07 },
-    { LEVEL_CASTLE_GROUNDS, 2, 7, 34, 25, 0, { -5464, 6656, -6575 }, credits08 },
+    { LEVEL_CASTLE_GROUNDS, 1, 1, 34, 0, 7, { -2500, 300, 0 }, credits08 },
+    { LEVEL_CASTLE_GROUNDS, 1, 1, 34, 0, 7, { -2500, 300, 0 }, credits08 },
+    { LEVEL_CASTLE_GROUNDS, 1, 1, 34, 0, 7, { -2500, 300, 0 }, credits08 },
     // { LEVEL_BOB, 1, 1, 117, 0, { 713, 3918, -3889 }, credits01 },
     // { LEVEL_WF, 1, 50, 46, 0, { 347, 5376, 326 }, credits02 },
     // { LEVEL_JRB, 1, 18, 22, 0, { 3800, -4840, 2727 }, credits03 },
@@ -113,8 +115,8 @@ struct CreditsEntry sCreditsSequence[] = {
     // { LEVEL_SA, 1, 1, 24, 0, { -1050, -1330, -1559 }, credits17 },
     // { LEVEL_COTMC, 1, 49, 0, -16, { -254, 415, -6045 }, credits18 },
     // { LEVEL_DDD, 2, -111, 0, -64, { 3948, 1185, -104 }, credits19 },
-    // { LEVEL_CCM, 1, 33, 31, 0, { 3169, -4607, 5240 }, credits20 },
-    { LEVEL_CASTLE_GROUNDS, 1, 1, -128, 0, { 0, 906, -1200 }, NULL },
+    // // { LEVEL_CCM, 1, 33, 31, 0, { 3169, -4607, 5240 }, credits20 },
+    // { LEVEL_CASTLE_GROUNDS, 1, 1, -128, 0, { 0, 906, -1200 }, NULL },
     { LEVEL_NONE, 0, 1, 0, 0, { 0, 0, 0 }, NULL },
 };
 

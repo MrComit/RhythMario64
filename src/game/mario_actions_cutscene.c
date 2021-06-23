@@ -2705,7 +2705,10 @@ static s32 act_credits_cutscene(struct MarioState *m) {
     }
 
     if (m->actionTimer++ == TIMER_CREDITS_WARP) {
-        level_trigger_warp(m, WARP_OP_CREDITS_NEXT);
+        if(gCurrCreditsEntry->splineID >= 7) {
+            level_trigger_warp(m, WARP_OP_CREDITS_END);
+        } else
+            level_trigger_warp(m, WARP_OP_CREDITS_NEXT);
     }
 
     m->marioObj->header.gfx.angle[1] += (gCurrCreditsEntry->unk02 & 0xC0) << 8;

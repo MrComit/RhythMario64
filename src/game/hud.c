@@ -1231,7 +1231,7 @@ void render_hud(void) {
         if(gCurrCourseNum == 3) {
             render_water_tri();
         }
-        render_audiovisual_bars();
+        //render_audiovisual_bars(); //my sweet summer child... ;(
 
         if(gRenderTarget > 0) {
             render_target();

@@ -6227,13 +6227,7 @@ struct CameraTrigger sCamSSL[] = {
  * the end of the ride.
  */
 struct CameraTrigger sCamRR[] = {
-    { 1, cam_rr_exit_building_side, -4197, 3819, -3087, 1769, 1490, 342, 0 },
-    { 1, cam_rr_enter_building_side, -4197, 3819, -3771, 769, 490, 342, 0 },
-    { 1, cam_rr_enter_building_window, -5603, 4834, -5209, 300, 600, 591, 0 },
-    { 1, cam_rr_enter_building, -2609, 3730, -5463, 300, 650, 577, 0 },
-    { 1, cam_rr_exit_building_top, -4196, 7343, -5155, 4500, 1000, 4500, 0 },
-    { 1, cam_rr_enter_building, -4196, 6043, -5155, 500, 300, 500, 0 },
-    NULL_TRIGGER,
+	NULL_TRIGGER
 };
 
 /**
@@ -6359,6 +6353,9 @@ struct CameraTrigger sCamJRB[] = {
 	NULL_TRIGGER
 };
 struct CameraTrigger sCamCastleGrounds[] = {
+	NULL_TRIGGER
+};
+struct CameraTrigger sCamCastleCourtyard[] = {
 	NULL_TRIGGER
 };
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {
@@ -9770,6 +9767,8 @@ extern struct CutsceneSplinePoint sJrb2CreditsSplinePositions[];
 extern struct CutsceneSplinePoint sJrb2CreditsSplineFocus[];
 extern struct CutsceneSplinePoint sCcmOutside2CreditsSplinePositions[];
 extern struct CutsceneSplinePoint sCcmOutside2CreditsSplineFocus[];
+extern struct CutsceneSplinePoint sCastleCourtyardCreditsSplinePositions[];
+extern struct CutsceneSplinePoint sCastleCourtyardCreditsSplineFocus[];
 
 /**
  * Follow splines through the courses of the game.
@@ -9896,12 +9895,20 @@ BAD_RETURN(s32) cutscene_credits(struct Camera *c) {
             focus = sBob2CreditsSplineFocus;
             break;
         case 4:
-            pos = sJrbCreditsSplinePositions;
-            focus = sJrbCreditsSplineFocus;
+            pos = sJrb2CreditsSplinePositions;
+            focus = sJrb2CreditsSplineFocus;
             break;
         case 5:
             pos = sCcmOutside2CreditsSplinePositions;
             focus = sCcmOutside2CreditsSplineFocus;
+            break;
+        case 6:
+            pos = sCcmSlideCreditsSplinePositions;
+            focus = sCcmSlideCreditsSplineFocus;
+            break;
+        case 7:
+            pos = sCastleCourtyardCreditsSplinePositions;
+            focus = sCastleCourtyardCreditsSplineFocus;
             break;
     }
 
@@ -10897,13 +10904,13 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SSL            | BOB
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SL             | WDW
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 1, 0, 0), // JRB            | THI
-	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // TTC            | RR
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 1, 0, 0), // TTC            | RR
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // CASTLE_GROUNDS | BITDW
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // VCUTM          | BITFS
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // SA             | BITS
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // LLL            | DDD
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // WF             | ENDING
-	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // COURTYARD      | PSS
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // COURTYARD      | PSS
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // COTMC          | TOTWC
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // BOWSER_1       | WMOTR
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // Unused         | BOWSER_2
@@ -10983,20 +10990,34 @@ struct CutsceneSplinePoint sJrbCreditsSplineFocus[] = {
 	{ -1, 600, { -24591, 250, 97 }},
 };
 
+struct CutsceneSplinePoint sJrb2CreditsSplinePositions[] = {
+    { 0, 16000, { -2248, -186, -4153 }},
+	{ 1, 16000, { -5139, 4453, -5987 }},
+	{ 2, 16000, { -3569, 8144, -7678 }},
+	{ -1, 16000, { 2904, 8144, -13151 }},
+};
+
+struct CutsceneSplinePoint sJrb2CreditsSplineFocus[] = {
+	{ 0, 16000, { -2248, 814, -6653 }},
+	{ 1, 16000, { -7500, 6359, -9000 }},
+	{ 2, 16000, { -3481, 6234, -9000 }},
+	{ -1, 16000, { 3071, 7260, -9370 }},
+};
+
 struct CutsceneSplinePoint sCcmSlideCreditsSplinePositions[] = {
-    { 0, 0, { -6324, 6745, -5626 } },
-    { 1, 0, { -6324, 6745, -5626 } },
-    { 2, 0, { -6108, 6762, -5770 } },
-    { 3, 0, { -5771, 6787, -5962 } },
-    { -1, 0, { -5672, 6790, -5979 } }
+    { 0, 16000, { 3004, 1850, -2156 }},
+	{ 1, 16000, { 2732, 1850, 3051 }},
+	{ 2, 16000, { -3459, 1850, 3064 }},
+	{ 3, 16000, { -3609, 1850, -3182 }},
+	{ -1, 16000, { 25, 1850, -19 }},
 };
 
 struct CutsceneSplinePoint sCcmSlideCreditsSplineFocus[] = {
-    { 0, 50, { -5911, 6758, -5908 } },
-    { 1, 50, { -5911, 6758, -5908 } },
-    { 2, 50, { -5652, 6814, -5968 } },
-    { 3, 50, { -5277, 6801, -6043 } },
-    { -1, 50, { -5179, 6804, -6060 } }
+    { 0, 16000, { 3004, -150, -2156 }},
+	{ 1, 16000, { 2732, -150, 3051 }},
+	{ 2, 16000, { -3459, -150, 3064 }},
+	{ 3, 16000, { -3609, -150, -3182 }},
+	{ -1, 16000, { 25, -150, -19 }},
 };
 
 struct CutsceneSplinePoint sBbhCreditsSplinePositions[] = {
@@ -11269,6 +11290,20 @@ struct CutsceneSplinePoint sCcmOutside2CreditsSplineFocus[] = {
 	{ 2, 4000, { 18127, 3300, -10191 }},
 	{ 3, 4000, { 14974, 3300, -14005 }},
 	{ -1, 4000, { 10523, 3300, -13029 }},
+};
+
+struct CutsceneSplinePoint sCastleCourtyardCreditsSplinePositions[] = {
+    { 0, 24000, { -2709, 300, -1281 }},
+	{ 1, 24000, { -1748, 300, 1032 }},
+	{ 2, 24000, { 2023, 300, 1150 }},
+	{ -1, 24000, { 2584, 300, -915 }},
+};
+
+struct CutsceneSplinePoint sCastleCourtyardCreditsSplineFocus[] = {
+    { 0, 24000, { -1324, 100, 280 }},
+	{ 1, 24000, { -694, 100, -544 }},
+	{ 2, 24000, { 1474, 100, -527 }},
+	{ -1, 24000, { 2369, 100, -655 }},
 };
 
 /**

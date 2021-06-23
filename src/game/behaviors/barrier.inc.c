@@ -17,13 +17,13 @@ void spawn_orange_number_gate(u16 behParam, s16 relX, s16 relY, s16 relZ, s16 x2
 }
 void bhv_gate_init(void) {
     o->oFC = o->oBehParams >> 24;
+    if(gCurrCreditsEntry != 0) {
+        return obj_mark_for_deletion(o);
+    }
     spawn_orange_number_gate(o->oFC, 0, 320, 0, 0, 50);
     o->oFC--;
     if (gCurrLevelNum == LEVEL_CCM) {
         o->header.gfx.scale[2] = 1.5f;
-    }
-    if(gCurrCreditsEntry != 0) {
-        obj_mark_for_deletion(o);
     }
 }
 

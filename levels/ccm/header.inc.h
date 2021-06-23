@@ -13,6 +13,10 @@ extern const GeoLayout ccm_area_2_geo[];
 extern const GeoLayout ccm_area_2[];
 extern const Collision ccm_area_2_collision[];
 extern const MacroObject ccm_area_2_macro_objs[];
+#include "src/game/camera.h"
+
+extern struct CutsceneSplinePoint ccm_area_2_spline_focus_2[];
+extern struct CutsceneSplinePoint ccm_area_2_spline_pos_2[];
 extern Lights1 ccm_dl_Castle_lights;
 extern Lights1 ccm_dl_Grounds_lights;
 extern Lights1 ccm_dl_Lava4_lights;
