@@ -34,8 +34,8 @@ extern struct HudNote *sCurrentHudNote;
 
 extern u16 sCurrentNote1, sCurrentNote2, sCurrentNote3, sCurrentNote4;
 
-extern s16 sC1Channel1Notes[];
-extern s16 sC1Channel2Notes[];
-extern s16 sC1Channel3Notes[];
+extern u16 sC1Channel1Notes[];
+extern u16 sC1Channel2Notes[];
+extern u16 sC1Channel3Notes[];
 
 #endif // HUD_H

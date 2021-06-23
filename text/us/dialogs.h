@@ -278,17 +278,10 @@ Mario, I just know that\n\
 he's here!"))
 
 DEFINE_DIALOG(DIALOG_032, 1, 4, 30, 200, _("\
-Alright Mario, I've\n\
-been through this song\n\
-and dance before. \n\
-\n\
-If Bowser is anywhere,\n\
-he's gonna be in a \n\
-castle, and I think I've\n\
-found just the place.\n\
-Jump into this portal\n\
-Mario, I just know that\n\
-he's here!"))
+Well Mario, what are\n\
+you waiting for???\n\
+Go mess up that DJ punk\n\
+and save us all!"))
 
 DEFINE_DIALOG(DIALOG_033, 1, 4, 30, 200, _("\
 You've done it Mario!\n\

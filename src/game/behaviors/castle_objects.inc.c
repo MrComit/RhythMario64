@@ -1,5 +1,6 @@
 #include "audio/load.h"
 #include "audio/synthesis.h"
+s32 cur_obj_beat_hit_and_reset_slower(s32 *timer, s32 timerDivisor);
 struct ObjectHitbox sSawbladeHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
@@ -13,23 +14,31 @@ struct ObjectHitbox sSawbladeHitbox = {
 };
 
 void bhv_castle_rock_init(void) {
+    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
+    s32 beatState = (((seqPlayer->globalSongTimer) % 192) / 96);
+    reset_for_checkpoint(&o->oBeatTimer, &o->oPrevSongTimer, 0, 1, 0);
     o->oAnimState = o->oBehParams2ndByte;
     if (o->oBehParams2ndByte)
         o->oAction = 1;
 }
 
 void bhv_castle_rock_loop(void) {
+    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
+    stay_on_beat(&o->oBeatTimer, &o->oPrevSongTimer);
+    if(gCheckpointLoaded) {
+        bhv_castle_rock_init();
+    }
     if (gMarioState->pos[0] < -5000.0f)
         return;
     switch (o->oAction) {
         case 0:
-            if (onScreenLayers[0] > 15) {
+            if (cur_obj_beat_hit_and_reset_slower(&o->oBeatTimer, 2)) {
                 o->oAction = 1;
             }
             o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, 0.2f);
             break;
         case 1:
-            if (onScreenLayers[0] > 15) {
+            if (cur_obj_beat_hit_and_reset_slower(&o->oBeatTimer, 2)) {
                 o->oAction = 0;
             }
             o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY - 200.0f, 0.2f);
@@ -132,16 +141,24 @@ void bhv_sawblade_loop(void) {
 void bhv_lava_spire_init(void) {
     //o->oAnimState = o->oBehParams >> 24;
     //reset_for_checkpoint(&o->oBeatTimer, &o->oPrevSongTimer, 32, 1, 0);
+    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
+    s32 beatState = (((seqPlayer->globalSongTimer) % 192) / 96);
+    reset_for_checkpoint(&o->oBeatTimer, &o->oPrevSongTimer, 0, 1, 0);
     if (o->oBehParams2ndByte)
         o->oAction = 1;
 }
 
 void bhv_lava_spire_loop(void) {
+    struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
+    stay_on_beat(&o->oBeatTimer, &o->oPrevSongTimer);
+    if(gCheckpointLoaded) {
+        bhv_lava_spire_init();
+    }
     if (gMarioState->pos[0] > -5000.0f)
         return;
     switch (o->oAction) {
         case 0:
-            if (onScreenLayers[0] > 15) {
+            if (cur_obj_beat_hit_and_reset_slower(&o->oBeatTimer, 2)) {
                 o->oAction = 1;
             }
             o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, 0.2f);
@@ -151,7 +168,7 @@ void bhv_lava_spire_loop(void) {
             if (o->oTimer < 8) {
                 load_object_collision_model();
             }
-            if (onScreenLayers[0] > 15) {
+            if (cur_obj_beat_hit_and_reset_slower(&o->oBeatTimer, 2)) {
                 o->oAction = 0;
             }
             o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY - 2500.0f, 0.2f);

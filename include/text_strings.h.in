@@ -399,10 +399,10 @@
 /**
  * Course Table names for Score Menu Save view
  */
-#define TEXT_MENU_BOB _(" 1 BOB-OMB BATTLEFIELD")
+#define TEXT_MENU_BOB _(" 1 BARITONE BATTLEFIELD")
 #define TEXT_MENU_WF _(" 2 WHOMP'S FORTRESS")
-#define TEXT_MENU_JRB _(" 3 JOLLY ROGER BAY")
-#define TEXT_MENU_CCM _(" 4 COOL, COOL MOUNTAIN")
+#define TEXT_MENU_JRB _(" 2 SUBMARINE SEA MAJOR")
+#define TEXT_MENU_CCM _(" 3 TREBLE CLEF CASTLE")
 #define TEXT_MENU_BBH _(" 5 BIG BOO'S HAUNT")
 #define TEXT_MENU_HMC _(" 6 HAZY MAZE CAVE")
 #define TEXT_MENU_LLL _(" 7 LETHAL LAVA LAND")
