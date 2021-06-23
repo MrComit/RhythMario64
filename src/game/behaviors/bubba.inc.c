@@ -166,6 +166,11 @@ void bhv_bubba_loop(void) {
 void bhv_angry_bubba_init(void) {
     obj_set_hitbox(o, &sBubbaHitbox);
     reset_for_checkpoint(&o->oBeatTimer, &o->oPrevSongTimer, 0, 1, 0);
+    if(gCurrentCheckpoint == 2) {
+        o->oPosX = gMarioState->pos[0];
+        o->oPosY = gMarioState->pos[1] + 500.0f;
+        o->oPosZ = gMarioState->pos[2];
+    }
 }
 
 void angry_bubba_stay_in_place(s32 side) {

@@ -557,6 +557,8 @@ void init_mario_after_warp(void) {
             break;
     }
 
+    disable_time_stop();
+
     sDelayedWarpOp = WARP_OP_NONE;
 
     if (gCurrDemoInput == NULL) {
@@ -1162,6 +1164,7 @@ void obj_explode(struct Object *obj, s16 dontDeactivate) {
     struct Object *explosion;
     explosion = spawn_object(obj, MODEL_EXPLOSION, bhvExplosion);
     explosion->oGraphYOffset += 100.0f;
+    explosion->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
     if(dontDeactivate == 0)
         obj->activeFlags = ACTIVE_FLAG_DEACTIVATED;
 }
@@ -1252,10 +1255,12 @@ s32 play_mode_normal(void) {
     if(gMarioState->health < 0x100 && gDead == 0) {
         obj_explode(gMarioObject, 1);
         set_mario_action(gMarioState, ACT_DISAPPEARED, 0);
+        gMarioState->pos[1] += 20000.0f;
         stop_background_music(sCurrentBackgroundMusicSeqId);
         gDialogResponse = 0;
         gRank.deaths++;
         gDead = 1;
+        enable_time_stop();
     }
     if(gMarioState->health < 0x100 && gDead != 0) {
         if(gDead == 15) {
