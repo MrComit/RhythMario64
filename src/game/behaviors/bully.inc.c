@@ -223,6 +223,10 @@ void bhv_bully_loop(void) {
     o->oBullyPrevY = o->oPosY;
     o->oBullyPrevZ = o->oPosZ;
 
+    if (gCurrentCheckpoint > 1) {
+        o->activeFlags = 0;
+    }
+
     //! Because this function runs no matter what, Mario is able to interrupt the bully's
     //  death action by colliding with it. Since the bully hitbox is tall enough to collide
     //  with Mario even when it is under a lava floor, this can get the bully stuck OOB

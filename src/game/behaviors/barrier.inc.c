@@ -103,14 +103,8 @@ void bhv_c3_barrier_loop(void) {
             }
             break;
         case 2:
-            if (o->oTimer == 0) {
-                if (gCurrentCheckpoint > 1) {
-                    o->oPosY = o->oHomeY;
-                    o->oPosX = o->oHomeX + 11100.0f;
-                }
-            }
             if (gCurrentCheckpoint > 1 && o->oF4 == 0) {
-                o->oPosY = approach_f32(o->oPosY, o->oHomeY, 80.0f, 80.0f);
+                o->oPosY = approach_f32(o->oPosY, o->oHomeY, 200.0f, 200.0f);
                 o->oPosX = approach_f32(o->oPosX, o->oHomeX + 11100.0f, 20.0f, 20.0f);
                 if (o->oPosX == o->oHomeX + 11100.0f) {
                     o->oF4 = 1;
@@ -121,10 +115,6 @@ void bhv_c3_barrier_loop(void) {
         case 3:
             if (o->oTimer == 0) {
                 o->header.gfx.scale[2] = 0.25f;
-                if (gCurrentCheckpoint > 1) {
-                    o->oPosY = o->oHomeY;
-                    o->oPosZ = o->oHomeZ - 11475.0f;
-                }
             }
             obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 0x0002);
             if (obj != NULL && obj->oF4 == 1 && o->oF4 == 0) {
@@ -139,10 +129,6 @@ void bhv_c3_barrier_loop(void) {
         case 4:
             if (o->oTimer == 0) {
                 o->header.gfx.scale[2] = 0.25f;
-                if (gCurrentCheckpoint > 1) {
-                    o->oPosY = o->oHomeY;
-                    o->oPosX = o->oHomeX + 6975.0f;
-                }
             }
             obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 0x0003);
             if (obj != NULL && obj->oF4 == 1 && o->oF4 == 0) {
@@ -157,10 +143,6 @@ void bhv_c3_barrier_loop(void) {
         case 5:
             if (o->oTimer == 0) {
                 o->header.gfx.scale[2] = 0.25f;
-                if (gCurrentCheckpoint > 1) {
-                    o->oPosY = o->oHomeY;
-                    o->oPosZ = o->oHomeZ + 12475.0f;
-                }
             }
             obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 0x0004);
             if (obj != NULL && obj->oF4 == 1 && o->oF4 == 0) {
