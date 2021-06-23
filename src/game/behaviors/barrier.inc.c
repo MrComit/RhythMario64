@@ -217,9 +217,9 @@ void bhv_c2_barrier_loop(void) {
                     o->oF4 = 1;
                 }
                 //kill_mario_if_behind();
-                if (gMarioState->pos[1] <= o->oPosY) {
-                    gMarioState->health = 0;
-                }
+            }
+            if (gMarioState->pos[1] <= o->oPosY) {
+                gMarioState->health = 0;
             }
             break;
         case 3:
