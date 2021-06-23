@@ -1271,14 +1271,16 @@ s32 play_mode_normal(void) {
                 gIntendedCheckpoint = gCurrentCheckpoint; 
                 gDead = 16;
                 gLoadingCheckpoint = 1;
-            } else if(gDialogResponse == 2) {
+            } else if(gDialogResponse == 2 || gCurrentCheckpoint == 0) {
                 level_trigger_warp(gMarioState, WARP_OP_DEATH);
                 gIntendedCheckpoint = 0;
                 gCurrentCheckpoint = 0;
                 gDead = 16;
-                gLoadingCheckpoint = 1;
+                if(gCurrAreaIndex != 2)
+                    gLoadingCheckpoint = 1;
             }
-            create_dialog_box_with_response(0);
+            if (gCurrentCheckpoint != 0)
+                create_dialog_box_with_response(0);
         } else if(gDead < 15) {
             gDead++;
         }
