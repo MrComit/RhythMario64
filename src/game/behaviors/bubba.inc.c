@@ -201,7 +201,7 @@ void bhv_angry_bubba_loop(void) {
     if(gCheckpointLoaded) {
         bhv_angry_bubba_init();
     }
-    if(gMarioObject->oPosZ > -5404.5f || (gMarioObject->oPosY > 6000.0f && gCurrentCheckpoint == 2)) {
+    if((gMarioObject->oPosZ > -5404.5f || (gMarioObject->oPosY > 6000.0f && gCurrentCheckpoint == 2)) && (gMarioObject->oPosX > -22750.0f || gCurrCreditsEntry != 0)) {
         switch(o->oAction) {
             case 0:
                 angry_bubba_stay_in_place(0);

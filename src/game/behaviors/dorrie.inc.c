@@ -183,15 +183,20 @@ void bhv_baby_dorrie_loop(void) {
         f32 dist;
         struct Object *enemy = cur_obj_find_nearest_object_with_behavior(bhvBulletBill, &dist);
         print_text_fmt_int(8, 8, "BABY DORRIE HP %d", o->oBabyDorrieHP);
-        if(o->oDorrieInvincibleTimer == 0 && enemy != 0 && lateral_dist_between_objects(o, enemy) < 75.0f) {
+        if(o->oTimer > 10 && o->oDorrieInvincibleTimer == 0 && enemy != 0 && lateral_dist_between_objects(o, enemy) < 75.0f) {
             o->oBabyDorrieHP--;
             o->oDorrieInvincibleTimer = 60;
             if(o->oBabyDorrieHP == 0) {
                 explode(0);
             }
+            play_sound(SOUND_OBJ_DORRIE, gGlobalSoundSource);
+        }
+        if(gMarioState->pos[2] < -6500.0f) {
+            o->oPosZ = approach_f32(o->oPosZ, gMarioState->pos[2], 20.0f, 15.0f);
         }
     }
-    cur_obj_push_mario_away_from_cylinder(150.0f, 150.0f);
+    //cur_obj_push_mario_away_from_cylinder(150.0f, 150.0f);
+    o->oFaceAngleYaw = o->oAngleToMario;
     if(o->oDorrieInvincibleTimer) {
         o->oDorrieInvincibleTimer--;
     }

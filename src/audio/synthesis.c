@@ -2201,6 +2201,7 @@ void note_set_frequency(struct Note *note, f32 frequency) {
 struct Object *gLaunchers[7];
 s32 gCurrentLauncher;
 u8 gBulletLauncherIndex[4];
+u32 gNoteShit;
 
 void note_enable(struct Note *note) {
     struct Object *obj;
