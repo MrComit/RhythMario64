@@ -167,8 +167,13 @@ void bhv_disco_loop(void) {
             struct Object *BOOBA = spawn_object_rel_with_rot(obj, MODEL_BOOBA, bhvBooba, 0, 500, 0, 0xC000, 0, 0);
             BOOBA->header.gfx.scale[0] = BOOBA->header.gfx.scale[1] = 2.0f;
         }
-        if(gCutsceneTimer == 90) {
-            warp_special(-1);
+        if(gCutsceneTimer == 120) {
+            save_file_set_star_flags(gCurrSaveFileNum - 1, 0x04, 0x02);
+            gSaveFileModified = TRUE;
+            save_file_do_save(gCurrSaveFileNum - 1);
+            gCurrCreditsEntry = &sCreditsSequence[0];
+            play_cutscene_music(SEQUENCE_ARGS(0, SEQ_STORM_EAGLE));
+            level_trigger_warp(gMarioState, WARP_OP_CREDITS_NEXT);
         }
     }
 }

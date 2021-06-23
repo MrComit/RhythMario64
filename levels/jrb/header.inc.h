@@ -2,6 +2,9 @@ extern const GeoLayout jrb_area_1_geo[];
 extern const GeoLayout jrb_area_1[];
 extern const Collision jrb_area_1_collision[];
 extern const MacroObject jrb_area_1_macro_objs[];
+#include "src/game/camera.h"
+
+extern struct CutsceneSplinePoint jrb_area_1_spline_focus[];
 extern Lights1 jrb_dl_floor_solid_layer1_lights;
 extern Lights1 jrb_dl_coral_lights;
 extern Lights1 jrb_dl_floor_lights;
