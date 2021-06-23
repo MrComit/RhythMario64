@@ -122,7 +122,7 @@ void bhv_bullet_bill_launcher_loop(void) {
         gBulletLauncherIndex[bparam1] = 0;
     }
     if(gBulletLauncherIndex[bparam1] == o->oBehParams2ndByte) {
-        if(o->oAction == 0) {
+        if(o->oAction == 0 && count_objects_with_behavior(bhvBulletBill) < 20) {
             spawn_object(o, MODEL_BULLET_BILL, bhvBulletBill);
             o->oAction = 1;
         }

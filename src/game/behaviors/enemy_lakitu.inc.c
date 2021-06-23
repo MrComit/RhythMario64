@@ -113,7 +113,7 @@ static void enemy_lakitu_sub_act_no_spiny(void) {
             o->oEnemyLakituSpinyCooldown = 30;
         }
     }*/
-    if (onScreenLayers[2] > 15) {
+    if (onScreenLayers[2] > 15 && gCurrCreditsEntry == 0) {
         struct Object *spiny = spawn_object(o, MODEL_SPINY_BALL, bhvSpiny);
         if (spiny != NULL) {
             o->prevObj = spiny;

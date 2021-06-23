@@ -9764,6 +9764,13 @@ extern struct CutsceneSplinePoint sDddSubCreditsSplineFocus[];
 extern struct CutsceneSplinePoint sCcmOutsideCreditsSplinePositions[];
 extern struct CutsceneSplinePoint sCcmOutsideCreditsSplineFocus[];
 
+extern struct CutsceneSplinePoint sBob2CreditsSplinePositions[];
+extern struct CutsceneSplinePoint sBob2CreditsSplineFocus[];
+extern struct CutsceneSplinePoint sJrb2CreditsSplinePositions[];
+extern struct CutsceneSplinePoint sJrb2CreditsSplineFocus[];
+extern struct CutsceneSplinePoint sCcmOutside2CreditsSplinePositions[];
+extern struct CutsceneSplinePoint sCcmOutside2CreditsSplineFocus[];
+
 /**
  * Follow splines through the courses of the game.
  */
@@ -9772,102 +9779,130 @@ BAD_RETURN(s32) cutscene_credits(struct Camera *c) {
 
     cutscene_event(cutscene_credits_reset_spline, c, 0, 0);
 
-    switch (gCurrLevelArea) {
-        case AREA_CASTLE_GROUNDS:
+    // switch (gCurrLevelArea) {
+    //     case AREA_CASTLE_GROUNDS:
+    //         pos = sBobCreditsSplinePositions;
+    //         focus = sBobCreditsSplineFocus;
+    //         break;
+    //     case AREA_BOB:
+    //         pos = sBobCreditsSplinePositions;
+    //         focus = sBobCreditsSplineFocus;
+    //         break;
+    //     case AREA_WF:
+    //         pos = sWfCreditsSplinePositions;
+    //         focus = sWfCreditsSplineFocus;
+    //         break;
+    //     case AREA_JRB_MAIN:
+    //         pos = sJrbCreditsSplinePositions;
+    //         focus = sJrbCreditsSplineFocus;
+    //         break;
+    //     case AREA_CCM_SLIDE:
+    //         pos = sCcmSlideCreditsSplinePositions;
+    //         focus = sCcmSlideCreditsSplineFocus;
+    //         break;
+    //     case AREA_BBH:
+    //         pos = sBbhCreditsSplinePositions;
+    //         focus = sBbhCreditsSplineFocus;
+    //         break;
+    //     case AREA_HMC:
+    //         pos = sHmcCreditsSplinePositions;
+    //         focus = sHmcCreditsSplineFocus;
+    //         break;
+    //     case AREA_THI_WIGGLER:
+    //         pos = sThiWigglerCreditsSplinePositions;
+    //         focus = sThiWigglerCreditsSplineFocus;
+    //         break;
+    //     case AREA_LLL_VOLCANO:
+    //         pos = sVolcanoCreditsSplinePositions;
+    //         focus = sVolcanoCreditsSplineFocus;
+    //         break;
+    //     case AREA_SSL_OUTSIDE:
+    //         pos = sSslCreditsSplinePositions;
+    //         focus = sSslCreditsSplineFocus;
+    //         break;
+    //     case AREA_DDD_WHIRLPOOL:
+    //         pos = sDddCreditsSplinePositions;
+    //         focus = sDddCreditsSplineFocus;
+    //         break;
+    //     case AREA_SL_OUTSIDE:
+    //         pos = sSlCreditsSplinePositions;
+    //         focus = sSlCreditsSplineFocus;
+    //         break;
+    //     case AREA_WDW_MAIN:
+    //         pos = sWdwCreditsSplinePositions;
+    //         focus = sWdwCreditsSplineFocus;
+    //         break;
+    //     case AREA_TTM_OUTSIDE:
+    //         pos = sTtmCreditsSplinePositions;
+    //         focus = sTtmCreditsSplineFocus;
+    //         break;
+    //     case AREA_THI_HUGE:
+    //         pos = sThiHugeCreditsSplinePositions;
+    //         focus = sThiHugeCreditsSplineFocus;
+    //         break;
+    //     case AREA_TTC:
+    //         pos = sTtcCreditsSplinePositions;
+    //         focus = sTtcCreditsSplineFocus;
+    //         break;
+    //     case AREA_RR:
+    //         pos = sRrCreditsSplinePositions;
+    //         focus = sRrCreditsSplineFocus;
+    //         break;
+    //     case AREA_SA:
+    //         pos = sSaCreditsSplinePositions;
+    //         focus = sSaCreditsSplineFocus;
+    //         break;
+    //     case AREA_COTMC:
+    //         pos = sCotmcCreditsSplinePositions;
+    //         focus = sCotmcCreditsSplineFocus;
+    //         break;
+    //     case AREA_DDD_SUB:
+    //         pos = sDddSubCreditsSplinePositions;
+    //         focus = sDddSubCreditsSplineFocus;
+    //         break;
+    //     case AREA_CCM_OUTSIDE:
+    //         //! Checks if the "Snowman's Lost His Head" star was collected. The credits likely would
+    //         //! have avoided the snowman if the player didn't collect that star, but in the end the
+    //         //! developers decided against it.
+    //         if (save_file_get_star_flags(gCurrSaveFileNum - 1, gCurrCourseNum - 1) & 0x10) {
+    //             pos = sCcmOutsideCreditsSplinePositions;
+    //             focus = sCcmOutsideCreditsSplineFocus;
+    //         } else {
+    //             pos = sCcmOutsideCreditsSplinePositions;
+    //             focus = sCcmOutsideCreditsSplineFocus;
+    //         }
+    //         break;
+    //     default:
+    //         pos = sCcmOutsideCreditsSplinePositions;
+    //         focus = sCcmOutsideCreditsSplineFocus;
+    // }
+
+    switch(gCurrCreditsEntry->splineID) {
+        case 0:
+        default:
             pos = sBobCreditsSplinePositions;
             focus = sBobCreditsSplineFocus;
             break;
-        case AREA_BOB:
-            pos = sBobCreditsSplinePositions;
-            focus = sBobCreditsSplineFocus;
-            break;
-        case AREA_WF:
-            pos = sWfCreditsSplinePositions;
-            focus = sWfCreditsSplineFocus;
-            break;
-        case AREA_JRB_MAIN:
+        case 1:
             pos = sJrbCreditsSplinePositions;
             focus = sJrbCreditsSplineFocus;
             break;
-        case AREA_CCM_SLIDE:
-            pos = sCcmSlideCreditsSplinePositions;
-            focus = sCcmSlideCreditsSplineFocus;
-            break;
-        case AREA_BBH:
-            pos = sBbhCreditsSplinePositions;
-            focus = sBbhCreditsSplineFocus;
-            break;
-        case AREA_HMC:
-            pos = sHmcCreditsSplinePositions;
-            focus = sHmcCreditsSplineFocus;
-            break;
-        case AREA_THI_WIGGLER:
-            pos = sThiWigglerCreditsSplinePositions;
-            focus = sThiWigglerCreditsSplineFocus;
-            break;
-        case AREA_LLL_VOLCANO:
-            pos = sVolcanoCreditsSplinePositions;
-            focus = sVolcanoCreditsSplineFocus;
-            break;
-        case AREA_SSL_OUTSIDE:
-            pos = sSslCreditsSplinePositions;
-            focus = sSslCreditsSplineFocus;
-            break;
-        case AREA_DDD_WHIRLPOOL:
-            pos = sDddCreditsSplinePositions;
-            focus = sDddCreditsSplineFocus;
-            break;
-        case AREA_SL_OUTSIDE:
-            pos = sSlCreditsSplinePositions;
-            focus = sSlCreditsSplineFocus;
-            break;
-        case AREA_WDW_MAIN:
-            pos = sWdwCreditsSplinePositions;
-            focus = sWdwCreditsSplineFocus;
-            break;
-        case AREA_TTM_OUTSIDE:
-            pos = sTtmCreditsSplinePositions;
-            focus = sTtmCreditsSplineFocus;
-            break;
-        case AREA_THI_HUGE:
-            pos = sThiHugeCreditsSplinePositions;
-            focus = sThiHugeCreditsSplineFocus;
-            break;
-        case AREA_TTC:
-            pos = sTtcCreditsSplinePositions;
-            focus = sTtcCreditsSplineFocus;
-            break;
-        case AREA_RR:
-            pos = sRrCreditsSplinePositions;
-            focus = sRrCreditsSplineFocus;
-            break;
-        case AREA_SA:
-            pos = sSaCreditsSplinePositions;
-            focus = sSaCreditsSplineFocus;
-            break;
-        case AREA_COTMC:
-            pos = sCotmcCreditsSplinePositions;
-            focus = sCotmcCreditsSplineFocus;
-            break;
-        case AREA_DDD_SUB:
-            pos = sDddSubCreditsSplinePositions;
-            focus = sDddSubCreditsSplineFocus;
-            break;
-        case AREA_CCM_OUTSIDE:
-            //! Checks if the "Snowman's Lost His Head" star was collected. The credits likely would
-            //! have avoided the snowman if the player didn't collect that star, but in the end the
-            //! developers decided against it.
-            if (save_file_get_star_flags(gCurrSaveFileNum - 1, gCurrCourseNum - 1) & 0x10) {
-                pos = sCcmOutsideCreditsSplinePositions;
-                focus = sCcmOutsideCreditsSplineFocus;
-            } else {
-                pos = sCcmOutsideCreditsSplinePositions;
-                focus = sCcmOutsideCreditsSplineFocus;
-            }
-            break;
-        default:
+        case 2:
             pos = sCcmOutsideCreditsSplinePositions;
             focus = sCcmOutsideCreditsSplineFocus;
+            break;
+        case 3:
+            pos = sBob2CreditsSplinePositions;
+            focus = sBob2CreditsSplineFocus;
+            break;
+        case 4:
+            pos = sJrbCreditsSplinePositions;
+            focus = sJrbCreditsSplineFocus;
+            break;
+        case 5:
+            pos = sCcmOutside2CreditsSplinePositions;
+            focus = sCcmOutside2CreditsSplineFocus;
+            break;
     }
 
     copy_spline_segment(sCurCreditsSplinePos, pos);
@@ -10885,19 +10920,35 @@ STATIC_ASSERT(ARRAY_COUNT(sZoomOutAreaMasks) - 1 == LEVEL_MAX / 2, "Make sure yo
  */
 
 struct CutsceneSplinePoint sBobCreditsSplinePositions[] = {
-    { 1, 0, { 5984, 3255, 4975 } },
-    { 2, 0, { 4423, 3315, 1888 } },
-    { 3, 0, { 776, 2740, -1825 } },
-    { 4, 0, { -146, 3894, -3167 } },
-    { -1, 0, { 741, 4387, -5474 } }
+    { 0, 16000, { -11000, 0, -6000 }},
+	{ 1, 16000, { -8955, 0, -3031 }},
+	{ 2, 16000, { -6987, 500, -3495 }},
+	{ 3, 16000, { -3683, 1000, -9321 }},
+	{ -1, 16000, { 3065, 1000, -14571 }},
 };
 
 struct CutsceneSplinePoint sBobCreditsSplineFocus[] = {
-    { 0, 30, { 5817, 3306, 4507 } },
-    { 0, 40, { 4025, 3378, 1593 } },
-    { 0, 50, { 1088, 2652, -2205 } },
-    { 0, 60, { 205, 3959, -3517 } },
-    { -1, 60, { 1231, 4400, -5649 } }
+    { 0, 16000, { -11000, 0, -6000 }},
+	{ 1, 16000, { -10465, 469, -5152 }},
+	{ 2, 16000, { -9709, 500, -6544 }},
+	{ 3, 16000, { -6712, 0, -6328 }},
+	{ -1, 16000, { -5431, 0, -10545 }},
+};
+
+struct CutsceneSplinePoint sBob2CreditsSplinePositions[] = {
+	{ 0, 16000, { 6881, 1000, -6908 }},
+	{ 1, 16000, { 3879, 1500, -3635 }},
+	{ 2, 16000, { 7775, 1500, -451 }},
+	{ 3, 16000, { 5656, 2000, 5599 }},
+	{ -1, 16000, { 1864, 5000, 9433 }},
+};
+
+struct CutsceneSplinePoint sBob2CreditsSplineFocus[] = {
+	{ 0, 16000, { 5431, 500, -6144 }},
+	{ 1, 16000, { 5558, 1500, -2490 }},
+	{ 2, 16000, { 5647, 1000, 192 }},
+	{ 3, 16000, { 5485, 1000, 4258 }},
+	{ -1, 16000, { 5437, 1000, 6604 }},
 };
 
 struct CutsceneSplinePoint sWfCreditsSplinePositions[] = {
@@ -11189,17 +11240,35 @@ struct CutsceneSplinePoint sDddSubCreditsSplineFocus[] = {
 };
 
 struct CutsceneSplinePoint sCcmOutsideCreditsSplinePositions[] = {
-    { 1, 0, { 1427, -1387, 5409 } },
-    { 2, 0, { -1646, -1536, 4526 } },
-    { 3, 0, { -3852, -1448, 3913 } },
-    { -1, 0, { -5199, -1366, 1886 } }
+    { 0, 4000, { -9123, 2734, 5980 }},
+	{ 1, 4000, { -13427, 2834, 1286 }},
+	{ 2, 4000, { -13581, 2934, -8663 }},
+	{ 3, 4000, { -7087, 3034, -9433 }},
+	{ -1, 4000, { -4577, 3134, -2129 }},
 };
 
 struct CutsceneSplinePoint sCcmOutsideCreditsSplineFocus[] = {
-    { 1, 50, { 958, -1481, 5262 } },
-    { 2, 50, { -2123, -1600, 4391 } },
-    { 3, 50, { -3957, -1401, 3426 } },
-    { -1, 50, { -4730, -1215, 1795 } }
+    { 0, 4000, { -8800, 2734, 2519 }},
+	{ 1, 4000, { -6754, 2834, -1033 }},
+	{ 2, 4000, { -9472, 2934, -5874 }},
+	{ 3, 4000, { -11689, 3034, -1455 }},
+	{ -1, 4000, { -10581, 3134, 4741 }},
+};
+
+struct CutsceneSplinePoint sCcmOutside2CreditsSplinePositions[] = {
+    { 0, 4000, { 17117, 3300, -1637 }},
+	{ 1, 4000, { 16514, 3300, -5943 }},
+	{ 2, 4000, { 18127, 3300, -9191 }},
+	{ 3, 4000, { 16095, 3300, -13256 }},
+	{ -1, 4000, { 11860, 3300, -13144 }},
+};
+
+struct CutsceneSplinePoint sCcmOutside2CreditsSplineFocus[] = {
+    { 0, 4000, { 17117, 3300, -2637 }},
+	{ 1, 4000, { 16514, 3300, -6943 }},
+	{ 2, 4000, { 18127, 3300, -10191 }},
+	{ 3, 4000, { 14974, 3300, -14005 }},
+	{ -1, 4000, { 10523, 3300, -13029 }},
 };
 
 /**

@@ -25,6 +25,9 @@ void bhv_gate_init(void) {
             o->oFC -= 31;
         }
     }
+    if(gCurrCreditsEntry != 0) {
+        obj_mark_for_deletion(o);
+    }
 }
 
 void bhv_gate_loop(void) {
@@ -357,5 +360,8 @@ void bhv_barrier_loop(void) {
         case LEVEL_CCM:
             bhv_c3_barrier_loop();
             break;
+    }
+    if(gCurrCreditsEntry != 0) {
+        obj_mark_for_deletion(o);
     }
 }

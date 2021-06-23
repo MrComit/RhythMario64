@@ -71,7 +71,7 @@ void bhv_sawblade_nogroup_loop(void) {
 //    if (o->oDistanceToMario > 5000.0f)
 //        return;
 
-    if (gCurrentCheckpoint <= 1)
+    if (gCurrentCheckpoint <= 1 && gCurrCreditsEntry == 0)
         return;
 
     if (onScreenLayers[2] > 15) {
@@ -86,17 +86,19 @@ void bhv_sawblade_nogroup_loop(void) {
 
 void bhv_sawblade_spawner_loop(void) {
     u8 bparam1 = o->oBehParams >> 24;;
-    if (o->oDistanceToMario > 10000.0f) {
+    if (o->oDistanceToMario > 30000.0f || (gCurrCreditsEntry == 0 && o->oDistanceToMario > 10000.0f)) {
         return;
     }
     if (bparam1 == 0xFF) {
         bhv_sawblade_nogroup_loop();
         return;
     }
-    if (bparam1 < 2 && gCurrentCheckpoint > 1)
+    if ((bparam1 < 2 && gCurrentCheckpoint > 1) || gCurrCreditsEntry != 0)
         return;
-    if (bparam1 >= 2 && gCurrentCheckpoint <= 1)
+    if (bparam1 >= 2 && gCurrentCheckpoint <= 1 && gCurrCreditsEntry == 0) {
+        print_text(5, 5, "IM A LITTLE CRINGE BABY BOY");
         return;
+    }
 
     if(gBulletLauncherIndex[bparam1] >= count_objects_with_behavior_and_bparams(bhvSawbladeSpawner, 0xFF000000, o->oBehParams & 0xFF000000)) {
         gBulletLauncherIndex[bparam1] = 0;
