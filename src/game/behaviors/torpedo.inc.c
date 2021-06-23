@@ -1,13 +1,5 @@
 #include "game/hud.h"
 
-void explode(s16 dontDeactivate) {
-    struct Object *explosion;
-    explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
-    explosion->oGraphYOffset += 100.0f;
-    if(dontDeactivate == 0)
-        o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
-}
-
 void bhv_torpedo_update(void) {
     o->oForwardVel = 100.0f;
     o->oWallHitboxRadius = 105.0f;

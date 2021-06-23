@@ -71,6 +71,8 @@ void (*sBulletBillActions[])(void) = { bullet_bill_act_0, bullet_bill_act_1, bul
                                        bullet_bill_act_3, bullet_bill_act_4 };
 
 void bhv_bullet_bill_loop(void) {
+    f32 dist;
+    struct Object *dorrie = cur_obj_find_nearest_object_with_behavior(bhvBabyDorrie, &dist);
     cur_obj_call_action_function(sBulletBillActions);
     if (cur_obj_check_interacted())
         o->oAction = 4;
@@ -78,6 +80,9 @@ void bhv_bullet_bill_loop(void) {
         o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1] + 80.0f, 30.0f, 30.0f);
         o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x40);
     }
+    if(dorrie != 0 && lateral_dist_between_objects(o, dorrie) < 75.0f) {
+        explode(0);
+    } 
 }
 
 void bhv_bullet_bill_launcher_init(void) {
@@ -122,7 +127,7 @@ void bhv_bullet_bill_launcher_loop(void) {
         gBulletLauncherIndex[bparam1] = 0;
     }
     if(gBulletLauncherIndex[bparam1] == o->oBehParams2ndByte) {
-        if(o->oAction == 0 && count_objects_with_behavior(bhvBulletBill) < 20) {
+        if(o->oAction == 0 && count_objects_with_behavior(bhvBulletBill) < 20 && o->oTimer > 3) {
             spawn_object(o, MODEL_BULLET_BILL, bhvBulletBill);
             o->oAction = 1;
         }

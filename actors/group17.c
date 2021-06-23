@@ -30,8 +30,3 @@ UNUSED static const u64 binid_3 = 3;
 #include "scuttlebug/anims/data.inc.c"
 #include "scuttlebug/anims/table.inc.c"
 UNUSED static const u64 binid_5 = 5;
-
-#include "dorrie/model.inc.c"
-#include "dorrie/anims/data.inc.c"
-#include "dorrie/anims/table.inc.c"
-#include "dorrie/collision.inc.c"

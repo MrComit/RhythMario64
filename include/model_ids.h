@@ -421,7 +421,7 @@
 #define MODEL_TREASURE_CHEST_BASE         0x65        // treasure_chest_base_geo
 #define MODEL_TREASURE_CHEST_LID          0x66        // treasure_chest_lid_geo
 #define MODEL_CYAN_FISH                   0x67        // cyan_fish_geo
-#define MODEL_WATER_RING                  0x68        // water_ring_geo
+#define MODEL_WATER_RING                  0x7E        // water_ring_geo
 #define MODEL_SKEETER                     0x69        // skeeter_geo
 
 // group 14

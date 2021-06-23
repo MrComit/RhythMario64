@@ -582,6 +582,8 @@ void bhv_goombah_cutscene_loop(void);
 void bhv_lakitu_cutscene_loop(void);
 void bhv_whomp_cutscene_loop(void);
 void bhv_egadd_loop(void);
+void bhv_baby_dorrie_init(void);
+void bhv_baby_dorrie_loop(void);
 
 Gfx *geo_move_mario_part_from_parent(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 

@@ -36,3 +36,8 @@ UNUSED static const u64 binid_5 = 5;
 
 #include "treasure_chest/model.inc.c"
 UNUSED static const u64 binid_6 = 6;
+
+#include "dorrie/model.inc.c"
+#include "dorrie/anims/data.inc.c"
+#include "dorrie/anims/table.inc.c"
+#include "dorrie/collision.inc.c"

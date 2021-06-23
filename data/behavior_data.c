@@ -6578,3 +6578,17 @@ const BehaviorScript bhvObjectiveChest[] = {
         CALL_NATIVE(bhv_objective_chest_bottom_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvBabyDorrie[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO  | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, dorrie_seg6_anims_0600F638),
+    ANIMATE(0),
+    SCALE(0, 12),
+    SET_HOME(),
+    SET_FLOAT(oGraphYOffset, 40),
+    CALL_NATIVE(bhv_baby_dorrie_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_baby_dorrie_loop),
+    END_LOOP(),
+};

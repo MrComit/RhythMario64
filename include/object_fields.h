@@ -1231,5 +1231,8 @@
 
 #define /*0x0F4*/ oSpikePillarActivated     OBJECT_FIELD_S32(0x1B)
 
+#define /*0x0F4*/ oBabyDorrieHP              OBJECT_FIELD_S32(0x1B)
+#define /*0x0F4*/ oDorrieInvincibleTimer     OBJECT_FIELD_S32(0x1C)
+
 
 #endif // OBJECT_FIELDS_H

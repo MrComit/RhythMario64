@@ -893,6 +893,14 @@ static void treat_far_home_as_mario(f32 threshold) {
     }
 }
 
+void explode(s16 dontDeactivate) {
+    struct Object *explosion;
+    explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
+    explosion->oGraphYOffset += 100.0f;
+    if(dontDeactivate == 0)
+        o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+}
+
 #include "behaviors/koopa.inc.c" // TODO: Text arg field name
 #include "behaviors/pokey.inc.c"
 #include "behaviors/swoop.inc.c"
