@@ -30,7 +30,7 @@
  * cannon reticle, and the unused keys.
  **/
 
-#define SEC_TO_M64_TIMER(x) x*120
+#define SEC_TO_M64_TIMER(x) x*120 // THIS IS CRINGE AND USELESS
 #define HUD_NOTE_POOL_CAPACITY 30
 struct HudNote sHudNotePool[HUD_NOTE_POOL_CAPACITY];
 s32 sHudNotePoolCount = 0;
@@ -109,7 +109,7 @@ u16 sC1Channel1Notes[] = {
 0x3721, 0xFFFF};
 
 u16 sC1Channel2Notes[] = {
-0x0589, 0x071E, 0x081A, 0x08D1,
+/*0x0589,*/ 0x071E, 0x081A, 0x08D1,
 0x0967, 0x09C7, 0x09F1, 0x0A12,
 0x0B1B, 0x0BD7, 0x0CE0, 0x0CF8,
 0x0D1B, 0x0D87, 0x0DE7, 0x0E47,
@@ -2737,54 +2737,67 @@ void spawn_hud_notes(void) {
     s16 *notes4 = sHudNoteLists[gCurrCourseNum - 1][3];
 
     if (notes1 != NULL && seqPlayer->globalSongTimer > notes1[sCurrentNote1] - sPerSecondTimer[gCurrCourseNum - 1]) {
-        create_note(0);
+		if (seqPlayer->globalSongTimer - (notes1[sCurrentNote1] - sPerSecondTimer[gCurrCourseNum - 1]) < 25)
+        	create_note(0);
         sCurrentNote1++;
     }
     if (notes2 != NULL && seqPlayer->globalSongTimer > notes2[sCurrentNote2] - sPerSecondTimer[gCurrCourseNum - 1]) {
-        create_note(1);
+		if (seqPlayer->globalSongTimer - (notes2[sCurrentNote2] - sPerSecondTimer[gCurrCourseNum - 1]) < 25)
+        	create_note(1);
         sCurrentNote2++;
     }
     if (notes3 != NULL && seqPlayer->globalSongTimer > notes3[sCurrentNote3] - sPerSecondTimer[gCurrCourseNum - 1]) {
-        create_note(2);
+		if (seqPlayer->globalSongTimer - (notes3[sCurrentNote3] - sPerSecondTimer[gCurrCourseNum - 1]) < 25)
+        	create_note(2);
         sCurrentNote3++;
     }
     if (notes4 != NULL && seqPlayer->globalSongTimer > notes4[sCurrentNote4] - sPerSecondTimer[gCurrCourseNum - 1]) {
-        create_note(3);
+		if (seqPlayer->globalSongTimer - (notes4[sCurrentNote4] - sPerSecondTimer[gCurrCourseNum - 1]) < 25)
+        	create_note(3);
         sCurrentNote4++;
     }
 }
 
+f32 sNoteIconScales[4] = {1.0f, 1.0f, 1.0f, 1.0f};
+
 void render_hud_attack_icons(void) {
+	create_dl_ortho_matrix();
     switch (gCurrLevelNum) {
         case LEVEL_BOB:
-            create_dl_translation_matrix(G_MTX_PUSH, (f32)60, (f32)220, 0.0f);
+            create_dl_translation_matrix(MENU_MTX_PUSH, (f32)60, (f32)220, 0.0f);
+			create_dl_scale_matrix(MENU_MTX_NOPUSH, sNoteIconScales[0], sNoteIconScales[0], 1.0f);
             gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, 0xFF);
             gSPDisplayList(gDisplayListHead++, &bulletbill_rect_mesh);
             gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 
-            create_dl_translation_matrix(G_MTX_PUSH, (f32)60, (f32)205, 0.0f);
+            create_dl_translation_matrix(MENU_MTX_PUSH, (f32)60, (f32)205, 0.0f);
+			create_dl_scale_matrix(MENU_MTX_NOPUSH, sNoteIconScales[1], sNoteIconScales[1], 1.0f);
             gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, 0xFF);
             gSPDisplayList(gDisplayListHead++, &laserring_rect_mesh);
             gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 
-            create_dl_translation_matrix(G_MTX_PUSH, (f32)60, (f32)190, 0.0f);
+            create_dl_translation_matrix(MENU_MTX_PUSH, (f32)60, (f32)190, 0.0f);
+			create_dl_scale_matrix(MENU_MTX_NOPUSH, sNoteIconScales[2], sNoteIconScales[2], 1.0f);
             gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, 0xFF);
             gSPDisplayList(gDisplayListHead++, &lakitu_rect_mesh);
             gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
             break;
         case LEVEL_JRB:
-            create_dl_translation_matrix(G_MTX_PUSH, (f32)60, (f32)220, 0.0f);
+            create_dl_translation_matrix(MENU_MTX_PUSH, (f32)60, (f32)220, 0.0f);
+			create_dl_scale_matrix(MENU_MTX_NOPUSH, sNoteIconScales[0], sNoteIconScales[0], 1.0f);
             gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, 0xFF);
             gSPDisplayList(gDisplayListHead++, &bulletbill_rect_mesh);
             gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 
-            create_dl_translation_matrix(G_MTX_PUSH, (f32)60, (f32)205, 0.0f);
+            create_dl_translation_matrix(MENU_MTX_PUSH, (f32)60, (f32)205, 0.0f);
+			create_dl_scale_matrix(MENU_MTX_NOPUSH, sNoteIconScales[1], sNoteIconScales[1], 1.0f);
             gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, 0xFF);
             gSPDisplayList(gDisplayListHead++, &spikepillar_rect_mesh);
             gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
             break;
         case LEVEL_CCM:
-            create_dl_translation_matrix(G_MTX_PUSH, (f32)60, (f32)220, 0.0f);
+            create_dl_translation_matrix(MENU_MTX_PUSH, (f32)60, (f32)220, 0.0f);
+			create_dl_scale_matrix(MENU_MTX_NOPUSH, sNoteIconScales[0], sNoteIconScales[0], 1.0f);
             gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, 0xFF);
             gSPDisplayList(gDisplayListHead++, &saw_rect_mesh);
             gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
@@ -2818,10 +2831,11 @@ void render_hud_notes(void) {
                 sCurrentHudNote->xPos += 2;
             } else {
                 sCurrentHudNote->xPos = 60;
+				sNoteIconScales[sCurrentHudNote->channel] = 1.2f;
             }
             //print_text(sCurrentHudNote->xPos, 209 - (sCurrentHudNote->channel * 15), "D");
             render_hud_note_helper(sCurrentHudNote->xPos, 220 - (sCurrentHudNote->channel * 15), sCurrentHudNote->channel);
-            if (sCurrentHudNote->timer > 30+15) {
+            if (sCurrentHudNote->timer > 30+1) {
                 delete_note(sCurrentHudNote);
             }
         }
@@ -2830,6 +2844,7 @@ void render_hud_notes(void) {
     print_text(60, 205, "B");
     print_text(60, 190, "C");*/
     render_hud_attack_icons();
+	sNoteIconScales[0] = sNoteIconScales[1] = sNoteIconScales[2] = sNoteIconScales[3] = 1.0f;
 }
 
 
@@ -2901,11 +2916,11 @@ void render_hud(void) {
             print_text(10, 60, "SURFACE NODE POOL FULL");
         }
 
-        // if (sCurrPlayMode == 0 && gCurrCourseNum && gCurrAreaIndex == 1) {
-        //     spawn_hud_notes();
-        //     render_hud_notes();
-        //     clear_notes();
-        // }
+        if (sCurrPlayMode == 0 && gCurrCourseNum && gCurrAreaIndex == 1) {
+            spawn_hud_notes();
+            render_hud_notes();
+            clear_notes();
+        }
         if(gCurrCourseNum == 3) {
             render_water_tri();
         }
