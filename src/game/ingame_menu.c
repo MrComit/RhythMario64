@@ -2200,7 +2200,7 @@ u8 gTextCourseArr[][7] = {
 #else
 #define TXT_STAR_X 98
 #define ACT_NAME_X 116
-#define LVL_NAME_X 117
+#define LVL_NAME_X 109 //117 originally
 #define MYSCORE_X  62
 #endif
 
@@ -2255,33 +2255,33 @@ void render_pause_my_score_coins(void) {
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
-    if (courseIndex < COURSE_STAGES_COUNT) {
+    /*if (courseIndex < COURSE_STAGES_COUNT) {
         print_hud_my_score_coins(1, gCurrSaveFileNum - 1, courseIndex, 178, 103);
         print_hud_my_score_stars(gCurrSaveFileNum - 1, courseIndex, 118, 103);
-    }
+    }*/
 
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
-    if (courseIndex < COURSE_STAGES_COUNT && save_file_get_course_star_count(gCurrSaveFileNum - 1, courseIndex) != 0) {
+    /*if (courseIndex < COURSE_STAGES_COUNT && save_file_get_course_star_count(gCurrSaveFileNum - 1, courseIndex) != 0) {
         print_generic_string(MYSCORE_X, 121, textMyScore);
-    }
+    }*/
 
     courseName = segmented_to_virtual(courseNameTbl[courseIndex]);
 
     if (courseIndex < COURSE_STAGES_COUNT) {
-#ifdef VERSION_EU
+/*#ifdef VERSION_EU
         print_generic_string(48, 157, gTextCourseArr[gInGameLanguage]);
 #else
         print_generic_string(63, 157, textCourse);
-#endif
-        int_to_str(gCurrCourseNum, strCourseNum);
+#endif*/
+        //int_to_str(gCurrCourseNum, strCourseNum);
 #ifdef VERSION_EU
         print_generic_string(get_string_width(gTextCourseArr[gInGameLanguage]) + 51, 157, strCourseNum);
 #else
-        print_generic_string(CRS_NUM_X1, 157, strCourseNum);
+        //print_generic_string(CRS_NUM_X1, 157, strCourseNum);
 #ifdef WIDE
         if (!gWidescreen) {
                 print_generic_string(10, 20, textCurrRatio43);
@@ -2296,14 +2296,14 @@ void render_pause_my_score_coins(void) {
 #endif
 #endif
 
-        actName = segmented_to_virtual(actNameTbl[(gCurrCourseNum - 1) * 6 + gDialogCourseActNum - 1]);
+        /*actName = segmented_to_virtual(actNameTbl[(gCurrCourseNum - 1) * 6 + gDialogCourseActNum - 1]);
 
         if (starFlags & (1 << (gDialogCourseActNum - 1))) {
             print_generic_string(TXT_STAR_X, 140, textStar);
         } else {
             print_generic_string(TXT_STAR_X, 140, textUnfilledStar);
         }
-        print_generic_string(ACT_NAME_X, 140, actName);
+        print_generic_string(ACT_NAME_X, 140, actName);*/
 #ifndef VERSION_JP
         print_generic_string(LVL_NAME_X, 157, &courseName[3]);
 #endif
@@ -2685,9 +2685,9 @@ s16 render_pause_courses_and_castle(void) {
             }
         #endif
 
-            if (gMarioStates[0].action & ACT_FLAG_PAUSE_EXIT) {
+            //if (gMarioStates[0].action & ACT_FLAG_PAUSE_EXIT) {
                 render_pause_course_options(99, 93, &gDialogLineNum, 15);
-            }
+            //}
 
 #ifdef VERSION_EU
             if (gPlayer3Controller->buttonPressed & (A_BUTTON | Z_TRIG | START_BUTTON))
@@ -2713,8 +2713,8 @@ s16 render_pause_courses_and_castle(void) {
         case DIALOG_STATE_HORIZONTAL:
             shade_screen();
             print_hud_pause_colorful_str();
-            render_pause_castle_menu_box(160, 143);
-            render_pause_castle_main_strings(104, 60);
+            //render_pause_castle_menu_box(160, 143);
+            //render_pause_castle_main_strings(104, 60);
 
 #ifdef VERSION_EU
             if (gPlayer3Controller->buttonPressed & (A_BUTTON | Z_TRIG | START_BUTTON))
