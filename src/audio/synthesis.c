@@ -15,6 +15,7 @@
 #include "engine/math_util.h"
 #include "game/interaction.h"
 #include "game/object_helpers.h"
+#include "game/print.h"
 
 
 #ifndef VERSION_SH
@@ -336,6 +337,7 @@ u64 *synthesis_execute(u64 *cmdBuf, s32 *writtenCmds, s16 *aiBuf, s32 bufLen) {
         process_sequences(i - 1);
         synthesis_load_note_subs_eu(gAudioBufferParameters.updatesPerFrame - i);
     }
+    
 #ifndef VERSION_SH
     aSegment(cmd++, 0, 0);
 #endif
