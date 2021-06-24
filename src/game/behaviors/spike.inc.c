@@ -35,7 +35,7 @@ void bhv_spike_init(void) {
 
     o->oMaxShotDelay = 0;
     o->oShotDelay = o->oMaxShotDelay;
-    o->oShotSpeed = 20;
+    //o->oShotSpeed = 20;
 
     obj_set_hitbox(o, &sSpikeHitbox);
 
@@ -80,14 +80,15 @@ void bhv_spike_update(void) {
         //     }
         // }
 
-            i = cur_obj_beat_hit_and_reset(&o->oBeatTimer, 1);
+            o->oSpikeReallyFunTimer += cur_obj_beat_hit_and_reset(&o->oBeatTimer, 1);
 
             if (o->oShotDelay == 0)
             {
-                if (o->oAnimState == 0 && i == 1 && o->oDistanceToMario < 10000.0f)
+                if (o->oAnimState == 0 && o->oSpikeReallyFunTimer == 4 && o->oDistanceToMario < 10000.0f)
                 {
                     cur_obj_init_animation(1);
                     o->oAnimState = 1;
+                    o->oSpikeReallyFunTimer = 0;
                 }
                 if (o->oAnimState == 1)
                 {
@@ -127,7 +128,7 @@ void bhv_spike_update(void) {
                     {
                         o->prevObj->oPosY = o->oPosY + 53.19;
 
-                        o->prevObj->oForwardVel = o->oShotSpeed;
+                        //o->prevObj->oForwardVel = o->oShotSpeed;
 
                         o->prevObj->oAnimState = 1;
 
@@ -155,15 +156,16 @@ void bhv_spike_update(void) {
 }
 
 void bhv_spike_bar_update(void) {
+    o->oForwardVel = 15.0f;
     stay_on_beat(&o->oBeatTimer, &o->oPrevSongTimer);
     if(cur_obj_beat_hit_and_reset(&o->oBeatTimer, 1)) {
         o->oBubbaTimer++;
         if(o->oBubbaTimer > 1) {
-            if(o->oPosY - o->oFloorHeight < 50.0f) {
+            if(o->oPosY - o->oFloorHeight < 60.0f) {
                 if(o->oTimer > 150) {
-                    o->oVelY = 50.0f;
+                    o->oVelY = 60.0f;
                 } else if(o->oTimer > 30) {
-                    o->oVelY = 20.0f;
+                    o->oVelY = 30.0f;
                 }
             }
             o->oBubbaTimer = 0;
@@ -177,7 +179,7 @@ void bhv_spike_bar_update(void) {
 
     o->oGraphYOffset = 80.0f;
 
-    if (o->oTimer > 785 || o->oMoveFlags & OBJ_MOVE_HIT_WALL)
+    if (o->oTimer > 1047 || o->oMoveFlags & OBJ_MOVE_HIT_WALL)
     {
         obj_mark_for_deletion(o);
     }
