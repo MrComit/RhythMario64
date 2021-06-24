@@ -156,7 +156,7 @@ void bhv_spike_update(void) {
 }
 
 void bhv_spike_bar_update(void) {
-    o->oForwardVel = 15.0f;
+    o->oForwardVel = 12.0f;
     stay_on_beat(&o->oBeatTimer, &o->oPrevSongTimer);
     if(cur_obj_beat_hit_and_reset(&o->oBeatTimer, 1)) {
         o->oBubbaTimer++;
