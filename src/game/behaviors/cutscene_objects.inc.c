@@ -299,19 +299,7 @@ void bhv_portal_blocker_loop(void) {
 }
 
 void bhv_rank_display_loop(void) {
-    s32 course = 0;
-    switch (o->oBehParams2ndByte) {
-        case 0:
-            course = 1;
-            break;
-        case 2:
-            course = 3;
-            break;
-        case 3:
-            course = 4;
-            break;
-    }
-    if(save_file_get_star_flags(gCurrSaveFileNum - 1, course) == 0) {
+    if(save_file_get_star_flags(gCurrSaveFileNum - 1, o->oBehParams2ndByte) == 0) {
         return o->activeFlags = 0;
     }
     o->oAnimState = gSaveBuffer.files[gCurrSaveFileNum - 1][0].ranks[o->oBehParams2ndByte];

@@ -283,6 +283,7 @@ void reset_rank(void) {
     gDead = 0;
     gRankTimer = 0;
     gMarioState->numCoins = 0;
+    gHudDisplay.coins = 0;
 }
 
 void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg) {
