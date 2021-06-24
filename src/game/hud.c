@@ -2916,7 +2916,7 @@ void render_hud(void) {
             print_text(10, 60, "SURFACE NODE POOL FULL");
         }
 
-        if (sCurrPlayMode == 0 && gCurrCourseNum && gCurrAreaIndex == 1) {
+        if (sCurrPlayMode == 0 && gCurrCourseNum && gCurrAreaIndex == 1 && gCurrCreditsEntry == 0) {
             spawn_hud_notes();
             render_hud_notes();
             clear_notes();

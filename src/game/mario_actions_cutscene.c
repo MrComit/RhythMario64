@@ -681,6 +681,25 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
                 enable_time_stop();
                 m->actionState = 1;
                 gRankTimer = 0;
+                if(gCurrCourseNum == 0x03) {
+                    struct Object *dorrie;
+                    uintptr_t *behaviorAddr = segmented_to_virtual(bhvBabyDorrie);
+                    struct Object *obj;
+                    struct ObjectNode *listHead;
+                    f32 minDist = 0x20000;
+
+                    listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+                    obj = (struct Object *) listHead->next;
+
+                    while (obj != (struct Object *) listHead) {
+                        if (obj->behavior == behaviorAddr) {
+                            if (obj->activeFlags != ACTIVE_FLAG_DEACTIVATED) {
+                                save_file_set_objectives(0x08);
+                            }
+                        }
+                        obj = (struct Object *) obj->header.next;
+                    }
+                }
                 break;
         }
     } else if (m->actionState == 1 /*&& gDialogResponse*/) {
@@ -2706,6 +2725,7 @@ static s32 act_credits_cutscene(struct MarioState *m) {
 
     if (m->actionTimer++ == TIMER_CREDITS_WARP) {
         if(gCurrCreditsEntry->splineID >= 7) {
+            fadeout_level_music(240);
             level_trigger_warp(m, WARP_OP_CREDITS_END);
         } else
             level_trigger_warp(m, WARP_OP_CREDITS_NEXT);

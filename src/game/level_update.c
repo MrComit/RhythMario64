@@ -66,7 +66,7 @@ const char *credits03[] = { "4ARRANGEMENTS BY", "MRCOMIT ", "TECHNOMANCER00 ", "
 const char *credits04[] = { "8PEACHS CASTLE", "TRAINING  KIRBY 64", "BOWSER APPEARS", "U.N.OWEN WAS HER  TOUHOU 6", "STAGE 1", "BOBOMB BATTLEFIELD  SM64", "STAGE 2", "COLLAPSING TIME RIFT  HAT IN TIME" };
 const char *credits05[] = { "8STAGE 3", "KOOPAS ROAD  SM64", "FINAL BOSS", "METALLIC MADNESS BF  SONIC CD", "HUB", "IDK", "CREDITS", "STORM EAGLE  MEGA MAN X" };
 const char *credits06[] = { "6BETA TESTING", "I", "FUCKED", "YOUR", "MOM", "DIPSHIT" };
-const char *credits07[] = { "7SPECIAL THANKS", "TECHNOMANCER00", "BANGIN TUNES", "MATT", "BUPENSIVE", "AGLAB2", "INSPIRATION" };
+const char *credits07[] = { "@                          SPECIAL THANKS", "", "TECHNOMANCER00", "BANGIN TUNES", "MATT", "BUPENSIVE AND LAVA", "SPK", "DJ BOWSER VOICE", "MRPR1993", "EGADD MODEL", "WISEGUY", "LASER RINGS", "AGLAB2", "INSPIRATION", "JANJA", "END SCREEN"};
 const char *credits08[] = { "7MAKE SURE TO CHECK OUT YOSHI COMMITS TAX", "", "FRAUD 64  MY MAJOR HACK RELEASING IN THE  ", "FUTURE                                                        ", "", "", "", };
 const char *credits09[] = { "3JUST ABOUT EVERYTHING", "CHEEZEPIN", "MRCOMIT" };
 const char *credits10[] = { "3JUST ABOUT EVERYTHING", "CHEEZEPIN", "MRCOMIT" };
@@ -92,7 +92,7 @@ struct CreditsEntry sCreditsSequence[] = {
     { LEVEL_BOB, 1, 1, 117, 1, 3, { 5500, 500, 5361 }, credits04 },
     { LEVEL_JRB, 1, 18, 22, 1, 4, { -3481, 6234, -9000 }, credits05 },
     { LEVEL_CCM, 1, 34, 25, 0, 5, { 9154, 2925, -12641 }, credits06 },
-    { LEVEL_CCM, 2, 34, 25, 0, 6, { 203, 300, 2799 }, credits07 },
+    { LEVEL_CCM, 2, 34, 25, 1, 6, { 203, 300, 2799 }, credits07 },
     { LEVEL_CASTLE_GROUNDS, 1, 1, 34, 0, 7, { -2500, 300, 0 }, credits08 },
     { LEVEL_CASTLE_GROUNDS, 1, 1, 34, 0, 7, { -2500, 300, 0 }, credits08 },
     { LEVEL_CASTLE_GROUNDS, 1, 1, 34, 0, 7, { -2500, 300, 0 }, credits08 },
@@ -556,6 +556,8 @@ void init_mario_after_warp(void) {
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x10, 0x00, 0x00, 0x00);
             break;
     }
+
+    disable_time_stop();
 
     sDelayedWarpOp = WARP_OP_NONE;
 
@@ -1162,6 +1164,7 @@ void obj_explode(struct Object *obj, s16 dontDeactivate) {
     struct Object *explosion;
     explosion = spawn_object(obj, MODEL_EXPLOSION, bhvExplosion);
     explosion->oGraphYOffset += 100.0f;
+    explosion->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
     if(dontDeactivate == 0)
         obj->activeFlags = ACTIVE_FLAG_DEACTIVATED;
 }
@@ -1252,10 +1255,12 @@ s32 play_mode_normal(void) {
     if(gMarioState->health < 0x100 && gDead == 0) {
         obj_explode(gMarioObject, 1);
         set_mario_action(gMarioState, ACT_DISAPPEARED, 0);
+        gMarioState->pos[1] += 20000.0f;
         stop_background_music(sCurrentBackgroundMusicSeqId);
         gDialogResponse = 0;
         gRank.deaths++;
         gDead = 1;
+        enable_time_stop();
     }
     if(gMarioState->health < 0x100 && gDead != 0) {
         if(gDead == 15) {

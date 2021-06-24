@@ -22,7 +22,7 @@ void bhv_torpedo_update(void) {
         explode(0);
         gRenderTarget = 0;
     }
-    spawn_object_relative(0, 0, 0, 200, o, MODEL_NONE, bhvBubbleParticleSpawner);
+    spawn_object_relative(0, 0, 0, 200, o, MODEL_SMOKE, bhvWhitePuffSmoke);
 }
 
 void bhv_torpedo_spawner_init(void) {
