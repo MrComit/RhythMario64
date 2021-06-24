@@ -137,3 +137,7 @@ void bhv_star_door_loop_2(void) {
     }
     o->oDoorUnk88 = sp4;
 }
+
+void bhv_luigi_door_loop(void) {
+    bhv_door_loop();
+}

@@ -401,4 +401,6 @@ extern const Collision whomp_seg6_collision_06020A0C[];
 
 
 #include "egadd/anim_header.h"
+#include "luigi/geo_header.h"
+
 #endif

@@ -6608,7 +6608,7 @@ const BehaviorScript bhvLuigiDoor[] = {
     SET_HOME(),
     CALL_NATIVE(bhv_door_init),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_door_loop),
+        CALL_NATIVE(bhv_luigi_door_loop),
     END_LOOP(),
 };
 

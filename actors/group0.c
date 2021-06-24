@@ -54,3 +54,4 @@
 #include "egadd/model.inc.c"
 #include "egadd/anims/data.inc.c"
 #include "egadd/anims/table.inc.c"
+#include "luigi/model.inc.c"

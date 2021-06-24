@@ -332,6 +332,8 @@ u32 go_to_checkpoint(u32 checkpoint) {
     return totalTimer;
 }
 
+s32 gLuigi;
+
 void get_current_checkpoint(void) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
     u8 checkpointIncrement = 0;
@@ -456,6 +458,15 @@ void bhv_mario_update(void) {
         if(gMarioState->action != ACT_STAR_DANCE_EXIT) {
             set_mario_action(gMarioState, ACT_STAR_DANCE_EXIT, 0);
         }
+    }
+
+    if(gCurrLevelNum == LEVEL_CASTLE_GROUNDS && gMarioState->pos[0] > 15250.0f) {
+
+    }
+    if(gLuigi) {
+        gMarioObject->header.gfx.sharedChild = gLoadedGraphNodes[0x02];
+    } else {
+        gMarioObject->header.gfx.sharedChild = gLoadedGraphNodes[0x01];
     }
 
     //print_text_fmt_int(20, 20, "%d", gLastBeatHit);

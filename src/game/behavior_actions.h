@@ -586,6 +586,7 @@ void bhv_baby_dorrie_init(void);
 void bhv_baby_dorrie_loop(void);
 void bhv_portal_blocker_loop(void);
 void bhv_rank_display_loop(void);
+void bhv_luigi_door_loop(void);
 
 Gfx *geo_move_mario_part_from_parent(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 

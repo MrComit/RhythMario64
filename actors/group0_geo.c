@@ -31,3 +31,4 @@
 #include "spike/geo.inc.c"
 #include "spike_bar/geo.inc.c"
 #include "egadd/geo.inc.c"
+#include "luigi/geo.inc.c"
