@@ -461,7 +461,7 @@ void bhv_mario_update(void) {
     }
 
     if(gCurrLevelNum == LEVEL_CASTLE_GROUNDS && gMarioState->pos[0] > 15250.0f) {
-
+        gLuigi = 1;
     }
     if(gLuigi) {
         gMarioObject->header.gfx.sharedChild = gLoadedGraphNodes[0x02];
