@@ -297,3 +297,10 @@ void bhv_portal_blocker_loop(void) {
         o->activeFlags = 0;
     }
 }
+
+void bhv_rank_display_loop(void) {
+    if(save_file_get_star_flags(gCurrSaveFileNum - 1, o->oBehParams2ndByte) == 0) {
+        return obj_mark_for_deletion(o);
+    }
+    o->oAnimState = gSaveBuffer.files[gCurrSaveFileNum - 1][0].ranks[o->oBehParams2ndByte];
+}

@@ -57,4 +57,6 @@ extern struct Painting c3_painting;
 
 #include "levels/castle_grounds/portal_blocker/collision_header.h"
 
+#include "levels/castle_grounds/rank_display/geo_header.h"
+
 #endif

@@ -21,3 +21,4 @@
 #include "levels/castle_grounds/geo.inc.c"
 
 #include "levels/castle_grounds/portal_blocker/geo.inc.c"
+#include "levels/castle_grounds/rank_display/geo.inc.c"

@@ -35,6 +35,7 @@ const LevelScript level_castle_grounds_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_CASTLE_DOOR, castle_door_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_WARP_PIPE, warp_pipe_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PORTAL_BLOCKER, portal_blocker_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_RANK_DISPLAY, rank_display_geo), 
 
 	AREA(1, castle_grounds_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -61,6 +62,9 @@ const LevelScript level_castle_grounds_entry[] = {
 		OBJECT(MODEL_CASTLE_GROUNDS_WARP_PIPE, 2197, 0, 974, 0, 0, 0, 0x00840000, bhvWarpPipe),
 		OBJECT(MODEL_PORTAL_BLOCKER, 156, 39, -1467, 0, 0, 0, 0x00000000, bhvPortalBlocker),
 		OBJECT(MODEL_PORTAL_BLOCKER, 1406, 39, -1467, 0, 0, 0, 0x00010000, bhvPortalBlocker),
+		OBJECT(MODEL_RANK_DISPLAY, -1228, 430, -1467, 0, 0, 0, 0x00000000, bhvRankDisplay),
+		OBJECT(MODEL_RANK_DISPLAY, -39, 430, -1467, 0, 0, 0, 0x00020000, bhvRankDisplay),
+		OBJECT(MODEL_RANK_DISPLAY, 1211, 430, -1467, 0, 0, 0, 0x00030000, bhvRankDisplay),
 		OBJECT(MODEL_NONE, -2500, 300, 0, 0, 90, 0, 0x000A0000, bhvFlyingWarp),
 		MARIO_POS(0x01, 90, -2500, 300, 0),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 3050, 0, -75, 0, -90, 0, 0x00000000, bhvLuigiDoor),

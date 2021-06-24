@@ -594,6 +594,7 @@
 #define MODEL_PORTAL_BLOCKER              0x43
 #define MODEL_BOOBA                       0x46
 #define MODEL_PORTAL                      0x48
+#define MODEL_RANK_DISPLAY                0x50
 
 // Menu Models (overwrites Level Geometry IDs)
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON         MODEL_LEVEL_GEOMETRY_03   // main_menu_geo_0001D0
