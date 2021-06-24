@@ -62,6 +62,7 @@ static void enemy_lakitu_update_vel_y(f32 offsetY) {
 static void enemy_lakitu_update_speed_and_angle(void) {
     f32 minSpeed;
     s16 turnSpeed;
+    f32 yPos = 600.0f;
 
     f32 distToMario = o->oDistanceToMario;
     if (distToMario > 500.0f) {
@@ -76,7 +77,10 @@ static void enemy_lakitu_update_speed_and_angle(void) {
     clamp_f32(&o->oForwardVel, minSpeed, 40.0f);
 
     // Accelerate toward mario vertically
-    enemy_lakitu_update_vel_y(600.0f);
+    if (gCurrentCheckpoint > 1) {
+        yPos = 800.0f;
+    }
+    enemy_lakitu_update_vel_y(yPos);
 
     // Turn toward mario except right after throwing a spiny
     if (o->oEnemyLakituFaceForwardCountdown != 0) {
@@ -165,6 +169,7 @@ static void enemy_lakitu_sub_act_throw_spiny(void) {
  * Main update function.
  */
 static void enemy_lakitu_act_main(void) {
+    f32 yPos = 400.0f;
     cur_obj_play_sound_1(SOUND_AIR_LAKITU_FLY);
 
     cur_obj_update_floor_and_walls();
@@ -195,7 +200,12 @@ static void enemy_lakitu_act_main(void) {
         // The spiny uses this as a signal to get thrown
     //    o->prevObj = NULL;
     //}
-    o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1] + 400.0f, 20.0f, 20.0f);
+    if (gCurrentCheckpoint > 1) {
+        yPos = 600.0f;
+    }
+    if (gMarioState->vel[1] > 0.0f)
+        yPos += gMarioState->vel[1] * 10.0f;
+    o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1] + yPos, 20.0f, 20.0f);
 }
 
 /**

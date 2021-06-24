@@ -44,7 +44,7 @@ extern Vtx bob_dl_Bridge_mesh_layer_1_vtx_cull[8];
 extern Vtx bob_dl_Bridge_mesh_layer_1_vtx_0[48];
 extern Gfx bob_dl_Bridge_mesh_layer_1_tri_0[];
 extern Vtx bob_dl_castle_mesh_layer_1_vtx_cull[8];
-extern Vtx bob_dl_castle_mesh_layer_1_vtx_0[296];
+extern Vtx bob_dl_castle_mesh_layer_1_vtx_0[304];
 extern Gfx bob_dl_castle_mesh_layer_1_tri_0[];
 extern Vtx bob_dl_castle_001_mesh_layer_1_vtx_cull[8];
 extern Vtx bob_dl_castle_001_mesh_layer_1_vtx_0[32];
