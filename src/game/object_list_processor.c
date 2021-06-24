@@ -332,7 +332,7 @@ u32 go_to_checkpoint(u32 checkpoint) {
     return totalTimer;
 }
 
-s32 gLuigi;
+s32 gLuigi = 0;
 
 void get_current_checkpoint(void) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
@@ -460,9 +460,6 @@ void bhv_mario_update(void) {
         }
     }
 
-    if(gCurrLevelNum == LEVEL_CASTLE_GROUNDS && gMarioState->pos[0] > 15250.0f) {
-        gLuigi = 1;
-    }
     if(gLuigi) {
         gMarioObject->header.gfx.sharedChild = gLoadedGraphNodes[0x02];
     } else {

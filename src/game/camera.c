@@ -3030,7 +3030,7 @@ void update_camera(struct Camera *c) {
     if(gCurrLevelNum == 0x06) {
         c->cutscene = CUTSCENE_EPIC_INTRO;
     }
-    if (c->cutscene == 0) {
+    if (c->cutscene == 0 && gCurrLevelNum != LEVEL_CASTLE_GROUNDS) {
         // Only process R_TRIG if 'fixed' is not selected in the menu
         if (cam_select_alt_mode(0) == CAM_SELECTION_MARIO) {
             if (gPlayer1Controller->buttonPressed & R_TRIG) {
@@ -3042,6 +3042,8 @@ void update_camera(struct Camera *c) {
             }
         }
         play_sound_if_cam_switched_to_lakitu_or_mario();
+    } else {
+        set_cam_angle(CAM_ANGLE_LAKITU);
     }
 
     // Initialize the camera
@@ -3175,7 +3177,9 @@ void update_camera(struct Camera *c) {
             if(gCurrLevelNum == LEVEL_JRB && gMarioState->pos[2] < -5404.5f && gMarioState->pos[1] < 875.0f) {
                 mode_cliff_camera(c);
             }
-            else {
+            else if(gCurrLevelNum == LEVEL_CASTLE_GROUNDS) {
+                mode_lakitu_camera(c);
+            } else {
                 mode_8_directions_camera(c);
             }
         }
