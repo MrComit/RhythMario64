@@ -1219,7 +1219,7 @@ Gfx *geo_painting_draw(s32 callContext, struct GraphNode *node, UNUSED void *con
     s32 group = (gen->parameter >> 8) & 0xFF;
     s32 id = gen->parameter & 0xFF;
     Gfx *paintingDlist = NULL;
-    struct Painting **paintingGroup = segmented_to_virtual(sPaintingGroups[group]);
+    struct Painting **paintingGroup = sPaintingGroups[group];
     struct Painting *painting = segmented_to_virtual(paintingGroup[id]);
 
     if (callContext != GEO_CONTEXT_RENDER) {

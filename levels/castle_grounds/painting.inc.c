@@ -12,22 +12,26 @@ ALIGNED8 static const Texture castle_seg7_texture_0700B800[] = {
 
 // 0x0700C800 - 0x0700D800
 ALIGNED8 static const Texture castle_seg7_texture_0700C800[] = {
-#include "levels/castle_grounds/CUSTOM_painting3.rgba16.inc.c"
+//#include "levels/castle_grounds/CUSTOM_painting3.rgba16.inc.c"
+#include "levels/castle_grounds/CUSTOM_painting1.rgba16.inc.c"
 };
 
 // 0x0700D800 - 0x0700E800
 ALIGNED8 static const Texture castle_seg7_texture_0700D800[] = {
-#include "levels/castle_grounds/CUSTOM_painting4.rgba16.inc.c"
+//#include "levels/castle_grounds/CUSTOM_painting4.rgba16.inc.c"
+#include "levels/castle_grounds/CUSTOM_painting2.rgba16.inc.c"
 };
 
 // 0x0700E800 - 0x0700F800
 ALIGNED8 static const Texture castle_seg7_texture_0700E800[] = {
-#include "levels/castle_grounds/CUSTOM_painting5.rgba16.inc.c"
+//#include "levels/castle_grounds/CUSTOM_painting5.rgba16.inc.c"
+#include "levels/castle_grounds/CUSTOM_painting1.rgba16.inc.c"
 };
 
 // 0x0700F800 - 0x07010800
 ALIGNED8 static const Texture castle_seg7_texture_0700F800[] = {
-#include "levels/castle_grounds/CUSTOM_painting6.rgba16.inc.c"
+//#include "levels/castle_grounds/CUSTOM_painting6.rgba16.inc.c"
+#include "levels/castle_grounds/CUSTOM_painting2.rgba16.inc.c"
 };
 
 
@@ -39,50 +43,50 @@ static const Lights1 castle_seg7_lights_07021800 = gdSPDefLights1(
 
 // 0x07021818 - 0x07021898
 static const Vtx castle_seg7_vertex_07021818[] = {
-    {{{     0,      0,      0}, 0, {   -32,    992}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{   614,      0,      0}, 0, {  2012,    992}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{   614,    307,      0}, 0, {  2012,      0}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{     0,    307,      0}, 0, {   -32,      0}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{     0,    307,      0}, 0, {   -32,    992}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{   614,    307,      0}, 0, {  2012,    992}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{   614,    614,      0}, 0, {  2012,    -28}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{     0,    614,      0}, 0, {   -32,    -28}, {0x00, 0x00, 0x7f, 0xff}}},
+    {{{     0,      0,      0}, 0, {   -32,    992}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{   614,      0,      0}, 0, {  2012,    992}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{   614,    307,      0}, 0, {  2012,      0}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{     0,    307,      0}, 0, {   -32,      0}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{     0,    307,      0}, 0, {   -32,    992}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{   614,    307,      0}, 0, {  2012,    992}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{   614,    614,      0}, 0, {  2012,    -28}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{     0,    614,      0}, 0, {   -32,    -28}, {0x00, 0x00, 0x7f, 0x80}}},
 };
 
 // 0x07021898 - 0x07021918
 static const Vtx castle_seg7_vertex_07021898[] = {
-    {{{     0,      0,      0}, 0, {   -32,    992}, {0xdd, 0xdd, 0xdd, 0xff}}},
-    {{{   614,      0,      0}, 0, {  2012,    992}, {0xdd, 0xdd, 0xdd, 0xff}}},
-    {{{   614,    307,      0}, 0, {  2012,      0}, {0xdd, 0xdd, 0xdd, 0xff}}},
-    {{{     0,    307,      0}, 0, {   -32,      0}, {0xdd, 0xdd, 0xdd, 0xff}}},
-    {{{     0,    307,      0}, 0, {   -32,    992}, {0xdd, 0xdd, 0xdd, 0xff}}},
-    {{{   614,    307,      0}, 0, {  2012,    992}, {0xdd, 0xdd, 0xdd, 0xff}}},
-    {{{   614,    614,      0}, 0, {  2012,    -28}, {0xdd, 0xdd, 0xdd, 0xff}}},
-    {{{     0,    614,      0}, 0, {   -32,    -28}, {0xdd, 0xdd, 0xdd, 0xff}}},
+    {{{     0,      0,      0}, 0, {   -32,    992}, {0xdd, 0xdd, 0xdd, 0x80}}},
+    {{{   614,      0,      0}, 0, {  2012,    992}, {0xdd, 0xdd, 0xdd, 0x80}}},
+    {{{   614,    307,      0}, 0, {  2012,      0}, {0xdd, 0xdd, 0xdd, 0x80}}},
+    {{{     0,    307,      0}, 0, {   -32,      0}, {0xdd, 0xdd, 0xdd, 0x80}}},
+    {{{     0,    307,      0}, 0, {   -32,    992}, {0xdd, 0xdd, 0xdd, 0x80}}},
+    {{{   614,    307,      0}, 0, {  2012,    992}, {0xdd, 0xdd, 0xdd, 0x80}}},
+    {{{   614,    614,      0}, 0, {  2012,    -28}, {0xdd, 0xdd, 0xdd, 0x80}}},
+    {{{     0,    614,      0}, 0, {   -32,    -28}, {0xdd, 0xdd, 0xdd, 0x80}}},
 };
 
 // 0x07021918 - 0x07021998
 static const Vtx castle_seg7_vertex_07021918[] = {
-    {{{ -3046,   -307,  -3724}, 0, {   -32,    992}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{ -2742,   -307,  -4258}, 0, {  2012,    992}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{ -2742,      0,  -4258}, 0, {  2012,      0}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{ -3046,      0,  -3724}, 0, {   -32,      0}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{ -3046,      0,  -3724}, 0, {   -32,    992}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{ -2742,      0,  -4258}, 0, {  2012,    992}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{ -2742,    307,  -4258}, 0, {  2012,      0}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{ -3046,    307,  -3724}, 0, {   -32,      0}, {0x00, 0x00, 0x7f, 0xff}}},
+    {{{ -3046,   -307,  -3724}, 0, {   -32,    992}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{ -2742,   -307,  -4258}, 0, {  2012,    992}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{ -2742,      0,  -4258}, 0, {  2012,      0}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{ -3046,      0,  -3724}, 0, {   -32,      0}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{ -3046,      0,  -3724}, 0, {   -32,    992}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{ -2742,      0,  -4258}, 0, {  2012,    992}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{ -2742,    307,  -4258}, 0, {  2012,      0}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{ -3046,    307,  -3724}, 0, {   -32,      0}, {0x00, 0x00, 0x7f, 0x80}}},
 };
 
 // 0x07021998 - 0x07021A18
 static const Vtx castle_seg7_vertex_07021998[] = {
-    {{{ -1866,   -307,  -4258}, 0, {   -32,    992}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{ -1562,   -307,  -3724}, 0, {  2012,    992}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{ -1562,      0,  -3724}, 0, {  2012,      0}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{ -1866,      0,  -4258}, 0, {   -32,      0}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{ -1866,      0,  -4258}, 0, {   -32,    992}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{ -1562,      0,  -3724}, 0, {  2012,    992}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{ -1562,    307,  -3724}, 0, {  2012,      0}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{ -1866,    307,  -4258}, 0, {   -32,      0}, {0x00, 0x00, 0x7f, 0xff}}},
+    {{{ -1866,   -307,  -4258}, 0, {   -32,    992}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{ -1562,   -307,  -3724}, 0, {  2012,    992}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{ -1562,      0,  -3724}, 0, {  2012,      0}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{ -1866,      0,  -4258}, 0, {   -32,      0}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{ -1866,      0,  -4258}, 0, {   -32,    992}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{ -1562,      0,  -3724}, 0, {  2012,    992}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{ -1562,    307,  -3724}, 0, {  2012,      0}, {0x00, 0x00, 0x7f, 0x80}}},
+    {{{ -1866,    307,  -4258}, 0, {   -32,      0}, {0x00, 0x00, 0x7f, 0x80}}},
 };
 
 // 0x07021A18 - 0x07021A30
@@ -1214,8 +1218,8 @@ struct Painting c1_painting = {
     /* Texture Type */ PAINTING_IMAGE,
     /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Mario's on */,
     /* Ripple Status */ 0x00,
-    /* Rotation */     0.0f,    90.0f,
-    /* Position */ 0.0f,   0.0f,   0.0f,
+    /* Rotation */     0.0f,    0.0f,
+    /* Position */ -1228.04f,   39.3676f,   -1466.72f,
     /*                         curr   passive     entry */
     /* Ripple Magnitude */     0.0f,    20.0f,    80.0f,
     /* Ripple Decay */         1.0f,  0.9608f,  0.9524f,
@@ -1229,9 +1233,9 @@ struct Painting c1_painting = {
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
-    /* Alpha */ 0xFF,
+    /* Alpha */ 0x80,
     /* Mario Below */  0x00, 0x00, 0x00, /* Whether or not Mario is below the painting */
-    /* Size */  614.0f,
+    /* Size */  390.0f,
 };
 
 // 0x07023698 - 0x07023710
@@ -1242,7 +1246,7 @@ struct Painting c2_painting = {
     /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Mario's on */,
     /* Ripple Status */ 0x00,
     /* Rotation */     0.0f,     0.0f,
-    /* Position */ 1000.0f,  0.0f, 0.0f,
+    /* Position */ -39.1357f,   39.3676f,   -1466.72f,
     /*                         curr   passive     entry */
     /* Ripple Magnitude */     0.0f,    20.0f,    80.0f,
     /* Ripple Decay */         1.0f,  0.9608f,  0.9524f,
@@ -1256,9 +1260,9 @@ struct Painting c2_painting = {
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
-    /* Alpha */ 0xFF,
+    /* Alpha */ 0x80,
     /* Mario Below */  0x00, 0x00, 0x00, /* Whether or not Mario is below the painting */
-    /* Size */  614.0f,
+    /* Size */  390.0f,
 };
 
 // 0x07023710 - 0x07023788
@@ -1269,7 +1273,7 @@ struct Painting c3_painting = {
     /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Mario's on */,
     /* Ripple Status */ 0x00,
     /* Rotation */     0.0f,     0.0f,
-    /* Position */   2000.0f,  0.0f, 0.0f,
+    /* Position */   1210.73f,   39.3676f,   -1466.72f,
     /*                         curr   passive     entry */
     /* Ripple Magnitude */     0.0f,    20.0f,    80.0f,
     /* Ripple Decay */         1.0f,  0.9608f,  0.9524f,
@@ -1283,7 +1287,7 @@ struct Painting c3_painting = {
     /* Texture w, h */ 64, 32,
     /* Ripple DList */ castle_seg7_painting_dl_07021AC0,
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
-    /* Alpha */ 0xFF,
+    /* Alpha */ 0x80,
     /* Mario Below */  0x00, 0x00, 0x00, /* Whether or not Mario is below the painting */
-    /* Size */  614.0f,
+    /* Size */  390.0f,
 };
