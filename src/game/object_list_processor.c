@@ -459,7 +459,6 @@ void bhv_mario_update(void) {
     if(seqPlayer->scriptState.pc[-1] == 0xFF && seqPlayer->scriptState.pc[-2] == 0xFF && gCurrCourseNum != 0x4) {
         if(gMarioState->action != ACT_STAR_DANCE_EXIT) {
             set_mario_action(gMarioState, ACT_STAR_DANCE_EXIT, 0);
-            gSaveBuffer.files[gCurrSaveFileNum - 1][0].ranks[gCurrCourseNum - 1] = gRank.rank;
         }
     }
 

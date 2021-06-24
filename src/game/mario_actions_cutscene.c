@@ -641,10 +641,10 @@ void rank_increment(void) {
 
 void rank_save(void) {
     gSaveFileModified = TRUE;
-    save_file_set_star_flags(gCurrSaveFileNum - 1, gCurrCourseNum, gCurrAreaIndex);
-    if(gRank.rank < save_file_get_rank(gCurrCourseNum - 1)) {
+    if(gRank.rank < save_file_get_rank(gCurrCourseNum - 1) || save_file_get_star_flags(gCurrSaveFileNum - 1, gCurrCourseNum - 1) == 0) {
         save_file_set_rank(gCurrCourseNum - 1, gRank.rank);
     }
+    save_file_set_star_flags(gCurrSaveFileNum - 1, gCurrCourseNum - 1, gCurrAreaIndex);
     save_file_do_save(gCurrSaveFileNum - 1);
 }
 
