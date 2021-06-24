@@ -4,9 +4,9 @@ static struct ObjectHitbox sSpikePillarHitbox = {
     /* damageOrCoinValue: */ 2,
     /* health:            */ 0,
     /* numLootCoins:      */ 1,
-    /* radius:            */ 100,
+    /* radius:            */ 110,
     /* height:            */ 600,
-    /* hurtboxRadius:     */ 105,
+    /* hurtboxRadius:     */ 115,
     /* hurtboxHeight:     */ 600,
 };
 

@@ -184,6 +184,7 @@ void bhv_spike_bar_update(void) {
         obj_mark_for_deletion(o);
     }
     if(o->oIntangibleTimer == 0 && sqrtf(POW2(o->oPosX - gMarioObject->oPosX) + POW2((o->oPosY + 75.0f) - gMarioObject->oPosY)) < 100.0f && absf(o->oPosZ - gMarioObject->oPosZ) < 625.0f) {
+        gMarioState->interactObj = o;
         set_mario_action(gMarioState, determine_knockback_action(gMarioState, 2), 2);
         o->oIntangibleTimer = 75;
         take_damage_and_knock_back(gMarioState, o);
