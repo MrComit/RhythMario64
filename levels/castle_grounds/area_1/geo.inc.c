@@ -39,7 +39,6 @@ const GeoLayout castle_grounds_dl_02__P1_geo[] = {
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(4, castle_grounds_dl_L1Box_mesh_layer_4),
 		GEO_CLOSE_NODE(),
-		GEO_DISPLAY_LIST(1, castle_grounds_dl_P1Room_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -50,7 +49,6 @@ const GeoLayout castle_grounds_dl_03__P2_geo[] = {
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(1, castle_grounds_dl_L2Box_mesh_layer_1),
 		GEO_CLOSE_NODE(),
-		GEO_DISPLAY_LIST(1, castle_grounds_dl_P2Room_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -58,7 +56,6 @@ const GeoLayout castle_grounds_dl_04__P3_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 1406, 406, -2684, castle_grounds_dl_L3Box_mesh_layer_1),
-		GEO_DISPLAY_LIST(1, castle_grounds_dl_P3Room_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
