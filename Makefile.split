@@ -181,7 +181,7 @@ $(eval $(call level_rules,menu,generic)) # Menu (File Select)
 $(BUILD_DIR)/levels/ending/cake_eu.inc.c: levels/ending/cake_eu.png
 	@$(PRINT) "$(GREEN)Splitting $(YELLOW)$< $(GREEN)to:  $(BLUE)$@ $(NO_COL)\n"
 	@$(SKYCONV) --type cake-eu --split $^ $(BUILD_DIR)/levels/ending
-$(BUILD_DIR)/levels/ending/cake.inc.c: levels/ending/CUSTOM_cake.png
+$(BUILD_DIR)/levels/ending/CUSTOM_cake.inc.c: levels/ending/CUSTOM_cake.png
 	@$(PRINT) "$(GREEN)Splitting $(YELLOW)$< $(GREEN)to:  $(BLUE)$@ $(NO_COL)\n"
 	@$(SKYCONV) --type cake --split $^ $(BUILD_DIR)/levels/ending
 

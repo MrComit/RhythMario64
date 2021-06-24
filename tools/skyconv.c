@@ -328,7 +328,7 @@ static void write_cake_c() {
         strcat(buffer, "/cake_eu.inc.c");
     }
     else {
-        strcat(buffer, "/cake.inc.c");
+        strcat(buffer, "/CUSTOM_cake.inc.c");
     }
 
     FILE *cFile = fopen(buffer, "w");
