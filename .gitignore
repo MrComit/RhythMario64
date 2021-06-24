@@ -65,6 +65,7 @@ build/*
 !/assets/**/*custom*.bin
 !/assets/**/*custom*/**/*.bin
 !/textures/crash_custom/*.png
+!/levels/ending/cake.png
 # libultra
 
 !/lib/*.a
