@@ -6611,3 +6611,17 @@ const BehaviorScript bhvLuigiDoor[] = {
         CALL_NATIVE(bhv_door_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvPortalBlocker[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(portal_blocker_collision),
+    SET_FLOAT(oCollisionDistance, 1000),
+    SET_HOME(),
+    SCALE(0, 110),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_portal_blocker_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

@@ -211,7 +211,7 @@ void bhv_c2_barrier_loop(void) {
             }
             obj = cur_obj_nearest_object_behavior_params(bhvBarrier, 0x0001);
             if (obj != NULL && obj->oF4 == 1 && o->oF4 == 0) {
-                o->oPosY = approach_f32(o->oPosY, o->oHomeY + 4400.0f, 7.0f, 10.0f);
+                o->oPosY = approach_f32(o->oPosY, o->oHomeY + 5400.0f, 8.0f, 8.0f);
                 //o->oPosZ = approach_f32(o->oPosZ, o->oHomeZ - 7500.0f, 20.0f, 20.0f);
                 if (o->oPosY == o->oHomeY + 4400.0f) {
                     o->oF4 = 1;

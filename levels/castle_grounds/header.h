@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "game/moving_texture.h"
+#include "game/paintings.h"
 
 // geo
 extern const GeoLayout castle_grounds_geo_000660[];
@@ -42,5 +43,18 @@ extern const Gfx castle_grounds_dl_waterfall[];
 extern const LevelScript level_castle_grounds_entry[];
 
 #include "levels/castle_grounds/header.inc.h"
+
+
+extern const Gfx castle_seg7_dl_070225D8[];
+extern const Gfx castle_seg7_dl_07022610[];
+extern const Gfx castle_seg7_dl_070234C0[];
+extern const Gfx castle_seg7_dl_07023520[];
+extern struct Painting c1_painting;
+extern struct Painting c2_painting;
+extern struct Painting c3_painting;
+
+#include "levels/castle_grounds/portal_blocker/geo_header.h"
+
+#include "levels/castle_grounds/portal_blocker/collision_header.h"
 
 #endif

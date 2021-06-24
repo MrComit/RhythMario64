@@ -585,5 +585,6 @@ extern const BehaviorScript bhvBossRock[];
 extern const BehaviorScript bhvObjectiveChest[];
 extern const BehaviorScript bhvBabyDorrie[];
 extern const BehaviorScript bhvLuigiDoor[];
+extern const BehaviorScript bhvPortalBlocker[];
 
 #endif // BEHAVIOR_DATA_H
