@@ -14,15 +14,21 @@ s32 D_8032F330[] = { SOUND_GENERAL_CLOSE_WOOD_DOOR, SOUND_GENERAL_CLOSE_IRON_DOO
 
 void door_animation_and_reset(s32 sp18) {
     cur_obj_init_animation_with_sound(sp18);
-    if (cur_obj_check_if_near_animation_end())
+    if (cur_obj_check_if_near_animation_end()) {
         o->oAction = 0;
+        o->oDoorState = 1;
+    }
 }
 
 void set_door_camera_event(void) {
-    if (segmented_to_virtual(bhvDoor) == o->behavior)
+    if (segmented_to_virtual(bhvDoor) == o->behavior) {
         gPlayerCameraState->cameraEvent = CAM_EVENT_DOOR;
-    else
+    } else {
         gPlayerCameraState->cameraEvent = CAM_EVENT_DOOR_WARP;
+        if(gMarioState->pos[0] > 3050.0f) {
+            gLuigi ^= 0x01;
+        }
+    }
     gPlayerCameraState->usedObj = o;
 }
 
