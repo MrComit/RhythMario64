@@ -293,40 +293,39 @@ Ultra-Note-Display 3000\n\
 helped quite a bit as\n\
 well, hehe..."))
 
-DEFINE_DIALOG(DIALOG_034, 1, 6, 30, 200, _("\
-Good afternoon. The\n\
-Lakitu Bros., here,\n\
-reporting live from just\n\
-outside the Princess's\n\
-castle.\n\
+DEFINE_DIALOG(DIALOG_034, 1, 4, 30, 200, _("\
+In each level, you'll be\n\
+faced with a variety of\n\
+obstacles over a linear\n\
+course.\n\
+At the end of the course,\n\
+you'll be awarded a rank,\n\
+the highest being A and\n\
+the lowest being F.\n\
+The rank you get depends\n\
+on your total damage,\n\
+deaths, and how many\n\
+coins you collect.\n\
+Each level also contains\n\
+two side objectives to\n\
+be completed over its\n\
+runtime.\n\
+Completing these at any\n\
+point will save them\n\
+permanently to your\n\
+record.\n\
+Having enough points for\n\
+an A rank, completing\n\
+both objectives, and not\n\
+dying gives you an S rank.\n\
+Specific ranks are not\n\
+required in any capacity\n\
+to complete the game.\n\
 \n\
-Mario has just arrived\n\
-on the scene, and we'll\n\
-be filming the action live\n\
-as he enters the castle\n\
-and pursues the missing\n\
-Power Stars.\n\
-As seasoned cameramen,\n\
-we'll be shooting from the\n\
-recommended angle, but\n\
-you can change the\n\
-camera angle by pressing\n\
-the [C] Buttons.\n\
-If we can't adjust the\n\
-view any further, we'll\n\
-buzz. To take a look at\n\
-the surroundings, stop\n\
-and press [C]^.\n\
-\n\
-Press [A] to resume play.\n\
-Switch camera modes with\n\
-the [R] Button. Signs along\n\
-the way will review these\n\
-instructions.\n\
-\n\
-For now, reporting live,\n\
-this has been the\n\
-Lakitu Bros."))
+...but getting an\n\
+S-rank in every level\n\
+will unlock the suspi-\n\
+cious doors in here."))
 
 DEFINE_DIALOG(DIALOG_035, 1, 5, 30, 200, _("\
 There are four camera, or\n\

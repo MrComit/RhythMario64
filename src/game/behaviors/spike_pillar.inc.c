@@ -4,9 +4,9 @@ static struct ObjectHitbox sSpikePillarHitbox = {
     /* damageOrCoinValue: */ 2,
     /* health:            */ 0,
     /* numLootCoins:      */ 1,
-    /* radius:            */ 110,
+    /* radius:            */ 125,
     /* height:            */ 600,
-    /* hurtboxRadius:     */ 115,
+    /* hurtboxRadius:     */ 125,
     /* hurtboxHeight:     */ 600,
 };
 
@@ -35,4 +35,5 @@ void bhv_spike_pillar_loop(void) {
     if(o->oPosY > o->oHomeY - 625.0f) {
         o->oPosY -= 62.5f;
     }
+    o->oInteractStatus = 0;
 }

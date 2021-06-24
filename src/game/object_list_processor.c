@@ -449,9 +449,9 @@ void bhv_mario_update(void) {
     }
 
     gCheckpointLoaded = 0;
-    /*if(gPlayer1Controller->buttonPressed & L_TRIG) {
+    if(gPlayer1Controller->buttonPressed & L_TRIG) {
         seqPlayer->globalSongTimer = go_to_checkpoint(2);
-    }*/
+    }
     if (gCurrAreaIndex == 1 && gCurrCourseNum >= 1 && gCurrCourseNum <= 4 && gMarioState->health >= 0x100) {
         get_current_checkpoint();
     }
@@ -459,6 +459,7 @@ void bhv_mario_update(void) {
     if(seqPlayer->scriptState.pc[-1] == 0xFF && seqPlayer->scriptState.pc[-2] == 0xFF && gCurrCourseNum != 0x4) {
         if(gMarioState->action != ACT_STAR_DANCE_EXIT) {
             set_mario_action(gMarioState, ACT_STAR_DANCE_EXIT, 0);
+            gSaveBuffer.files[gCurrSaveFileNum - 1][0].ranks[gCurrCourseNum - 1] = gRank.rank;
         }
     }
 

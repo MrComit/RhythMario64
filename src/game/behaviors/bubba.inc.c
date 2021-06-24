@@ -1,5 +1,7 @@
 // bubba.inc.c
 
+#include "src/audio/load.h"
+
 static struct ObjectHitbox sBubbaHitbox = {
     /* interactType:      */ INTERACT_CLAM_OR_BUBBA,
     /* downOffset:        */ 100,
@@ -206,7 +208,9 @@ void bhv_angry_bubba_loop(void) {
     if(gCheckpointLoaded) {
         bhv_angry_bubba_init();
     }
-    if((gMarioObject->oPosZ > -5404.5f || (gMarioObject->oPosY > 6000.0f && gCurrentCheckpoint == 2)) && (gMarioObject->oPosX > -22750.0f || gCurrCreditsEntry != 0)) {
+    if((gMarioObject->oPosZ > -5404.5f || (gMarioObject->oPosY > 6000.0f && gCurrentCheckpoint == 2))
+    && (gMarioObject->oPosX > -22750.0f || gCurrCreditsEntry != 0) 
+    && (!(gSequencePlayers[0].globalSongTimer > 0x4800 && (save_file_get_objectives() & 0x08) == 0) || gCurrCreditsEntry != 0)) {
         switch(o->oAction) {
             case 0:
                 angry_bubba_stay_in_place(0);
@@ -254,7 +258,7 @@ void bhv_angry_bubba_loop(void) {
                 break;
         }
     } else {
-        o->oPosY = approach_f32_symmetric(o->oPosY, 7250.0f, 50.0f);
+        o->oPosY = approach_f32_symmetric(o->oPosY, 10250.0f, 25.0f);
     }
     o->oIntangibleTimer = o->oInteractStatus = 0;
 }

@@ -176,7 +176,7 @@ void bhv_dorrie_update(void) {
 void bhv_baby_dorrie_init(void) {
     o->oBabyDorrieHP = 5;
     o->oDorrieInvincibleTimer = 0;
-    if((save_file_get_objectives() & 0x08) != 0) {
+    if((save_file_get_objectives() & 0x08) != 0 && gCurrCreditsEntry == 0) {
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
 }
@@ -185,8 +185,9 @@ void bhv_baby_dorrie_loop(void) {
     if(gCurrentCheckpoint >= 2) {
         f32 dist;
         struct Object *enemy = cur_obj_find_nearest_object_with_behavior(bhvBulletBill, &dist);
-        print_text_fmt_int(20, 36, "BABY DORRIE HP %d", o->oBabyDorrieHP);
-        if(o->oTimer > 30 && o->oDorrieInvincibleTimer == 0 && enemy != 0 && lateral_dist_between_objects(o, enemy) < 75.0f) {
+        if(gMarioState->action != ACT_STAR_DANCE_EXIT)
+            print_text_fmt_int(20, 36, "BABY DORRIE HP %d", o->oBabyDorrieHP);
+        if(o->oTimer > 30 && gMarioState->action != ACT_STAR_DANCE_EXIT && o->oDorrieInvincibleTimer == 0 && enemy != 0 && lateral_dist_between_objects(o, enemy) < 75.0f) {
             o->oBabyDorrieHP--;
             o->oDorrieInvincibleTimer = 20;
             if(o->oBabyDorrieHP == 0) {
