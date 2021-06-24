@@ -332,7 +332,7 @@ u32 go_to_checkpoint(u32 checkpoint) {
     return totalTimer;
 }
 
-s32 gLuigi;
+s32 gLuigi = 0;
 
 void get_current_checkpoint(void) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
@@ -376,6 +376,8 @@ u8 channelMap[4][CHANNELS_MAX] = {
     {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0xFF, 0xFF, 0xFF, 0xFF, 3},
     {0, 1, 2, 3, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 3},
 };
+
+#include "save_file.h"
 
 void bhv_mario_update(void) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
@@ -469,6 +471,10 @@ void bhv_mario_update(void) {
         gMarioObject->header.gfx.sharedChild = gLoadedGraphNodes[0x01];
     }
 
+    /*print_text_fmt_int(80, 120, "RANK 1 %d", gSaveBuffer.files[gCurrSaveFileNum - 1][0].ranks[0]);
+    print_text_fmt_int(80, 100, "RANK 2 %d", gSaveBuffer.files[gCurrSaveFileNum - 1][0].ranks[1]);
+    print_text_fmt_int(80, 80, "RANK 3 %d", gSaveBuffer.files[gCurrSaveFileNum - 1][0].ranks[2]);
+    print_text_fmt_int(80, 60, "RANK 4 %d", gSaveBuffer.files[gCurrSaveFileNum - 1][0].ranks[3]);*/
     //print_text_fmt_int(20, 20, "%d", gLastBeatHit);
 }
 
