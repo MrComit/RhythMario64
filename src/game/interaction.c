@@ -749,10 +749,10 @@ u32 interact_coin(struct MarioState *m, UNUSED u32 interactType, struct Object *
 
     o->oInteractStatus = INT_STATUS_INTERACTED;
 
-    if (COURSE_IS_MAIN_COURSE(gCurrCourseNum) && m->numCoins - o->oDamageOrCoinValue < 100
+    /*if (COURSE_IS_MAIN_COURSE(gCurrCourseNum) && m->numCoins - o->oDamageOrCoinValue < 100
         && m->numCoins >= 100) {
         bhv_spawn_star_no_level_exit(6);
-    }
+    }*/
 #if ENABLE_RUMBLE
     if (o->oDamageOrCoinValue >= 2) {
         queue_rumble_data(5, 80);
@@ -1001,12 +1001,14 @@ u32 get_door_save_file_flag(struct Object *door) {
     return saveFileFlag;
 }
 
+s32 has_all_s_ranks(void);
+
 u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
     s16 requiredNumStars = o->oBehParams >> 24;
     s16 numStars = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
 
     if (m->action == ACT_WALKING || m->action == ACT_DECELERATING) {
-        if (numStars >= requiredNumStars) {
+        if (has_all_s_ranks()) {
             u32 actionArg = should_push_or_pull_door(m, o);
             u32 enterDoorAction;
             u32 doorSaveFileFlag;
@@ -1054,7 +1056,8 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
                     break;
             }
 
-            text += requiredNumStars - numStars;
+            //text += requiredNumStars - numStars;
+            text = DIALOG_022;
 
             sDisplayingDoorText = TRUE;
             return set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, text);

@@ -124,7 +124,8 @@ static void spiny_act_walk(void) {
  */
 static void spiny_act_held_by_lakitu(void) {
     f32 dist;
-    s16 pitch, yaw;
+    s16 pitch, yaw, rand;
+    Vec3f pos;
     o->oGraphYOffset = 15.0f;
     cur_obj_init_animation_with_sound(0);
 
@@ -134,8 +135,13 @@ static void spiny_act_held_by_lakitu(void) {
 
     //if (o->parentObj->prevObj == NULL) {
         o->oAction = SPINY_ACT_THROWN_BY_LAKITU;
+
+        rand = random_u16();
+        pos[0] = gMarioState->pos[0] + (100.0f * sins(rand));
+        pos[2] = gMarioState->pos[2] + (100.0f * coss(rand));
+        pos[1] = gMarioState->pos[1];
         //o->oMoveAngleYaw = o->oAngleToMario;
-        vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
+        vec3f_get_dist_and_angle(&o->oPosX, pos, &dist, &pitch, &yaw);
         o->oMoveAngleYaw = yaw;
         o->oMoveAnglePitch = pitch;
         if (o->oMoveAnglePitch > -0x2000) {
