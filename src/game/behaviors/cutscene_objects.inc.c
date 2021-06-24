@@ -289,3 +289,11 @@ void bhv_egadd_loop(void) {
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
     o->oInteractStatus = 0;
 }
+
+
+
+void bhv_portal_blocker_loop(void) {
+    if(save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) > o->oBehParams2ndByte) {
+        o->activeFlags = 0;
+    }
+}

@@ -7,6 +7,7 @@
 #include "game_init.h"
 #include "geo_misc.h"
 #include "levels/castle_inside/header.h"
+#include "levels/castle_grounds/header.h"
 #include "levels/hmc/header.h"
 #include "levels/ttm/header.h"
 #include "mario.h"
@@ -170,9 +171,7 @@ struct Painting *sHmcPaintings[] = {
 };
 
 struct Painting *sInsideCastlePaintings[] = {
-    &bob_painting, &ccm_painting, &wf_painting,  &jrb_painting,      &lll_painting,
-    &ssl_painting, &hmc_painting, &ddd_painting, &wdw_painting,      &thi_tiny_painting,
-    &ttm_painting, &ttc_painting, &sl_painting,  &thi_huge_painting, NULL,
+    &c1_painting, &c2_painting, &c3_painting, &c3_painting, &c3_painting, &c3_painting, NULL,
 };
 
 struct Painting *sTtmPaintings[] = {
@@ -1220,7 +1219,7 @@ Gfx *geo_painting_draw(s32 callContext, struct GraphNode *node, UNUSED void *con
     s32 group = (gen->parameter >> 8) & 0xFF;
     s32 id = gen->parameter & 0xFF;
     Gfx *paintingDlist = NULL;
-    struct Painting **paintingGroup = sPaintingGroups[group];
+    struct Painting **paintingGroup = segmented_to_virtual(sPaintingGroups[group]);
     struct Painting *painting = segmented_to_virtual(paintingGroup[id]);
 
     if (callContext != GEO_CONTEXT_RENDER) {

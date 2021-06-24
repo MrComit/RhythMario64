@@ -19,3 +19,5 @@
 #include "levels/castle_grounds/areas/1/8/geo.inc.c"
 #include "levels/castle_grounds/areas/1/geo.inc.c"
 #include "levels/castle_grounds/geo.inc.c"
+
+#include "levels/castle_grounds/portal_blocker/geo.inc.c"
