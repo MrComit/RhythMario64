@@ -26,7 +26,7 @@ extern u8 jrb_dl__7__2__ci4_pal_rgba16[];
 extern u8 jrb_dl_porthole_ci8[];
 extern u8 jrb_dl_porthole_ci8_pal_rgba16[];
 extern u8 jrb_dl_bowsah_rgba16[];
-extern Vtx jrb_dl_main_mesh_layer_1_vtx_0[665];
+extern Vtx jrb_dl_main_mesh_layer_1_vtx_0[687];
 extern Gfx jrb_dl_main_mesh_layer_1_tri_0[];
 extern Vtx jrb_dl_main_mesh_layer_1_vtx_1[8];
 extern Gfx jrb_dl_main_mesh_layer_1_tri_1[];
