@@ -65,6 +65,7 @@ const LevelScript level_castle_grounds_entry[] = {
 		OBJECT(MODEL_RANK_DISPLAY, 1211, 430, -1467, 0, 0, 0, 0x00030000, bhvRankDisplay),
 		OBJECT(MODEL_WOODEN_SIGNPOST, -1504, 0, -1363, 0, 0, 0, 0x00220000, bhvMessagePanel),
 		OBJECT(MODEL_NONE, -2500, 300, 0, 0, 90, 0, 0x000A0000, bhvFlyingWarp),
+		OBJECT(MODEL_NONE, -2500, 300, 0, 0, 90, 0, 0x00840000, bhvWarp),
 		MARIO_POS(0x01, 90, -2500, 300, 0),
 		TERRAIN(castle_grounds_area_1_collision),
 		ROOMS(castle_grounds_area_1_collision_rooms),

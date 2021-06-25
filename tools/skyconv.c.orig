@@ -339,7 +339,7 @@ static void write_cake_c() {
         strcat(buffer, "/cake_eu.inc.c");
     }
     else {
-        strcat(buffer, "/cake.inc.c");
+        strcat(buffer, "/CUSTOM_cake.inc.c");
     }
 
     FILE *cFile = fopen(buffer, "w");
@@ -347,18 +347,17 @@ static void write_cake_c() {
     const char *euSuffx = "";
     if (type == CakeEU) {
         euSuffx = "eu_";
-     }
- 
-     int numTiles = TABLE_DIMENSIONS[type].cols * TABLE_DIMENSIONS[type].rows;
-     fprintf(cFile, "ALIGNED8 static const Texture cake_end_texture_%sdata[] = {\n", euSuffx);
-     for (int i = 0; i < numTiles; ++i) {
-         print_raw_data(cFile, &tiles[i]);
-         fputc(',', cFile);
-         fputc('\n', cFile);
-     }
-     fputs("};\n\n", cFile);
-     fclose(cFile);
- }
+    }
+
+    int numTiles = TABLE_DIMENSIONS[type].cols * TABLE_DIMENSIONS[type].rows;
+    fprintf(cFile, "ALIGNED8 static const Texture cake_end_texture_%sdata[] = {\n", euSuffx);
+    for (int i = 0; i < numTiles; ++i) {
+        print_raw_data(cFile, &tiles[i]);
+        fputc(' \n', cFile);
+    }
+    fputs("};\n\n", cFile);
+    fclose(cFile);
+}
 
 // input: the skybox tiles + the table = up to 64 32x32 images (rgba16) + 80 pointers (u32)
 // some pointers point to duplicate entries
