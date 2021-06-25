@@ -1,3 +1,7 @@
+Lights1 portal_blocker_Wood_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
+
 Gfx portal_blocker_mirror2_ci8_aligner[] = {gsSPEndDisplayList()};
 u8 portal_blocker_mirror2_ci8[] = {
 	0x00, 0x01, 0x01, 0x02, 0x02, 0x03, 0x03, 0x04, 
@@ -326,41 +330,37 @@ Vtx portal_blocker_Portal1_001_mesh_layer_1_vtx_cull[8] = {
 	{{{251, 431, -20},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 };
 
-Vtx portal_blocker_Portal1_001_mesh_layer_1_vtx_0[24] = {
-	{{{251, 60, 0},0, {758, 2034},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{159, -41, 0},0, {234, 2034},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-251, 330, 0},0, {234, -1042},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-159, 431, 0},0, {758, -1042},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{251, 60, 42},0, {725, 1838},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{-159, 431, 42},0, {725, -846},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{-251, 330, 42},0, {267, -846},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{159, -41, 42},0, {267, 1838},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{159, -41, 0},0, {267, 2045},{0x5E, 0xAB, 0x0, 0xFF}}},
-	{{{251, 60, 0},0, {725, 2045},{0x5E, 0xAB, 0x0, 0xFF}}},
-	{{{251, 60, 42},0, {725, 1838},{0x5E, 0xAB, 0x0, 0xFF}}},
-	{{{159, -41, 42},0, {267, 1838},{0x5E, 0xAB, 0x0, 0xFF}}},
-	{{{-251, 330, 0},0, {-676, -676},{0xAB, 0xA2, 0x0, 0xFF}}},
-	{{{159, -41, 0},0, {-676, 1668},{0xAB, 0xA2, 0x0, 0xFF}}},
-	{{{159, -41, 42},0, {-676, 1668},{0xAB, 0xA2, 0x0, 0xFF}}},
-	{{{-251, 330, 42},0, {-676, -676},{0xAB, 0xA2, 0x0, 0xFF}}},
-	{{{-159, 431, 0},0, {725, -1053},{0xA2, 0x55, 0x0, 0xFF}}},
-	{{{-251, 330, 0},0, {267, -1053},{0xA2, 0x55, 0x0, 0xFF}}},
-	{{{-251, 330, 42},0, {267, -846},{0xA2, 0x55, 0x0, 0xFF}}},
-	{{{-159, 431, 42},0, {725, -846},{0xA2, 0x55, 0x0, 0xFF}}},
-	{{{251, 60, 0},0, {1668, 1668},{0x55, 0x5E, 0x0, 0xFF}}},
-	{{{-159, 431, 0},0, {1668, -676},{0x55, 0x5E, 0x0, 0xFF}}},
-	{{{-159, 431, 42},0, {1668, -676},{0x55, 0x5E, 0x0, 0xFF}}},
-	{{{251, 60, 42},0, {1668, 1668},{0x55, 0x5E, 0x0, 0xFF}}},
+Vtx portal_blocker_Portal1_001_mesh_layer_1_vtx_0[20] = {
+	{{{251, 60, 0},0, {758, 2034},{0xA6, 0xA6, 0xA6, 0xFF}}},
+	{{{159, -41, 0},0, {234, 2034},{0xA6, 0xA6, 0xA6, 0xFF}}},
+	{{{-251, 330, 0},0, {234, -1042},{0xA6, 0xA6, 0xA6, 0xFF}}},
+	{{{-159, 431, 0},0, {758, -1042},{0xA6, 0xA6, 0xA6, 0xFF}}},
+	{{{159, -41, 0},0, {267, 2045},{0xA6, 0xA6, 0xA6, 0xFF}}},
+	{{{251, 60, 0},0, {725, 2045},{0xA6, 0xA6, 0xA6, 0xFF}}},
+	{{{251, 60, 42},0, {725, 1838},{0xE5, 0xE5, 0xE5, 0xFF}}},
+	{{{159, -41, 42},0, {267, 1838},{0xC3, 0xC3, 0xC3, 0xFF}}},
+	{{{-251, 330, 42},0, {267, -846},{0xE5, 0xE5, 0xE5, 0xFF}}},
+	{{{-159, 431, 42},0, {725, -846},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-159, 431, 0},0, {725, -1053},{0xA6, 0xA6, 0xA6, 0xFF}}},
+	{{{-251, 330, 0},0, {267, -1053},{0xA6, 0xA6, 0xA6, 0xFF}}},
+	{{{-251, 330, 0},0, {-676, -676},{0xA6, 0xA6, 0xA6, 0xFF}}},
+	{{{159, -41, 0},0, {-676, 1668},{0xA6, 0xA6, 0xA6, 0xFF}}},
+	{{{159, -41, 42},0, {-676, 1668},{0xC3, 0xC3, 0xC3, 0xFF}}},
+	{{{-251, 330, 42},0, {-676, -676},{0xE5, 0xE5, 0xE5, 0xFF}}},
+	{{{251, 60, 0},0, {1668, 1668},{0xA6, 0xA6, 0xA6, 0xFF}}},
+	{{{-159, 431, 0},0, {1668, -676},{0xA6, 0xA6, 0xA6, 0xFF}}},
+	{{{-159, 431, 42},0, {1668, -676},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{251, 60, 42},0, {1668, 1668},{0xE5, 0xE5, 0xE5, 0xFF}}},
 };
 
 Gfx portal_blocker_Portal1_001_mesh_layer_1_tri_0[] = {
-	gsSPVertex(portal_blocker_Portal1_001_mesh_layer_1_vtx_0 + 0, 24, 0),
+	gsSPVertex(portal_blocker_Portal1_001_mesh_layer_1_vtx_0 + 0, 20, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
-	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
+	gsSP2Triangles(6, 8, 7, 0, 6, 9, 8, 0),
+	gsSP2Triangles(10, 8, 9, 0, 10, 11, 8, 0),
 	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
 	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
-	gsSP2Triangles(20, 21, 22, 0, 20, 22, 23, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -396,7 +396,8 @@ Gfx mat_revert_portal_blocker_Portal_001[] = {
 
 Gfx mat_portal_blocker_Wood[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0),
+	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
+	gsSPClearGeometryMode(G_LIGHTING),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, portal_blocker_xx_1_lighter2_ci8_pal_rgba16),
@@ -413,11 +414,13 @@ Gfx mat_portal_blocker_Wood[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
+	gsSPSetLights1(portal_blocker_Wood_lights),
 	gsSPEndDisplayList(),
 };
 
 Gfx mat_revert_portal_blocker_Wood[] = {
 	gsDPPipeSync(),
+	gsSPSetGeometryMode(G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
