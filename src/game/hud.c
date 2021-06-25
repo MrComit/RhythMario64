@@ -326,7 +326,7 @@ static s16 sPowerMeterStoredHealth;
 
 static struct PowerMeterHUD sPowerMeterHUD = {
     POWER_METER_HIDDEN,
-    140,
+    280, //140
     166,
     1.0,
 };
@@ -558,9 +558,9 @@ void render_hud_mario_lives(void) {
  * Renders the amount of coins collected.
  */
 void render_hud_coins(void) { 
-    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(90), HUD_TOP_Y, "+"); // 'Coin' glyph
-    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(90-16), HUD_TOP_Y, "*"); // 'X' glyph
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(90-32), HUD_TOP_Y, "%d", gHudDisplay.coins);
+    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22), 15, "+"); // 'Coin' glyph
+    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(38), 15, "*"); // 'X' glyph
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(54), 15, "%d", gHudDisplay.coins);
 }
 
 #ifdef VERSION_JP
