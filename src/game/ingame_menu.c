@@ -3420,6 +3420,7 @@ u8 numberTotalPoints[8];
 u8 numberRank[8];
 
 
+
 //this is just garbage code to fix the pj64 2.4 gcc crash
 void cringe_function_cringe(void) {
     s8 i = 0;
