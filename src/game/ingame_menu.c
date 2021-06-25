@@ -3419,12 +3419,61 @@ u8 numberCoins[8];
 u8 numberTotalPoints[8];
 u8 numberRank[8];
 
+
+void cringe_function_cringe(void) {
+    s8 i = 0;
+    i++;
+    i = 7;
+    s8 k = i * 2;
+    i = k - 3;
+    k = i * 5;
+}
+
+//void format_integer(s32 n, s32 base, char *dest, s32 *totalLength, u8 width, s8 zeroPad);
+s32 int_pow(s32 n, s32 exponent);
+
 void print_epic_number(u8 *str, s32 value, u8 appendNegative) {
-    u8 i;
+    s32 i;
+    u32 powBase;
+    s8 digit;
+    s32 numDigits = 0;
+    s8 len = 0;
     for(i = 0; i < 8; i++) {
         str[i] = 0;
     }
-    sprintf(str, "%d", value);
+    //sprintf(str, "%d", value);
+    
+    while (TRUE) {
+        powBase = int_pow(10, numDigits);
+
+        if (powBase > (u32) value) {
+            break;
+        }
+
+        numDigits++;
+    }
+
+    if (appendNegative && value > 0) {
+        str[len] = 0x9F;
+        len++;
+    }
+
+    // Transfer the digits into the proper base.
+    for (i = numDigits - 1; i >= 0; i--) {
+        powBase = int_pow(10, i);
+        digit = value / powBase;
+
+        // FIXME: Why doesn't [] match?
+        if (digit < 10) {
+            str[len + numDigits - 1 - i] = digit + '0';
+        } else {
+            str[len + numDigits - 1 - i] = digit + '7';
+        }
+
+        value -= digit * powBase;
+    }
+
+
     for(i = 0; i < 8; i++) {
         if(str[i] >= 0x30 && str[i] < 0x3A) {
             str[i] -= 0x30;
@@ -3433,12 +3482,12 @@ void print_epic_number(u8 *str, s32 value, u8 appendNegative) {
             i = 8;
         }
     }
-    if(appendNegative && value > 0) {
+    /*if(appendNegative && value > 0) {
         for(i = 8; i > 0; i--) {
             str[i] = str[i - 1];
         }
         str[0] = 0x9F; 
-    }
+    }*/
 }
 
 #define WHITE 0

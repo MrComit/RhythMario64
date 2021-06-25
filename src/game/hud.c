@@ -2878,7 +2878,7 @@ void render_hud(void) {
             render_hud_mario_lives();
         }
     #endif
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT) {
+        if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT && gRankTimer <= 0) {
             render_hud_coins();
         }
 
@@ -2929,6 +2929,7 @@ void render_hud(void) {
         // print_text_fmt_int(40, 40, "%d", x);
         // print_text_fmt_int(40, 20, "%d", y);
         
+		//gRankTimer = 1;
         if(gRankTimer > 0)
             render_rank_screen();
     }
