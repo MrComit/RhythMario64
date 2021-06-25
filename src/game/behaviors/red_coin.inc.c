@@ -61,10 +61,10 @@ void bhv_red_coin_init(void) {
  * the orange number counter.
  */
 void bhv_red_coin_loop(void) {
-    if ((o->oBehParams >> 24) == 1) {
+    /*if ((o->oBehParams >> 24) == 1) {
         struct Object *obj = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
         obj->oPosY += 200.0f;
-    }
+    }*/
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         gRedCoinsCollected++;
         // Spawn the orange number counter, as long as it isn't the last coin.
