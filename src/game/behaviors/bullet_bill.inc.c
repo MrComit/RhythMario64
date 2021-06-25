@@ -79,8 +79,17 @@ void bhv_bullet_bill_loop(void) {
     if(o->oTimer < 20 && !(cur_obj_has_behavior(bhvDiscoBullet)) && !(gCurrCourseNum == 0x03)) {
         o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1] + 80.0f, 30.0f, 30.0f);
     }
-    if(!(cur_obj_has_behavior(bhvDiscoBullet)))
-        o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x40);
+    if(!(cur_obj_has_behavior(bhvDiscoBullet))) {
+        if (gCurrLevelNum == LEVEL_JRB) {
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x40);
+        } else if (gCurrLevelNum == LEVEL_BOB) {
+            if (o->oTimer < 10 && absi(o->oAngleToMario - o->oMoveAngleYaw) < 0x800) {
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x140);
+            } else {
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x20);
+            }
+        }
+    }
     if(dorrie != 0 && lateral_dist_between_objects(o, dorrie) < 75.0f) {
         explode(0);
     } 

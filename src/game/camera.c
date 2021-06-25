@@ -3457,7 +3457,7 @@ void init_camera(struct Camera *c) {
     c->yaw = gLakituState.yaw;
     c->nextYaw = gLakituState.yaw;
     s8DirModeBaseYaw = gMarioSpawnInfo->startAngle[1];
-    if (gCurrLevelNum != LEVEL_BOB)
+    if (gCurrLevelNum != LEVEL_BOB || gCurrentCheckpoint != 0)
         s8DirModeBaseYaw += 0x8000;
 
 }
