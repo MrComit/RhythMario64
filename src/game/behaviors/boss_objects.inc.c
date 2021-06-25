@@ -17,7 +17,7 @@ void bhv_boss_rock_init(void) {
     struct SequencePlayer *seqPlayer = &gSequencePlayers[0];
     s32 beatState = (((seqPlayer->globalSongTimer) % 192) / 96);
     reset_for_checkpoint(&o->oBeatTimer, &o->oPrevSongTimer, 0, 1, 0);
-    o->oFC = count_objects_with_behavior(bhvDiscoLock);
+    o->oFC = 1;
     o->oAnimState = o->oBehParams2ndByte;
     if (o->oBehParams2ndByte)
         o->oAction = 1;
@@ -31,16 +31,20 @@ void bhv_boss_rock_loop(void) {
     }
     switch (o->oAction) {
         case 0:
-            if (cur_obj_beat_hit_and_reset_slower(&o->oBeatTimer, (4 - o->oFC))) {
+            if (cur_obj_beat_hit_and_reset_slower(&o->oBeatTimer, o->oFC)) {
                 o->oAction = 1;
-                o->oFC = count_objects_with_behavior(bhvDiscoLock);
+                if (count_objects_with_behavior(bhvDiscoLock) < 3) {
+                    o->oFC = 2;
+                }
             }
             o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, (f32)(5 - o->oFC)/10.0f);
             break;
         case 1:
-            if (cur_obj_beat_hit_and_reset_slower(&o->oBeatTimer, (4 - o->oFC))) {
+            if (cur_obj_beat_hit_and_reset_slower(&o->oBeatTimer, o->oFC)) {
                 o->oAction = 0;
-                o->oFC = count_objects_with_behavior(bhvDiscoLock);
+                if (count_objects_with_behavior(bhvDiscoLock) < 3) {
+                    o->oFC = 2;
+                }
             }
             o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY - 500.0f, (f32)(5 - o->oFC)/10.0f);
             break;
