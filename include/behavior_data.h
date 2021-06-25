@@ -587,5 +587,6 @@ extern const BehaviorScript bhvBabyDorrie[];
 extern const BehaviorScript bhvLuigiDoor[];
 extern const BehaviorScript bhvPortalBlocker[];
 extern const BehaviorScript bhvRankDisplay[];
+extern const BehaviorScript bhvEmpty[];
 
 #endif // BEHAVIOR_DATA_H

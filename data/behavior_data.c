@@ -3726,7 +3726,7 @@ const BehaviorScript bhvSeaweed[] = {
 const BehaviorScript bhvSeaweedBundle[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    DROP_TO_FLOOR(),
+    //DROP_TO_FLOOR(),
     CALL_NATIVE(bhv_seaweed_bundle_init),
     BEGIN_LOOP(),
     END_LOOP(),
@@ -6346,7 +6346,7 @@ const BehaviorScript bhvSpike[] = {
 
 const BehaviorScript bhvSpikeBar[] = {
     BEGIN(OBJ_LIST_GENACTOR),
-    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_ACTIVE_FROM_AFAR)),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_ACTIVE_FROM_AFAR | OBJ_FLAG_PERSISTENT_RESPAWN)),
     SET_INT(oIntangibleTimer, 0),
     SET_INT(oDamageOrCoinValue, 2),
     BEGIN_LOOP(),
@@ -6632,5 +6632,11 @@ const BehaviorScript bhvRankDisplay[] = {
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_rank_display_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvEmpty[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    BEGIN_LOOP(),
     END_LOOP(),
 };

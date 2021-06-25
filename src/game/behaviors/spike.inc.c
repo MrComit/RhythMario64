@@ -165,7 +165,7 @@ void bhv_spike_bar_update(void) {
                 if(o->oTimer > 150) {
                     o->oVelY = 60.0f;
                 } else if(o->oTimer > 30) {
-                    o->oVelY = 30.0f;
+                    o->oVelY = 50.0f;
                 }
             }
             o->oBubbaTimer = 0;
@@ -179,7 +179,7 @@ void bhv_spike_bar_update(void) {
 
     o->oGraphYOffset = 80.0f;
 
-    if (o->oTimer > 1047 || o->oMoveFlags & OBJ_MOVE_HIT_WALL)
+    if (o->oTimer > 1280 || o->oMoveFlags & OBJ_MOVE_HIT_WALL)
     {
         obj_mark_for_deletion(o);
     }
