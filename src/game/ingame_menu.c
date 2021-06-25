@@ -3170,9 +3170,9 @@ void handle_objectives(void) {
     switch (gCurrLevelNum) {
         case LEVEL_BOB:
             if (sTextAlpha1)
-                print_objective_string(20, 20, sTextAlpha1, text1);
+                print_objective_string(20, 40, sTextAlpha1, text1);
             if (sTextAlpha2)
-                print_objective_string(20, 20, sTextAlpha2, text2);
+                print_objective_string(20, 40, sTextAlpha2, text2);
 
             if (objectives & 0x1 || gCurrentCheckpoint != 1) {
                 sTextAlpha1 = approach_s16_symmetric(sTextAlpha1, 0, 0x10);
@@ -3187,9 +3187,9 @@ void handle_objectives(void) {
             break;
         case LEVEL_JRB:
             if (sTextAlpha1)
-                print_objective_string(20, 20, sTextAlpha1, text3);
+                print_objective_string(20, 40, sTextAlpha1, text3);
             if (sTextAlpha2)
-                print_objective_string(20, 20, sTextAlpha2, text4);
+                print_objective_string(20, 40, sTextAlpha2, text4);
 
             if (objectives & 0x4 || gCurrentCheckpoint != 1) {
                 sTextAlpha1 = approach_s16_symmetric(sTextAlpha1, 0, 0x10);
@@ -3206,9 +3206,9 @@ void handle_objectives(void) {
             if (gCurrAreaIndex != 1)
                 break;
             if (sTextAlpha1)
-                print_objective_string(20, 20, sTextAlpha1, text5);
+                print_objective_string(20, 40, sTextAlpha1, text5);
             if (sTextAlpha2)
-                print_objective_string(20, 20, sTextAlpha2, text6);
+                print_objective_string(20, 40, sTextAlpha2, text6);
 
             if (objectives & 0x10 || gCurrentCheckpoint != 1) {
                 sTextAlpha1 = approach_s16_symmetric(sTextAlpha1, 0, 0x10);
@@ -3420,6 +3420,7 @@ u8 numberTotalPoints[8];
 u8 numberRank[8];
 
 
+//this is just garbage code to fix the pj64 2.4 gcc crash
 void cringe_function_cringe(void) {
     s8 i = 0;
     i++;

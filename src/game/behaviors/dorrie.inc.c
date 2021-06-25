@@ -184,9 +184,12 @@ void bhv_baby_dorrie_init(void) {
 void bhv_baby_dorrie_loop(void) {
     if(gCurrentCheckpoint >= 2) {
         f32 dist;
+        if (o->oTimer < 15) {
+            return;
+        }
         struct Object *enemy = cur_obj_find_nearest_object_with_behavior(bhvBulletBill, &dist);
         if(gMarioState->action != ACT_STAR_DANCE_EXIT)
-            print_text_fmt_int(20, 36, "BABY DORRIE HP %d", o->oBabyDorrieHP);
+            print_text_fmt_int(20, 56, "BABY DORRIE HP %d", o->oBabyDorrieHP);
         if(o->oTimer > 30 && gMarioState->action != ACT_STAR_DANCE_EXIT && o->oDorrieInvincibleTimer == 0 && enemy != 0 && lateral_dist_between_objects(o, enemy) < 75.0f) {
             o->oBabyDorrieHP--;
             o->oDorrieInvincibleTimer = 20;
@@ -196,9 +199,11 @@ void bhv_baby_dorrie_loop(void) {
             play_sound(SOUND_OBJ_DORRIE, gGlobalSoundSource);
         }
         if(gMarioState->pos[2] < -6500.0f) {
-            o->oPosZ = approach_f32(o->oPosZ, gMarioState->pos[2], 20.0f, 15.0f);
+            o->oPosZ = approach_f32(o->oPosZ, gMarioState->pos[2], 25.0f, 25.0f);
         }
         o->oPosY = approach_f32_asymptotic(o->oPosY, 6233.55f, 0.4f);
+    } else {
+        o->oTimer = 0;
     }
     //cur_obj_push_mario_away_from_cylinder(150.0f, 150.0f);
     o->oFaceAngleYaw = o->oAngleToMario;

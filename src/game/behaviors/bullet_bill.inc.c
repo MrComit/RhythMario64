@@ -80,8 +80,11 @@ void bhv_bullet_bill_loop(void) {
         o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1] + 80.0f, 30.0f, 30.0f);
     }
     if(!(cur_obj_has_behavior(bhvDiscoBullet))) {
-        if (gCurrLevelNum == LEVEL_JRB) {
-            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x40);
+        if (gCurrLevelNum == LEVEL_JRB && gCurrentCheckpoint > 1) {
+            if (o->oTimer < 10)
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x800);
+            else
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x40);
         } else if (gCurrLevelNum == LEVEL_BOB) {
             if (o->oTimer < 10 && absi(o->oAngleToMario - o->oMoveAngleYaw) < 0x800) {
                 o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x140);
