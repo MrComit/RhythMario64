@@ -307,6 +307,10 @@ The rank you get depends\n\
 on your total damage,\n\
 deaths, and how many\n\
 coins you collect.\n\
+Note that (re-)starting\n\
+a level from the beginning\n\
+will reset all these\n\
+statistics.\n\
 Each level also contains\n\
 two side objectives to\n\
 be completed over its\n\
