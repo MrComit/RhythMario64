@@ -198,7 +198,7 @@ void bhv_baby_dorrie_loop(void) {
         if(gMarioState->pos[2] < -6500.0f) {
             o->oPosZ = approach_f32(o->oPosZ, gMarioState->pos[2], 20.0f, 15.0f);
         }
-        o->oPosY = approach_f32(o->oPosY, gMarioState->pos[2], 6233.55, 40.0f);
+        o->oPosY = approach_f32_asymptotic(o->oPosY, 6233.55f, 0.4f);
     }
     //cur_obj_push_mario_away_from_cylinder(150.0f, 150.0f);
     o->oFaceAngleYaw = o->oAngleToMario;

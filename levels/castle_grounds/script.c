@@ -72,7 +72,7 @@ const LevelScript level_castle_grounds_entry[] = {
 		STOP_MUSIC(0),
 		TERRAIN_TYPE(TERRAIN_STONE),
 	END_AREA(),
-	
+
 
 	FREE_LEVEL_POOL(),
 	MARIO_POS(0x01, 90, -2500, 300, 0),
