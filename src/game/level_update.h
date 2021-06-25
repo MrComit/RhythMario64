@@ -155,8 +155,9 @@ extern struct Rank gRank;
 #define RANK_F 5
 
 #define COMPLETION_BONUS 2000
-#define DAMAGE_DIVISOR 9.6 //health (out of 0x0880) / divisor
-#define DEATH_MULTIPLIER 50
-#define COIN_MULTIPLIER 16
+//#define DAMAGE_DIVISOR 9.6 //health (out of 0x0880) / divisor
+#define DAMAGE_DIVISOR 19.2
+#define DEATH_MULTIPLIER 20
+#define COIN_MULTIPLIER 15
 
 #endif // LEVEL_UPDATE_H
