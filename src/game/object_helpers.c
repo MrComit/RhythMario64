@@ -2997,7 +2997,8 @@ s32 cur_obj_beat_hit_and_reset(s32 *timer, s32 timerDivisor) {
         timerDivisor = 1;
     }
     if(*timer >= (96 / timerDivisor)) {
-        *timer -= (96 / timerDivisor);
+        while(*timer >= (96 / timerDivisor))
+            *timer -= (96 / timerDivisor);
         return 1;
     } else {
         return 0;

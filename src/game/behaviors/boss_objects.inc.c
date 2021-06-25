@@ -4,7 +4,8 @@ s32 cur_obj_beat_hit_and_reset_slower(s32 *timer, s32 timerDivisor) {
         timerDivisor = 1;
     }
     if(*timer >= (96*4 / timerDivisor)) {
-        *timer -= (96*4 / timerDivisor);
+        while(*timer >= (96*4 / timerDivisor))
+            *timer -= (96*4 / timerDivisor);
         return 1;
     } else {
         return 0;
