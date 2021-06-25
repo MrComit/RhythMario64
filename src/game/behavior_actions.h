@@ -562,6 +562,7 @@ void bhv_laser_ring_loop(void);
 void bhv_beat_block_init(void);
 void bhv_beat_block_update(void);
 void bhv_block_update(void);
+void bhv_block_init(void);
 void bhv_whomp_circle_loop(void);
 void bhv_spike_pillar_init(void);
 void bhv_spike_pillar_loop(void);

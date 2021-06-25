@@ -10,6 +10,12 @@ struct ObjectHitbox sBoxHitbox = {
     /* hurtboxHeight: */ 30,
 };
 
+void bhv_block_init(void) {
+    if (o->oBehParams >> 24) {
+        o->collisionData = segmented_to_virtual(&block2_collision);
+    }
+}
+
 
 void bhv_block_update(void) {
     o->oAnimState = o->oBehParams2ndByte;

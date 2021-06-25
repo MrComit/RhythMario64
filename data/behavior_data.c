@@ -6185,6 +6185,7 @@ const BehaviorScript bhvBlock[] = {
     LOAD_COLLISION_DATA(block_collision),
     SET_FLOAT(oCollisionDistance, 300),
     SET_HOME(),
+    CALL_NATIVE(bhv_block_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_block_update),
     END_LOOP(),
