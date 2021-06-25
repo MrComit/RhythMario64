@@ -37,9 +37,9 @@ const GeoLayout ccm_area_2[] = {
 				GEO_CLOSE_NODE(),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(1, ccm_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(4, ccm_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(2, ccm_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(1, ccm_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };
