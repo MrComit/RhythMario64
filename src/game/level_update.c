@@ -1195,9 +1195,9 @@ void determine_rank(void) {
         gRank.rank--;
     }
 
-    if(gRank.deaths > 0 && gRank.rank == 0) {
+    /*if(gRank.deaths > 0 && gRank.rank == 0) {
         gRank.rank++;
-    }
+    }*/
 }
 
 s32 gLoadingCheckpoint;

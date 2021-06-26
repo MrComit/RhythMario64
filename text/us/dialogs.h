@@ -320,9 +320,9 @@ point will save them\n\
 permanently to your\n\
 record.\n\
 Having enough points for\n\
-an A rank, completing\n\
-both objectives, and not\n\
-dying gives you an S rank.\n\
+an A rank, and completing\n\
+both objectives, gives\n\
+you an S rank.\n\
 Specific ranks are not\n\
 required in any capacity\n\
 to complete the game.\n\
