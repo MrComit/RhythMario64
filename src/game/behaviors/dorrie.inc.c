@@ -174,7 +174,7 @@ void bhv_dorrie_update(void) {
 }
 
 void bhv_baby_dorrie_init(void) {
-    o->oBabyDorrieHP = 5;
+    o->oBabyDorrieHP = 3;
     o->oDorrieInvincibleTimer = 0;
     if((save_file_get_objectives() & 0x08) != 0 && gCurrCreditsEntry == 0) {
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;

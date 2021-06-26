@@ -21,7 +21,7 @@ void door_animation_and_reset(s32 sp18) {
 }
 
 s32 has_all_s_ranks(void) {
-    if (gMarioState->numStars < 4)
+    if (gMarioState->numStars < 3)
         return 0;
     if (gSaveBuffer.files[gCurrSaveFileNum - 1][0].ranks[0])
         return 0;

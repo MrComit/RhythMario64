@@ -3440,56 +3440,61 @@ void print_epic_number(u8 *str, s32 value, u8 appendNegative) {
     s8 digit;
     s32 numDigits = 0;
     s8 len = 0;
-    for(i = 0; i < 8; i++) {
-        str[i] = 0;
-    }
-    //sprintf(str, "%d", value);
-    
-    while (TRUE) {
-        powBase = int_pow(10, numDigits);
+    if (value != 0) {
+        for(i = 0; i < 8; i++) {
+            str[i] = 0;
+        }
+        //sprintf(str, "%d", value);
+        
+        while (TRUE) {
+            powBase = int_pow(10, numDigits);
 
-        if (powBase > (u32) value) {
-            break;
+            if (powBase > (u32) value) {
+                break;
+            }
+
+            numDigits++;
         }
 
-        numDigits++;
-    }
-
-    if (appendNegative && value > 0) {
-        str[len] = 0x9F;
-        len++;
-    }
-
-    // Transfer the digits into the proper base.
-    for (i = numDigits - 1; i >= 0; i--) {
-        powBase = int_pow(10, i);
-        digit = value / powBase;
-
-        // FIXME: Why doesn't [] match?
-        if (digit < 10) {
-            str[len + numDigits - 1 - i] = digit + '0';
-        } else {
-            str[len + numDigits - 1 - i] = digit + '7';
+        if (appendNegative && value > 0) {
+            str[len] = 0x9F;
+            len++;
         }
 
-        value -= digit * powBase;
-    }
+        // Transfer the digits into the proper base.
+        for (i = numDigits - 1; i >= 0; i--) {
+            powBase = int_pow(10, i);
+            digit = value / powBase;
+
+            // FIXME: Why doesn't [] match?
+            if (digit < 10) {
+                str[len + numDigits - 1 - i] = digit + '0';
+            } else {
+                str[len + numDigits - 1 - i] = digit + '7';
+            }
+
+            value -= digit * powBase;
+        }
 
 
-    for(i = 0; i < 8; i++) {
-        if(str[i] >= 0x30 && str[i] < 0x3A) {
-            str[i] -= 0x30;
-        } else if (str[i] < 0x30) {
-            str[i] = 0xFF;
-            i = 8;
+        for(i = 0; i < 8; i++) {
+            if(str[i] >= 0x30 && str[i] < 0x3A) {
+                str[i] -= 0x30;
+            } else if (str[i] < 0x30) {
+                str[i] = 0xFF;
+                i = 8;
+            }
         }
+        /*if(appendNegative && value > 0) {
+            for(i = 8; i > 0; i--) {
+                str[i] = str[i - 1];
+            }
+            str[0] = 0x9F; 
+        }*/
+    } else {
+        str[0] = 0;
+        str[1] = 0xFF;
     }
-    /*if(appendNegative && value > 0) {
-        for(i = 8; i > 0; i--) {
-            str[i] = str[i - 1];
-        }
-        str[0] = 0x9F; 
-    }*/
 }
 
 #define WHITE 0

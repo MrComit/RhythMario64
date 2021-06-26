@@ -65,7 +65,7 @@ const char *credits02[] = { "4LEVEL MODELING", "MOSTLY COMIT", "ENGINE PROGRAMMI
 const char *credits03[] = { "4ARRANGEMENTS BY", "MRCOMIT ", "TECHNOMANCER00 ", "CHEEZEPIN " };
 const char *credits04[] = { "8PEACHS CASTLE", "TRAINING  KIRBY 64", "BOWSER APPEARS", "U.N.OWEN WAS HER  TOUHOU 6", "STAGE 1", "BOBOMB BATTLEFIELD  SM64", "STAGE 2", "COLLAPSING TIME RIFT  HAT IN TIME" };
 const char *credits05[] = { "6STAGE 3", "KOOPAS ROAD  SM64", "FINAL BOSS", "METALLIC MADNESS BF  SONIC CD", /*"HUB", "IDK",*/ "CREDITS", "STORM EAGLE  MEGA MAN X" };
-const char *credits06[] = { "6BETA TESTING", "ROVERT", "REONU", "PYRO JAY", "", "" };
+const char *credits06[] = { "6BETA TESTING", "ROVERT", "REONU", "PYRO JAY", "NOT BEN", "FUCK BEN" };
 const char *credits07[] = { "D                          SPECIAL THANKS", "", "TECHNOMANCER00", "BANGIN TUNES", "MATT", "BUPENSIVE AND LAVA", "SPK", "VOICES", "MRPR1993", "E.GADD MODEL", "WISEGUY", "LASER RINGS", "YOSHI MILKMAN", "BULLET BILLS", "AXOLLYON", "SPIKE", "AGLAB2", "INSPIRATION", "JANJA", "END SCREEN"};
 const char *credits08[] = { "7MAKE SURE TO CHECK OUT YOSHI COMMITS TAX", "", "FRAUD 64  MY MAJOR HACK RELEASING IN THE  ", "FUTURE                                                        ", "", "", "", };
 const char *credits09[] = { "3JUST ABOUT EVERYTHING", "CHEEZEPIN", "MRCOMIT" };
@@ -563,6 +563,7 @@ void init_mario_after_warp(void) {
     sDelayedWarpOp = WARP_OP_NONE;
 
     if (gCurrDemoInput == NULL) {
+        if(!(gCurrAreaIndex == 2 && sCurrentBackgroundMusicSeqId == SEQ_BOSS))
         set_background_music(gCurrentArea->musicParam, gCurrentArea->musicParam2, 0);
 
         if (gMarioState->flags & MARIO_METAL_CAP) {
@@ -997,7 +998,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 break;
         }
 
-        if (val04 && gCurrDemoInput == NULL) {
+        if (val04 && gCurrDemoInput == NULL && (gCurrAreaIndex != 2)) {
             fadeout_music((3 * sDelayedWarpTimer / 2) * 8 - 2);
         }
     }
@@ -1257,7 +1258,8 @@ s32 play_mode_normal(void) {
         obj_explode(gMarioObject, 1);
         set_mario_action(gMarioState, ACT_DISAPPEARED, 0);
         gMarioState->pos[1] += 20000.0f;
-        stop_background_music(sCurrentBackgroundMusicSeqId);
+        if(gCurrAreaIndex != 2)
+            stop_background_music(sCurrentBackgroundMusicSeqId);
         gDialogResponse = 0;
         gRank.deaths++;
         gDead = 1;
