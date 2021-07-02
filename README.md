@@ -1,3 +1,6 @@
+# RhythMario Project 64.5
+Hack by Team Subway (MrComit and Cheezepin)
+
 # UltraSM64-extbounds
 Fork of the ultrasm64 repo by CrashOveride which includes the following commonly used patches (patches marked with `*` are toggleable in `config.h`): 
 - slope fix
